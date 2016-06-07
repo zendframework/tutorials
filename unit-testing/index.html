@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Unit Testing A zend-mvc Application - tutorials</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">tutorials</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Getting Started with Zend Framework</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../getting-started/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/skeleton-application/">The Skeleton Application</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/modules/">Modules</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/routing-and-controllers/">Routing and Controllers</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/database-and-models/">Database and Models</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/forms-and-actions/">Forms and Actions</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/conclusion/">Conclusion</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+<li >
+    <a href="../advanced-config/">Advanced Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../db-adapter/">Setting Up A Database Adapter</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../event-manager/">Using the EventManager</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../i18n/">Internationalization</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../navigation/">Adding zend-navigation to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../pagination/">Adding zend-paginator to the Album Module</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Unit Testing A zend-mvc Application</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/tutorials">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#unit-testing-a-zend-mvc-application">Unit Testing a zend-mvc application</a></li>
+        
+            <li><a href="#todo">TODO</a></li>
+        
+            <li><a href="#setting-up-phpunit-to-use-composers-autoloadphp">Setting up phpunit to use composer's autoload.php</a></li>
+        
+            <li><a href="#setting-up-the-tests-directory">Setting up the tests directory</a></li>
+        
+            <li><a href="#bootstrapping-your-tests">Bootstrapping your tests</a></li>
+        
+            <li><a href="#your-first-controller-test">Your first controller test</a></li>
+        
+            <li><a href="#a-failing-test-case">A failing test case</a></li>
+        
+            <li><a href="#configuring-the-service-manager-for-the-tests">Configuring the service manager for the tests</a></li>
+        
+            <li><a href="#testing-actions-with-post">Testing actions with POST</a></li>
+        
+            <li><a href="#testing-model-entities">Testing model entities</a></li>
+        
+            <li><a href="#testing-model-tables">Testing model tables</a></li>
+        
+            <li><a href="#conclusion">Conclusion</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../pagination/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next disabled ">
+        <a rel="next" >Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Tutorials &raquo;</li>
+      
+    
+  
+  <li class="active">Unit Testing A zend-mvc Application</li>
+</ol>
+
+<h1 id="unit-testing-a-zend-mvc-application">Unit Testing a zend-mvc application</h1>
+<blockquote>
+<h3 id="todo">TODO</h3>
+<ul>
+<li>Remove section on installing phpunit, and replace with installing zend-test.</li>
+<li>Update assertions against controller names; they're the same as the class now.</li>
+<li>Try the tests and confirm they work.</li>
+</ul>
+</blockquote>
+<p>A solid unit test suite is essential for ongoing development in large projects,
+especially those with many people involved. Going back and manually testing
+every individual component of an application after every change is impractical.
+Your unit tests will help alleviate that by automatically testing your
+application's components and alerting you when something is not working the same
+way it was when you wrote your tests.</p>
+<p>This tutorial is written in the hopes of showing how to test different parts of
+a zend-mvc application. As such, this tutorial will use the application written
+in the <a href="../getting-started/overview/">getting started user guide</a>. It is in no way a
+guide to unit testing in general, but is here only to help overcome the initial
+hurdles in writing unit tests for zend-mvc applications.</p>
+<p>It is recommended to have at least a basic understanding of unit tests,
+assertions and mocks.</p>
+<p>zend-test, which provides testing integration for zend-mvc, uses
+<a href="http://phpunit.de/">PHPUnit</a>. This tutorial assumes that you already have
+PHPUnit from either a version 4 or version 5 series installed; version 5 is
+required if you are using PHP 7.</p>
+<h2 id="setting-up-phpunit-to-use-composers-autoloadphp">Setting up phpunit to use composer's autoload.php</h2>
+<p>If you used composer to generate an <code>autoload.php</code> file for you, per the
+skeleton application, then you need to use a phpunit binary installed by
+composer. You can add this as a development dependency using composer itself:</p>
+<pre class="codehilite"><code class="language-bash">$ composer require --dev phpunit/phpunit</code></pre>
+
+
+<p>The above command will update your <code>composer.json</code> file and perform an update
+for you, which will also setup autoloading rules.</p>
+<h2 id="setting-up-the-tests-directory">Setting up the tests directory</h2>
+<p>As zend-mvc applications are built from modules that should be
+standalone blocks of an application, we don't test the application in it's
+entirety, but module by module.</p>
+<p>We will demonstrate setting up the minimum requirements to test a module, the
+<code>Album</code> module we wrote in the user guide, which then can be used as a base
+for testing any other module.</p>
+<p>Start by creating a directory called <code>test</code> in <code>zf2-tutorial\module\Album</code> with
+the following subdirectories:</p>
+<pre class="codehilite"><code class="language-text">zf2-tutorial/
+    /module
+        /Album
+            /test
+                /Controller</code></pre>
+
+
+<p>Additionally, add an <code>autoload-dev</code> rule in your <code>composer.json</code>:</p>
+<pre class="codehilite"><code class="language-json">&quot;autoload-dev&quot;: {
+    &quot;psr-4&quot;: {
+        &quot;AlbumTest\\&quot;: &quot;module/Album/test/&quot;
+    }
+}</code></pre>
+
+
+<p>When done, run:</p>
+<pre class="codehilite"><code class="language-bash">$ composer dump-autoload</code></pre>
+
+
+<p>The structure of the <code>test</code> directory matches exactly with that of the module's
+source files, and it will allow you to keep your tests well-organized and easy
+to find.</p>
+<h2 id="bootstrapping-your-tests">Bootstrapping your tests</h2>
+<p>Next, create a file called <code>phpunit.xml.dist</code> under
+<code>zf2-tutorial/module/Album/test</code>:</p>
+<pre class="codehilite"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;phpunit bootstrap=&quot;Bootstrap.php&quot; colors=&quot;true&quot;&gt;
+    &lt;testsuites&gt;
+        &lt;testsuite name=&quot;zf2tutorial&quot;&gt;
+            &lt;directory&gt;.&lt;/directory&gt;
+        &lt;/testsuite&gt;
+    &lt;/testsuites&gt;
+&lt;/phpunit&gt;</code></pre>
+
+
+<p>Now create a file called <code>Bootstrap.php</code>, also under <code>zf2-tutorial/module/Album/test</code>:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace AlbumTest;
+
+use Zend\Loader\AutoloaderFactory;
+use Zend\Mvc\Service\ServiceManagerConfig;
+use Zend\ServiceManager\ServiceManager;
+use RuntimeException;
+
+error_reporting(E_ALL | E_STRICT);
+chdir(__DIR__);
+
+/**
+ * Test bootstrap, for setting up autoloading
+ */
+class Bootstrap
+{
+    protected static $serviceManager;
+
+    public static function init()
+    {
+        $zf2ModulePaths = array(dirname(dirname(__DIR__)));
+        if (($path = static::findParentPath('vendor'))) {
+            $zf2ModulePaths[] = $path;
+        }
+        if (($path = static::findParentPath('module')) !== $zf2ModulePaths[0]) {
+            $zf2ModulePaths[] = $path;
+        }
+
+        static::initAutoloader();
+
+        // Use ModuleManager to load this module and its dependencies
+        $config = [
+            'module_listener_options' =&gt; [
+                'module_paths' =&gt; $zf2ModulePaths,
+            ],
+            'modules' =&gt; [
+                'Album',
+            ]
+        ];
+
+        $serviceManager = new ServiceManager(new ServiceManagerConfig());
+        $serviceManager-&gt;setService('ApplicationConfig', $config);
+        $serviceManager-&gt;get('ModuleManager')-&gt;loadModules();
+        static::$serviceManager = $serviceManager;
+    }
+
+    public static function chroot()
+    {
+        $rootPath = dirname(static::findParentPath('module'));
+        chdir($rootPath);
+    }
+
+    public static function getServiceManager()
+    {
+        return static::$serviceManager;
+    }
+
+    protected static function initAutoloader()
+    {
+        $vendorPath = static::findParentPath('vendor');
+
+        if (file_exists($vendorPath.'/autoload.php')) {
+            include $vendorPath.'/autoload.php';
+        }
+
+        if (! class_exists('Zend\Mvc\Application')) {
+            throw new RuntimeException('Unable to load ZF2. Run `composer install`');
+        }
+    }
+
+    protected static function findParentPath($path)
+    {
+        $dir = __DIR__;
+        $previousDir = '.';
+        while (! is_dir($dir . '/' . $path)) {
+            $dir = dirname($dir);
+            if ($previousDir === $dir) {
+                return false;
+            }
+            $previousDir = $dir;
+        }
+        return $dir . '/' . $path;
+    }
+}
+
+Bootstrap::init();
+Bootstrap::chroot();</code></pre>
+
+
+<p>The contents of this bootstrap file can be daunting at first sight, but all it
+does is ensure that all the necessary files are autoloadable for our tests, and
+that we have initial application configuration. The most important lines are in
+the <code>init()</code> method, where we specify the <code>modules</code> for the application.  In
+this case we are only loading the <code>Album</code> module as it has no dependencies
+against other modules, but when testing other modules, you will need to factor
+in their own dependencies.</p>
+<p>Now, if you navigate to the <code>zf2-tutorial/module/Album/test/</code> directory, and run
+<code>phpunit</code>, you should get a similar output to this:</p>
+<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+
+Configuration read from /var/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+
+Time: 0 seconds, Memory: 1.75Mb
+
+No tests executed!</code></pre>
+
+
+<p>Even though no tests were executed, we at least know that the autoloader found
+the required files and classes; otherwise it would throw a <code>RuntimeException</code>,
+as demonstrated in the <code>initAutoloader()</code> method.</p>
+<h2 id="your-first-controller-test">Your first controller test</h2>
+<p>Testing controllers is never an easy task, but the zend-test component makes
+testing much less cumbersome.</p>
+<p>First, create <code>AlbumControllerTest.php</code> under
+<code>zf2-tutorial/module/Album/test/Controller</code> with the following contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace AlbumTest\Controller;
+
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+
+class AlbumControllerTest extends AbstractHttpControllerTestCase
+{
+    public function setUp()
+    {
+        $this-&gt;setApplicationConfig(
+            // Grabbing the full application configuration:
+            include __DIR__ . '/../../../../config/application.config.php'
+        );
+        parent::setUp();
+    }
+}</code></pre>
+
+
+<p>The <code>AbstractHttpControllerTestCase</code> class we extend here helps us setting up
+the application itself, helps with dispatching and other tasks that happen
+during a request, and offers methods for asserting request params, response
+headers, redirects, and more. See the <a href="https://zendframework.github.io/zend-test/phpunit/">zend-test</a>
+documentation for more information.</p>
+<p>The principal requirement for any zend-test test case is to set the application
+config with the <code>setApplicationConfig()</code> method.</p>
+<p>Now, add the following function to the <code>AlbumControllerTest</code> class:</p>
+<pre class="codehilite"><code class="language-php">public function testIndexActionCanBeAccessed()
+{
+    $this-&gt;dispatch('/album');
+    $this-&gt;assertResponseStatusCode(200);
+
+    $this-&gt;assertModuleName('Album');
+    $this-&gt;assertControllerName('Album\Controller\Album');
+    $this-&gt;assertControllerClass('AlbumController');
+    $this-&gt;assertMatchedRouteName('album');
+}</code></pre>
+
+
+<p>This test case dispatches the <code>/album</code> URL, asserts that the response code is
+200, and that we ended up in the desired module and controller.</p>
+<blockquote>
+<h3 id="assert-against-controller-service-names">Assert against controller service names</h3>
+<p>For asserting the <em>controller name</em> we are using the controller name we
+defined in our  routing configuration for the Album module. In our example
+this should be defined on line 19 of the <code>module.config.php</code> file in the Album
+module.</p>
+</blockquote>
+<h2 id="a-failing-test-case">A failing test case</h2>
+<p>Finally, <code>cd</code> to <code>zf2-tutorial/module/Album/test/</code> and run <code>phpunit</code>. Uh-oh! The
+test failed!</p>
+<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+
+Configuration read from /var/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+
+F
+
+Time: 0 seconds, Memory: 8.50Mb
+
+There was 1 failure:
+
+1) AlbumTest\Controller\AlbumControllerTest::testIndexActionCanBeAccessed
+Failed asserting response code &quot;200&quot;, actual status code is &quot;500&quot;
+
+/var/www/zf2-tutorial/vendor/ZF2/library/Zend/Test/PHPUnit/Controller/AbstractControllerTestCase.php:373
+/var/www/zf2-tutorial/module/Album/test/AlbumTest/Controller/AlbumControllerTest.php:22
+
+FAILURES!
+Tests: 1, Assertions: 0, Failures: 1.</code></pre>
+
+
+<p>The failure message doesn't tell us much, apart from that the expected status
+code is not 200, but 500. To get a bit more information when something goes
+wrong in a test case, we set the protected <code>$traceError</code> member to <code>true</code>. Add
+the following just above the <code>setUp</code> method in our <code>AlbumControllerTest</code> class:</p>
+<pre class="codehilite"><code class="language-php">protected $traceError = true;</code></pre>
+
+
+<p>Running the <code>phpunit</code> command again and we should see some more information
+about what went wrong in our test. The main error message we are interested in
+should read something like:</p>
+<pre class="codehilite"><code class="language-text">Zend\ServiceManager\Exception\ServiceNotFoundException: Zend\ServiceManager\ServiceManager::get
+was unable to fetch or create an instance for Zend\Db\Adapter\Adapter</code></pre>
+
+
+<p>From this error message it is clear that not all our dependencies are available
+in the service manager. Let us take a look how can we fix this.</p>
+<h2 id="configuring-the-service-manager-for-the-tests">Configuring the service manager for the tests</h2>
+<p>The error says that the service manager can not create an instance of a database
+adapter for us. The database adapter is indirectly used by our
+<code>Album\Model\AlbumTable</code> to fetch the list of albums from the database.</p>
+<p>The first thought would be to create an instance of an adapter, pass it to the
+service manager, and let the code run from there as is. The problem with this
+approach is that we would end up with our test cases actually doing queries
+against the database. To keep our tests fast, and to reduce the number of
+possible failure points in our tests, this should be avoided.</p>
+<p>The second thought would be then to create a mock of the database adapter, and
+prevent the actual database calls by mocking them out. This is a much better
+approach, but creating the adapter mock is tedious (but no doubt we will have to
+create it at some point).</p>
+<p>The best thing to do would be to mock out our <code>Album\Model\AlbumTable</code> class
+which retrieves the list of albums from the database. Remember, we are now
+testing our controller, so we can mock out the actual call to <code>fetchAll</code> and
+replace the return values with dummy values. At this point, we are not
+interested in how <code>fetchAll</code> retrieves the albums, but only that it gets called
+and that it returns an array of albums; these facts allow us to provide mock
+instances. When we test <code>AlbumTable</code> itself, we can write the actual tests for
+the <code>fetchAll</code> method.</p>
+<p>Here is how we can accomplish this, by modifying the
+<code>testIndexActionCanBeAccessed</code> test method as follows:</p>
+<pre class="codehilite"><code class="language-php">public function testIndexActionCanBeAccessed()
+{
+    $albumTableMock = $this-&gt;getMockBuilder(AlbumTable::class)
+        -&gt;disableOriginalConstructor()
+        -&gt;getMock();
+
+    $albumTableMock-&gt;expects($this-&gt;once())
+        -&gt;method('fetchAll')
+        -&gt;will($this-&gt;returnValue([]));
+
+    $serviceManager = $this-&gt;getApplicationServiceLocator();
+    $serviceManager-&gt;setAllowOverride(true);
+    $serviceManager-&gt;setService(AlbumTable::class, $albumTableMock);
+
+    $this-&gt;dispatch('/album');
+    $this-&gt;assertResponseStatusCode(200);
+
+    $this-&gt;assertModuleName('Album');
+    $this-&gt;assertControllerName('Album\Controller\Album');
+    $this-&gt;assertControllerClass('AlbumController');
+    $this-&gt;assertMatchedRouteName('album');
+}</code></pre>
+
+
+<p>By default, the <code>ServiceManager</code> does not allow us to replace existing services.
+As the <code>Album\Model\AlbumTable</code> was already set, we are allowing for overrides
+(via the <code>setAllowOverride()</code> call), and then replacing the real instance of the
+<code>AlbumTable</code> with a mock.  The mock is created so that it will return just an
+empty array when the <code>fetchAll</code> method is called. This allows us to test for
+what we care about in this test, and that is that by dispatching to the <code>/album</code>
+URL we get to the Album module's AlbumController.</p>
+<p>Running <code>phpunit</code> at this point, we will get the following output as the tests
+now pass:</p>
+<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+
+Configuration read from /var/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+
+.
+
+Time: 0 seconds, Memory: 9.00Mb
+
+OK (1 test, 6 assertions)</code></pre>
+
+
+<h2 id="testing-actions-with-post">Testing actions with POST</h2>
+<p>One of the most common actions happening in controllers is submitting a form
+with some POST data; those tests look similar to the following:</p>
+<pre class="codehilite"><code class="language-php"> :linenos:}
+public function testAddActionRedirectsAfterValidPost()
+{
+    $albumTableMock = $this-&gt;getMockBuilder(AlbumTable::class)
+        -&gt;disableOriginalConstructor()
+        -&gt;getMock();
+
+    $albumTableMock-&gt;expects($this-&gt;once())
+        -&gt;method('saveAlbum')
+        -&gt;will($this-&gt;returnValue(null));
+
+    $serviceManager = $this-&gt;getApplicationServiceLocator();
+    $serviceManager-&gt;setAllowOverride(true);
+    $serviceManager-&gt;setService(AlbumTable::class, $albumTableMock);
+
+    $postData = [
+        'title'  =&gt; 'Led Zeppelin III',
+        'artist' =&gt; 'Led Zeppelin',
+        'id'     =&gt; '',
+    ];
+    $this-&gt;dispatch('/album/add', 'POST', $postData);
+    $this-&gt;assertResponseStatusCode(302);
+
+    $this-&gt;assertRedirectTo('/album/');
+}</code></pre>
+
+
+<p>Here we test that when we make a POST request against the <code>/album/add</code> URL, the
+<code>Album\Model\AlbumTable</code>'s <code>saveAlbum()</code> method will be called, and after that
+we will be redirected back to the <code>/album</code> URL.</p>
+<p>Running <code>phpunit</code> gives us the following output:</p>
+<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+
+Configuration read from /home/robert/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+
+..
+
+Time: 0 seconds, Memory: 10.75Mb
+
+OK (2 tests, 9 assertions)</code></pre>
+
+
+<p>Testing the <code>editAction()</code> and <code>deleteAction()</code> methods can be easily done in a
+manner similar as shown for the <code>addAction()</code>.</p>
+<p>When testing the <code>editAction()</code> method, you will also need to mock out the
+<code>getAlbum()</code> method:</p>
+<pre class="codehilite"><code class="language-php">$albumTableMock-&gt;expects($this-&gt;once())
+    -&gt;method('getAlbum')
+    -&gt;will($this-&gt;returnValue(new Album()));</code></pre>
+
+
+<h2 id="testing-model-entities">Testing model entities</h2>
+<p>Now that we know how to test our controllers, let us move to an other important
+part of our application: the model entity.</p>
+<p>Here we want to test that the initial state of the entity is what we expect it
+to be, that we can convert the model's parameters to and from an array, and that
+it has all the input filters we need.</p>
+<p>Create the file <code>AlbumTest.php</code> in <code>module/Album/test/Model</code> directory
+with the following contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace AlbumTest\Model;
+
+use Album\Model\Album;
+use PHPUnit_Framework_TestCase as TestCase;
+
+class AlbumTest extends TestCase
+{
+    public function testAlbumInitialState()
+    {
+        $album = new Album();
+
+        $this-&gt;assertNull(
+            $album-&gt;artist,
+            '&quot;artist&quot; should initially be null'
+        );
+
+        $this-&gt;assertNull(
+            $album-&gt;id,
+            '&quot;id&quot; should initially be null'
+        );
+
+        $this-&gt;assertNull(
+            $album-&gt;title,
+            '&quot;title&quot; should initially be null'
+        );
+    }
+
+    public function testExchangeArraySetsPropertiesCorrectly()
+    {
+        $album = new Album();
+        $data  = [
+            'artist' =&gt; 'some artist',
+            'id'     =&gt; 123,
+            'title'  =&gt; 'some title'
+        ];
+
+        $album-&gt;exchangeArray($data);
+
+        $this-&gt;assertSame(
+            $data['artist'],
+            $album-&gt;artist,
+            '&quot;artist&quot; was not set correctly'
+        );
+
+        $this-&gt;assertSame(
+            $data['id'],
+            $album-&gt;id,
+            '&quot;id&quot; was not set correctly'
+        );
+
+        $this-&gt;assertSame(
+            $data['title'],
+            $album-&gt;title,
+            '&quot;title&quot; was not set correctly'
+        );
+    }
+
+    public function testExchangeArraySetsPropertiesToNullIfKeysAreNotPresent()
+    {
+        $album = new Album();
+
+        $album-&gt;exchangeArray([
+            'artist' =&gt; 'some artist',
+            'id'     =&gt; 123,
+            'title'  =&gt; 'some title',
+        ]);
+        $album-&gt;exchangeArray([]);
+
+        $this-&gt;assertNull(
+            $album-&gt;artist,
+            '&quot;artist&quot; should have defaulted to null'
+        );
+
+        $this-&gt;assertNull(
+            $album-&gt;id,
+            '&quot;id&quot; should have defaulted to null'
+        );
+
+        $this-&gt;assertNull(
+            $album-&gt;title,
+            '&quot;title&quot; should have defaulted to null'
+        );
+    }
+
+    public function testGetArrayCopyReturnsAnArrayWithPropertyValues()
+    {
+        $album = new Album();
+        $data  = [
+            'artist' =&gt; 'some artist',
+            'id'     =&gt; 123,
+            'title'  =&gt; 'some title'
+        ];
+
+        $album-&gt;exchangeArray($data);
+        $copyArray = $album-&gt;getArrayCopy();
+
+        $this-&gt;assertSame(
+            $data['artist'],
+            $copyArray['artist'],
+            '&quot;artist&quot; was not set correctly'
+        );
+
+        $this-&gt;assertSame(
+            $data['id'],
+            $copyArray['id'],
+            '&quot;id&quot; was not set correctly'
+        );
+
+        $this-&gt;assertSame(
+            $data['title'],
+            $copyArray['title'],
+            '&quot;title&quot; was not set correctly'
+        );
+    }
+
+    public function testInputFiltersAreSetCorrectly()
+    {
+        $album = new Album();
+
+        $inputFilter = $album-&gt;getInputFilter();
+
+        $this-&gt;assertSame(3, $inputFilter-&gt;count());
+        $this-&gt;assertTrue($inputFilter-&gt;has('artist'));
+        $this-&gt;assertTrue($inputFilter-&gt;has('id'));
+        $this-&gt;assertTrue($inputFilter-&gt;has('title'));
+    }
+}</code></pre>
+
+
+<p>We are testing for 5 things:</p>
+<ol>
+<li>Are all of the <code>Album</code>'s properties initially set to <code>NULL</code>?</li>
+<li>Will the <code>Album</code>'s properties be set correctly when we call <code>exchangeArray()</code>?</li>
+<li>Will a default value of <code>NULL</code> be used for properties whose keys are not present in the <code>$data</code> array?</li>
+<li>Can we get an array copy of our model?</li>
+<li>Do all elements have input filters present?</li>
+</ol>
+<p>If we run <code>phpunit</code> again, we will get the following output, confirming that our
+model is indeed correct:</p>
+<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+
+Configuration read from /var/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+
+.......
+
+Time: 0 seconds, Memory: 11.00Mb
+
+OK (7 tests, 25 assertions)</code></pre>
+
+
+<h2 id="testing-model-tables">Testing model tables</h2>
+<p>The final step in this unit testing tutorial for zend-mvc applications is
+writing tests for our model tables.</p>
+<p>This test assures that we can get a list of albums, or one album by its ID, and
+that we can save and delete albums from the database.</p>
+<p>To avoid actual interaction with the database itself, we will replace certain
+parts with mocks.</p>
+<p>Create a file <code>AlbumTableTest.php</code> in <code>module/Album/test/Model</code> with
+the following contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace AlbumTest\Model;
+
+use Album\Model\AlbumTable;
+use Album\Model\Album;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Db\ResultSet\ResultSet;
+
+class AlbumTableTest extends TestCase
+{
+    public function testFetchAllReturnsAllAlbums()
+    {
+        $resultSet = new ResultSet();
+        $mockTableGateway = $this-&gt;getMock(
+            'Zend\Db\TableGateway\TableGateway',
+            ['select'],
+            [],
+            '',
+            false
+        );
+        $mockTableGateway-&gt;expects($this-&gt;once())
+            -&gt;method('select')
+            -&gt;with()
+            -&gt;will($this-&gt;returnValue($resultSet));
+
+        $albumTable = new AlbumTable($mockTableGateway);
+
+        $this-&gt;assertSame($resultSet, $albumTable-&gt;fetchAll());
+    }
+}</code></pre>
+
+
+<p>Since we are testing the <code>AlbumTable</code> here and not the <code>TableGateway</code> class
+(which has already been tested in zend-db), we only want to make sure
+that our <code>AlbumTable</code> class is interacting with the <code>TableGateway</code> class the way
+that we expect it to. Above, we're testing to see if the <code>fetchAll()</code> method of
+<code>AlbumTable</code> will call the <code>select()</code> method of the <code>$tableGateway</code> property
+with no parameters. If it does, it should return a <code>ResultSet</code> object. Finally,
+we expect that this same <code>ResultSet</code> object will be returned to the calling
+method. This test should run fine, so now we can add the rest of the test
+methods:</p>
+<pre class="codehilite"><code class="language-php">public function testCanRetrieveAnAlbumByItsId()
+{
+    $album = new Album();
+    $album-&gt;exchangeArray([
+        'id'     =&gt; 123,
+        artist' =&gt; 'The Military Wives',
+        title'  =&gt; 'In My Dreams'
+    ]);
+
+    $resultSet = new ResultSet();
+    $resultSet-&gt;setArrayObjectPrototype(new Album());
+    $resultSet-&gt;initialize(array($album));
+
+    $mockTableGateway = $this-&gt;getMock(
+        'Zend\Db\TableGateway\TableGateway',
+        ['select'],
+        [],
+        '',
+        false
+    );
+    $mockTableGateway-&gt;expects($this-&gt;once())
+        -&gt;method('select')
+        -&gt;with(['id' =&gt; 123])
+        -&gt;will($this-&gt;returnValue($resultSet));
+
+    $albumTable = new AlbumTable($mockTableGateway);
+
+    $this-&gt;assertSame($album, $albumTable-&gt;getAlbum(123));
+}
+
+public function testCanDeleteAnAlbumByItsId()
+{
+    $mockTableGateway = $this-&gt;getMock(
+        'Zend\Db\TableGateway\TableGateway',
+        ['delete'],
+        [],
+        '',
+        false
+    );
+    $mockTableGateway-&gt;expects($this-&gt;once())
+        -&gt;method('delete')
+        -&gt;with(['id' =&gt; 123]);
+
+    $albumTable = new AlbumTable($mockTableGateway);
+    $albumTable-&gt;deleteAlbum(123);
+}
+
+public function testSaveAlbumWillInsertNewAlbumsIfTheyDontAlreadyHaveAnId()
+{
+    $albumData = [
+        'artist' =&gt; 'The Military Wives',
+        'title'  =&gt; 'In My Dreams'
+    ];
+    $album = new Album();
+    $album-&gt;exchangeArray($albumData);
+
+    $mockTableGateway = $this-&gt;getMock(
+        'Zend\Db\TableGateway\TableGateway',
+        ['insert'],
+        [],
+        '',
+        false
+    );
+    $mockTableGateway-&gt;expects($this-&gt;once())
+        -&gt;method('insert')
+        -&gt;with($albumData);
+
+    $albumTable = new AlbumTable($mockTableGateway);
+    $albumTable-&gt;saveAlbum($album);
+}
+
+public function testSaveAlbumWillUpdateExistingAlbumsIfTheyAlreadyHaveAnId()
+{
+    $albumData = [
+        'id'     =&gt; 123,
+        'artist' =&gt; 'The Military Wives',
+        'title'  =&gt; 'In My Dreams',
+    ];
+    $album = new Album();
+    $album-&gt;exchangeArray($albumData);
+
+    $resultSet = new ResultSet();
+    $resultSet-&gt;setArrayObjectPrototype(new Album());
+    $resultSet-&gt;initialize([$album]);
+
+    $mockTableGateway = $this-&gt;getMock(
+        'Zend\Db\TableGateway\TableGateway',
+        ['select', 'update'],
+        [],
+        '',
+        false
+    );
+    $mockTableGateway-&gt;expects($this-&gt;once())
+        -&gt;method('select')
+        -&gt;with(['id' =&gt; 123])
+        -&gt;will($this-&gt;returnValue($resultSet));
+    $mockTableGateway-&gt;expects($this-&gt;once())
+        -&gt;method('update')
+        -&gt;with(
+            [
+                'artist' =&gt; 'The Military Wives',
+                'title'  =&gt; 'In My Dreams'
+            ],
+            ['id' =&gt; 123]
+        );
+
+    $albumTable = new AlbumTable($mockTableGateway);
+    $albumTable-&gt;saveAlbum($album);
+}
+
+public function testExceptionIsThrownWhenGettingNonExistentAlbum()
+{
+    $resultSet = new ResultSet();
+    $resultSet-&gt;setArrayObjectPrototype(new Album());
+    $resultSet-&gt;initialize([]);
+
+    $mockTableGateway = $this-&gt;getMock(
+        'Zend\Db\TableGateway\TableGateway',
+        ['select'],
+        [],
+        '',
+        false
+    );
+    $mockTableGateway-&gt;expects($this-&gt;once())
+        -&gt;method('select')
+        -&gt;with(['id' =&gt; 123])
+        -&gt;will($this-&gt;returnValue($resultSet));
+
+    $albumTable = new AlbumTable($mockTableGateway);
+
+    $this-&gt;setExpectedException('Exception', 'Could not find row 123');
+    $albumTable-&gt;getAlbum(123);
+}</code></pre>
+
+
+<p>These tests are nothing complicated and they should be self explanatory. In each
+test we are injecting a mock table gateway into our <code>AlbumTable</code>, and we then
+set our expectations accordingly.</p>
+<p>We are testing that:</p>
+<ol>
+<li>We can retrieve an individual album by its ID.</li>
+<li>We can delete albums.</li>
+<li>We can save a new album.</li>
+<li>We can update existing albums.</li>
+<li>We will encounter an exception if we're trying to retrieve an album that doesn't exist.</li>
+</ol>
+<p>Running <code>phpunit</code> one last time, we get the output as follows:</p>
+<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+
+Configuration read from /var/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+
+.............
+
+Time: 0 seconds, Memory: 11.50Mb
+
+OK (13 tests, 34 assertions)</code></pre>
+
+
+<h2 id="conclusion">Conclusion</h2>
+<p>In this short tutorial, we gave a few examples how different parts of a zend-mvc
+application can be tested. We covered setting up the environment for testing,
+how to test controllers and actions, how to approach failing test cases , how to
+configure the service manager, as well as how to test model entities and model
+tables .</p>
+<p>This tutorial is by no means a definitive guide to writing unit tests, just a
+small stepping stone helping you develop applications of higher quality.</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../pagination/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next disabled ">
+      <a rel="next" >Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>

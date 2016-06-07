@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Adding zend-paginator to the Album Module - tutorials</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">tutorials</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Getting Started with Zend Framework</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../getting-started/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/skeleton-application/">The Skeleton Application</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/modules/">Modules</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/routing-and-controllers/">Routing and Controllers</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/database-and-models/">Database and Models</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/forms-and-actions/">Forms and Actions</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/conclusion/">Conclusion</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+<li >
+    <a href="../advanced-config/">Advanced Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../db-adapter/">Setting Up A Database Adapter</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../event-manager/">Using the EventManager</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../i18n/">Internationalization</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../navigation/">Adding zend-navigation to the Album Module</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Adding zend-paginator to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../unit-testing/">Unit Testing A zend-mvc Application</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/tutorials">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#using-zend-paginator-in-your-album-module">Using zend-paginator in your Album Module</a></li>
+        
+            <li><a href="#todo">TODO</a></li>
+        
+            <li><a href="#preparation">Preparation</a></li>
+        
+            <li><a href="#modifying-the-albumtable">Modifying the AlbumTable</a></li>
+        
+            <li><a href="#modifying-the-albumcontroller">Modifying the AlbumController</a></li>
+        
+            <li><a href="#updating-the-view-script">Updating the View Script</a></li>
+        
+            <li><a href="#creating-the-pagination-control-partial">Creating the Pagination Control Partial</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../navigation/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../unit-testing/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Tutorials &raquo;</li>
+      
+    
+  
+  <li class="active">Adding zend-paginator to the Album Module</li>
+</ol>
+
+<h1 id="using-zend-paginator-in-your-album-module">Using zend-paginator in your Album Module</h1>
+<blockquote>
+<h3 id="todo">TODO</h3>
+<p>Update to:</p>
+<ul>
+<li>follow the changes in the user-guide</li>
+<li>use SQLite-compatible SQL syntax, and provide a script for inserting the data</li>
+</ul>
+</blockquote>
+<p>In this tutorial we will use the <a href="https://zendframework.github.io/zend-paginator/intro/">zend-paginator component</a>
+to add a handy pagination controller to the bottom of the album list.</p>
+<p>Currently, we only have a handful of albums to display, so showing everything on
+one page is not a problem. However, how will the album list look when we have
+100 albums or more in our database? The standard solution to this problem is to
+split the data up into a number of pages, and allow the user to navigate around
+these pages using a pagination control. Just type "Zend Framework" into Google,
+and you can see their pagination control at the bottom of the page:</p>
+<p><img alt="Example pagination control" src="../images/pagination.sample.png" class="img-responsive"/></p>
+<h2 id="preparation">Preparation</h2>
+<p>In order for us to have lots of albums in our database, you'll need to run the
+following SQL insert statement to insert the current 150 top iTunes albums (at
+the time of writing!):</p>
+<pre class="codehilite"><code class="language-sql">INSERT INTO `album` (`artist`, `title`)
+VALUES
+    ('David Bowie', 'The Next Day (Deluxe Version)'),
+    ('Bastille', 'Bad Blood'),
+    ('Bruno Mars', 'Unorthodox Jukebox'),
+    ('Emeli Sandé', 'Our Version of Events (Special Edition)'),
+    ('Bon Jovi', 'What About Now (Deluxe Version)'),
+    ('Justin Timberlake', 'The 20/20 Experience (Deluxe Version)'),
+    ('Bastille', 'Bad Blood (The Extended Cut)'),
+    ('P!nk', 'The Truth About Love'),
+    ('Sound City - Real to Reel', 'Sound City - Real to Reel'),
+    ('Jake Bugg', 'Jake Bugg'),
+    ('Various Artists', 'The Trevor Nelson Collection'),
+    ('David Bowie', 'The Next Day'),
+    ('Mumford &amp; Sons', 'Babel'),
+    ('The Lumineers', 'The Lumineers'),
+    ('Various Artists', 'Get Ur Freak On - R&amp;B Anthems'),
+    ('The 1975', 'Music For Cars EP'),
+    ('Various Artists', 'Saturday Night Club Classics - Ministry of Sound'),
+    ('Hurts', 'Exile (Deluxe)'),
+    ('Various Artists', 'Mixmag - The Greatest Dance Tracks of All Time'),
+    ('Ben Howard', 'Every Kingdom'),
+    ('Stereophonics', 'Graffiti On the Train'),
+    ('The Script', '#3'),
+    ('Stornoway', 'Tales from Terra Firma'),
+    ('David Bowie', 'Hunky Dory (Remastered)'),
+    ('Worship Central', 'Let It Be Known (Live)'),
+    ('Ellie Goulding', 'Halcyon'),
+    ('Various Artists', 'Dermot O\'Leary Presents the Saturday Sessions 2013'),
+    ('Stereophonics', 'Graffiti On the Train (Deluxe Version)'),
+    ('Dido', 'Girl Who Got Away (Deluxe)'),
+    ('Hurts', 'Exile'),
+    ('Bruno Mars', 'Doo-Wops &amp; Hooligans'),
+    ('Calvin Harris', '18 Months'),
+    ('Olly Murs', 'Right Place Right Time'),
+    ('Alt-J (?)', 'An Awesome Wave'),
+    ('One Direction', 'Take Me Home'),
+    ('Various Artists', 'Pop Stars'),
+    ('Various Artists', 'Now That\'s What I Call Music! 83'),
+    ('John Grant', 'Pale Green Ghosts'),
+    ('Paloma Faith', 'Fall to Grace'),
+    ('Laura Mvula', 'Sing To the Moon (Deluxe)'),
+    ('Duke Dumont', 'Need U (100%) [feat. A*M*E] - EP'),
+    ('Watsky', 'Cardboard Castles'),
+    ('Blondie', 'Blondie: Greatest Hits'),
+    ('Foals', 'Holy Fire'),
+    ('Maroon 5', 'Overexposed'),
+    ('Bastille', 'Pompeii (Remixes) - EP'),
+    ('Imagine Dragons', 'Hear Me - EP'),
+    ('Various Artists', '100 Hits: 80s Classics'),
+    ('Various Artists', 'Les Misérables (Highlights From the Motion Picture Soundtrack)'),
+    ('Mumford &amp; Sons', 'Sigh No More'),
+    ('Frank Ocean', 'Channel ORANGE'),
+    ('Bon Jovi', 'What About Now'),
+    ('Various Artists', 'BRIT Awards 2013'),
+    ('Taylor Swift', 'Red'),
+    ('Fleetwood Mac', 'Fleetwood Mac: Greatest Hits'),
+    ('David Guetta', 'Nothing But the Beat Ultimate'),
+    ('Various Artists', 'Clubbers Guide 2013 (Mixed By Danny Howard) - Ministry of Sound'),
+    ('David Bowie', 'Best of Bowie'),
+    ('Laura Mvula', 'Sing To the Moon'),
+    ('ADELE', '21'),
+    ('Of Monsters and Men', 'My Head Is an Animal'),
+    ('Rihanna', 'Unapologetic'),
+    ('Various Artists', 'BBC Radio 1\'s Live Lounge - 2012'),
+    ('Avicii &amp; Nicky Romero', 'I Could Be the One (Avicii vs. Nicky Romero)'),
+    ('The Streets', 'A Grand Don\'t Come for Free'),
+    ('Tim McGraw', 'Two Lanes of Freedom'),
+    ('Foo Fighters', 'Foo Fighters: Greatest Hits'),
+    ('Various Artists', 'Now That\'s What I Call Running!'),
+    ('Swedish House Mafia', 'Until Now'),
+    ('The xx', 'Coexist'),
+    ('Five', 'Five: Greatest Hits'),
+    ('Jimi Hendrix', 'People, Hell &amp; Angels'),
+    ('Biffy Clyro', 'Opposites (Deluxe)'),
+    ('The Smiths', 'The Sound of the Smiths'),
+    ('The Saturdays', 'What About Us - EP'),
+    ('Fleetwood Mac', 'Rumours'),
+    ('Various Artists', 'The Big Reunion'),
+    ('Various Artists', 'Anthems 90s - Ministry of Sound'),
+    ('The Vaccines', 'Come of Age'),
+    ('Nicole Scherzinger', 'Boomerang (Remixes) - EP'),
+    ('Bob Marley', 'Legend (Bonus Track Version)'),
+    ('Josh Groban', 'All That Echoes'),
+    ('Blue', 'Best of Blue'),
+    ('Ed Sheeran', '+'),
+    ('Olly Murs', 'In Case You Didn\'t Know (Deluxe Edition)'),
+    ('Macklemore &amp; Ryan Lewis', 'The Heist (Deluxe Edition)'),
+    ('Various Artists', 'Defected Presents Most Rated Miami 2013'),
+    ('Gorgon City', 'Real EP'),
+    ('Mumford &amp; Sons', 'Babel (Deluxe Version)'),
+    ('Various Artists', 'The Music of Nashville: Season 1, Vol. 1 (Original Soundtrack)'),
+    ('Various Artists', 'The Twilight Saga: Breaking Dawn, Pt. 2 (Original Motion Picture Soundtrack)'),
+    ('Various Artists', 'Mum - The Ultimate Mothers Day Collection'),
+    ('One Direction', 'Up All Night'),
+    ('Bon Jovi', 'Bon Jovi Greatest Hits'),
+    ('Agnetha Fältskog', 'A'),
+    ('Fun.', 'Some Nights'),
+    ('Justin Bieber', 'Believe Acoustic'),
+    ('Atoms for Peace', 'Amok'),
+    ('Justin Timberlake', 'Justified'),
+    ('Passenger', 'All the Little Lights'),
+    ('Kodaline', 'The High Hopes EP'),
+    ('Lana Del Rey', 'Born to Die'),
+    ('JAY Z &amp; Kanye West', 'Watch the Throne (Deluxe Version)'),
+    ('Biffy Clyro', 'Opposites'),
+    ('Various Artists', 'Return of the 90s'),
+    ('Gabrielle Aplin', 'Please Don\'t Say You Love Me - EP'),
+    ('Various Artists', '100 Hits - Driving Rock'),
+    ('Jimi Hendrix', 'Experience Hendrix - The Best of Jimi Hendrix'),
+    ('Various Artists', 'The Workout Mix 2013'),
+    ('The 1975', 'Sex'),
+    ('Chase &amp; Status', 'No More Idols'),
+    ('Rihanna', 'Unapologetic (Deluxe Version)'),
+    ('The Killers', 'Battle Born'),
+    ('Olly Murs', 'Right Place Right Time (Deluxe Edition)'),
+    ('A$AP Rocky', 'LONG.LIVE.A$AP (Deluxe Version)'),
+    ('Various Artists', 'Cooking Songs'),
+    ('Haim', 'Forever - EP'),
+    ('Lianne La Havas', 'Is Your Love Big Enough?'),
+    ('Michael Bublé', 'To Be Loved'),
+    ('Daughter', 'If You Leave'),
+    ('The xx', 'xx'),
+    ('Eminem', 'Curtain Call'),
+    ('Kendrick Lamar', 'good kid, m.A.A.d city (Deluxe)'),
+    ('Disclosure', 'The Face - EP'),
+    ('Palma Violets', '180'),
+    ('Cody Simpson', 'Paradise'),
+    ('Ed Sheeran', '+ (Deluxe Version)'),
+    ('Michael Bublé', 'Crazy Love (Hollywood Edition)'),
+    ('Bon Jovi', 'Bon Jovi Greatest Hits - The Ultimate Collection'),
+    ('Rita Ora', 'Ora'),
+    ('g33k', 'Spabby'),
+    ('Various Artists', 'Annie Mac Presents 2012'),
+    ('David Bowie', 'The Platinum Collection'),
+    ('Bridgit Mendler', 'Ready or Not (Remixes) - EP'),
+    ('Dido', 'Girl Who Got Away'),
+    ('Various Artists', 'Now That\'s What I Call Disney'),
+    ('The 1975', 'Facedown - EP'),
+    ('Kodaline', 'The Kodaline - EP'),
+    ('Various Artists', '100 Hits: Super 70s'),
+    ('Fred V &amp; Grafix', 'Goggles - EP'),
+    ('Biffy Clyro', 'Only Revolutions (Deluxe Version)'),
+    ('Train', 'California 37'),
+    ('Ben Howard', 'Every Kingdom (Deluxe Edition)'),
+    ('Various Artists', 'Motown Anthems'),
+    ('Courteeners', 'ANNA'),
+    ('Johnny Marr', 'The Messenger'),
+    ('Rodriguez', 'Searching for Sugar Man'),
+    ('Jessie Ware', 'Devotion'),
+    ('Bruno Mars', 'Unorthodox Jukebox'),
+    ('Various Artists', 'Call the Midwife (Music From the TV Series)'
+);</code></pre>
+
+
+<p>This gives us a handy extra 150 rows to play with. If you now visit your album
+list at <code>/album</code>, you'll see a huge long list of 150+ albums; it's ugly.</p>
+<h2 id="modifying-the-albumtable">Modifying the AlbumTable</h2>
+<p>In order to let zend-paginator handle our database queries automatically for us,
+we will be using the <a href="https://zendframework.github.io/zend-paginator/usage/#the-dbselect-adapter">DbSelect paginator adapter</a>
+This will automatically manipulate and run a <code>Zend\Db\Sql\Select</code> object to
+include the correct <code>LIMIT</code> and <code>WHERE</code> clauses so that it returns only the
+configured amount of data for the given page. Let's modify the <code>fetchAll</code> method
+of the <code>AlbumTable</code> model, so that it can optionally return a paginator object:</p>
+<pre class="codehilite"><code class="language-php">// in module/Album/src/Album/Model/AlbumTable.php:
+namespace Album\Model;
+
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Select;
+use Zend\Paginator\Adapter\DbSelect;
+use Zend\Paginator\Paginator;
+
+class AlbumTable
+{
+    /* ... */
+
+    public function fetchAll($paginated = false)
+    {
+        if ($paginated) {
+            return $this-&gt;fetchPaginatedResults();
+        }
+        $resultSet = $this-&gt;tableGateway-&gt;select();
+        return $resultSet;
+    }
+
+    private function fetchPaginatedResults()
+    {
+        // Create a new Select object for the table album:
+        $select = new Select('album');
+
+        // Create a new result set based on the Album entity:
+        $resultSetPrototype = new ResultSet();
+        $resultSetPrototype-&gt;setArrayObjectPrototype(new Album());
+
+        // Create a new pagination adapter object:
+        $paginatorAdapter = new DbSelect(
+            // our configured select object:
+            $select,
+            // the adapter to run it against:
+            $this-&gt;tableGateway-&gt;getAdapter(),
+            // the result set to hydrate:
+            $resultSetPrototype
+        );
+
+        $paginator = new Paginator($paginatorAdapter);
+        return $paginator;
+    }
+
+    /* ... */
+}</code></pre>
+
+
+<p>This will return a fully configured <code>Paginator</code> instance. We've already told the
+<code>DbSelect</code> adapter to use our created <code>Select</code> object, to use the adapter that
+the <code>TableGateway</code> object uses, and also how to hydrate the result into a
+<code>Album</code> entity in the same fashion as the <code>TableGateway</code> does. This means that
+our executed and returned paginator results will return <code>Album</code> objects in
+exactly the same fashion as the non-paginated results.</p>
+<h2 id="modifying-the-albumcontroller">Modifying the AlbumController</h2>
+<p>Next, we need to tell the album controller to return a <code>Pagination</code> object
+instead of a <code>ResultSet</code>. Both these objects can by iterated over to return
+hydrated <code>Album</code> objects, so we won't need to make many changes to the view
+script:</p>
+<pre class="codehilite"><code class="language-php">// in module/Album/src/Album/Controller/AlbumController.php:
+
+/* ... */
+
+public function indexAction()
+{
+    // Grab the paginator from the AlbumTable:
+    $paginator = $this-&gt;getAlbumTable()-&gt;fetchAll(true);
+
+    // Set the current page to what has been passed in query string,
+    // or to 1 if none set:
+    $paginator-&gt;setCurrentPageNumber(
+        (int) $this-&gt;params()-&gt;fromQuery('page', 1)
+    );
+
+    // Set the number of items per page to 10:
+    $paginator-&gt;setItemCountPerPage(10);
+
+    return new ViewModel([
+        'paginator' =&gt; $paginator
+    ]);
+}
+
+/* ... */</code></pre>
+
+
+<p>Here we are getting the configured <code>Paginator</code> object from the <code>AlbumTable</code>, and
+then telling it to use the page that is optionally passed in the querystring
+<code>page</code> parameter. We are also telling the paginator we want to display 10
+objects per page.</p>
+<h2 id="updating-the-view-script">Updating the View Script</h2>
+<p>Now, let's just tell the view script to iterate over the <code>pagination</code> view
+variable, rather than the <code>albums</code> variable:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php // in module/Album/view/album/album/index.phtml: ?&gt;
+&lt;table class=&quot;table&quot;&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Title&lt;/th&gt;
+        &lt;th&gt;Artist&lt;/th&gt;
+        &lt;th&gt;&amp;nbsp;&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;?php foreach ($this-&gt;paginator as $album) : // &lt;-- change here! ?&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;?= $this-&gt;escapeHtml($album-&gt;title) ?&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;?= $this-&gt;escapeHtml($album-&gt;artist) ?&gt;&lt;/td&gt;
+            &lt;td&gt;
+                &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action' =&gt; 'edit', 'id' =&gt; $album-&gt;id)] ?&gt;&quot;&gt;Edit&lt;/a&gt;
+                &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action' =&gt; 'delete', 'id' =&gt; $album-&gt;id]) ?&gt;&quot;&gt;Delete&lt;/a&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;?php endforeach; ?&gt;
+&lt;/table&gt;</code></pre>
+
+
+<p>Checking the <code>/album</code> route on your website should now give you a list of just
+10 albums, but with no method to navigate through the pages. Let's correct that
+now.</p>
+<h2 id="creating-the-pagination-control-partial">Creating the Pagination Control Partial</h2>
+<p>Much like we created a custom breadcrumbs partial to render our breadcrumb in
+the <a href="../navigation/#adding-breadcrumbs">navigation tutorial</a>, we need to create a
+custom pagination control partial to render our pagination control just the way
+we want it. Again, because we are using Bootstrap, this will primarily involve
+outputting correctly formatted html. Let's create the partial in the
+<code>module/Application/view/partial/</code> folder, so that we can use the control in all
+our modules:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/partial/paginator.phtml: ?&gt;
+&lt;?php if ($this-&gt;pageCount): ?&gt;
+    &lt;div&gt;
+        &lt;ul class=&quot;pagination&quot;&gt;
+            &lt;!-- Previous page link --&gt;
+            &lt;?php if (isset($this-&gt;previous)): ?&gt;
+                &lt;li&gt;
+                    &lt;a href=&quot;&lt;?= $this-&gt;url($this-&gt;route, [], ['query' =&gt; ['page' =&gt; $this-&gt;previous]]) ?&gt;&quot;&gt;
+                        &lt;&lt;
+                    &lt;/a&gt;
+                &lt;/li&gt;
+            &lt;?php else: ?&gt;
+                &lt;li class=&quot;disabled&quot;&gt;
+                    &lt;a href=&quot;#&quot;&gt;
+                        &lt;&lt;
+                    &lt;/a&gt;
+                &lt;/li&gt;
+            &lt;?php endif; ?&gt;
+
+            &lt;!-- Numbered page links --&gt;
+            &lt;?php foreach ($this-&gt;pagesInRange as $page): ?&gt;
+                &lt;?php if ($page !== $this-&gt;current): ?&gt;
+                    &lt;li&gt;
+                        &lt;a href=&quot;&lt;?= $this-&gt;url($this-&gt;route, [], ['query' =&gt; ['page' =&gt; $page]]) ?&gt;&quot;&gt;
+                            &lt;?= $page; ?&gt;
+                        &lt;/a&gt;
+                    &lt;/li&gt;
+                &lt;?php else: ?&gt;
+                    &lt;li class=&quot;active&quot;&gt;
+                        &lt;a href=&quot;#&quot;&gt;&lt;?= $page; ?&gt;&lt;/a&gt;
+                    &lt;/li&gt;
+                &lt;?php endif; ?&gt;
+            &lt;?php endforeach; ?&gt;
+
+            &lt;!-- Next page link --&gt;
+            &lt;?php if (isset($this-&gt;next)): ?&gt;
+                &lt;li&gt;
+                    &lt;a href=&quot;&lt;?= $this-&gt;url($this-&gt;route, [], ['query' =&gt; ['page' =&gt; $this-&gt;next]]) ?&gt;&quot;&gt;
+                        &gt;&gt;
+                    &lt;/a&gt;
+                &lt;/li&gt;
+            &lt;?php else: ?&gt;
+                &lt;li class=&quot;disabled&quot;&gt;
+                    &lt;a href=&quot;#&quot;&gt;
+                        &gt;&gt;
+                    &lt;/a&gt;
+                &lt;/li&gt;
+            &lt;?php endif; ?&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;?php endif; ?&gt;</code></pre>
+
+
+<p>This partial creates a pagination control with links to the correct pages (if
+there is more than one page in the pagination object). It will render a previous
+page link (and mark it disabled if you are at the first page), then render a
+list of intermediate pages (that are passed to the partial based on the
+rendering style; we'll set in the view helper in the next step).  Finally, it
+will create a next page link (and disable it if you're at the end).  Notice how
+we pass the page number via the <code>page</code> querystring parameter which we have
+already told our controller to use to display the current page.</p>
+<h3 id="using-the-paginationcontrol-view-helper">Using the PaginationControl View Helper</h3>
+<p>To page through the albums, we need to invoke the
+<a href="https://zendframework.github.io/zend-paginator/usage/#rendering-pages-with-view-scripts">paginationControl view helper</a>
+to display our pagination control:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+// In module/Album/view/album/album/index.phtml.
+// Add at the end of the file after the table:
+echo $this-&gt;paginationControl(
+    // The paginator object:
+    $this-&gt;paginator,
+    // The scrolling style:
+    'sliding',
+    // The partial to use to render the control:
+    'partial/paginator.phtml',
+    // The route to link to when a user clicks a control link:
+    [ 'route' =&gt; 'album' ]
+);
+?&gt;</code></pre>
+
+
+<p>The above echoes the <code>paginationControl</code> helper, and tells it to use our
+paginator instance, the <a href="https://zendframework.github.io/zend-paginator/advanced/#custom-scrolling-styles">sliding scrolling style</a>,
+our paginator partial, and which route to use for generating links. Refreshing
+your application now should give you Bootstrap-styled pagination controls!</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../navigation/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../unit-testing/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>

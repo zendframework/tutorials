@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    <title>Forms and Actions - tutorials</title>
+
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/zf.css" rel="stylesheet">
+    <link href="../../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="../..">tutorials</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Getting Started with Zend Framework</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../skeleton-application/">The Skeleton Application</a>
+</li>
+
+        
+            
+<li >
+    <a href="../modules/">Modules</a>
+</li>
+
+        
+            
+<li >
+    <a href="../routing-and-controllers/">Routing and Controllers</a>
+</li>
+
+        
+            
+<li >
+    <a href="../database-and-models/">Database and Models</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Forms and Actions</a>
+</li>
+
+        
+            
+<li >
+    <a href="../conclusion/">Conclusion</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+<li >
+    <a href="../../advanced-config/">Advanced Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../db-adapter/">Setting Up A Database Adapter</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../event-manager/">Using the EventManager</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../i18n/">Internationalization</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../navigation/">Adding zend-navigation to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../pagination/">Adding zend-paginator to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../unit-testing/">Unit Testing A zend-mvc Application</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/tutorials">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#forms-and-actions">Forms and actions</a></li>
+        
+            <li><a href="#adding-new-albums">Adding new albums</a></li>
+        
+            <li><a href="#editing-an-album">Editing an album</a></li>
+        
+            <li><a href="#deleting-an-album">Deleting an album</a></li>
+        
+            <li><a href="#ensuring-that-the-home-page-displays-the-list-of-albums">Ensuring that the home page displays the list of albums</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../database-and-models/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../conclusion/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="../..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Tutorials &raquo;</li>
+      
+    
+      
+        <li>Getting Started with Zend Framework &raquo;</li>
+      
+    
+  
+  <li class="active">Forms and Actions</li>
+</ol>
+
+<h1 id="forms-and-actions">Forms and actions</h1>
+<h2 id="adding-new-albums">Adding new albums</h2>
+<p>We can now code up the functionality to add new albums. There are two bits to this part:</p>
+<ul>
+<li>Display a form for user to provide details.</li>
+<li>Process the form submission and store to database.</li>
+</ul>
+<p>We will use zend-form to do this. zend-form manages the various form inputs as
+well as their validation, the latter of which is handled by the zend-inputfilter
+component. We'll start by creating a new class, <code>Album\Form\AlbumForm</code>,
+extending from <code>Zend\Form\Form</code>. Create the file
+<code>module/Album/src/Form/AlbumForm.php</code> with the following contents:</p>
+<pre class="codehilite"><code class="language-php">namespace Album\Form;
+
+use Zend\Form\Form;
+
+class AlbumForm extends Form
+{
+    public function __construct($name = null)
+    {
+        // We will ignore the name provided to the constructor
+        parent::__construct('album');
+
+        $this-&gt;add([
+            'name' =&gt; 'id',
+            'type' =&gt; 'hidden',
+        ]);
+        $this-&gt;add([
+            'name' =&gt; 'title',
+            'type' =&gt; 'text',
+            'options' =&gt; [
+                'label' =&gt; 'Title',
+            ],
+        ]);
+        $this-&gt;add([
+            'name' =&gt; 'artist',
+            'type' =&gt; 'text',
+            'options' =&gt; [
+                'label' =&gt; 'Artist',
+            ],
+        ]);
+        $this-&gt;add([
+            'name' =&gt; 'submit',
+            'type' =&gt; 'submit',
+            'attributes' =&gt; [
+                'value' =&gt; 'Go',
+                'id'    =&gt; 'submitbutton',
+            ],
+        ]);
+    }
+}</code></pre>
+
+
+<p>Within the constructor of <code>AlbumForm</code> we do several things. First, we set the
+name of the form as we call the parent's constructor. The, we create four form
+elements: the id, title, artist, and submit button. For each item we set various
+attributes and options, including the label to be displayed.</p>
+<blockquote>
+<h3 id="form-method">Form method</h3>
+<p>HTML forms can be sent using <code>POST</code> and <code>GET</code>. zend-form defaults to <code>POST</code>;
+therefore you don't have to be explicit in setting this option. If you want to
+change it to <code>GET</code> however, set the method attribute in the constructor:</p>
+<pre class="codehilite"><code class="language-php">$this-&gt;setAttribute('method', 'GET');</code></pre>
+
+
+</blockquote>
+<p>We also need to set up validation for this form.  <a href="https://zendframework.github.io/zend-inputfilter">zend-inputfilter</a>
+provides a general purpose mechanism for input validation. It also provides an
+interface, <code>InputFilterAwareInterface</code>, which zend-form will use in order to
+bind an input filter to a given form. We'll add this capability now to our
+<code>Album</code> class.</p>
+<pre class="codehilite"><code class="language-php">// module/Album/src/Model/Album.php:
+namespace Album\Model;
+
+// Add the following import statements:
+use DomainException;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
+class Album implements InputFilterAwareInterface
+{
+    public $id;
+    public $artist;
+    public $title;
+
+    // Add this property:
+    private $inputFilter;
+
+    public function exchangeArray(array $data)
+    {
+        $this-&gt;id     = ! empty($data['id']) ? $data['id'] : null;
+        $this-&gt;artist = ! empty($data['artist']) ? $data['artist'] : null;
+        $this-&gt;title  = ! empty($data['title']) ? $data['title'] : null;
+    }
+
+    public function getArrayCopy()
+    {
+        return [
+            'id'     =&gt; $this-&gt;id,
+            'artist' =&gt; $this-&gt;artist,
+            'title'  =&gt; $this-&gt;title,
+        ];
+    }
+
+    /* Add the following methods: */
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new DomainException(sprintf(
+            '%s does not allow injection of an alternate input filter',
+            __CLASS__
+        ));
+    }
+
+    public function getInputFilter()
+    {
+        if ($this-&gt;inputFilter) {
+            return $this-&gt;inputFilter;
+        }
+
+        $inputFilter = new InputFilter();
+
+        $inputFilter-&gt;add([
+            'name' =&gt; 'id',
+            'required' =&gt; true,
+            'filters' =&gt; [
+                ['name' =&gt; 'int'],
+            ],
+        ]);
+
+        $inputFilter-&gt;add([
+            'name' =&gt; 'artist',
+            'required' =&gt; true,
+            'filters' =&gt; [
+                ['name' =&gt; 'StripTags'],
+                ['name' =&gt; 'StringTrim'],
+            ],
+            'validators' =&gt; [
+                [
+                    'name' =&gt; 'StringLength',
+                    'options' =&gt; [
+                        'encoding' =&gt; 'UTF-8',
+                        'min' =&gt; 1,
+                        'max' =&gt; 100,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter-&gt;add([
+            'name' =&gt; 'title',
+            'required' =&gt; true,
+            'filters' =&gt; [
+                ['name' =&gt; 'StripTags'],
+                ['name' =&gt; 'StringTrim'],
+            ],
+            'validators' =&gt; [
+                [
+                    'name' =&gt; 'StringLength',
+                    'options' =&gt; [
+                        'encoding' =&gt; 'UTF-8',
+                        'min' =&gt; 1,
+                        'max' =&gt; 100,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this-&gt;inputFilter = $inputFilter;
+        return $this-&gt;inputFilter;
+    }
+}</code></pre>
+
+
+<p>The <code>InputFilterAwareInterface</code> defines two methods: <code>setInputFilter()</code> and
+<code>getInputFilter()</code>. We only need to implement <code>getInputFilter()</code> so we
+throw an exception from <code>setInputFilter()</code>.</p>
+<p>Within <code>getInputFilter()</code>, we instantiate an <code>InputFilter</code> and then add the
+inputs that we require. We add one input for each property that we wish to
+filter or validate. For the <code>id</code> field we add an <code>int</code> filter as we only need
+integers. For the text elements, we add two filters, <code>StripTags</code> and
+<code>StringTrim</code>, to remove unwanted HTML and unnecessary white space. We also set
+them to be <em>required</em> and add a <code>StringLength</code> validator to ensure that the user
+doesn't enter more characters than we can store into the database.</p>
+<p>We now need to get the form to display and then process it on submission. This
+is done within the <code>AlbumController::addAction()</code>:</p>
+<pre class="codehilite"><code class="language-php">// module/Album/src/Controller/AlbumController.php:
+
+// Add the following import statements at the top of the file:
+use Album\Form\AlbumForm;
+use Album\Model\Album;
+
+class AlbumController extends AbstractActionController
+{
+    /* ... */
+
+    /* Update the following method to read as follows: */
+    public function addAction()
+    {
+        $form = new AlbumForm();
+        $form-&gt;get('submit')-&gt;setValue('Add');
+
+        $request = $this-&gt;getRequest();
+
+        if (! $request-&gt;isPost()) {
+            return ['form' =&gt; $form];
+        }
+
+        $album = new Album();
+        $form-&gt;setInputFilter($album-&gt;getInputFilter());
+        $form-&gt;setData($request-&gt;getPost());
+
+        if (! $form-&gt;isValid()) {
+            return ['form' =&gt; $form];
+        }
+
+        $album-&gt;exchangeArray($form-&gt;getData());
+        $this-&gt;table-&gt;saveAlbum($album);
+        return $this-&gt;redirect()-&gt;toRoute('album');
+    }
+
+    /* ... */
+}</code></pre>
+
+
+<p>After adding the <code>Album</code> and <code>AlbumForm</code> classes to the import list, we
+implement <code>addAction()</code>. Let's look at the <code>addAction()</code> code in a little more
+detail:</p>
+<pre class="codehilite"><code class="language-php">$form = new AlbumForm();
+$form-&gt;get('submit')-&gt;setValue('Add');</code></pre>
+
+
+<p>We instantiate <code>AlbumForm</code> and set the label on the submit button to "Add". We
+do this here as we'll want to re-use the form when editing an album and will use
+a different label.</p>
+<pre class="codehilite"><code class="language-php">$request = $this-&gt;getRequest();
+
+if (! $request-&gt;isPost()) {
+    return ['form' =&gt; $form];
+}</code></pre>
+
+
+<p>If the request is not a <code>POST</code> request, then no form data has been submitted,
+and we need to display the form. zend-mvc allows you to return an array of data
+instead of a view model if desired; if you do, the array will be used to create
+a view model.</p>
+<pre class="codehilite"><code class="language-php">$album = new Album();
+$form-&gt;setInputFilter($album-&gt;getInputFilter());
+$form-&gt;setData($request-&gt;getPost());</code></pre>
+
+
+<p>At this point, we know we have a form submission. We create an <code>Album</code> instance,
+and pass its input filter on to the form; additionally, we pass the submitted
+data from the request instance to the form.</p>
+<pre class="codehilite"><code class="language-php">if (! $form-&gt;isValid()) {
+    return ['form' =&gt; $form];
+}</code></pre>
+
+
+<p>If form validation fails, we want to redisplay the form. At this point, the form
+contains information about what fields failed validation, and why, and this
+information will be communicated to the view layer.</p>
+<pre class="codehilite"><code class="language-php">$album-&gt;exchangeArray($form-&gt;getData());
+$this-&gt;getAlbumTable()-&gt;saveAlbum($album);</code></pre>
+
+
+<p>If the form is valid, then we grab the data from the form and store to the model
+using <code>saveAlbum()</code>.</p>
+<pre class="codehilite"><code class="language-php">return $this-&gt;redirect()-&gt;toRoute('album');</code></pre>
+
+
+<p>After we have saved the new album row, we redirect back to the list of albums
+using the <code>Redirect</code> controller plugin.</p>
+<p>We now need to render the form in the <code>add.phtml</code> view script:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+// module/Album/view/album/album/add.phtml:
+
+$title = 'Add new album';
+$this-&gt;headTitle($title);
+?&gt;
+&lt;h1&gt;&lt;?= $this-&gt;escapeHtml($title) ?&gt;&lt;/h1&gt;
+&lt;?php
+$form-&gt;setAttribute('action', $this-&gt;url('album', ['action' =&gt; 'add']));
+$form-&gt;prepare();
+
+echo $this-&gt;form()-&gt;openTag($form);
+echo $this-&gt;formHidden($form-&gt;get('id'));
+echo $this-&gt;formRow($form-&gt;get('title'));
+echo $this-&gt;formRow($form-&gt;get('artist'));
+echo $this-&gt;formSubmit($form-&gt;get('submit'));
+echo $this-&gt;form()-&gt;closeTag();</code></pre>
+
+
+<p>We display a title as before, and then we render the form. zend-form provides
+several view helpers to make this a little easier. The <code>form()</code> view helper has
+an <code>openTag()</code> and <code>closeTag()</code> method which we use to open and close the form.
+Then for each element with a label, we can use <code>formRow()</code> to render the label,
+input, and any validation error messages; for the two elements that are
+standalone and have no validation rules, we use <code>formHidden()</code> and
+<code>formSubmit()</code>.</p>
+<p>Alternatively, the process of rendering the form can be simplified by using the
+bundled <code>formCollection</code> view helper. For example, in the view script above
+replace all the form-rendering echo statements with:</p>
+<pre class="codehilite"><code class="language-php">echo $this-&gt;formCollection($form);</code></pre>
+
+
+<p>This will iterate over the form structure, calling the appropriate label,
+element, and error view helpers for each element, but you still have to wrap
+<code>formCollection($form)</code> with the open and close form tags. This helps reduce the
+complexity of your view script in situations where the default HTML rendering of
+the form is acceptable.</p>
+<p>You should now be able to use the "Add new album" link on the home page of the
+application to add a new album record, resulting in something like the
+following:</p>
+<p><img alt="Add Album Form" src="../../images/user-guide.forms-and-actions.album-form-add-original.png" class="img-responsive"/></p>
+<p>This doesn't look all that great! The reason is because Bootstrap, the CSS
+foundation used in the skeleton, has specialized markup for displaying forms! We
+can address that in our view script by:</p>
+<ul>
+<li>Adding markup around the elements.</li>
+<li>Rendering labels, elements, and error messages separately.</li>
+<li>Adding attributes to elements.</li>
+</ul>
+<p>Update your <code>add.phtml</code> view script to read as follows:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+$title = 'Add new album';
+$this-&gt;headTitle($title);
+?&gt;
+&lt;h1&gt;&lt;?= $this-&gt;escapeHtml($title) ?&gt;&lt;/h1&gt;
+&lt;?php
+// This provides a default CSS class and placeholder text for the title element:
+$album = $form-&gt;get('title');
+$album-&gt;setAttribute('class', 'form-control');
+$album-&gt;setAttribute('placeholder', 'Album title');
+
+// This provides a default CSS class and placeholder text for the artist element:
+$artist = $form-&gt;get('artist');
+$artist-&gt;setAttribute('class', 'form-control');
+$artist-&gt;setAttribute('placeholder', 'Artist');
+
+// This provides CSS classes for the submit button:
+$submit = $form-&gt;get('submit');
+$submit-&gt;setAttribute('class', 'btn btn-primary');
+
+$form-&gt;setAttribute('action', $this-&gt;url('album', ['action' =&gt; 'add']));
+$form-&gt;prepare();
+
+echo $this-&gt;form()-&gt;openTag($form);
+?&gt;
+&lt;?php // Wrap the elements in divs marked as form groups, and render the
+      // label, element, and errors separately within ?&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;?= $this-&gt;formLabel($album) ?&gt;
+    &lt;?= $this-&gt;formElement($album) ?&gt;
+    &lt;?= $this-&gt;formElementErrors()-&gt;render($album, ['class' =&gt; 'help-block']) ?&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;?= $this-&gt;formLabel($artist) ?&gt;
+    &lt;?= $this-&gt;formElement($artist) ?&gt;
+    &lt;?= $this-&gt;formElementErrors()-&gt;render($artist, ['class' =&gt; 'help-block']) ?&gt;
+&lt;/div&gt;
+
+&lt;?php
+echo $this-&gt;formSubmit($submit);
+echo $this-&gt;formHidden($form-&gt;get('id'));
+echo $this-&gt;form()-&gt;closeTag();</code></pre>
+
+
+<p>The results we get are much better:</p>
+<p><img alt="Add Album Form" src="../../images/user-guide.forms-and-actions.add-album-form.png" class="img-responsive"/></p>
+<p>The above is meant to demonstrate both the ease of use of the default form
+features, as well as some of the customizations possible when rendering forms.
+You should be able to generate any markup necessary for your site.</p>
+<h2 id="editing-an-album">Editing an album</h2>
+<p>Editing an album is almost identical to adding one, so the code is very similar.
+This time we use <code>editAction()</code> in the <code>AlbumController</code>:</p>
+<pre class="codehilite"><code class="language-php">// module/Album/src/Controller/AlbumController.php:
+// ...
+
+    public function editAction()
+    {
+        $id = (int) $this-&gt;params()-&gt;fromRoute('id', 0);
+
+        if (0 === $id) {
+            return $this-&gt;redirect()-&gt;toRoute('album', ['action' =&gt; 'add']);
+        }
+
+        // Retrieve the album with the specified id. Doing so raises
+        // an exception if the album is not found, which should result
+        // in redirecting to the landing page.
+        try {
+            $album = $this-&gt;table-&gt;getAlbum($id);
+        } catch (\Exception $e) {
+            return $this-&gt;redirect()-&gt;toRoute('album', ['action' =&gt; 'index']);
+        }
+
+        $form = new AlbumForm();
+        $form-&gt;bind($album);
+        $form-&gt;get('submit')-&gt;setAttribute('value', 'Edit');
+
+        $request = $this-&gt;getRequest();
+        $viewData = ['id' =&gt; $id, 'form' =&gt; $form];
+
+        if (! $request-&gt;isPost()) {
+            return $viewData;
+        }
+
+        $form-&gt;setInputFilter($album-&gt;getInputFilter());
+        $form-&gt;setData($request-&gt;getPost());
+
+        if (! $form-&gt;isValid()) {
+            return $viewData;
+        }
+
+        $this-&gt;table-&gt;saveAlbum($album);
+
+        // Redirect to album list
+        return $this-&gt;redirect()-&gt;toRoute('album', ['action' =&gt; 'index']);
+    }</code></pre>
+
+
+<p>This code should look comfortably familiar. Let's look at the differences from
+adding an album. Firstly, we look for the <code>id</code> that is in the matched route and
+use it to load the album to be edited:</p>
+<pre class="codehilite"><code class="language-php">$id = (int) $this-&gt;params()-&gt;fromRoute('id', 0);
+
+if (0 === $id) {
+    return $this-&gt;redirect()-&gt;toRoute('album', ['action' =&gt; 'add']);
+}
+
+// Retrieve the album with the specified id. Doing so raises
+// an exception if the album is not found, which should result
+// in redirecting to the landing page.
+try {
+    $album = $this-&gt;table-&gt;getAlbum($id);
+} catch (\Exception $e) {
+    return $this-&gt;redirect()-&gt;toRoute('album', ['action' =&gt; 'index']);
+}</code></pre>
+
+
+<p><code>params</code> is a controller plugin that provides a convenient way to retrieve
+parameters from the matched route. We use it to retrieve the <code>id</code> from the route
+we created within the Album module's <code>module.config.php</code>. If the <code>id</code> is zero,
+then we redirect to the add action, otherwise, we continue by getting the album
+entity from the database.</p>
+<p>We have to check to make sure that the album with the specified <code>id</code> can
+actually be found. If it cannot, then the data access method throws an
+exception. We catch that exception and re-route the user to the index page.</p>
+<pre class="codehilite"><code class="language-php">$form = new AlbumForm();
+$form-&gt;bind($album);
+$form-&gt;get('submit')-&gt;setAttribute('value', 'Edit');</code></pre>
+
+
+<p>The form's <code>bind()</code> method attaches the model to the form. This is used in two ways:</p>
+<ul>
+<li>When displaying the form, the initial values for each element are extracted
+  from the model.</li>
+<li>After successful validation in <code>isValid()</code>, the data from the form is put back
+  into the model.</li>
+</ul>
+<p>These operations are done using a <em>hydrator</em> object. There are a number of
+hydrators, but the default one is <code>Zend\Hydrator\ArraySerializable</code> which
+expects to find two methods in the model: <code>getArrayCopy()</code> and
+<code>exchangeArray()</code>. We have already written <code>exchangeArray()</code> in our <code>Album</code>
+entity, so we now need to write <code>getArrayCopy()</code>:</p>
+<pre class="codehilite"><code class="language-php">// module/Album/src/Model/Album.php:
+// ...
+
+    public function exchangeArray($data)
+    {
+        $this-&gt;id     = (isset($data['id']))     ? $data['id']     : null;
+        $this-&gt;artist = (isset($data['artist'])) ? $data['artist'] : null;
+        $this-&gt;title  = (isset($data['title']))  ? $data['title']  : null;
+    }
+
+    // Add the following method:
+    public function getArrayCopy()
+    {
+        return [
+            'id'     =&gt; $this-&gt;id,
+            'artist' =&gt; $this-&gt;artist,
+            'title'  =&gt; $this-&gt;title,
+        ];
+    }
+
+// ...</code></pre>
+
+
+<p>As a result of using <code>bind()</code> with its hydrator, we do not need to populate the
+form's data back into the <code>$album</code> as that's already been done, so we can just
+call the mapper's <code>saveAlbum()</code> method to store the changes back to the
+database.</p>
+<p>The view template, <code>edit.phtml</code>, looks very similar to the one for adding an album:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+// module/Album/view/album/album/edit.phtml:
+
+$title = 'Edit album';
+$this-&gt;headTitle($title);
+?&gt;
+&lt;h1&gt;&lt;?= $this-&gt;escapeHtml($title) ?&gt;&lt;/h1&gt;
+&lt;?php
+$album = $form-&gt;get('title');
+$album-&gt;setAttribute('class', 'form-control');
+$album-&gt;setAttribute('placeholder', 'Album title');
+
+$artist = $form-&gt;get('artist');
+$artist-&gt;setAttribute('class', 'form-control');
+$artist-&gt;setAttribute('placeholder', 'Artist');
+
+$submit = $form-&gt;get('submit');
+$submit-&gt;setAttribute('class', 'btn btn-primary');
+
+$form-&gt;setAttribute('action', $this-&gt;url('album', [
+    'action' =&gt; 'edit',
+    'id'     =&gt; $id,
+]));
+$form-&gt;prepare();
+
+echo $this-&gt;form()-&gt;openTag($form);
+?&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;?= $this-&gt;formLabel($album) ?&gt;
+    &lt;?= $this-&gt;formElement($album) ?&gt;
+    &lt;?= $this-&gt;formElementErrors()-&gt;render($album, ['class' =&gt; 'help-block']) ?&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;?= $this-&gt;formLabel($artist) ?&gt;
+    &lt;?= $this-&gt;formElement($artist) ?&gt;
+    &lt;?= $this-&gt;formElementErrors()-&gt;render($artist, ['class' =&gt; 'help-block']) ?&gt;
+&lt;/div&gt;
+
+&lt;?php
+echo $this-&gt;formSubmit($submit);
+echo $this-&gt;formHidden($form-&gt;get('id'));
+echo $this-&gt;form()-&gt;closeTag();</code></pre>
+
+
+<p>The only changes are to use the ‘Edit Album' title and set the form's action to
+the 'edit' action too, using the current album identifier.</p>
+<p>You should now be able to edit albums.</p>
+<h2 id="deleting-an-album">Deleting an album</h2>
+<p>To round out our application, we need to add deletion. We have a "Delete" link
+next to each album on our list page, and the naive approach would be to do a
+delete when it's clicked. This would be wrong. Remembering our HTTP spec, we
+recall that you shouldn't do an irreversible action using GET and should use
+POST instead.</p>
+<p>We shall show a confirmation form when the user clicks delete, and if they then
+click "yes", we will do the deletion. As the form is trivial, we'll code it
+directly into our view (zend-form is, after all, optional!).</p>
+<p>Let's start with the action code in <code>AlbumController::deleteAction()</code>:</p>
+<pre class="codehilite"><code class="language-php">// module/Album/src/Album/Controller/AlbumController.php:
+//...
+    // Add content to the following method:
+    public function deleteAction()
+    {
+        $id = (int) $this-&gt;params()-&gt;fromRoute('id', 0);
+        if (!$id) {
+            return $this-&gt;redirect()-&gt;toRoute('album');
+        }
+
+        $request = $this-&gt;getRequest();
+        if ($request-&gt;isPost()) {
+            $del = $request-&gt;getPost('del', 'No');
+
+            if ($del == 'Yes') {
+                $id = (int) $request-&gt;getPost('id');
+                $this-&gt;getAlbumTable()-&gt;deleteAlbum($id);
+            }
+
+            // Redirect to list of albums
+            return $this-&gt;redirect()-&gt;toRoute('album');
+        }
+
+        return array(
+            'id'    =&gt; $id,
+            'album' =&gt; $this-&gt;getAlbumTable()-&gt;getAlbum($id)
+        );
+    }
+//...</code></pre>
+
+
+<p>As before, we get the <code>id</code> from the matched route, and check the request object's <code>isPost()</code> to determine whether to show the confirmation page or to delete the album. We use the table object to delete the row using the <code>deleteAlbum()</code> method and then redirect back the list of albums. If the request is not a POST, then we retrieve the correct database record and assign to the view, along with the <code>id</code>.</p>
+<p>The view script is a simple form:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+// module/Album/view/album/album/delete.phtml:
+
+$title = 'Delete album';
+$url   = $this-&gt;url('album', ['action' =&gt; 'delete', 'id' =&gt; $id]);
+
+$this-&gt;headTitle($title);
+?&gt;
+&lt;h1&gt;&lt;?= $this-&gt;escapeHtml($title) ?&gt;&lt;/h1&gt;
+
+&lt;p&gt;
+    Are you sure that you want to delete
+    &quot;&lt;?= $this-&gt;escapeHtml($album-&gt;title) ?&gt;&quot; by
+    &quot;&lt;?= $this-&gt;escapeHtml($album-&gt;artist) ?&gt;&quot;?
+&lt;/p&gt;
+
+&lt;form action=&quot;&lt;?= $url ?&gt;&quot; method=&quot;post&quot;&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;&lt;?= (int) $album-&gt;id ?&gt;&quot; /&gt;
+    &lt;input type=&quot;submit&quot; class=&quot;btn btn-danger&quot; name=&quot;del&quot; value=&quot;Yes&quot; /&gt;
+    &lt;input type=&quot;submit&quot; class=&quot;btn btn-success&quot; name=&quot;del&quot; value=&quot;No&quot; /&gt;
+&lt;/div&gt;
+&lt;/form&gt;</code></pre>
+
+
+<p>In this script, we display a confirmation message to the user and then a form
+with "Yes" and "No" buttons. In the action, we checked specifically for the
+"Yes" value when doing the deletion.</p>
+<h2 id="ensuring-that-the-home-page-displays-the-list-of-albums">Ensuring that the home page displays the list of albums</h2>
+<p>One final point. At the moment, the home page, <code>http://zf2-tutorial.localhost/</code>
+doesn't display the list of albums.</p>
+<p>This is due to a route set up in the <code>Application</code> module's <code>module.config.php</code>.
+To change it, open <code>module/Application/config/module.config.php</code> and find the
+home route:</p>
+<pre class="codehilite"><code class="language-php">'home' =&gt; [
+    'type' =&gt; Literal::class,
+    'options' =&gt; [
+        'route'    =&gt; '/',
+        'defaults' =&gt; [
+            'controller' =&gt; Controller\IndexController::class,
+            'action'     =&gt; 'index',
+        ],
+    ],
+],</code></pre>
+
+
+<p>Import <code>Album\Controller\AlbumController</code> at the top of the file:</p>
+<pre class="codehilite"><code class="language-php">use Album\Controller\AlbumController;</code></pre>
+
+
+<p>and change the <code>controller</code> from <code>Controller\IndexController::class</code> to <code>AlbumController::class</code>:</p>
+<pre class="codehilite"><code class="language-php">'home' =&gt; [
+    'type' =&gt; Literal::class,
+    'options' =&gt; [
+        'route'    =&gt; '/',
+        'defaults' =&gt; [
+            'controller' =&gt; AlbumController::class, // &lt;-- change here
+            'action'     =&gt; 'index',
+        ],
+    ],
+],</code></pre>
+
+
+<p>That's it &mdash; you now have a fully working application!</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../database-and-models/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../conclusion/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../../js/jquery-1.10.2.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../../js/prism-zf.js"></script>
+
+    <script>var base_url = '../..';</script>
+    <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+    <script src="../../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>

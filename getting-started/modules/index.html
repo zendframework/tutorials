@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    <title>Modules - tutorials</title>
+
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/zf.css" rel="stylesheet">
+    <link href="../../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="../..">tutorials</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Getting Started with Zend Framework</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../skeleton-application/">The Skeleton Application</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Modules</a>
+</li>
+
+        
+            
+<li >
+    <a href="../routing-and-controllers/">Routing and Controllers</a>
+</li>
+
+        
+            
+<li >
+    <a href="../database-and-models/">Database and Models</a>
+</li>
+
+        
+            
+<li >
+    <a href="../forms-and-actions/">Forms and Actions</a>
+</li>
+
+        
+            
+<li >
+    <a href="../conclusion/">Conclusion</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+<li >
+    <a href="../../advanced-config/">Advanced Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../db-adapter/">Setting Up A Database Adapter</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../event-manager/">Using the EventManager</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../i18n/">Internationalization</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../navigation/">Adding zend-navigation to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../pagination/">Adding zend-paginator to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../unit-testing/">Unit Testing A zend-mvc Application</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/tutorials">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#modules">Modules</a></li>
+        
+            <li><a href="#setting-up-the-album-module">Setting up the Album module</a></li>
+        
+            <li><a href="#configuration">Configuration</a></li>
+        
+            <li><a href="#informing-the-application-about-our-new-module">Informing the application about our new module</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../skeleton-application/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../routing-and-controllers/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="../..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Tutorials &raquo;</li>
+      
+    
+      
+        <li>Getting Started with Zend Framework &raquo;</li>
+      
+    
+  
+  <li class="active">Modules</li>
+</ol>
+
+<h1 id="modules">Modules</h1>
+<p>zend-mvc uses a module system to organise your main application-specific
+code within each module. The <code>Application</code> module provided by the skeleton is used
+to provide bootstrapping, error, and routing configuration to the whole
+application. It is usually used to provide application level controllers for
+the home page of an application, but we are not going to use the default
+one provided in this tutorial as we want our album list to be the home page,
+which will live in our own module.</p>
+<p>We are going to put all our code into the <code>Album</code> module which will contain our
+controllers, models, forms and views, along with configuration. We’ll also tweak
+the <code>Application</code> module as required.</p>
+<p>Let’s start with the directories required.</p>
+<h2 id="setting-up-the-album-module">Setting up the Album module</h2>
+<p>Start by creating a directory called <code>Album</code> under <code>module</code> with the following
+subdirectories to hold the module’s files:</p>
+<pre class="codehilite"><code class="language-text">zf2-tutorial/
+    /module
+        /Album
+            /config
+            /src
+                /Controller
+                /Form
+                /Model
+            /view
+                /album
+                    /album</code></pre>
+
+
+<p>The <code>Album</code> module has separate directories for the different types of files we
+will have. The PHP files that contain classes within the <code>Album</code> namespace live
+in the <code>src/</code> directory. The view directory also has a sub-folder called <code>album</code>
+for our module's view scripts.</p>
+<p>In order to load and configure a module, Zend Framework provides a
+<code>ModuleManager</code>.  This will look for a <code>Module</code> class in the specified module
+namespace (i.e., <code>Album</code>); in the case of our new module, that means the class
+<code>Album\Module</code>, which will be found in <code>module/Album/src/Module.php</code>.</p>
+<p>Let's create that file now, with the following contents:</p>
+<pre class="codehilite"><code class="language-php">namespace Album;
+
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+
+class Module implements ConfigProviderInterface
+{
+    public function getConfig()
+    {
+        return include __DIR__ . '/../config/module.config.php';
+    }
+}</code></pre>
+
+
+<p>The <code>ModuleManager</code> will call <code>getConfig()</code> automatically for us.</p>
+<h3 id="autoloading">Autoloading</h3>
+<p>While Zend Framework provides autoloading capabilities via its
+<a href="https://zendframework.github.io/zend-loader">zend-loader</a> component, we
+recommend using Composer's autoloading capabilities. As such, we need to inform
+Composer of our new namespace, and where its files live.</p>
+<p>Open <code>composer.json</code> in your project root, and look for the <code>autoload</code> section;
+it should look like the following by default:</p>
+<pre class="codehilite"><code class="language-json">&quot;autoload&quot;: {
+    &quot;psr-4&quot;: {
+        &quot;Application\\&quot;: &quot;module/Application/src/&quot;
+    }
+},</code></pre>
+
+
+<p>We'll now add our new module to the list, so it now reads:</p>
+<pre class="codehilite"><code class="language-json">&quot;autoload&quot;: {
+    &quot;psr-4&quot;: {
+        &quot;Application\\&quot;: &quot;module/Application/src/&quot;,
+        &quot;Album\\&quot;: &quot;module/Album/src/&quot;
+    }
+},</code></pre>
+
+
+<p>Once you've made that change, run the following to ensure Composer updates its
+autoloading rules:</p>
+<pre class="codehilite"><code class="language-bash">$ composer dump-autoload</code></pre>
+
+
+<h2 id="configuration">Configuration</h2>
+<p>Having registered the autoloader, let’s have a quick look at the <code>getConfig()</code>
+method in <code>Album\Module</code>. This method loads the <code>config/module.config.php</code> file
+under the module's root directory.</p>
+<p>Create a file called <code>module.config.php</code> under
+<code>zf2-tutorial/module/Album/config/</code>:</p>
+<pre class="codehilite"><code class="language-php">namespace Album;
+
+use Zend\ServiceManager\Factory\InvokableFactory;
+
+return [
+    'controllers' =&gt; [
+        'factories' =&gt; [
+            Controller\AlbumController::class =&gt; InvokableFactory::class,
+        ],
+    ],
+    'view_manager' =&gt; [
+        'template_path_stack' =&gt; [
+            'album' =&gt; __DIR__ . '/../view',
+        ],
+    ],
+];</code></pre>
+
+
+<p>The config information is passed to the relevant components by the
+<code>ServiceManager</code>. We need two initial sections: <code>controllers</code> and
+<code>view_manager</code>. The controllers section provides a list of all the controllers
+provided by the module. We will need one controller, <code>AlbumController</code>; we'll
+reference it by its fully qualified class name, and use the zend-servicemanager
+<code>InvokableFactory</code> to create instances of it.</p>
+<p>Within the <code>view_manager</code> section, we add our view directory to the
+<code>TemplatePathStack</code> configuration. This will allow it to find the view scripts
+for the <code>Album</code> module that are stored in our <code>view/</code> directory.</p>
+<h2 id="informing-the-application-about-our-new-module">Informing the application about our new module</h2>
+<p>We now need to tell the <code>ModuleManager</code> that this new module exists. This is
+done in the application’s <code>config/application.config.php</code> file which is provided
+by the skeleton application. Update this file so that its <code>modules</code> section
+contains the <code>Album</code> module as well, so the file now looks like this:</p>
+<p>(Changes required are highlighted using comments; original comments from the
+file are omitted for brevity.)</p>
+<pre class="codehilite"><code class="language-php">return [
+    'modules' =&gt; [
+        'Zend\Form',
+        'Zend\Db',
+        'Zend\Router',
+        'Zend\Validator',
+        'Application',
+        'Album',                  // &lt;-- Add this line
+    ],
+    'module_listener_options' =&gt; [
+        'config_glob_paths'    =&gt; [
+            'config/autoload/{{,*.}global,{,*.}local}.php',
+        ],
+        'module_paths' =&gt; [
+            './module',
+            './vendor',
+        ],
+    ],
+];</code></pre>
+
+
+<p>As you can see, we have added our <code>Album</code> module into the list of modules after
+the <code>Application</code> module.</p>
+<p>We have now set up the module ready for putting our custom code into it.</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../skeleton-application/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../routing-and-controllers/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../../js/jquery-1.10.2.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../../js/prism-zf.js"></script>
+
+    <script>var base_url = '../..';</script>
+    <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+    <script src="../../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>

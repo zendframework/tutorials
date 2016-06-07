@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Adding zend-navigation to the Album Module - tutorials</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">tutorials</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Getting Started with Zend Framework</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../getting-started/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/skeleton-application/">The Skeleton Application</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/modules/">Modules</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/routing-and-controllers/">Routing and Controllers</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/database-and-models/">Database and Models</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/forms-and-actions/">Forms and Actions</a>
+</li>
+
+        
+            
+<li >
+    <a href="../getting-started/conclusion/">Conclusion</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+<li >
+    <a href="../advanced-config/">Advanced Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../db-adapter/">Setting Up A Database Adapter</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../event-manager/">Using the EventManager</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../i18n/">Internationalization</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Adding zend-navigation to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../pagination/">Adding zend-paginator to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../unit-testing/">Unit Testing A zend-mvc Application</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/tutorials">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#using-zend-navigation-in-your-album-module">Using zend-navigation in your Album Module</a></li>
+        
+            <li><a href="#todo">TODO</a></li>
+        
+            <li><a href="#preparation">Preparation</a></li>
+        
+            <li><a href="#setting-up-zend-navigation">Setting Up zend-navigation</a></li>
+        
+            <li><a href="#configuring-our-site-map">Configuring our Site Map</a></li>
+        
+            <li><a href="#adding-the-menu-view-helper">Adding the Menu View Helper</a></li>
+        
+            <li><a href="#adding-breadcrumbs">Adding Breadcrumbs</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../i18n/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../pagination/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Tutorials &raquo;</li>
+      
+    
+  
+  <li class="active">Adding zend-navigation to the Album Module</li>
+</ol>
+
+<h1 id="using-zend-navigation-in-your-album-module">Using zend-navigation in your Album Module</h1>
+<p>In this tutorial we will use the <a href="https://zendframework.github.io/zend-navigation/intro/">zend-navigation component</a>
+to add a navigation menu to the black bar at the top of the screen, and add
+breadcrumbs above the main site content.</p>
+<blockquote>
+<h3 id="todo">TODO</h3>
+<p>Update this to follow the changes made in the getting-started guide.</p>
+</blockquote>
+<h2 id="preparation">Preparation</h2>
+<p>In a real world application, the album browser would be only a portion of a
+working website. Usually the user would land on a homepage first, and be able to
+view albums by using a standard navigation menu. So that we have a site that is
+more realistic than just the albums feature, lets make the standard skeleton
+welcome page our homepage, with the /album route still showing our album module.
+In order to make this change, we need to undo some work we did earlier.
+Currently, navigating to the root of your app (<code>/</code>) routes you to the
+<code>AlbumController</code>'s default action. Let's undo this route change so we have two
+discrete entry points to the app, a home page, and an albums area.</p>
+<pre class="codehilite"><code class="language-php">// In module/Application/config/module.config.php:
+'home' =&gt; [
+   'type' =&gt; 'Zend\Router\Http\Literal',
+    'options' =&gt; [
+        'route'    =&gt; '/',
+        'defaults' =&gt; [
+            'controller' =&gt; 'Application\Controller\Index', // &lt;-- change back here
+            'action'     =&gt; 'index',
+        ],
+    ],
+],</code></pre>
+
+
+<p>This change means that if you go to the home page of your application
+(<code>http://zf2-tutorial.localhost/</code>), you see the default skeleton application
+introduction. Your list of albums is still available at the <code>/album</code> route.</p>
+<h2 id="setting-up-zend-navigation">Setting Up zend-navigation</h2>
+<p>Firstly, we need to tell our application which <code>NavigationFactory</code> to use when
+using the bundled navigation view helpers. Thankfully, zend-navigation comes with a default
+factory that will suit our needs just fine; assuming you have used
+<a href="https://zendframework.github.io/zend-component-installer">zend-component-installer</a>
+in your skeleton when adding zend-navigation, this will already be enabled.</p>
+<p>If not, you will need to add the configuration manually. To do this, create a
+new file, <code>config/autoload/navigation.global.php</code> with the following contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+use Zend\Navigation\ConfigProvider;
+
+return [
+    'service_manager' =&gt; (new ConfigProvider())-&gt;getDependencyConfig(),
+];</code></pre>
+
+
+<h2 id="configuring-our-site-map">Configuring our Site Map</h2>
+<p>Next up, we need <code>Zend\Navigation</code> to understand the hierarchy of our site.
+To do this, we can add a <code>navigation</code> key to our configuration, with the site
+structure details. We'll do that in the <code>Application</code> module configuration:</p>
+<pre class="codehilite"><code class="language-php">// in module/Application/config/module.config.php:
+return [
+    /* ... */
+    'navigation' =&gt; [
+        'default' =&gt; [
+            [
+                'label' =&gt; 'Home',
+                'route' =&gt; 'home',
+            ],
+            [
+                'label' =&gt; 'Album',
+                'route' =&gt; 'album',
+                'pages' =&gt; [
+                    [
+                        'label' =&gt; 'Add',
+                        'route' =&gt; 'album',
+                        'action' =&gt; 'add',
+                    ],
+                    [
+                        'label' =&gt; 'Edit',
+                        'route' =&gt; 'album',
+                        'action' =&gt; 'edit',
+                    ],
+                    [
+                        'label' =&gt; 'Delete',
+                        'route' =&gt; 'album',
+                        'action' =&gt; 'delete',
+                    ],
+                ],
+            ],
+        ],
+    ],
+    /* ... */
+];</code></pre>
+
+
+<p>This configuration maps out the pages we've defined in our controller, with
+labels linking to the given route names. You can define highly complex
+hierarchical sites here with pages and sub-pages linking to route names,
+controller/action pairs or external uris. For more information, see the
+<a href="https://zendframework.github.io/zend-navigation/quick-start/">zend-navigation quick start</a>.</p>
+<h2 id="adding-the-menu-view-helper">Adding the Menu View Helper</h2>
+<p>Now that we have the navigation helper configured by our service manager and
+merged config, we can add the menu to the title bar to our layout by
+using the <a href="https://zendframework.github.io/zend-navigation/helpers/menu/">menu view helper</a>:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+&lt;div class=&quot;collapse navbar-collapse&quot;&gt;
+    &lt;?php // add this: ?&gt;
+    &lt;?= $this-&gt;navigation('navigation')-&gt;menu() ?&gt;
+&lt;/div&gt;</code></pre>
+
+
+<p>The navigation helper is provided by default with zend-view, and uses the service
+manager configuration we've already defined to configure itself automatically.
+Refreshing your application, you will see a working menu; with just a few tweaks
+however, we can make it look even better:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+&lt;div class=&quot;collapse navbar-collapse&quot;&gt;
+    &lt;?php // update to: ?&gt;
+    &lt;?= $this-&gt;navigation('navigation')
+        -&gt;menu()
+        -&gt;setMinDepth(0)
+        -&gt;setMaxDepth(0)
+        -&gt;setUlClass('nav navbar-nav') ?&gt;
+&lt;/div&gt;</code></pre>
+
+
+<p>Here we tell the renderer to give the root <code>&lt;ul&gt;</code> the class of <code>nav</code> (so that
+Bootstrap styles the menu correctly), and only render the first level of any
+given page. If you view your application in your browser, you will now see a
+nicely styled menu appear in the title bar.</p>
+<p>The great thing about zend-navigation is that it integrates with zend-router in
+order to highlight the currently viewed page. Because of this, it sets the
+active page to have a class of <code>active</code> in the menu; Bootstrap uses this to
+highlight your current page accordingly.</p>
+<h2 id="adding-breadcrumbs">Adding Breadcrumbs</h2>
+<p>Adding breadcrumbs follows the same process. In our <code>layout.phtml</code> we want to
+add breadcrumbs above the main content pane, so our users know exactly
+where they are in our website. Inside the container div, before we
+output the content from the view, let's add a breadcrumb by using the
+<a href="https://zendframework.github.io/zend-navigation/helpers/breadcrumbs/">breadcrumbs view helper</a>.</p>
+<pre class="codehilite"><code class="language-php">&lt;?php // module/Application/view/layout/layout.phtml: ?&gt;
+&lt;div class=&quot;container&quot;&gt;
+    &lt;?php // add the following line: ?&gt;
+    &lt;?= $this-&gt;navigation('navigation')-&gt;breadcrumbs()-&gt;setMinDepth(0) ?&gt;
+    &lt;?= $this-&gt;content ?&gt;
+&lt;/div&gt;</code></pre>
+
+
+<p>This adds a simple but functional breadcrumb to every page (we tell it to render
+from a depth of 0 so we see all page levels), but we can do better than that!
+Because Bootstrap has a styled breadcrumb as part of its base CSS, let's add
+a partial that outputs the <code>&lt;ul&gt;</code> using Bootstrap styles. We'll create it in the
+<code>view</code> directory of the <code>Application</code> module (this partial is application wide,
+rather than album specific):</p>
+<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/partial/breadcrumb.phtml: ?&gt;
+&lt;ul class=&quot;breadcrumb&quot;&gt;
+    &lt;?php
+    // iterate through the pages
+    foreach ($this-&gt;pages as $key =&gt; $page):
+    ?&gt;
+        &lt;li&gt;
+            &lt;?php
+            // if this isn't the last page, add a link and the separator:
+            if ($key &lt; count($this-&gt;pages) - 1):
+            ?&gt;
+                &lt;a href=&quot;&lt;?= $page-&gt;getHref(); ?&gt;&quot;&gt;&lt;?= $page-&gt;getLabel(); ?&gt;&lt;/a&gt;
+            &lt;?php
+            // otherwise, output the name only:
+            else:
+            ?&gt;
+                &lt;?= $page-&gt;getLabel(); ?&gt;
+            &lt;?php endif; ?&gt;
+        &lt;/li&gt;
+    &lt;?php endforeach; ?&gt;
+&lt;/ul&gt;</code></pre>
+
+
+<p>Notice how the partial is passed a <code>Zend\View\Model\ViewModel</code> instance with the
+<code>pages</code> property set to an array of pages to render.</p>
+<p>Now we need to tell the breadcrumb helper to use the partial we have just
+written:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+&lt;div class=&quot;container&quot;&gt;
+    &lt;?php // Update to: ?&gt;
+    &lt;?= $this-&gt;navigation('navigation')
+            -&gt;breadcrumbs()
+            -&gt;setMinDepth(0)
+            -&gt;setPartial('partial/breadcrumb.phtml') ?&gt;
+    &lt;?= $this-&gt;content ?&gt;
+&lt;/div&gt;</code></pre>
+
+
+<p>Refreshing the page now gives us a styled set of breadcrumbs on each page.</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../i18n/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../pagination/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>
