@@ -144,8 +144,30 @@ responsibility: it will be *writing* new blog posts. As such, it will need to
 emit *commands*, and thus use the `PostCommandInterface` that we have defined
 previously.
 
+<<<<<<< bb6a2c65745fbea17b98e2e100e676bbcab45a1b
 To do that, it needs to accept and process user input, which we have modeled
 in our `PostForm` in a previous section of this chapter.
+=======
+~~~~ {.sourceCode .php}
+<?php
+// Filename: /module/Blog/config/module.config.php
+
+use Blog\Controller;
+use Zend\ServiceManager\Factory\InvokableFactory;
+
+return array(
+    'db'              => array( /** DB Config */ ),
+    'service_manager' => array( /** ServiceManager Config */),
+    'view_manager'    => array( /** ViewManager Config */ ),
+    'controllers'     => array(
+        'factories' => array(
+            Controller\ListController::class  => InvokableFactory::class,
+            Controller\WriteController::class => InvokableFactory::class,
+        )
+    ),
+    'router'          => array( /** Router Config */ )
+);
+~~~~
 
 Let's create this new class now. Open a new file,
 `module/Blog/src/Controller/WriteController.php`, and add the following
@@ -185,10 +207,12 @@ class WriteController extends AbstractActionController
 
     public function addAction()
     {
-        
+
     }
 }
 ```
+
+Next step would be to write the `WriteControllerFactory`. Have the factory return the `WriteController` and add the required dependencies within the constructor.
 
 We'll now create a factory for this new controller; create a new file,
 `module/Blog/src/Factory/WriteControllerFactory.php`, with the following
@@ -227,7 +251,7 @@ The above factory introduces something new: the `FormElementManager`. This is a
 plugin manager implementation that is specifically for forms. We don't
 necessarily need to register our forms with it, as it will check to see if a
 requested instance is a form when attempting to pull one from it. However, it
-does provide a couple nice features: 
+does provide a couple nice features:
 
 - If the form or fieldset or element retrieved implements an `init()` method, it
   invokes that method after instantiation. This is useful, as that way we're
@@ -258,9 +282,11 @@ to it:
 // In module/Blog/config/module.config.php:
 namespace Blog;
 
+use Blog\Controller;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
+    'db'              => array( /** Db Config */ ),
     'service_manager' => [ /* ... */ ],
     'controllers'     => [ /* ... */ ],
     'router'          => [
@@ -613,7 +639,7 @@ class ZendDbSqlCommand implements PostCommandInterface
      * @var AdapterInterface
      */
     private $db;
- 
+
     /**
      * @param AdapterInterface $db
      */

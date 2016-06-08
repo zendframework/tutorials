@@ -146,9 +146,19 @@ public function getConfig()
 Reload your application and you'll see that everything remains as it was. Next
 we add the new route to our configuration file:
 
+<<<<<<< bb6a2c65745fbea17b98e2e100e676bbcab45a1b
 ```php
 // In /module/Blog/config/module.config.php:
 namespace Blog;
+
+return [
+=======
+~~~~ {.sourceCode .php}
+<?php
+// Filename: /module/Blog/config/module.config.php
+
+use Blog\Controller;
+use Zend\Router\Http\Literal;
 
 return [
     // This lines opens the configuration for the RouteManager
@@ -158,7 +168,7 @@ return [
             // Define a new route called "blog"
             'blog' => [
                 // Define a "literal" route type:
-                'type' => 'literal',
+                'type' => Literal::class,
                 // Configure the route itself
                 'options' => [
                     // Listen to "/blog" as uri:
@@ -197,6 +207,39 @@ We now need to tell our module where to find this controller named
 `module/Blog/config/module.config.php`.
 
 ```php
+=======
+No Exception available
+~~~~
+
+We now need to tell our module where to find this controller named `Blog\Controller\ListController`. To achieve this we have to add this key to the `controllers` configuration key inside your `/module/Blog/config/module.config.php`.
+
+~~~~ {.sourceCode .php}
+<?php
+// Filename: /module/Blog/config/module.config.php
+use Blog\Controller;
+use Zend\ServiceManager\Factory\InvokableFactory;
+
+return array(
+    'controllers' => array(
+        'factories' => array(
+            Controller\ListController::class => InvokableFactory::class,
+        )
+    ),
+    'router' => array( /** Route Configuration */ )
+);
+~~~~
+
+This configuration defines `Blog\Controller\List` as an alias for the `ListController` under the namespace `Blog\Controller`. Reloading the page should then give you:
+
+~~~~ {.sourceCode .html}
+( ! ) Fatal error: Class 'Blog\Controller\ListController' not found in {libPath}/Zend/ServiceManager/AbstractPluginManager.php on line {lineNumber}
+~~~~
+
+This error tells us that the application knows what class to load, but not where to find it. To fix this, we need to configure [autoloading](http://www.php.net/manual/en/language.oop5.autoload.php) for our Module. Autoloading is a process to allow PHP to automatically load classes on demand. For our Module we set this up by adding a `getAutoloaderConfig()` function to our Module class. (This function is defined in the [AutoloaderProviderInterface](https://github.com/zendframework/zf2/:current_branch/library/Zend/ModuleManager/Feature/AutoloaderProviderInterface.php), although the presence of the function is enough, actually implementing the interface is optional.)
+
+~~~~ {.sourceCode .php}
+<?php
+// Filename: /module/Blog/Module.php
 namespace Blog;
 
 use Zend\ServiceManager\Factory\InvokableFactory;
