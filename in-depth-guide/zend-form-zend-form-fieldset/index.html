@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    <title>Making Use of Forms and Fieldsets - tutorials</title>
+
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/zf.css" rel="stylesheet">
+    <link href="../../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="../..">tutorials</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Getting Started with Zend Framework</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../getting-started/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/skeleton-application/">The Skeleton Application</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/modules/">Modules</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/routing-and-controllers/">Routing and Controllers</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/database-and-models/">Database and Models</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/forms-and-actions/">Forms and Actions</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/conclusion/">Conclusion</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">In-Depth Tutorial</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../first-module/">Introducing the Blog Module</a>
+</li>
+
+        
+            
+<li >
+    <a href="../models-and-servicemanager/">Models and the ServiceManager</a>
+</li>
+
+        
+            
+<li >
+    <a href="../preparing-databases/">Preparing for Different Databases</a>
+</li>
+
+        
+            
+<li >
+    <a href="../zend-db-sql-zend-hydrator/">SQL Abstraction and Object Hydration</a>
+</li>
+
+        
+            
+<li >
+    <a href="../understanding-routing/">Understanding the Router</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Making Use of Forms and Fieldsets</a>
+</li>
+
+        
+            
+<li >
+    <a href="../data-binding/">Editing and Deleting Data</a>
+</li>
+
+        
+            
+<li >
+    <a href="../review/">Reviewing the Blog Module</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+<li >
+    <a href="../../advanced-config/">Advanced Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../db-adapter/">Setting Up A Database Adapter</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../event-manager/">Using the EventManager</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../i18n/">Internationalization</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../navigation/">Adding zend-navigation to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../pagination/">Adding zend-paginator to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../unit-testing/">Unit Testing A zend-mvc Application</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/tutorials">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#making-use-of-forms-and-fieldsets">Making Use of Forms and Fieldsets</a></li>
+        
+            <li><a href="#form-components">Form components</a></li>
+        
+            <li><a href="#creating-your-first-fieldset">Creating your first Fieldset</a></li>
+        
+            <li><a href="#creating-the-postform">Creating the PostForm</a></li>
+        
+            <li><a href="#adding-a-new-post">Adding a new Post</a></li>
+        
+            <li><a href="#displaying-the-form">Displaying the form</a></li>
+        
+            <li><a href="#general-form-handling-logic-for-controllers">General form-handling logic for controllers</a></li>
+        
+            <li><a href="#using-zend-hydrator-with-zend-form">Using zend-hydrator with zend-form</a></li>
+        
+            <li><a href="#conclusion">Conclusion</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../understanding-routing/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../data-binding/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="../..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Tutorials &raquo;</li>
+      
+    
+      
+        <li>In-Depth Tutorial &raquo;</li>
+      
+    
+  
+  <li class="active">Making Use of Forms and Fieldsets</li>
+</ol>
+
+<h1 id="making-use-of-forms-and-fieldsets">Making Use of Forms and Fieldsets</h1>
+<p>So far all we have done is read data from the database. In a real-life
+application, this won't get us very far, as we'll often need to support the full
+range of full <code>Create</code>, <code>Read</code>, <code>Update</code> and <code>Delete</code> operations (CRUD).
+Typically, new data will arrive via web form submissions.</p>
+<h2 id="form-components">Form components</h2>
+<p>The <a href="https://zendframework.github.io/zend-form/">zend-form</a> and
+<a href="https://zendframework.github.io/zend-inputfilter/">zend-inputfilter</a> components
+provide us with the ability to create fully-featured forms and their validation
+rules. zend-form consumes zend-inputfilter internally, so let's take a look at
+the elements of zend-form that we will use for our application.</p>
+<h3 id="fieldsets">Fieldsets</h3>
+<p><code>Zend\Form\Fieldset</code> models a reusable set of elements. You will use a
+<code>Fieldset</code> to create the various HTML inputs needed to map to your server-side
+entities. It is considered good practice to have one <code>Fieldset</code> for every entity
+in your application.</p>
+<p>The <code>Fieldset</code> component, however, is not a form, meaning you will not be able
+to use a <code>Fieldset</code> without attaching it to the <code>Zend\Form\Form</code> instance. The
+advantage here is that you have one set of elements that you can re-use for as
+many forms as you like.</p>
+<h3 id="forms">Forms</h3>
+<p><code>Zend\Form\Form</code> is a container for all elements of your HTML <code>&lt;form&gt;</code>. You are
+able to add both single elements or fieldsets (modeled as <code>Zend\Form\Fieldset</code>
+instances).</p>
+<h2 id="creating-your-first-fieldset">Creating your first Fieldset</h2>
+<p>Explaining how zend-form works is best done by giving you real
+code to work with. So let's jump right into it and create all the forms we need
+to finish our <code>Blog</code> module. We start by creating a <code>Fieldset</code> that contains all
+the input elements that we need to work with our blog data:</p>
+<ul>
+<li>You will need one hidden input for the <code>id</code> property, which is only needed for
+  editting and deleting data.</li>
+<li>You will need one text input for the <code>title</code> property.</li>
+<li>You will need one textarea for the <code>text</code> property.</li>
+</ul>
+<p>Create the file <code>module/Blog/src/Form/PostFieldset.php</code> with the following
+contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace Blog\Form;
+
+use Zend\Form\Fieldset;
+
+class PostFieldset extends Fieldset
+{
+    public function init()
+    {
+        $this-&gt;add([
+            'type' =&gt; 'hidden',
+            'name' =&gt; 'id',
+        ]);
+
+        $this-&gt;add([
+            'type' =&gt; 'text',
+            'name' =&gt; 'title',
+            'options' =&gt; [
+                'label' =&gt; 'Post Title',
+            ],
+        ]);
+
+        $this-&gt;add([
+            'type' =&gt; 'textarea',
+            'name' =&gt; 'text',
+            'options' =&gt; [
+                'label' =&gt; 'Post Text',
+            ],
+        ]);
+    }
+}</code></pre>
+
+
+<p>This new class creates an extension of <code>Zend\Form\Fieldset</code> that, in an <code>init()</code>
+method (more on this later),  adds elements for each aspect of our blog post. We
+can now re-use this fieldset in as many forms as we want. Let's create our first
+form.</p>
+<h2 id="creating-the-postform">Creating the PostForm</h2>
+<p>Now that we have our <code>PostFieldset</code> in place, we can use it inside a <code>Form</code>.
+The form will use the <code>PostFieldset</code>, and also include a submit button so that
+the user can submit the data.</p>
+<p>Create the file <code>module/Blog/src/Form/PostForm.php</code> with the following contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace Blog\Form;
+
+use Zend\Form\Form;
+
+class PostForm extends Form
+{
+    public function init()
+    {
+        $this-&gt;add([
+            'name' =&gt; 'post',
+            'type' =&gt; PostFieldset::class,
+        ]);
+
+        $this-&gt;add([
+            'type' =&gt; 'submit',
+            'name' =&gt; 'submit',
+            'attributes' =&gt; [
+                'value' =&gt; 'Insert new Post',
+            ],
+        ]);
+    }
+}</code></pre>
+
+
+<p>And that's our form. Nothing special here, we add our <code>PostFieldset</code> to the
+form, we add a submit button to the form, and nothing more.</p>
+<h2 id="adding-a-new-post">Adding a new Post</h2>
+<p>Now that we have the <code>PostForm</code> written, it's time to use it. But there are a
+few more tasks left:</p>
+<ul>
+<li>We need to create a new controller <code>WriteController</code> which accepts the
+  following instances via its constructor:</li>
+<li>a <code>PostCommandInterface</code> instance</li>
+<li>a <code>PostForm</code> instance</li>
+<li>We need to create an <code>addAction()</code> method in the new <code>WriteController</code> to
+  handle displaying the form and processing it.</li>
+<li>We need to create a new route, <code>blog/add</code>, that routes to the
+  <code>WriteController</code> and its <code>addAction()</code> method.</li>
+<li>We need to create a new view script to display the form.</li>
+</ul>
+<h3 id="creating-the-writecontroller">Creating the WriteController</h3>
+<p>While we could re-use our existing controller, it has a different
+responsibility: it will be <em>writing</em> new blog posts. As such, it will need to
+emit <em>commands</em>, and thus use the <code>PostCommandInterface</code> that we have defined
+previously.</p>
+<p>To do that, it needs to accept and process user input, which we have modeled
+in our <code>PostForm</code> in a previous section of this chapter.</p>
+<p>Let's create this new class now. Open a new file,
+<code>module/Blog/src/Controller/WriteController.php</code>, and add the following
+contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace Blog\Controller;
+
+use Blog\Form\PostForm;
+use Blog\Model\Post;
+use Blog\Model\PostCommandInterface;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class WriteController extends AbstractActionController
+{
+    /**
+     * @var PostCommandInterface
+     */
+    private $command;
+
+    /**
+     * @var PostForm
+     */
+    private $form;
+
+    /**
+     * @param PostCommandInterface $command
+     * @param PostForm $form
+     */
+    public function __construct(PostCommandInterface $command, PostForm $form)
+    {
+        $this-&gt;command = $command;
+        $this-&gt;form = $form;
+    }
+
+    public function addAction()
+    {
+
+    }
+}</code></pre>
+
+
+<p>We'll now create a factory for this new controller; create a new file,
+<code>module/Blog/src/Factory/WriteControllerFactory.php</code>, with the following
+contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace Blog\Factory;
+
+use Blog\Controller\WriteController;
+use Blog\Form\PostForm;
+use Blog\Model\PostCommandInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+
+class WriteControllerFactory implements FactoryInterface
+{
+    /**
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param null|array $options
+     * @return WriteController
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        $formManager = $container-&gt;get('FormElementManager');
+        return new WriteController(
+            $container-&gt;get(PostCommandInterface::class),
+            $formManager-&gt;get(PostForm::class)
+        );
+    }
+}</code></pre>
+
+
+<p>The above factory introduces something new: the <code>FormElementManager</code>. This is a
+plugin manager implementation that is specifically for forms. We don't
+necessarily need to register our forms with it, as it will check to see if a
+requested instance is a form when attempting to pull one from it. However, it
+does provide a couple nice features: </p>
+<ul>
+<li>If the form or fieldset or element retrieved implements an <code>init()</code> method, it
+  invokes that method after instantiation. This is useful, as that way we're
+  initializing after we have all our dependencies injected, such as input
+  filters. Our form and fieldset define this method!</li>
+<li>It ensures that the various plugin managers related to input validation are
+  shared with the instance, a feature we'll be using later.</li>
+</ul>
+<p>Finally, we need to configure the new factory; in
+<code>module/Blog/config/module.config.php</code>, add an entry in the <code>controllers</code>
+configuration section:</p>
+<pre class="codehilite"><code class="language-php">'controllers' =&gt; [
+    'factories' =&gt; [
+        Controller\ListController::class =&gt; Factory\ListControllerFactory::class,
+        // Add the following line:
+        Controller\WriteController::class =&gt; Factory\WriteControllerFactory::class,
+    ],
+],</code></pre>
+
+
+<p>Now that we have the basics for our controller in place, we can create a route
+to it:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+// In module/Blog/config/module.config.php:
+namespace Blog;
+
+use Zend\ServiceManager\Factory\InvokableFactory;
+
+return [
+    'service_manager' =&gt; [ /* ... */ ],
+    'controllers'     =&gt; [ /* ... */ ],
+    'router'          =&gt; [
+        'routes' =&gt; [
+            'blog' =&gt; [
+                'type' =&gt; 'literal',
+                'options' =&gt; [
+                    'route'    =&gt; '/blog',
+                    'defaults' =&gt; [
+                        'controller' =&gt; Controller\ListController::class,
+                        'action'     =&gt; 'index',
+                    ]
+                ],
+
+                'may_terminate' =&gt; true,
+
+                'child_routes'  =&gt; [
+                    'detail' =&gt; [
+                        'type' =&gt; 'segment',
+                        'options' =&gt; [
+                            'route'    =&gt; '/:id',
+                            'defaults' =&gt; [
+                                'action' =&gt; 'detail'
+                            ],
+                            'constraints' =&gt; [
+                                'id' =&gt; '\d+'
+                            ]
+                        ]
+                    ],
+
+                    // Add the following route:
+                    'add' =&gt; [
+                        'type' =&gt; 'literal',
+                        'options' =&gt; [
+                            'route'    =&gt; '/add',
+                            'defaults' =&gt; [
+                                'controller' =&gt; Controller\WriteController::class,
+                                'action'     =&gt; 'add',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'view_manager' =&gt; [ /* ... */ ],
+];</code></pre>
+
+
+<p>Finally, we'll create a dummy template:</p>
+<pre class="codehilite"><code class="language-html">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
+&lt;h1&gt;WriteController::addAction()&lt;/h1&gt;</code></pre>
+
+
+<h3 id="check-in">Check-in</h3>
+<p>If you try to access the new route <code>localhost:8080/blog/add</code> you're supposed to
+see the following error message:</p>
+<pre class="codehilite"><code class="language-text">An error occurred
+
+An error occurred during execution; please try again later.
+
+Additional information:
+
+Zend\ServiceManager\Exception\ServiceNotFoundException
+
+File:
+{projectPath}/vendor/zendframework/zend-servicemanager/src/ServiceManager.php:{lineNumber}
+
+Message:
+Unable to resolve service &quot;Blog\Model\PostCommandInterface&quot; to a factory; are you certain you provided it during configuration?</code></pre>
+
+
+<p>If this is not the case, be sure to follow the tutorial correctly and carefully
+check all your files.</p>
+<p>The error is due to the fact that we have not yet defined an <em>implementation</em> of
+our <code>PostCommandInterface</code>, much less wired the implementation into our
+application!</p>
+<p>Let's create a dummy implementation, as we did when we first started working
+with repositories. Create the file <code>module/Blog/src/Model/PostCommand.php</code> with
+the following contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace Blog\Model;
+
+class PostCommand implements PostCommandInterface
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function insertPost(Post $post)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function updatePost(Post $post)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function deletePost(Post $post)
+    {
+    }
+}</code></pre>
+
+
+<p>Now add service configuration in <code>module/Blog/config/module.config.php</code>:</p>
+<pre class="codehilite"><code class="language-php">'service_manager' =&gt; [
+    'aliases' =&gt; [
+        /* ... */
+        // Add the following line:
+        Model\PostCommandInterface::class =&gt; Model\PostCommand::class,
+    ],
+    'factories' =&gt; [
+        /* ... */
+        // Add the following line:
+        Model\PostCommand::class =&gt; InvokableFactory::class,
+    ],
+],</code></pre>
+
+
+<p>Reloading your application now will yield you the desired result.</p>
+<h2 id="displaying-the-form">Displaying the form</h2>
+<p>Now that we have new controller working, it's time to pass this form to the view
+and render it.  Change your controller so that the form is passed to the view:</p>
+<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Controller/WriteController.php:
+public function addAction()
+{
+    return new ViewModel([
+        'form' =&gt; $this-&gt;form,
+    ]);
+}</code></pre>
+
+
+<p>And then we need to modify our view to render the form:</p>
+<pre class="codehilite"><code class="language-php">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
+&lt;h1&gt;Add a blog post&lt;/h1&gt;
+
+&lt;?php
+$form = $this-&gt;form;
+$form-&gt;setAttribute('action', $this-&gt;url());
+$form-&gt;prepare();
+
+echo $this-&gt;form()-&gt;openTag($form);
+echo $this-&gt;formCollection($form);
+echo $this-&gt;form()-&gt;closeTag();</code></pre>
+
+
+<p>The above does the following:</p>
+<ul>
+<li>We set the <code>action</code> attribute of the form to the current URL.</li>
+<li>We "prepare" the form; this ensures any data or error messages bound to the
+  form or its various elements are injected and ready to use for display
+  purposes.</li>
+<li>We render an opening tag for the form we are using.</li>
+<li>We render the contents of the form, using the <code>formCollection()</code> view helper;
+  this is a convenience method with some typically sane default markup. We'll be
+  changing it momentarily.</li>
+<li>We render a closing tag for the form.</li>
+</ul>
+<blockquote>
+<h3 id="form-method">Form method</h3>
+<p>HTML forms can be sent using <code>POST</code> and <code>GET</code>. zend-form defaults to <code>POST</code>.
+If you want to switch to <code>GET</code>:</p>
+<pre class="codehilite"><code class="language-php">$form-&gt;setAttribute('method', 'GET');</code></pre>
+
+
+</blockquote>
+<p>Refreshing the browser you will now see your form properly displayed. It's not
+pretty, though, as the default markup does not follow semantics for Bootstrap
+(which is used in the skeleton application by default). Let's update it a bit to
+make it look better; we'll do that in the view script itself, as markup-related
+concerns belong in the view layer:</p>
+<pre class="codehilite"><code class="language-php">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
+&lt;h1&gt;Add a blog post&lt;/h1&gt;
+
+&lt;?php
+$form = $this-&gt;form;
+$form-&gt;setAttribute('action', $this-&gt;url());
+
+$fieldset = $form-&gt;get('post');
+
+$title = $fieldset-&gt;get('title');
+$title-&gt;setAttribute('class', 'form-control');
+$title-&gt;setAttribute('placeholder', 'Post title');
+
+$text = $fieldset-&gt;get('text');
+$text-&gt;setAttribute('class', 'form-control');
+$text-&gt;setAttribute('placeholder', 'Post content');
+
+$submit = $form-&gt;get('submit');
+$submit-&gt;setAttribute('class', 'btn btn-primary');
+
+$form-&gt;prepare();
+
+echo $this-&gt;form()-&gt;openTag($form);
+?&gt;
+
+&lt;fieldset&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;?= $this-&gt;formLabel($title) ?&gt;
+    &lt;?= $this-&gt;formElement($title) ?&gt;
+    &lt;?= $this-&gt;formElementErrors()-&gt;render($title, ['class' =&gt; 'help-block']) ?&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;?= $this-&gt;formLabel($text) ?&gt;
+    &lt;?= $this-&gt;formElement($text) ?&gt;
+    &lt;?= $this-&gt;formElementErrors()-&gt;render($text, ['class' =&gt; 'help-block']) ?&gt;
+&lt;/div&gt;
+&lt;/fieldset&gt;
+
+&lt;?php
+echo $this-&gt;formSubmit($submit);
+echo $this-&gt;formHidden($fieldset-&gt;get('id'));
+echo $this-&gt;form()-&gt;closeTag();</code></pre>
+
+
+<p>The above adds HTML attributes to a number of the elements we've defined, and
+uses more specific view helpers to allow us to render the exact markup we want
+for our form.</p>
+<p>However, if we're submitting the form all we see is our form being displayed
+again. And this is due to the simple fact that we didn't add any logic to the
+controller yet.</p>
+<h2 id="general-form-handling-logic-for-controllers">General form-handling logic for controllers</h2>
+<p>Writing a controller that handles a form workflow follows the same basic pattern
+regardless of form and entities:</p>
+<ol>
+<li>You need to check if the HTTP request method is via <code>POST</code>, meaning if the
+   form has been sent.</li>
+<li>If the form has been sent, you need to:</li>
+<li>pass the submitted data to your <code>Form</code> instance</li>
+<li>validate the <code>Form</code> instance</li>
+<li>If the form passes validation, you will:</li>
+<li>persist the form data</li>
+<li>redirect the user to either the detail page of the entered data, or to an
+     overview page</li>
+<li>In all other cases, you need to display the form, potentially with error
+   messages.</li>
+</ol>
+<p>Modify your <code>WriteController:addAction()</code> to read as follows:</p>
+<pre class="codehilite"><code class="language-php">public function addAction()
+{
+    $request   = $this-&gt;getRequest();
+    $viewModel = new ViewModel(['form' =&gt; $this-&gt;form]);
+
+    if (! $request-&gt;isPost()) {
+        return $viewModel;
+    }
+
+    $this-&gt;form-&gt;setData($request-&gt;getPost());
+
+    if (! $this-&gt;form-&gt;isValid()) {
+        return $viewModel;
+    }
+
+    $data = $this-&gt;form-&gt;getData()['post'];
+    $post = new Post($data['title'], $data['text']);
+
+    try {
+        $post = $this-&gt;command-&gt;insertPost($post);
+    } catch (\Exception $ex) {
+        // An exception occurred; we may want to log this later and/or
+        // report it to the user. For now, we'll just re-throw.
+        throw $ex;
+    }
+
+    return $this-&gt;redirect()-&gt;toRoute(
+        'blog/detail',
+        ['id' =&gt; $post-&gt;getId()]
+    );
+}</code></pre>
+
+
+<p>Stepping through the code:</p>
+<ul>
+<li>We retrieve the current request.</li>
+<li>We create a default view model containing the form.</li>
+<li>If we do not have a <code>POST</code> request, we return the default view model.</li>
+<li>We populate the form with data from the request.</li>
+<li>If the form is not valid, we return the default view model; at this point, the
+  form will also contain error messages.</li>
+<li>We create a <code>Post</code> instance from the validated data.</li>
+<li>We attempt to insert the post.</li>
+<li>On success, we redirect to the post's detail page.</li>
+</ul>
+<blockquote>
+<h3 id="child-route-names">Child route names</h3>
+<p>When using the various <code>url()</code> helpers provided in zend-mvc and zend-view,
+you need to provide the name of a route. When using child routes, the route
+name is of the form <code>&lt;parent&gt;/&lt;child&gt;</code> &mdash; i.e., the parent name and child
+name are separated with a slash.</p>
+</blockquote>
+<p>Submitting the form right now will return into the following error</p>
+<pre class="codehilite"><code class="language-text">Fatal error: Call to a member function getId() on null in
+{projectPath}/module/Blog/src/Controller/WriteController.php
+on line {lineNumber}</code></pre>
+
+
+<p>This is because our stub <code>PostCommand</code> class does not return a new <code>Post</code>
+instance, violating the contract!</p>
+<p>Let's create a new implementation to work against zend-db. Create the file
+<code>module/Blog/src/Model/ZendDbSqlCommand.php</code> with the following contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace Blog\Model;
+
+use RuntimeException;
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\Sql\Delete;
+use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Update;
+
+class ZendDbSqlCommand implements PostCommandInterface
+{
+    /**
+     * @var AdapterInterface
+     */
+    private $db;
+
+    /**
+     * @param AdapterInterface $db
+     */
+    public function __construct(AdapterInterface $db)
+    {
+        $this-&gt;db = $db;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function insertPost(Post $post)
+    {
+        $insert = new Insert('posts');
+        $insert-&gt;values([
+            'title' =&gt; $post-&gt;getTitle(),
+            'text' =&gt; $post-&gt;getText(),
+        ]);
+
+        $sql = new Sql($this-&gt;db);
+        $statement = $sql-&gt;prepareStatementForSqlObject($insert);
+        $result = $statement-&gt;execute();
+
+        if (! $result instanceof ResultInterface) {
+            throw new RuntimeException(
+                'Database error occurred during blog post insert operation'
+            );
+        }
+
+        $id = $result-&gt;getGeneratedValue();
+
+        return new Post(
+            $post-&gt;getTitle(),
+            $post-&gt;getText(),
+            $result-&gt;getGeneratedValue()
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function updatePost(Post $post)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function deletePost(Post $post)
+    {
+    }
+}</code></pre>
+
+
+<p>In the <code>insertPost()</code> method, we do the following:</p>
+<ul>
+<li>We create a <code>Zend\Db\Sql\Insert</code> instance, providing it the table name.</li>
+<li>We add values to the <code>Insert</code> instance.</li>
+<li>We create a <code>Zend\Db\Sql\Sql</code> instance with the database adapter, and prepare
+  a statement from our <code>Insert</code> instance.</li>
+<li>We execute the statement and check for a valid result.</li>
+<li>We marshal a return value.</li>
+</ul>
+<p>Now that we have this in place, we'll create a factory for it; create the file
+<code>module/Blog/src/Factory/ZendDbSqlCommandFactory.php</code> with the following
+contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace Blog\Factory;
+
+use Interop\Container\ContainerInterface;
+use Blog\Model\ZendDbSqlCommand;
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+
+class ZendDbSqlCommandFactory implements FactoryInterface
+{
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        return new ZendDbSqlCommand($container-&gt;get(AdapterInterface::class));
+    }
+}</code></pre>
+
+
+<p>And finally, we'll wire it up in the configuration; update the <code>service_manager</code>
+section of <code>module/Blog/config/module.config.php</code> to read as follows:</p>
+<pre class="codehilite"><code class="language-php">'service_manager' =&gt; [
+    'aliases' =&gt; [
+        Model\PostRepositoryInterface::class =&gt; Model\ZendDbSqlRepository::class,
+        // Update the following alias:
+        Model\PostCommandInterface::class =&gt; Model\ZendDbSqlCommand::class,
+    ],
+    'factories' =&gt; [
+        Model\PostRepository::class =&gt; InvokableFactory::class,
+        Model\ZendDbSqlRepository::class =&gt; Factory\ZendDbSqlRepositoryFactory::class,
+        Model\PostCommand::class =&gt; InvokableFactory::class,
+        // Add the following line:
+        Model\ZendDbSqlCommand::class =&gt; Factory\ZendDbSqlCommandFactory::class,
+    ],
+],</code></pre>
+
+
+<p>Submitting your form again, it should process the form and redirect you to the
+detail page for the new entry!</p>
+<p>Let's see if we an improve this a bit.</p>
+<h2 id="using-zend-hydrator-with-zend-form">Using zend-hydrator with zend-form</h2>
+<p>In our controller currently, we have the following:</p>
+<pre class="codehilite"><code class="language-php">$data = $this-&gt;form-&gt;getData()['post'];
+$post = new Post($data['title'], $data['text']);</code></pre>
+
+
+<p>What if we could automate that, so we didn't need to worry about:</p>
+<ul>
+<li>Whether or not we're using a fieldset</li>
+<li>What the form fields are named</li>
+</ul>
+<p>Fortunately, zend-form features integration with zend-hydrator. This will allow
+us to return a <code>Post</code> instance when we retrieve the validated values!</p>
+<p>Let's udpate our fieldset to provide a hydrator and a prototype object.</p>
+<p>First, add two import statements to the top of the class file:</p>
+<pre class="codehilite"><code class="language-php">// In module/Blog/src/Form/PostFieldset.php:
+use Blog\Model\Post;
+use Zend\Hydrator\Reflection as ReflectionHydrator;</code></pre>
+
+
+<p>Next, update the <code>init()</code> method to add the following two lines:</p>
+<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Form/PostFieldset.php:
+
+public function init()
+{
+    $this-&gt;setHydrator(new ReflectionHydrator());
+    $this-&gt;setObject(new Post('', ''));
+
+    /* ... */
+}</code></pre>
+
+
+<p>When you grab the data from this fiedlset, it will be returned as a <code>Post</code>
+instance.</p>
+<p>However, we grab data <em>from the form</em>; how can we simplify that interaction?</p>
+<p>Since we only have the one fieldset, we'll set it as the form's <em>base fieldset</em>.
+This hints to the form that when we retrieve data from it, it should return the
+values from the specified fieldset instead; since our fieldset returns the
+<code>Post</code> instance, we'll have exactly what we need.</p>
+<p>Modify your <code>PostForm</code> class as follows:</p>
+<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Form/PostForm.php:
+
+public function init()
+{
+    $this-&gt;add([
+        'name' =&gt; 'post',
+        'type' =&gt; PostFieldset::class,
+        'options' =&gt; [
+            'use_as_base_fieldset' =&gt; true,
+        ],
+    ]);
+
+    /* ... */</code></pre>
+
+
+<p>Let's update our <code>WriteController</code>; modify the <code>addAction()</code> method to replace
+the following two lines:</p>
+<pre class="codehilite"><code class="language-php">$data = $this-&gt;form-&gt;getData()['post'];
+$post = new Post($data['title'], $data['text']);</code></pre>
+
+
+<p>to:</p>
+<pre class="codehilite"><code class="language-php">$post = $this-&gt;form-&gt;getData();</code></pre>
+
+
+<p>Everything should continue to work. The changes done serve the purpose of
+de-coupling the details of how the form is structured from the controller,
+allowing us to work directly with our entities at all times!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this chapter, we've learned the fundamentals of using zend-form, including
+adding fieldsets and elements, rendering the form, validating input, and wiring
+forms and fieldsets to use entities.</p>
+<p>In the next chapter we will finalize the CRUD functionality by creating the
+update and delete routines for the blog module.</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../understanding-routing/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../data-binding/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../../js/jquery-1.10.2.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../../js/prism-zf.js"></script>
+
+    <script>var base_url = '../..';</script>
+    <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+    <script src="../../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>

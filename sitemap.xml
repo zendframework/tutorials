@@ -4,7 +4,7 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2016-06-07</lastmod>
+     <lastmod>2016-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -18,44 +18,50 @@
     </url>
         
     <url>
+     <loc>None</loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>None/advanced-config/</loc>
-     <lastmod>2016-06-07</lastmod>
+     <lastmod>2016-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/db-adapter/</loc>
-     <lastmod>2016-06-07</lastmod>
+     <lastmod>2016-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/event-manager/</loc>
-     <lastmod>2016-06-07</lastmod>
+     <lastmod>2016-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/i18n/</loc>
-     <lastmod>2016-06-07</lastmod>
+     <lastmod>2016-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/navigation/</loc>
-     <lastmod>2016-06-07</lastmod>
+     <lastmod>2016-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/pagination/</loc>
-     <lastmod>2016-06-07</lastmod>
+     <lastmod>2016-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/unit-testing/</loc>
-     <lastmod>2016-06-07</lastmod>
+     <lastmod>2016-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

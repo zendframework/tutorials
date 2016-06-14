@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    <title>Understanding the Router - tutorials</title>
+
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/zf.css" rel="stylesheet">
+    <link href="../../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="../..">tutorials</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Getting Started with Zend Framework</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../getting-started/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/skeleton-application/">The Skeleton Application</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/modules/">Modules</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/routing-and-controllers/">Routing and Controllers</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/database-and-models/">Database and Models</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/forms-and-actions/">Forms and Actions</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../getting-started/conclusion/">Conclusion</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">In-Depth Tutorial</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../first-module/">Introducing the Blog Module</a>
+</li>
+
+        
+            
+<li >
+    <a href="../models-and-servicemanager/">Models and the ServiceManager</a>
+</li>
+
+        
+            
+<li >
+    <a href="../preparing-databases/">Preparing for Different Databases</a>
+</li>
+
+        
+            
+<li >
+    <a href="../zend-db-sql-zend-hydrator/">SQL Abstraction and Object Hydration</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Understanding the Router</a>
+</li>
+
+        
+            
+<li >
+    <a href="../zend-form-zend-form-fieldset/">Making Use of Forms and Fieldsets</a>
+</li>
+
+        
+            
+<li >
+    <a href="../data-binding/">Editing and Deleting Data</a>
+</li>
+
+        
+            
+<li >
+    <a href="../review/">Reviewing the Blog Module</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+<li >
+    <a href="../../advanced-config/">Advanced Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../db-adapter/">Setting Up A Database Adapter</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../event-manager/">Using the EventManager</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../i18n/">Internationalization</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../navigation/">Adding zend-navigation to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../pagination/">Adding zend-paginator to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../unit-testing/">Unit Testing A zend-mvc Application</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/tutorials">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#understanding-the-router">Understanding the Router</a></li>
+        
+            <li><a href="#different-route-types">Different route types</a></li>
+        
+            <li><a href="#different-routing-concepts">Different routing concepts</a></li>
+        
+            <li><a href="#a-practical-example-for-our-blog-module">A practical example for our blog module</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../zend-db-sql-zend-hydrator/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../zend-form-zend-form-fieldset/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="../..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Tutorials &raquo;</li>
+      
+    
+      
+        <li>In-Depth Tutorial &raquo;</li>
+      
+    
+  
+  <li class="active">Understanding the Router</li>
+</ol>
+
+<h1 id="understanding-the-router">Understanding the Router</h1>
+<p>Our module is coming along nicely. However, we're not really doing all that much
+yet; to be precise, all we do is display <em>all</em> blog entries on one page. In this
+chapter, you will learn everything you need to know about the <code>Router</code> in order
+to route to controllers and actions for displaying a single blog post, adding a
+new blog post, editing an existing post, and deleting a post.</p>
+<h2 id="different-route-types">Different route types</h2>
+<p>Before we go into details on our application, let's take a look at the most
+often used route types.</p>
+<h3 id="literal-routes">Literal routes</h3>
+<p>As mentioned in a previous chapter, a literal route is one that exactly matches
+a specific string. Examples of URLs that can utilize literal routes include:</p>
+<ul>
+<li><code>http://domain.com/blog</code></li>
+<li><code>http://domain.com/blog/add</code></li>
+<li><code>http://domain.com/about-me</code></li>
+<li><code>http://domain.com/my/very/deep/page</code></li>
+<li><code>http://domain.com/my/very/deep/page</code></li>
+</ul>
+<p>Configuration for a literal route requires you to provide the path to match, and
+the "defaults" to return on a match. The "defaults" are then returned as route
+match parameters; one use case for these is to specify the controller to invoke
+and the action method on that controller to use. As an example:</p>
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
+    'routes' =&gt; [
+        'about' =&gt; [
+            'type' =&gt; 'literal',
+            'options' =&gt; [
+                'route'    =&gt; '/about-me',
+                'defaults' =&gt; [
+                    'controller' =&gt; 'AboutMeController',
+                    'action'     =&gt; 'aboutme',
+                ],
+            ],
+        ],
+    ],
+],</code></pre>
+
+
+<h3 id="segment-routes">Segment routes</h3>
+<p>Segment routes allow you to define routes with variable parameters; a common use
+case is for specifying an identifier in the path.  Examples of URLs that might
+require segment routes include:</p>
+<ul>
+<li><code>http://domain.com/blog/1</code> (parameter "1" is dynamic)</li>
+<li><code>http://domain.com/blog/details/1</code> (parameter "1" is dynamic)</li>
+<li><code>http://domain.com/blog/edit/1</code> (parameter "1" is dynamic)</li>
+<li><code>http://domain.com/blog/1/edit</code> (parameter "1" is dynamic)</li>
+<li><code>http://domain.com/news/archive/2014</code> (parameter "2014" is dynamic)</li>
+<li><code>http://domain.com/news/archive/2014/january</code> (parameter "2014" and "january"
+   are dynamic)</li>
+</ul>
+<p>Configuring a segment route is similar to that of a literal route.
+The primary differences are:</p>
+<ul>
+<li>The route will have one or more <code>:&lt;varname&gt;</code> segments, indicating items that
+  will be dynamically filled. <code>&lt;varname&gt;</code> should be a string, and will be used
+  to identify the variable to return when routing is successful.</li>
+<li>The route <em>may</em> also contain <em>optional</em> segments, which are items surrounded
+  by square braces (<code>[]</code>), and which can contain any mix of literal and variable
+  segments internally.</li>
+<li>The "defaults" can include the names of variable segments; in case that
+  segment is missing, the default will be used. (They can also be completely
+  independent; for instance, the "controller" rarely should be included as a
+  segment!).</li>
+<li>You may also specify "constraints" for each variable segment; each constraint
+  will be a regular expression that must pass for matching to be successful.</li>
+</ul>
+<p>As an example, let's consider a route where we want to specify a variable "year"
+segment, and indicate that the segment must contain exactly four digits; when
+matched, we should use the <code>ArchiveController</code> and its <code>byYear</code> action:</p>
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
+    'routes' =&gt; [
+        'archives' =&gt; [
+            'type' =&gt; 'segment',
+            'options' =&gt; [
+                'route'    =&gt; '/news/archive[/:year]',
+                'defaults' =&gt; [
+                    'controller' =&gt; ArchiveController::class,
+                    'action'     =&gt; 'byYear',
+                    'year'       =&gt; date('Y'),
+                ],
+                'constraints' =&gt; [
+                    'year' =&gt; '\d{4}',
+                ],
+            ],
+        ],
+    ],
+],</code></pre>
+
+
+<p>This configuration defines a route for a URL such as
+<code>//example.com/news/archive/2014</code>. The route contains the variable segment
+<code>:year</code>, which has a regex constraint defined as <code>\d{4}</code>, indicating it will
+match if and only if it is exactly four digits. As such, the URL
+<code>//example.com/news/archive/123</code> will fail to match, but
+<code>//example.com/news/archive/1234</code> will.</p>
+<p>The definition marks an optional segment, denoted by <code>[/:year]</code>. This has a
+couple of implications. First, it means that we can also match:</p>
+<ul>
+<li><code>//example.com/news/archive</code> </li>
+<li><code>//example.com/news/archive/</code> </li>
+</ul>
+<p>In both cases, we'll also still receive a value for the <code>:year</code> segment, because
+we defined a default for it: the expression <code>date('Y')</code> (returning the current
+year).</p>
+<p>Segment routes allow you to dynamically match paths, and provide extensive
+capabilities for how you shape those paths, matching variable segments, and
+providing constraints for them.</p>
+<h2 id="different-routing-concepts">Different routing concepts</h2>
+<p>When thinking about an entire application, you'll quickly realize that you may
+have many, many routes to define.
+When writing these routes you have two options:</p>
+<ul>
+<li>Spend less time writing routes that in turn are a little slow in matching.</li>
+<li>Write very explicit routes that match faster, but require more work to define.</li>
+</ul>
+<h3 id="generic-routes">Generic routes</h3>
+<p>A generic route is greedy, and will match as many URLs as possible.
+A common approach is to write a route that matches the controller and action:</p>
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
+    'routes' =&gt; [
+        'default' =&gt; [
+            'type' =&gt; 'segment',
+            'options' =&gt; [
+                'route'    =&gt; '/[:controller[/:action]]',
+                'defaults' =&gt; [
+                    'controller'    =&gt; Application\Controller\IndexController::class,
+                    'action'        =&gt; 'index',
+                ],
+                'constraints' =&gt; [
+                    'controller' =&gt; '[a-zA-Z][a-zA-Z0-9_-]*',
+                    'action'     =&gt; '[a-zA-Z][a-zA-Z0-9_-]*',
+                ],
+            ],
+        ],
+    ],
+],</code></pre>
+
+
+<p>Let's take a closer look as to what has been defined in this configuration. The
+<code>route</code> part now contains two optional parameters, <code>controller</code> and <code>action</code>.
+The <code>action</code> parameter is optional only when the <code>controller</code> parameter is
+present. Both have constraints that ensure they only allow strings that would be
+valid PHP class and method names.</p>
+<p>The big advantage of this approach is the immense time you save when developing
+your application; one route, and then all you need to do is create controllers,
+add action methods to them, and they are immediately available.</p>
+<p>The downsides are in the details.</p>
+<p>In order for this to work, you will need to use aliases when defining your
+controllers, so that you can alias shorter names that omit namespaces to the
+fully qualified controller class names; this sets up the potential for
+collisions between different application modules which might define the same
+controller class names.</p>
+<p>Second, matching nested optional segments, each with regular expression
+constraints, adds performance overhead to routing.</p>
+<p>Third, such a route does not match any additional segments, constraining your
+controllers to omit dynamic route segments and instead rely on query string
+arguments for route parameters &mdash; which in turn leaves parameter validation
+to your controllers.</p>
+<p>Finally, there is no guarantee that a valid match will result in a valid
+controller and action. As an example, if somebody requested
+<code>//example.com/strange/nonExistent</code>, and no controller maps to <code>strange</code>, or the
+controller has no <code>nonExistentAction()</code> method, the application will use more
+cycles to discover and report the error condition than it would if routing had
+simply failed to match. This is both a performance and a security consideration,
+as an attacker could use this fact to launch a Denial of Service.</p>
+<h3 id="basic-routing">Basic routing</h3>
+<p>By now, you should be convinced that generic routes, while nice for prototyping,
+should likely be avoided. That means defining explicit routes. </p>
+<p>Your initial approach might be to create one route for every permutation:</p>
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
+    'routes' =&gt; [
+        'news' =&gt; [
+            'type' =&gt; 'literal',
+            'options' =&gt; [
+                'route'    =&gt; '/news',
+                'defaults' =&gt; [
+                    'controller' =&gt; NewsController::class,
+                    'action'     =&gt; 'showAll',
+                ],
+            ],
+        ],
+        'news-archive' =&gt; [
+            'type' =&gt; 'segment',
+            'options' =&gt; [
+                'route'    =&gt; '/news/archive[/:year]',
+                'defaults' =&gt; [
+                    'controller' =&gt; NewsController::class,
+                    'action'     =&gt; 'archive',
+                ],
+                'constraints' =&gt; [
+                    'year' =&gt; '\d{4}',
+                ],
+            ],
+        ],
+        'news-single' =&gt; [
+            'type' =&gt; 'segment',
+            'options' =&gt; [
+                'route'    =&gt; '/news/:id',
+                'defaults' =&gt; [
+                    'controller' =&gt; NewsController::class,
+                    'action'     =&gt; 'detail',
+                ],
+                'constraints' =&gt; [
+                    'id' =&gt; '\d+',
+                ],
+            ],
+        ],
+    ],
+],</code></pre>
+
+
+<p>Routing is done as a stack, meaning last in, first out (LIFO). The trick is to
+define your most general routes first, and your most specific routes last. In
+the example above, our most general route is a literal match against the path
+<code>/news</code>. We then have two additional routes that are more specific, one matching
+<code>/news/archive</code> (with an optional segment for the year), and another one
+matching <code>/news/:id</code>. These exhibit a fair bit of repetition:</p>
+<ul>
+<li>In order to prevent naming collisions between routes, each route name is
+  prefixed with <code>news-</code>.</li>
+<li>Each routing string contains <code>/news</code>.</li>
+<li>Each defines the same default controller.</li>
+</ul>
+<p>Clearly, this can get tedious. Additionally, if you have many routes with
+repitition such as this, you need to pay special attention to the stack and
+possible route overlaps, as well as performance (if the stack becomes large).</p>
+<h3 id="child-routes">Child routes</h3>
+<p>To solve the problems detailed in the last section, zend-router allows defining
+"child routes". Child routes inherit inherit all <code>options</code> from their respective
+parents; this means that if an option, such as the controller default, doesn't change, you do not need to
+redefine it.</p>
+<p>Additionally, child routes match <em>relative</em> to the parent route. This provides
+several optimizations:</p>
+<ul>
+<li>You do not need to duplicate common path segments.</li>
+<li>Routing will ignore the child routes <em>unless the parent matches</em>, which can
+  provide enormous performance benefits during routing.</li>
+</ul>
+<p>Let's take a look at a child routes configuration using the same example as
+above:</p>
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
+    'routes' =&gt; [
+        'news' =&gt; [
+            // First we define the basic options for the parent route:
+            'type' =&gt; 'literal',
+            'options' =&gt; [
+                'route'    =&gt; '/news',
+                'defaults' =&gt; [
+                    'controller' =&gt; NewsController::class,
+                    'action'     =&gt; 'showAll',
+                ],
+            ],
+
+            // The following allows &quot;/news&quot; to match on its own if no child
+            // routes match:
+            'may_terminate' =&gt; true,
+
+            // Child routes begin:
+            'child_routes' =&gt; [
+                'archive' =&gt; [
+                    'type' =&gt; 'segment',
+                    'options' =&gt; [
+                        'route'    =&gt; '/archive[/:year]',
+                        'defaults' =&gt; [
+                            'action' =&gt; 'archive',
+                        ],
+                        'constraints' =&gt; [
+                            'year' =&gt; '\d{4}',
+                        ],
+                    ],
+                ],
+                'single' =&gt; [
+                    'type' =&gt; 'segment',
+                    'options' =&gt; [
+                        'route'    =&gt; '/:id',
+                        'defaults' =&gt; [
+                            'action' =&gt; 'detail',
+                        ],
+                        'constraints' =&gt; [
+                            'id' =&gt; '\d+',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+],</code></pre>
+
+
+<p>At its most basic, we define a parent route as normal, and then add an
+additional key, <code>child_routes</code>, which is normal routing configuration for
+additional routes to match if the parent route matches.</p>
+<p>The <code>may_terminate</code> configuration key is used to determine if the parent route
+is allowed to match on its own; in other words, if no child routes match, is the
+parent route a valid route match? The flag is <code>false</code> by default; setting it to
+<code>true</code> allows the parent to match on its own.</p>
+<p>The <code>child_routes</code> themselves look like standard routing at the top-level, and
+follow the same rules; they themselves can have child routes, too! The thing to
+remember is that any routing strings defined <em>are relative to the parent</em>. As
+such, the above definition allows matching any of the following:</p>
+<ul>
+<li><code>/news</code></li>
+<li><code>/news/archive</code></li>
+<li><code>/news/archive/2014</code></li>
+<li><code>/news/42</code></li>
+</ul>
+<p>(If <code>may_terminate</code> was set to <code>false</code>, the first path above, <code>/news</code>, <em>would not
+match</em>.)</p>
+<p>You'll note that the child routes defined above do not specify a <code>controller</code>
+default. Child routes <em>inherit options</em> from the parent, however, which means
+that, effectively, each of these will use the same controller as the parent!</p>
+<p>The advantages to using child routes include:</p>
+<ul>
+<li>Explicit routes mean fewer error conditions with regards to matching
+  controllers and action methods.</li>
+<li>Performance; the router ignores child routes unless the parent matches.</li>
+<li>De-duplication; the parent route contains the common path prefix and common
+  options.</li>
+<li>Organization; you can see at a glance all route definitions that start with a
+  common path segment.</li>
+</ul>
+<p>The primary disadvantage is the verbosity of configuration.</p>
+<h2 id="a-practical-example-for-our-blog-module">A practical example for our blog module</h2>
+<p>Now that we know how to configure routes, let's first create a route to display
+only a single blog entry based on internal identifier.  Given that ID is a
+variable parameter, we need a segment route. Furthermore, we know that the route
+will also match against the same <code>/blog</code> path prefix, so we can define it as a
+child route of our existing route. Let's update our configuration:</p>
+<pre class="codehilite"><code class="language-php">// In module/Blog/config/module.config.php:
+namespace Blog;
+
+use Zend\ServiceManager\Factory\InvokableFactory;
+
+return [
+    'service_manager' =&gt; [ /* ... */ ],
+    'controllers'     =&gt; [ /* ... */ ],
+    'router' =&gt; [
+        'routes' =&gt; [
+            'blog' =&gt; [
+                'type' =&gt; 'literal',
+                'options' =&gt; [
+                    'route'    =&gt; '/blog',
+                    'defaults' =&gt; [
+                        'controller' =&gt; Controller\ListController::class,
+                        'action'     =&gt; 'index',
+                    ],
+                ],
+
+                'may_terminate' =&gt; true,
+
+                'child_routes'  =&gt; [
+                    'detail' =&gt; [
+                        'type' =&gt; 'segment',
+                        'options' =&gt; [
+                            'route'    =&gt; '/:id',
+                            'defaults' =&gt; [
+                                'action' =&gt; 'detail',
+                            ],
+                            'constraints' =&gt; [
+                                'id' =&gt; '[1-9]\d*',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'view_manager'    =&gt; [ /* ... */ ],
+];</code></pre>
+
+
+<p>With this we have set up a new route that we use to display a single blog entry.
+The route defines a parameter, <code>id</code>, which needs to be a sequence of 1 or more
+positive digits, not beginning with 0.</p>
+<p>The route will call the same <code>controller</code> as the parent route, but using
+the <code>detailAction()</code> method instead. Go to your browser and request the URL
+<code>http://localhost:8080/blog/2</code>; you'll see the following error message:</p>
+<pre class="codehilite"><code class="language-text">A 404 error occurred
+
+Page not found.
+
+The requested controller was unable to dispatch the request.
+
+Controller:
+Blog\Controller\ListController
+
+No Exception available</code></pre>
+
+
+<p>This is due to the fact that the controller tries to access the
+<code>detailAction()</code>, which does not yet exist. We'll create this action now; go to
+your <code>ListController</code> and add the following action, which will return an empty
+view model</p>
+<pre class="codehilite"><code class="language-php">// In module/Blog/src/Controller/ListController.php:
+
+/* .. */
+
+class ListController extends AbstractActionController
+{
+    /* ... */
+
+    public function detailAction()
+    {
+        return new ViewModel();
+    }
+}</code></pre>
+
+
+<p>Refresh your browser, which should result in the familiar message that a template
+was unable to be rendered.</p>
+<p>Let's create this template now and assume that we will get a <code>Post</code> instance
+passed to the template to see the details of our blog. Create a new view file
+under <code>module/Blog/view/blog/list/detail.phtml</code>:</p>
+<pre class="codehilite"><code class="language-php">&lt;h1&gt;Post Details&lt;/h1&gt;
+
+&lt;dl&gt;
+    &lt;dt&gt;Post Title&lt;/dt&gt;
+    &lt;dd&gt;&lt;?= $this-&gt;escapeHtml($this-&gt;post-&gt;getTitle()) ?&gt;&lt;/dd&gt;
+
+    &lt;dt&gt;Post Text&lt;/dt&gt;
+    &lt;dd&gt;&lt;?= $this-&gt;escapeHtml($this-&gt;post-&gt;getText()) ?&gt;&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+
+
+<p>The above template is expecting a <code>$post</code> variable referencing a <code>Post</code> instance
+in the view model. We'll now update the <code>ListController</code> to provide that:</p>
+<pre class="codehilite"><code class="language-php">public function detailAction()
+{
+    $id = $this-&gt;params()-&gt;fromRoute('id');
+
+    return new ViewModel([
+        'post' =&gt; $this-&gt;postRepository-&gt;findPost($id)
+    ]);
+}</code></pre>
+
+
+<p>If you refresh your application now, you'll see the details for our <code>Post</code> are
+displayed. However, there is one problem with what we have done: while we
+have our repository set up to throw an <code>InvalidArgumentException</code> when no post
+is found matching a given identifier, we do not check for it in our controller.</p>
+<p>Go to your browser and open the URL <code>http://localhost:8080/blog/99</code>; you will
+see the following error message:</p>
+<pre class="codehilite"><code class="language-text">An error occurred
+
+An error occurred during execution; please try again later.
+
+Additional information:
+InvalidArgumentException
+
+File:
+{projectPath}/module/Blog/src/Model/ZendDbSqlRepository.php:{lineNumber}
+
+Message:
+Blog post with identifier &quot;99&quot; not found.</code></pre>
+
+
+<p>This is kind of ugly, so our <code>ListController</code> should be prepared to do something
+whenever an <code>InvalidArgumentException</code> is thrown by the <code>PostService</code>. Let's
+have the controller redirect to the blog post overview.</p>
+<p>First, add a new import to the <code>ListController</code> class file:</p>
+<pre class="codehilite"><code class="language-php">use InvalidArgumentException;</code></pre>
+
+
+<p>Now add the following try-catch statement to the <code>detailAction()</code> method:</p>
+<pre class="codehilite"><code class="language-php">public function detailAction()
+{
+    $id = $this-&gt;params()-&gt;fromRoute('id');
+
+    try {
+        $post = $this-&gt;postService-&gt;findPost($id);
+    } catch (\InvalidArgumentException $ex) {
+        return $this-&gt;redirect()-&gt;toRoute('blog');
+    }
+
+    return new ViewModel(array(
+        'post' =&gt; $post
+    ));
+}</code></pre>
+
+
+<p>Now whenever a user requests an invalid identifier, you'll be redirected to the
+route <code>blog</code>, which is our list of blog posts!</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../zend-db-sql-zend-hydrator/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../zend-form-zend-form-fieldset/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../../js/jquery-1.10.2.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../../js/prism-zf.js"></script>
+
+    <script>var base_url = '../..';</script>
+    <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+    <script src="../../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>
