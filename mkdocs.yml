@@ -27,6 +27,15 @@ pages:
       - "Adding zend-navigation to the Album Module": navigation.md
       - "Adding zend-paginator to the Album Module": pagination.md
       - "Unit Testing A zend-mvc Application": unit-testing.md
+    - In-depth tutorial for beginners:
+      - "Introducing our first “Blog” Module": in-depth-guide/first-module.md
+      - "Introducing Services and the ServiceManager": in-depth-guide/services-and-servicemanager.md
+      - "Preparing for different Database-Backends": in-depth-guide/preparing-db-backend.md
+      - "Introducing Zend\Db\Sql and Zend\Hydrator": in-depth-guide/zend-db-sql-zend-hydrator.md
+      - "Understanding the Router": in-depth-guide/understanding-routing.md
+      - "Making use of Forms and Fieldsets": in-depth-guide/zend-form-zend-form-fieldset.md
+      - "Editing and Deleting Data": in-depth-guide/data-binding.md
+      - "Reviewing the Blog-application": in-depth-guide/review.md
 site_name: tutorials
 site_description: "Zend Framework Tutorials"
 repo_url: 'https://github.com/zendframework/tutorials'
