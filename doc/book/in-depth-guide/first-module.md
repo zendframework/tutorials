@@ -146,17 +146,9 @@ public function getConfig()
 Reload your application and you'll see that everything remains as it was. Next
 we add the new route to our configuration file:
 
-<<<<<<< bb6a2c65745fbea17b98e2e100e676bbcab45a1b
 ```php
 // In /module/Blog/config/module.config.php:
 namespace Blog;
-
-return [
-=======
-~~~~ {.sourceCode .php}
-<?php
-// Filename: /module/Blog/config/module.config.php
-
 use Blog\Controller;
 use Zend\Router\Http\Literal;
 
