@@ -274,6 +274,8 @@
         
             <li><a href="#preparation">Preparation</a></li>
         
+            <li><a href="#install-zend-paginator">Install zend-paginator</a></li>
+        
             <li><a href="#modifying-the-albumtable">Modifying the AlbumTable</a></li>
         
             <li><a href="#modifying-the-albumcontroller">Modifying the AlbumController</a></li>
@@ -319,7 +321,7 @@
 <li>use SQLite-compatible SQL syntax, and provide a script for inserting the data</li>
 </ul>
 </blockquote>
-<p>In this tutorial we will use the <a href="https://zendframework.github.io/zend-paginator/intro/">zend-paginator component</a>
+<p>In this tutorial, we will use the <a href="https://zendframework.github.io/zend-paginator/intro/">zend-paginator component</a>
 to add a handy pagination controller to the bottom of the album list.</p>
 <p>Currently, we only have a handful of albums to display, so showing everything on
 one page is not a problem. However, how will the album list look when we have
@@ -332,176 +334,236 @@ and you can see their pagination control at the bottom of the page:</p>
 <p>In order for us to have lots of albums in our database, you'll need to run the
 following SQL insert statement to insert the current 150 top iTunes albums (at
 the time of writing!):</p>
-<pre class="codehilite"><code class="language-sql">INSERT INTO `album` (`artist`, `title`)
+<pre class="codehilite"><code class="language-sql">INSERT INTO &quot;album&quot; (&quot;artist&quot;, &quot;title&quot;)
 VALUES
-    ('David Bowie', 'The Next Day (Deluxe Version)'),
-    ('Bastille', 'Bad Blood'),
-    ('Bruno Mars', 'Unorthodox Jukebox'),
-    ('Emeli Sandé', 'Our Version of Events (Special Edition)'),
-    ('Bon Jovi', 'What About Now (Deluxe Version)'),
-    ('Justin Timberlake', 'The 20/20 Experience (Deluxe Version)'),
-    ('Bastille', 'Bad Blood (The Extended Cut)'),
-    ('P!nk', 'The Truth About Love'),
-    ('Sound City - Real to Reel', 'Sound City - Real to Reel'),
-    ('Jake Bugg', 'Jake Bugg'),
-    ('Various Artists', 'The Trevor Nelson Collection'),
-    ('David Bowie', 'The Next Day'),
-    ('Mumford &amp; Sons', 'Babel'),
-    ('The Lumineers', 'The Lumineers'),
-    ('Various Artists', 'Get Ur Freak On - R&amp;B Anthems'),
-    ('The 1975', 'Music For Cars EP'),
-    ('Various Artists', 'Saturday Night Club Classics - Ministry of Sound'),
-    ('Hurts', 'Exile (Deluxe)'),
-    ('Various Artists', 'Mixmag - The Greatest Dance Tracks of All Time'),
-    ('Ben Howard', 'Every Kingdom'),
-    ('Stereophonics', 'Graffiti On the Train'),
-    ('The Script', '#3'),
-    ('Stornoway', 'Tales from Terra Firma'),
-    ('David Bowie', 'Hunky Dory (Remastered)'),
-    ('Worship Central', 'Let It Be Known (Live)'),
-    ('Ellie Goulding', 'Halcyon'),
-    ('Various Artists', 'Dermot O\'Leary Presents the Saturday Sessions 2013'),
-    ('Stereophonics', 'Graffiti On the Train (Deluxe Version)'),
-    ('Dido', 'Girl Who Got Away (Deluxe)'),
-    ('Hurts', 'Exile'),
-    ('Bruno Mars', 'Doo-Wops &amp; Hooligans'),
-    ('Calvin Harris', '18 Months'),
-    ('Olly Murs', 'Right Place Right Time'),
-    ('Alt-J (?)', 'An Awesome Wave'),
-    ('One Direction', 'Take Me Home'),
-    ('Various Artists', 'Pop Stars'),
-    ('Various Artists', 'Now That\'s What I Call Music! 83'),
-    ('John Grant', 'Pale Green Ghosts'),
-    ('Paloma Faith', 'Fall to Grace'),
-    ('Laura Mvula', 'Sing To the Moon (Deluxe)'),
-    ('Duke Dumont', 'Need U (100%) [feat. A*M*E] - EP'),
-    ('Watsky', 'Cardboard Castles'),
-    ('Blondie', 'Blondie: Greatest Hits'),
-    ('Foals', 'Holy Fire'),
-    ('Maroon 5', 'Overexposed'),
-    ('Bastille', 'Pompeii (Remixes) - EP'),
-    ('Imagine Dragons', 'Hear Me - EP'),
-    ('Various Artists', '100 Hits: 80s Classics'),
-    ('Various Artists', 'Les Misérables (Highlights From the Motion Picture Soundtrack)'),
-    ('Mumford &amp; Sons', 'Sigh No More'),
-    ('Frank Ocean', 'Channel ORANGE'),
-    ('Bon Jovi', 'What About Now'),
-    ('Various Artists', 'BRIT Awards 2013'),
-    ('Taylor Swift', 'Red'),
-    ('Fleetwood Mac', 'Fleetwood Mac: Greatest Hits'),
-    ('David Guetta', 'Nothing But the Beat Ultimate'),
-    ('Various Artists', 'Clubbers Guide 2013 (Mixed By Danny Howard) - Ministry of Sound'),
-    ('David Bowie', 'Best of Bowie'),
-    ('Laura Mvula', 'Sing To the Moon'),
-    ('ADELE', '21'),
-    ('Of Monsters and Men', 'My Head Is an Animal'),
-    ('Rihanna', 'Unapologetic'),
-    ('Various Artists', 'BBC Radio 1\'s Live Lounge - 2012'),
-    ('Avicii &amp; Nicky Romero', 'I Could Be the One (Avicii vs. Nicky Romero)'),
-    ('The Streets', 'A Grand Don\'t Come for Free'),
-    ('Tim McGraw', 'Two Lanes of Freedom'),
-    ('Foo Fighters', 'Foo Fighters: Greatest Hits'),
-    ('Various Artists', 'Now That\'s What I Call Running!'),
-    ('Swedish House Mafia', 'Until Now'),
-    ('The xx', 'Coexist'),
-    ('Five', 'Five: Greatest Hits'),
-    ('Jimi Hendrix', 'People, Hell &amp; Angels'),
-    ('Biffy Clyro', 'Opposites (Deluxe)'),
-    ('The Smiths', 'The Sound of the Smiths'),
-    ('The Saturdays', 'What About Us - EP'),
-    ('Fleetwood Mac', 'Rumours'),
-    ('Various Artists', 'The Big Reunion'),
-    ('Various Artists', 'Anthems 90s - Ministry of Sound'),
-    ('The Vaccines', 'Come of Age'),
-    ('Nicole Scherzinger', 'Boomerang (Remixes) - EP'),
-    ('Bob Marley', 'Legend (Bonus Track Version)'),
-    ('Josh Groban', 'All That Echoes'),
-    ('Blue', 'Best of Blue'),
-    ('Ed Sheeran', '+'),
-    ('Olly Murs', 'In Case You Didn\'t Know (Deluxe Edition)'),
-    ('Macklemore &amp; Ryan Lewis', 'The Heist (Deluxe Edition)'),
-    ('Various Artists', 'Defected Presents Most Rated Miami 2013'),
-    ('Gorgon City', 'Real EP'),
-    ('Mumford &amp; Sons', 'Babel (Deluxe Version)'),
-    ('Various Artists', 'The Music of Nashville: Season 1, Vol. 1 (Original Soundtrack)'),
-    ('Various Artists', 'The Twilight Saga: Breaking Dawn, Pt. 2 (Original Motion Picture Soundtrack)'),
-    ('Various Artists', 'Mum - The Ultimate Mothers Day Collection'),
-    ('One Direction', 'Up All Night'),
-    ('Bon Jovi', 'Bon Jovi Greatest Hits'),
-    ('Agnetha Fältskog', 'A'),
-    ('Fun.', 'Some Nights'),
-    ('Justin Bieber', 'Believe Acoustic'),
-    ('Atoms for Peace', 'Amok'),
-    ('Justin Timberlake', 'Justified'),
-    ('Passenger', 'All the Little Lights'),
-    ('Kodaline', 'The High Hopes EP'),
-    ('Lana Del Rey', 'Born to Die'),
-    ('JAY Z &amp; Kanye West', 'Watch the Throne (Deluxe Version)'),
-    ('Biffy Clyro', 'Opposites'),
-    ('Various Artists', 'Return of the 90s'),
-    ('Gabrielle Aplin', 'Please Don\'t Say You Love Me - EP'),
-    ('Various Artists', '100 Hits - Driving Rock'),
-    ('Jimi Hendrix', 'Experience Hendrix - The Best of Jimi Hendrix'),
-    ('Various Artists', 'The Workout Mix 2013'),
-    ('The 1975', 'Sex'),
-    ('Chase &amp; Status', 'No More Idols'),
-    ('Rihanna', 'Unapologetic (Deluxe Version)'),
-    ('The Killers', 'Battle Born'),
-    ('Olly Murs', 'Right Place Right Time (Deluxe Edition)'),
-    ('A$AP Rocky', 'LONG.LIVE.A$AP (Deluxe Version)'),
-    ('Various Artists', 'Cooking Songs'),
-    ('Haim', 'Forever - EP'),
-    ('Lianne La Havas', 'Is Your Love Big Enough?'),
-    ('Michael Bublé', 'To Be Loved'),
-    ('Daughter', 'If You Leave'),
-    ('The xx', 'xx'),
-    ('Eminem', 'Curtain Call'),
-    ('Kendrick Lamar', 'good kid, m.A.A.d city (Deluxe)'),
-    ('Disclosure', 'The Face - EP'),
-    ('Palma Violets', '180'),
-    ('Cody Simpson', 'Paradise'),
-    ('Ed Sheeran', '+ (Deluxe Version)'),
-    ('Michael Bublé', 'Crazy Love (Hollywood Edition)'),
-    ('Bon Jovi', 'Bon Jovi Greatest Hits - The Ultimate Collection'),
-    ('Rita Ora', 'Ora'),
-    ('g33k', 'Spabby'),
-    ('Various Artists', 'Annie Mac Presents 2012'),
-    ('David Bowie', 'The Platinum Collection'),
-    ('Bridgit Mendler', 'Ready or Not (Remixes) - EP'),
-    ('Dido', 'Girl Who Got Away'),
-    ('Various Artists', 'Now That\'s What I Call Disney'),
-    ('The 1975', 'Facedown - EP'),
-    ('Kodaline', 'The Kodaline - EP'),
-    ('Various Artists', '100 Hits: Super 70s'),
-    ('Fred V &amp; Grafix', 'Goggles - EP'),
-    ('Biffy Clyro', 'Only Revolutions (Deluxe Version)'),
-    ('Train', 'California 37'),
-    ('Ben Howard', 'Every Kingdom (Deluxe Edition)'),
-    ('Various Artists', 'Motown Anthems'),
-    ('Courteeners', 'ANNA'),
-    ('Johnny Marr', 'The Messenger'),
-    ('Rodriguez', 'Searching for Sugar Man'),
-    ('Jessie Ware', 'Devotion'),
-    ('Bruno Mars', 'Unorthodox Jukebox'),
-    ('Various Artists', 'Call the Midwife (Music From the TV Series)'
+    (&quot;David Bowie&quot;, &quot;The Next Day (Deluxe Version)&quot;),
+    (&quot;Bastille&quot;, &quot;Bad Blood&quot;),
+    (&quot;Bruno Mars&quot;, &quot;Unorthodox Jukebox&quot;),
+    (&quot;Emeli Sandé&quot;, &quot;Our Version of Events (Special Edition)&quot;),
+    (&quot;Bon Jovi&quot;, &quot;What About Now (Deluxe Version)&quot;),
+    (&quot;Justin Timberlake&quot;, &quot;The 20/20 Experience (Deluxe Version)&quot;),
+    (&quot;Bastille&quot;, &quot;Bad Blood (The Extended Cut)&quot;),
+    (&quot;P!nk&quot;, &quot;The Truth About Love&quot;),
+    (&quot;Sound City - Real to Reel&quot;, &quot;Sound City - Real to Reel&quot;),
+    (&quot;Jake Bugg&quot;, &quot;Jake Bugg&quot;),
+    (&quot;Various Artists&quot;, &quot;The Trevor Nelson Collection&quot;),
+    (&quot;David Bowie&quot;, &quot;The Next Day&quot;),
+    (&quot;Mumford &amp; Sons&quot;, &quot;Babel&quot;),
+    (&quot;The Lumineers&quot;, &quot;The Lumineers&quot;),
+    (&quot;Various Artists&quot;, &quot;Get Ur Freak On - R&amp;B Anthems&quot;),
+    (&quot;The 1975&quot;, &quot;Music For Cars EP&quot;),
+    (&quot;Various Artists&quot;, &quot;Saturday Night Club Classics - Ministry of Sound&quot;),
+    (&quot;Hurts&quot;, &quot;Exile (Deluxe)&quot;),
+    (&quot;Various Artists&quot;, &quot;Mixmag - The Greatest Dance Tracks of All Time&quot;),
+    (&quot;Ben Howard&quot;, &quot;Every Kingdom&quot;),
+    (&quot;Stereophonics&quot;, &quot;Graffiti On the Train&quot;),
+    (&quot;The Script&quot;, &quot;#3&quot;),
+    (&quot;Stornoway&quot;, &quot;Tales from Terra Firma&quot;),
+    (&quot;David Bowie&quot;, &quot;Hunky Dory (Remastered)&quot;),
+    (&quot;Worship Central&quot;, &quot;Let It Be Known (Live)&quot;),
+    (&quot;Ellie Goulding&quot;, &quot;Halcyon&quot;),
+    (&quot;Various Artists&quot;, &quot;Dermot O'Leary Presents the Saturday Sessions 2013&quot;),
+    (&quot;Stereophonics&quot;, &quot;Graffiti On the Train (Deluxe Version)&quot;),
+    (&quot;Dido&quot;, &quot;Girl Who Got Away (Deluxe)&quot;),
+    (&quot;Hurts&quot;, &quot;Exile&quot;),
+    (&quot;Bruno Mars&quot;, &quot;Doo-Wops &amp; Hooligans&quot;),
+    (&quot;Calvin Harris&quot;, &quot;18 Months&quot;),
+    (&quot;Olly Murs&quot;, &quot;Right Place Right Time&quot;),
+    (&quot;Alt-J (?)&quot;, &quot;An Awesome Wave&quot;),
+    (&quot;One Direction&quot;, &quot;Take Me Home&quot;),
+    (&quot;Various Artists&quot;, &quot;Pop Stars&quot;),
+    (&quot;Various Artists&quot;, &quot;Now That's What I Call Music! 83&quot;),
+    (&quot;John Grant&quot;, &quot;Pale Green Ghosts&quot;),
+    (&quot;Paloma Faith&quot;, &quot;Fall to Grace&quot;),
+    (&quot;Laura Mvula&quot;, &quot;Sing To the Moon (Deluxe)&quot;),
+    (&quot;Duke Dumont&quot;, &quot;Need U (100%) [feat. A*M*E] - EP&quot;),
+    (&quot;Watsky&quot;, &quot;Cardboard Castles&quot;),
+    (&quot;Blondie&quot;, &quot;Blondie: Greatest Hits&quot;),
+    (&quot;Foals&quot;, &quot;Holy Fire&quot;),
+    (&quot;Maroon 5&quot;, &quot;Overexposed&quot;),
+    (&quot;Bastille&quot;, &quot;Pompeii (Remixes) - EP&quot;),
+    (&quot;Imagine Dragons&quot;, &quot;Hear Me - EP&quot;),
+    (&quot;Various Artists&quot;, &quot;100 Hits: 80s Classics&quot;),
+    (&quot;Various Artists&quot;, &quot;Les Misérables (Highlights From the Motion Picture Soundtrack)&quot;),
+    (&quot;Mumford &amp; Sons&quot;, &quot;Sigh No More&quot;),
+    (&quot;Frank Ocean&quot;, &quot;Channel ORANGE&quot;),
+    (&quot;Bon Jovi&quot;, &quot;What About Now&quot;),
+    (&quot;Various Artists&quot;, &quot;BRIT Awards 2013&quot;),
+    (&quot;Taylor Swift&quot;, &quot;Red&quot;),
+    (&quot;Fleetwood Mac&quot;, &quot;Fleetwood Mac: Greatest Hits&quot;),
+    (&quot;David Guetta&quot;, &quot;Nothing But the Beat Ultimate&quot;),
+    (&quot;Various Artists&quot;, &quot;Clubbers Guide 2013 (Mixed By Danny Howard) - Ministry of Sound&quot;),
+    (&quot;David Bowie&quot;, &quot;Best of Bowie&quot;),
+    (&quot;Laura Mvula&quot;, &quot;Sing To the Moon&quot;),
+    (&quot;ADELE&quot;, &quot;21&quot;),
+    (&quot;Of Monsters and Men&quot;, &quot;My Head Is an Animal&quot;),
+    (&quot;Rihanna&quot;, &quot;Unapologetic&quot;),
+    (&quot;Various Artists&quot;, &quot;BBC Radio 1's Live Lounge - 2012&quot;),
+    (&quot;Avicii &amp; Nicky Romero&quot;, &quot;I Could Be the One (Avicii vs. Nicky Romero)&quot;),
+    (&quot;The Streets&quot;, &quot;A Grand Don't Come for Free&quot;),
+    (&quot;Tim McGraw&quot;, &quot;Two Lanes of Freedom&quot;),
+    (&quot;Foo Fighters&quot;, &quot;Foo Fighters: Greatest Hits&quot;),
+    (&quot;Various Artists&quot;, &quot;Now That's What I Call Running!&quot;),
+    (&quot;Swedish House Mafia&quot;, &quot;Until Now&quot;),
+    (&quot;The xx&quot;, &quot;Coexist&quot;),
+    (&quot;Five&quot;, &quot;Five: Greatest Hits&quot;),
+    (&quot;Jimi Hendrix&quot;, &quot;People, Hell &amp; Angels&quot;),
+    (&quot;Biffy Clyro&quot;, &quot;Opposites (Deluxe)&quot;),
+    (&quot;The Smiths&quot;, &quot;The Sound of the Smiths&quot;),
+    (&quot;The Saturdays&quot;, &quot;What About Us - EP&quot;),
+    (&quot;Fleetwood Mac&quot;, &quot;Rumours&quot;),
+    (&quot;Various Artists&quot;, &quot;The Big Reunion&quot;),
+    (&quot;Various Artists&quot;, &quot;Anthems 90s - Ministry of Sound&quot;),
+    (&quot;The Vaccines&quot;, &quot;Come of Age&quot;),
+    (&quot;Nicole Scherzinger&quot;, &quot;Boomerang (Remixes) - EP&quot;),
+    (&quot;Bob Marley&quot;, &quot;Legend (Bonus Track Version)&quot;),
+    (&quot;Josh Groban&quot;, &quot;All That Echoes&quot;),
+    (&quot;Blue&quot;, &quot;Best of Blue&quot;),
+    (&quot;Ed Sheeran&quot;, &quot;+&quot;),
+    (&quot;Olly Murs&quot;, &quot;In Case You Didn't Know (Deluxe Edition)&quot;),
+    (&quot;Macklemore &amp; Ryan Lewis&quot;, &quot;The Heist (Deluxe Edition)&quot;),
+    (&quot;Various Artists&quot;, &quot;Defected Presents Most Rated Miami 2013&quot;),
+    (&quot;Gorgon City&quot;, &quot;Real EP&quot;),
+    (&quot;Mumford &amp; Sons&quot;, &quot;Babel (Deluxe Version)&quot;),
+    (&quot;Various Artists&quot;, &quot;The Music of Nashville: Season 1, Vol. 1 (Original Soundtrack)&quot;),
+    (&quot;Various Artists&quot;, &quot;The Twilight Saga: Breaking Dawn, Pt. 2 (Original Motion Picture Soundtrack)&quot;),
+    (&quot;Various Artists&quot;, &quot;Mum - The Ultimate Mothers Day Collection&quot;),
+    (&quot;One Direction&quot;, &quot;Up All Night&quot;),
+    (&quot;Bon Jovi&quot;, &quot;Bon Jovi Greatest Hits&quot;),
+    (&quot;Agnetha Fältskog&quot;, &quot;A&quot;),
+    (&quot;Fun.&quot;, &quot;Some Nights&quot;),
+    (&quot;Justin Bieber&quot;, &quot;Believe Acoustic&quot;),
+    (&quot;Atoms for Peace&quot;, &quot;Amok&quot;),
+    (&quot;Justin Timberlake&quot;, &quot;Justified&quot;),
+    (&quot;Passenger&quot;, &quot;All the Little Lights&quot;),
+    (&quot;Kodaline&quot;, &quot;The High Hopes EP&quot;),
+    (&quot;Lana Del Rey&quot;, &quot;Born to Die&quot;),
+    (&quot;JAY Z &amp; Kanye West&quot;, &quot;Watch the Throne (Deluxe Version)&quot;),
+    (&quot;Biffy Clyro&quot;, &quot;Opposites&quot;),
+    (&quot;Various Artists&quot;, &quot;Return of the 90s&quot;),
+    (&quot;Gabrielle Aplin&quot;, &quot;Please Don't Say You Love Me - EP&quot;),
+    (&quot;Various Artists&quot;, &quot;100 Hits - Driving Rock&quot;),
+    (&quot;Jimi Hendrix&quot;, &quot;Experience Hendrix - The Best of Jimi Hendrix&quot;),
+    (&quot;Various Artists&quot;, &quot;The Workout Mix 2013&quot;),
+    (&quot;The 1975&quot;, &quot;Sex&quot;),
+    (&quot;Chase &amp; Status&quot;, &quot;No More Idols&quot;),
+    (&quot;Rihanna&quot;, &quot;Unapologetic (Deluxe Version)&quot;),
+    (&quot;The Killers&quot;, &quot;Battle Born&quot;),
+    (&quot;Olly Murs&quot;, &quot;Right Place Right Time (Deluxe Edition)&quot;),
+    (&quot;A$AP Rocky&quot;, &quot;LONG.LIVE.A$AP (Deluxe Version)&quot;),
+    (&quot;Various Artists&quot;, &quot;Cooking Songs&quot;),
+    (&quot;Haim&quot;, &quot;Forever - EP&quot;),
+    (&quot;Lianne La Havas&quot;, &quot;Is Your Love Big Enough?&quot;),
+    (&quot;Michael Bublé&quot;, &quot;To Be Loved&quot;),
+    (&quot;Daughter&quot;, &quot;If You Leave&quot;),
+    (&quot;The xx&quot;, &quot;xx&quot;),
+    (&quot;Eminem&quot;, &quot;Curtain Call&quot;),
+    (&quot;Kendrick Lamar&quot;, &quot;good kid, m.A.A.d city (Deluxe)&quot;),
+    (&quot;Disclosure&quot;, &quot;The Face - EP&quot;),
+    (&quot;Palma Violets&quot;, &quot;180&quot;),
+    (&quot;Cody Simpson&quot;, &quot;Paradise&quot;),
+    (&quot;Ed Sheeran&quot;, &quot;+ (Deluxe Version)&quot;),
+    (&quot;Michael Bublé&quot;, &quot;Crazy Love (Hollywood Edition)&quot;),
+    (&quot;Bon Jovi&quot;, &quot;Bon Jovi Greatest Hits - The Ultimate Collection&quot;),
+    (&quot;Rita Ora&quot;, &quot;Ora&quot;),
+    (&quot;g33k&quot;, &quot;Spabby&quot;),
+    (&quot;Various Artists&quot;, &quot;Annie Mac Presents 2012&quot;),
+    (&quot;David Bowie&quot;, &quot;The Platinum Collection&quot;),
+    (&quot;Bridgit Mendler&quot;, &quot;Ready or Not (Remixes) - EP&quot;),
+    (&quot;Dido&quot;, &quot;Girl Who Got Away&quot;),
+    (&quot;Various Artists&quot;, &quot;Now That's What I Call Disney&quot;),
+    (&quot;The 1975&quot;, &quot;Facedown - EP&quot;),
+    (&quot;Kodaline&quot;, &quot;The Kodaline - EP&quot;),
+    (&quot;Various Artists&quot;, &quot;100 Hits: Super 70s&quot;),
+    (&quot;Fred V &amp; Grafix&quot;, &quot;Goggles - EP&quot;),
+    (&quot;Biffy Clyro&quot;, &quot;Only Revolutions (Deluxe Version)&quot;),
+    (&quot;Train&quot;, &quot;California 37&quot;),
+    (&quot;Ben Howard&quot;, &quot;Every Kingdom (Deluxe Edition)&quot;),
+    (&quot;Various Artists&quot;, &quot;Motown Anthems&quot;),
+    (&quot;Courteeners&quot;, &quot;ANNA&quot;),
+    (&quot;Johnny Marr&quot;, &quot;The Messenger&quot;),
+    (&quot;Rodriguez&quot;, &quot;Searching for Sugar Man&quot;),
+    (&quot;Jessie Ware&quot;, &quot;Devotion&quot;),
+    (&quot;Bruno Mars&quot;, &quot;Unorthodox Jukebox&quot;),
+    (&quot;Various Artists&quot;, &quot;Call the Midwife (Music From the TV Series)&quot;
 );</code></pre>
 
 
+<blockquote>
+<h3 id="populating-the-database">Populating the database</h3>
+<p>You have a number of options for populating the database, based on your
+operating system and installed applications.</p>
+<p>First, copy the above into the file <code>data/bulk_albums.sql</code>.</p>
+<p>Next, if you have the <code>sqlite</code> or <code>sqlite3</code> command installed, run:</p>
+<pre class="codehilite"><code class="language-bash">$ sqlite data/zftutorial.db &lt; data/bulk_albums.sql</code></pre>
+
+
+<p>(If you have <code>sqlite3</code> on your system, use that, as sqlite typically refers to
+the SQLite v2 binary.)</p>
+<p>If you do not, you can use PHP. Create a new file, <code>data/load_bulk_albums.php</code>,
+with the following contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+$db = new PDO('sqlite:' . realpath(__DIR__) . '/zftutorial.db');
+$sql = file_get_contents(__DIR__ . '/bulk_albums.sql');
+$db-&gt;exec($sql);</code></pre>
+
+
+<p>Then, execute it with:</p>
+<pre class="codehilite"><code class="language-bash">$ php data/load_bulk_albums.php</code></pre>
+
+
+</blockquote>
 <p>This gives us a handy extra 150 rows to play with. If you now visit your album
 list at <code>/album</code>, you'll see a huge long list of 150+ albums; it's ugly.</p>
+<h2 id="install-zend-paginator">Install zend-paginator</h2>
+<p>zend-paginator is not installed or configured by default, so we will need to do
+that. Run the following from the application root:</p>
+<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-paginator</code></pre>
+
+
+<p>Assuming you followed the <a href="../getting-started/overview/">Getting Started tutorial</a>,
+you will be prompted by the <a href="https://zendframework.github.io/zend-component-installer">zend-component-installer</a>
+plugin to inject <code>Zend\Paginator</code>; be sure to select the option for either
+<code>config/application.config.php</code> or <code>config/modules.config.php</code>; since it is the
+only package you are installing, you can answer either "y" or "n" to the "Remember this
+option for other packages of the same type" prompt.</p>
+<blockquote>
+<h3 id="manual-configuration">Manual configuration</h3>
+<p>If you are not using zend-component-installer, you will need to setup
+configuration manually. You can do this in one of two ways:</p>
+<ul>
+<li>Register the <code>Zend\Paginator</code> module in either
+  <code>config/application.config.php</code> or <code>config/modules.config.php</code>. Make sure
+  you put it towards the top of the module list, before any modules you have
+  defined or third party modules you are using.</li>
+<li>Alternately, add a new file, <code>config/autoload/paginator.global.php</code>, with
+  the following contents:</li>
+</ul>
+<pre class="codehilite"><code class="language-php">&lt;?php
+use Zend\Paginator\ConfigProvider;
+
+return [
+    'service_manager' =&gt; (new ConfigProvider())-&gt;getDependencyConfig(),
+];</code></pre>
+
+
+</blockquote>
+<p>Once installed, our application is now aware of zend-paginator, and even has
+some default factories in place, which we will now make use of.</p>
 <h2 id="modifying-the-albumtable">Modifying the AlbumTable</h2>
 <p>In order to let zend-paginator handle our database queries automatically for us,
-we will be using the <a href="https://zendframework.github.io/zend-paginator/usage/#the-dbselect-adapter">DbSelect paginator adapter</a>
+we will be using the <a href="https://zendframework.github.io/zend-paginator/usage/#the-dbselect-adapter">DbSelect pagination adapter</a>
 This will automatically manipulate and run a <code>Zend\Db\Sql\Select</code> object to
 include the correct <code>LIMIT</code> and <code>WHERE</code> clauses so that it returns only the
 configured amount of data for the given page. Let's modify the <code>fetchAll</code> method
 of the <code>AlbumTable</code> model, so that it can optionally return a paginator object:</p>
-<pre class="codehilite"><code class="language-php">// in module/Album/src/Album/Model/AlbumTable.php:
+<pre class="codehilite"><code class="language-php">// in module/Album/src/Model/AlbumTable.php:
 namespace Album\Model;
 
+use RuntimeException;
 use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
@@ -514,14 +576,14 @@ class AlbumTable
         if ($paginated) {
             return $this-&gt;fetchPaginatedResults();
         }
-        $resultSet = $this-&gt;tableGateway-&gt;select();
-        return $resultSet;
+
+        return $this-&gt;tableGateway-&gt;select();
     }
 
     private function fetchPaginatedResults()
     {
-        // Create a new Select object for the table album:
-        $select = new Select('album');
+        // Create a new Select object for the table:
+        $select = new Select($this-&gt;tableGateway-&gt;getTable());
 
         // Create a new result set based on the Album entity:
         $resultSetPrototype = new ResultSet();
@@ -552,31 +614,29 @@ the <code>TableGateway</code> object uses, and also how to hydrate the result in
 our executed and returned paginator results will return <code>Album</code> objects in
 exactly the same fashion as the non-paginated results.</p>
 <h2 id="modifying-the-albumcontroller">Modifying the AlbumController</h2>
-<p>Next, we need to tell the album controller to return a <code>Pagination</code> object
-instead of a <code>ResultSet</code>. Both these objects can by iterated over to return
-hydrated <code>Album</code> objects, so we won't need to make many changes to the view
-script:</p>
-<pre class="codehilite"><code class="language-php">// in module/Album/src/Album/Controller/AlbumController.php:
+<p>Next, we need to tell the album controller to provide the view with a
+<code>Pagination</code> object instead of a <code>ResultSet</code>. Both these objects can by iterated
+over to return hydrated <code>Album</code> objects, so we won't need to make many changes
+to the view script:</p>
+<pre class="codehilite"><code class="language-php">// in module/Album/src/Controller/AlbumController.php:
 
 /* ... */
 
 public function indexAction()
 {
     // Grab the paginator from the AlbumTable:
-    $paginator = $this-&gt;getAlbumTable()-&gt;fetchAll(true);
+    $paginator = $this-&gt;table-&gt;fetchAll(true);
 
     // Set the current page to what has been passed in query string,
-    // or to 1 if none set:
-    $paginator-&gt;setCurrentPageNumber(
-        (int) $this-&gt;params()-&gt;fromQuery('page', 1)
-    );
+    // or to 1 if none is set, or the page is invalid:
+    $page = (int) $this-&gt;params()-&gt;fromQuery('page', 1);
+    $page = ($page &lt; 1) ? 1 : $page;
+    $paginator-&gt;setCurrentPageNumber($page);
 
     // Set the number of items per page to 10:
     $paginator-&gt;setItemCountPerPage(10);
 
-    return new ViewModel([
-        'paginator' =&gt; $paginator
-    ]);
+    return new ViewModel(['paginator' =&gt; $paginator]);
 }
 
 /* ... */</code></pre>
@@ -584,11 +644,11 @@ public function indexAction()
 
 <p>Here we are getting the configured <code>Paginator</code> object from the <code>AlbumTable</code>, and
 then telling it to use the page that is optionally passed in the querystring
-<code>page</code> parameter. We are also telling the paginator we want to display 10
-objects per page.</p>
+<code>page</code> parameter (after first validating it). We are also telling the paginator
+we want to display 10 albums per page.</p>
 <h2 id="updating-the-view-script">Updating the View Script</h2>
-<p>Now, let's just tell the view script to iterate over the <code>pagination</code> view
-variable, rather than the <code>albums</code> variable:</p>
+<p>Now, tell the view script to iterate over the <code>pagination</code> view variable, rather
+than the <code>albums</code> variable:</p>
 <pre class="codehilite"><code class="language-php">&lt;?php // in module/Album/view/album/album/index.phtml: ?&gt;
 &lt;table class=&quot;table&quot;&gt;
     &lt;tr&gt;
@@ -617,69 +677,69 @@ now.</p>
 the <a href="../navigation/#adding-breadcrumbs">navigation tutorial</a>, we need to create a
 custom pagination control partial to render our pagination control just the way
 we want it. Again, because we are using Bootstrap, this will primarily involve
-outputting correctly formatted html. Let's create the partial in the
+outputting correctly formatted HTML. Let's create the partial in the
 <code>module/Application/view/partial/</code> folder, so that we can use the control in all
 our modules:</p>
 <pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/partial/paginator.phtml: ?&gt;
 &lt;?php if ($this-&gt;pageCount): ?&gt;
-    &lt;div&gt;
-        &lt;ul class=&quot;pagination&quot;&gt;
-            &lt;!-- Previous page link --&gt;
-            &lt;?php if (isset($this-&gt;previous)): ?&gt;
-                &lt;li&gt;
-                    &lt;a href=&quot;&lt;?= $this-&gt;url($this-&gt;route, [], ['query' =&gt; ['page' =&gt; $this-&gt;previous]]) ?&gt;&quot;&gt;
-                        &lt;&lt;
-                    &lt;/a&gt;
-                &lt;/li&gt;
-            &lt;?php else: ?&gt;
-                &lt;li class=&quot;disabled&quot;&gt;
-                    &lt;a href=&quot;#&quot;&gt;
-                        &lt;&lt;
-                    &lt;/a&gt;
-                &lt;/li&gt;
-            &lt;?php endif; ?&gt;
+&lt;div&gt;
+  &lt;ul class=&quot;pagination&quot;&gt;
+  &lt;!-- Previous page link --&gt;
+  &lt;?php if (isset($this-&gt;previous)): ?&gt;
+    &lt;li&gt;
+      &lt;a href=&quot;&lt;?= $this-&gt;url($this-&gt;route, [], ['query' =&gt; ['page' =&gt; $this-&gt;previous]]) ?&gt;&quot;&gt;
+        &amp;lt;&amp;lt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;?php else: ?&gt;
+    &lt;li class=&quot;disabled&quot;&gt;
+      &lt;a href=&quot;#&quot;&gt;
+        &amp;lt;&amp;lt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;?php endif ?&gt;
 
-            &lt;!-- Numbered page links --&gt;
-            &lt;?php foreach ($this-&gt;pagesInRange as $page): ?&gt;
-                &lt;?php if ($page !== $this-&gt;current): ?&gt;
-                    &lt;li&gt;
-                        &lt;a href=&quot;&lt;?= $this-&gt;url($this-&gt;route, [], ['query' =&gt; ['page' =&gt; $page]]) ?&gt;&quot;&gt;
-                            &lt;?= $page; ?&gt;
-                        &lt;/a&gt;
-                    &lt;/li&gt;
-                &lt;?php else: ?&gt;
-                    &lt;li class=&quot;active&quot;&gt;
-                        &lt;a href=&quot;#&quot;&gt;&lt;?= $page; ?&gt;&lt;/a&gt;
-                    &lt;/li&gt;
-                &lt;?php endif; ?&gt;
-            &lt;?php endforeach; ?&gt;
+  &lt;!-- Numbered page links --&gt;
+  &lt;?php foreach ($this-&gt;pagesInRange as $page): ?&gt;
+    &lt;?php if ($page !== $this-&gt;current): ?&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;&lt;?= $this-&gt;url($this-&gt;route, [], ['query' =&gt; ['page' =&gt; $page]]) ?&gt;&quot;&gt;
+          &lt;?= $page; ?&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;?php else: ?&gt;
+      &lt;li class=&quot;active&quot;&gt;
+        &lt;a href=&quot;#&quot;&gt;&lt;?= $page; ?&gt;&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;?php endif ?&gt;
+  &lt;?php endforeach ?&gt;
 
-            &lt;!-- Next page link --&gt;
-            &lt;?php if (isset($this-&gt;next)): ?&gt;
-                &lt;li&gt;
-                    &lt;a href=&quot;&lt;?= $this-&gt;url($this-&gt;route, [], ['query' =&gt; ['page' =&gt; $this-&gt;next]]) ?&gt;&quot;&gt;
-                        &gt;&gt;
-                    &lt;/a&gt;
-                &lt;/li&gt;
-            &lt;?php else: ?&gt;
-                &lt;li class=&quot;disabled&quot;&gt;
-                    &lt;a href=&quot;#&quot;&gt;
-                        &gt;&gt;
-                    &lt;/a&gt;
-                &lt;/li&gt;
-            &lt;?php endif; ?&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-&lt;?php endif; ?&gt;</code></pre>
+  &lt;!-- Next page link --&gt;
+  &lt;?php if (isset($this-&gt;next)): ?&gt;
+    &lt;li&gt;
+      &lt;a href=&quot;&lt;?= $this-&gt;url($this-&gt;route, [], ['query' =&gt; ['page' =&gt; $this-&gt;next]]) ?&gt;&quot;&gt;
+        &amp;gt;&amp;gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;?php else: ?&gt;
+    &lt;li class=&quot;disabled&quot;&gt;
+      &lt;a href=&quot;#&quot;&gt;
+        &amp;gt;&amp;gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;?php endif ?&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;?php endif ?&gt;</code></pre>
 
 
 <p>This partial creates a pagination control with links to the correct pages (if
 there is more than one page in the pagination object). It will render a previous
 page link (and mark it disabled if you are at the first page), then render a
 list of intermediate pages (that are passed to the partial based on the
-rendering style; we'll set in the view helper in the next step).  Finally, it
-will create a next page link (and disable it if you're at the end).  Notice how
-we pass the page number via the <code>page</code> querystring parameter which we have
+rendering style; we'll pass that to the view helper in the next step). Finally,
+it will create a next page link (and disable it if you're at the end). Notice
+how we pass the page number via the <code>page</code> querystring parameter which we have
 already told our controller to use to display the current page.</p>
 <h3 id="using-the-paginationcontrol-view-helper">Using the PaginationControl View Helper</h3>
 <p>To page through the albums, we need to invoke the
@@ -688,17 +748,17 @@ to display our pagination control:</p>
 <pre class="codehilite"><code class="language-php">&lt;?php
 // In module/Album/view/album/album/index.phtml.
 // Add at the end of the file after the table:
-echo $this-&gt;paginationControl(
+?&gt;
+&lt;?= $this-&gt;paginationControl(
     // The paginator object:
     $this-&gt;paginator,
     // The scrolling style:
     'sliding',
     // The partial to use to render the control:
-    'partial/paginator.phtml',
+    'partial/paginator',
     // The route to link to when a user clicks a control link:
     [ 'route' =&gt; 'album' ]
-);
-?&gt;</code></pre>
+) ?&gt;</code></pre>
 
 
 <p>The above echoes the <code>paginationControl</code> helper, and tells it to use our
