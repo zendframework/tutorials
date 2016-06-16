@@ -270,9 +270,9 @@
     
         <li class="main active"><a href="#unit-testing-a-zend-mvc-application">Unit Testing a zend-mvc application</a></li>
         
-            <li><a href="#todo">TODO</a></li>
+            <li><a href="#installing-zend-test">Installing zend-test</a></li>
         
-            <li><a href="#setting-up-phpunit-to-use-composers-autoloadphp">Setting up phpunit to use composer's autoload.php</a></li>
+            <li><a href="#running-the-initial-tests">Running the initial tests</a></li>
         
             <li><a href="#setting-up-the-tests-directory">Setting up the tests directory</a></li>
         
@@ -321,14 +321,6 @@
 </ol>
 
 <h1 id="unit-testing-a-zend-mvc-application">Unit Testing a zend-mvc application</h1>
-<blockquote>
-<h3 id="todo">TODO</h3>
-<ul>
-<li>Remove section on installing phpunit, and replace with installing zend-test.</li>
-<li>Update assertions against controller names; they're the same as the class now.</li>
-<li>Try the tests and confirm they work.</li>
-</ul>
-</blockquote>
 <p>A solid unit test suite is essential for ongoing development in large projects,
 especially those with many people involved. Going back and manually testing
 every individual component of an application after every change is impractical.
@@ -342,19 +334,36 @@ guide to unit testing in general, but is here only to help overcome the initial
 hurdles in writing unit tests for zend-mvc applications.</p>
 <p>It is recommended to have at least a basic understanding of unit tests,
 assertions and mocks.</p>
-<p>zend-test, which provides testing integration for zend-mvc, uses
-<a href="http://phpunit.de/">PHPUnit</a>. This tutorial assumes that you already have
-PHPUnit from either a version 4 or version 5 series installed; version 5 is
-required if you are using PHP 7.</p>
-<h2 id="setting-up-phpunit-to-use-composers-autoloadphp">Setting up phpunit to use composer's autoload.php</h2>
-<p>If you used composer to generate an <code>autoload.php</code> file for you, per the
-skeleton application, then you need to use a phpunit binary installed by
-composer. You can add this as a development dependency using composer itself:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require --dev phpunit/phpunit</code></pre>
+<p><a href="https://zendframework.github.io/zend-test/">zend-test</a>, which provides testing
+integration for zend-mvc, uses <a href="http://phpunit.de/">PHPUnit</a>; this tutorial will
+cover using that library for testing your applications.</p>
+<h2 id="installing-zend-test">Installing zend-test</h2>
+<p><a href="https://zendframework.github.io/zend-test/">zend-test</a> provides PHPUnit
+integration for zend-mvc, including application scaffolding and custom
+assertions. You will need to install it:</p>
+<pre class="codehilite"><code class="language-bash">$ composer require --dev zendframework/zend-test</code></pre>
 
 
 <p>The above command will update your <code>composer.json</code> file and perform an update
 for you, which will also setup autoloading rules.</p>
+<h2 id="running-the-initial-tests">Running the initial tests</h2>
+<p>Out-of-the-box, the skeleton application provides several tests for the shipped
+<code>Application\Controller\IndexController</code> class. Now that you have zend-test
+installed, you can run these:</p>
+<pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit</code></pre>
+
+
+<p>You should see output similar to the following:</p>
+<pre class="codehilite"><code class="language-text">PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
+
+...                                                                 3 / 3 (100%)
+
+Time: 116 ms, Memory: 11.00MB
+
+OK (3 tests, 7 assertions)</code></pre>
+
+
+<p>Now it's time to write our own tests!</p>
 <h2 id="setting-up-the-tests-directory">Setting up the tests directory</h2>
 <p>As zend-mvc applications are built from modules that should be
 standalone blocks of an application, we don't test the application in it's
@@ -362,18 +371,18 @@ entirety, but module by module.</p>
 <p>We will demonstrate setting up the minimum requirements to test a module, the
 <code>Album</code> module we wrote in the user guide, which then can be used as a base
 for testing any other module.</p>
-<p>Start by creating a directory called <code>test</code> in <code>zf2-tutorial\module\Album</code> with
+<p>Start by creating a directory called <code>test</code> under <code>module/Album/</code> with
 the following subdirectories:</p>
-<pre class="codehilite"><code class="language-text">zf2-tutorial/
-    /module
-        /Album
-            /test
-                /Controller</code></pre>
+<pre class="codehilite"><code class="language-text">module/
+    Album/
+        test/
+            Controller/</code></pre>
 
 
 <p>Additionally, add an <code>autoload-dev</code> rule in your <code>composer.json</code>:</p>
 <pre class="codehilite"><code class="language-json">&quot;autoload-dev&quot;: {
     &quot;psr-4&quot;: {
+        &quot;ApplicationTest\\&quot;: &quot;module/Application/test/&quot;,
         &quot;AlbumTest\\&quot;: &quot;module/Album/test/&quot;
     }
 }</code></pre>
@@ -387,147 +396,60 @@ the following subdirectories:</p>
 source files, and it will allow you to keep your tests well-organized and easy
 to find.</p>
 <h2 id="bootstrapping-your-tests">Bootstrapping your tests</h2>
-<p>Next, create a file called <code>phpunit.xml.dist</code> under
-<code>zf2-tutorial/module/Album/test</code>:</p>
+<p>Next, edit the <code>phpunit.xml.dist</code> file at the project root; we'll add a new
+test suite to it. When done, it should read as follows:</p>
 <pre class="codehilite"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;phpunit bootstrap=&quot;Bootstrap.php&quot; colors=&quot;true&quot;&gt;
+&lt;phpunit colors=&quot;true&quot;&gt;
     &lt;testsuites&gt;
-        &lt;testsuite name=&quot;zf2tutorial&quot;&gt;
-            &lt;directory&gt;.&lt;/directory&gt;
+        &lt;testsuite name=&quot;ZendSkeletonApplication Test Suite&quot;&gt;
+            &lt;directory&gt;./module/Application/test&lt;/directory&gt;
+        &lt;/testsuite&gt;
+        &lt;testsuite name=&quot;Album&quot;&gt;
+            &lt;directory&gt;./module/Album/test&lt;/directory&gt;
         &lt;/testsuite&gt;
     &lt;/testsuites&gt;
 &lt;/phpunit&gt;</code></pre>
 
 
-<p>Now create a file called <code>Bootstrap.php</code>, also under <code>zf2-tutorial/module/Album/test</code>:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
-namespace AlbumTest;
-
-use Zend\Loader\AutoloaderFactory;
-use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\ServiceManager\ServiceManager;
-use RuntimeException;
-
-error_reporting(E_ALL | E_STRICT);
-chdir(__DIR__);
-
-/**
- * Test bootstrap, for setting up autoloading
- */
-class Bootstrap
-{
-    protected static $serviceManager;
-
-    public static function init()
-    {
-        $zf2ModulePaths = array(dirname(dirname(__DIR__)));
-        if (($path = static::findParentPath('vendor'))) {
-            $zf2ModulePaths[] = $path;
-        }
-        if (($path = static::findParentPath('module')) !== $zf2ModulePaths[0]) {
-            $zf2ModulePaths[] = $path;
-        }
-
-        static::initAutoloader();
-
-        // Use ModuleManager to load this module and its dependencies
-        $config = [
-            'module_listener_options' =&gt; [
-                'module_paths' =&gt; $zf2ModulePaths,
-            ],
-            'modules' =&gt; [
-                'Album',
-            ]
-        ];
-
-        $serviceManager = new ServiceManager(new ServiceManagerConfig());
-        $serviceManager-&gt;setService('ApplicationConfig', $config);
-        $serviceManager-&gt;get('ModuleManager')-&gt;loadModules();
-        static::$serviceManager = $serviceManager;
-    }
-
-    public static function chroot()
-    {
-        $rootPath = dirname(static::findParentPath('module'));
-        chdir($rootPath);
-    }
-
-    public static function getServiceManager()
-    {
-        return static::$serviceManager;
-    }
-
-    protected static function initAutoloader()
-    {
-        $vendorPath = static::findParentPath('vendor');
-
-        if (file_exists($vendorPath.'/autoload.php')) {
-            include $vendorPath.'/autoload.php';
-        }
-
-        if (! class_exists('Zend\Mvc\Application')) {
-            throw new RuntimeException('Unable to load ZF2. Run `composer install`');
-        }
-    }
-
-    protected static function findParentPath($path)
-    {
-        $dir = __DIR__;
-        $previousDir = '.';
-        while (! is_dir($dir . '/' . $path)) {
-            $dir = dirname($dir);
-            if ($previousDir === $dir) {
-                return false;
-            }
-            $previousDir = $dir;
-        }
-        return $dir . '/' . $path;
-    }
-}
-
-Bootstrap::init();
-Bootstrap::chroot();</code></pre>
-
-
-<p>The contents of this bootstrap file can be daunting at first sight, but all it
-does is ensure that all the necessary files are autoloadable for our tests, and
-that we have initial application configuration. The most important lines are in
-the <code>init()</code> method, where we specify the <code>modules</code> for the application.  In
-this case we are only loading the <code>Album</code> module as it has no dependencies
-against other modules, but when testing other modules, you will need to factor
-in their own dependencies.</p>
-<p>Now, if you navigate to the <code>zf2-tutorial/module/Album/test/</code> directory, and run
-<code>phpunit</code>, you should get a similar output to this:</p>
+<p>Now run <code>phpunit -- testsuite Album</code> from the project root; you should get
+similar output to the following:</p>
 <pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
-
-Configuration read from /var/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
 
 Time: 0 seconds, Memory: 1.75Mb
 
 No tests executed!</code></pre>
 
 
-<p>Even though no tests were executed, we at least know that the autoloader found
-the required files and classes; otherwise it would throw a <code>RuntimeException</code>,
-as demonstrated in the <code>initAutoloader()</code> method.</p>
+<p>Let's write our first test!</p>
 <h2 id="your-first-controller-test">Your first controller test</h2>
 <p>Testing controllers is never an easy task, but the zend-test component makes
 testing much less cumbersome.</p>
-<p>First, create <code>AlbumControllerTest.php</code> under
-<code>zf2-tutorial/module/Album/test/Controller</code> with the following contents:</p>
+<p>First, create <code>AlbumControllerTest.php</code> under <code>module/Album/test/Controller/</code>
+with the following contents:</p>
 <pre class="codehilite"><code class="language-php">&lt;?php
 namespace AlbumTest\Controller;
 
+use Album\Controller\AlbumController;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class AlbumControllerTest extends AbstractHttpControllerTestCase
 {
+    protected $traceError = false;
+
     public function setUp()
     {
-        $this-&gt;setApplicationConfig(
+        // The module configuration should still be applicable for tests.
+        // You can override configuration here with test case specific values,
+        // such as sample view templates, path stacks, module_listener_options,
+        // etc.
+        $configOverrides = [];
+
+        $this-&gt;setApplicationConfig(ArrayUtils::merge(
             // Grabbing the full application configuration:
-            include __DIR__ . '/../../../../config/application.config.php'
-        );
+            include __DIR__ . '/../../../../config/application.config.php',
+            $configOverrides
+        ));
         parent::setUp();
     }
 }</code></pre>
@@ -539,15 +461,16 @@ during a request, and offers methods for asserting request params, response
 headers, redirects, and more. See the <a href="https://zendframework.github.io/zend-test/phpunit/">zend-test</a>
 documentation for more information.</p>
 <p>The principal requirement for any zend-test test case is to set the application
-config with the <code>setApplicationConfig()</code> method.</p>
-<p>Now, add the following function to the <code>AlbumControllerTest</code> class:</p>
+config with the <code>setApplicationConfig()</code> method. For now, we assume the default
+application configuration will be appropriate; however, we can override values
+locally within the test using the <code>$configOverrides</code> variable.</p>
+<p>Now, add the following method to the <code>AlbumControllerTest</code> class:</p>
 <pre class="codehilite"><code class="language-php">public function testIndexActionCanBeAccessed()
 {
     $this-&gt;dispatch('/album');
     $this-&gt;assertResponseStatusCode(200);
-
     $this-&gt;assertModuleName('Album');
-    $this-&gt;assertControllerName('Album\Controller\Album');
+    $this-&gt;assertControllerName(AlbumController::class);
     $this-&gt;assertControllerClass('AlbumController');
     $this-&gt;assertMatchedRouteName('album');
 }</code></pre>
@@ -562,12 +485,39 @@ defined in our  routing configuration for the Album module. In our example
 this should be defined on line 19 of the <code>module.config.php</code> file in the Album
 module.</p>
 </blockquote>
-<h2 id="a-failing-test-case">A failing test case</h2>
-<p>Finally, <code>cd</code> to <code>zf2-tutorial/module/Album/test/</code> and run <code>phpunit</code>. Uh-oh! The
-test failed!</p>
-<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+<p>If you run:</p>
+<pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album</code></pre>
 
-Configuration read from /var/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+
+<p>again, you should see something like the following:</p>
+<pre class="codehilite"><code class="language-text">PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
+
+.                                                                   1 / 1 (100%)
+
+Time: 124 ms, Memory: 11.50MB
+
+OK (1 test, 5 assertions)</code></pre>
+
+
+<p>A successful first test!</p>
+<h2 id="a-failing-test-case">A failing test case</h2>
+<p>We likely don't want to hit the same database during testing as we use for our
+web property. Let's add some configuration to the test case to remove the
+database configuration. In your <code>AlbumControllerTest::setUp()</code> method, add the
+following lines following the call to <code>parent::setUp();</code>:</p>
+<pre class="codehilite"><code class="language-php">$services = $this-&gt;getApplicationServiceLocator();
+$config = $services-&gt;get('config');
+unset($config['db']);
+$services-&gt;setAllowOverride(true);
+$services-&gt;setService('config', $config);
+$services-&gt;setAllowOverride(false);</code></pre>
+
+
+<p>The above removes the 'db' configuration entirely; we'll be replacing it with
+something else before long.</p>
+<p>When we run the tests now:</p>
+<pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album
+PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
 
 F
 
@@ -578,8 +528,8 @@ There was 1 failure:
 1) AlbumTest\Controller\AlbumControllerTest::testIndexActionCanBeAccessed
 Failed asserting response code &quot;200&quot;, actual status code is &quot;500&quot;
 
-/var/www/zf2-tutorial/vendor/ZF2/library/Zend/Test/PHPUnit/Controller/AbstractControllerTestCase.php:373
-/var/www/zf2-tutorial/module/Album/test/AlbumTest/Controller/AlbumControllerTest.php:22
+{projectPath}/vendor/ZF2/library/Zend/Test/PHPUnit/Controller/AbstractControllerTestCase.php:{lineNumber}
+{projectPath}/module/Album/test/AlbumTest/Controller/AlbumControllerTest.php:{lineNumber}
 
 FAILURES!
 Tests: 1, Assertions: 0, Failures: 1.</code></pre>
@@ -587,20 +537,26 @@ Tests: 1, Assertions: 0, Failures: 1.</code></pre>
 
 <p>The failure message doesn't tell us much, apart from that the expected status
 code is not 200, but 500. To get a bit more information when something goes
-wrong in a test case, we set the protected <code>$traceError</code> member to <code>true</code>. Add
-the following just above the <code>setUp</code> method in our <code>AlbumControllerTest</code> class:</p>
+wrong in a test case, we set the protected <code>$traceError</code> member to <code>true</code> (which
+is the default; we set it to <code>false</code> to demonstrate this capability). Modify the
+following line from just above the <code>setUp</code> method in our <code>AlbumControllerTest</code> class:</p>
 <pre class="codehilite"><code class="language-php">protected $traceError = true;</code></pre>
 
 
 <p>Running the <code>phpunit</code> command again and we should see some more information
-about what went wrong in our test. The main error message we are interested in
-should read something like:</p>
-<pre class="codehilite"><code class="language-text">Zend\ServiceManager\Exception\ServiceNotFoundException: Zend\ServiceManager\ServiceManager::get
-was unable to fetch or create an instance for Zend\Db\Adapter\Adapter</code></pre>
+about what went wrong in our test. You'll get a list of the exceptions raised,
+along with their messages, the filename, and line number:</p>
+<pre class="codehilite"><code class="language-text">1) AlbumTest\Controller\AlbumControllerTest::testIndexActionCanBeAccessed
+Failed asserting response code &quot;200&quot;, actual status code is &quot;500&quot;
+
+Exceptions raised:
+Exception 'Zend\ServiceManager\Exception\ServiceNotCreatedException' with message 'Service with name &quot;Zend\Db\Adapter\AdapterInterface&quot; could not be created. Reason: createDriver expects a &quot;driver&quot; key to be present inside the parameters' in {projectPath}/vendor/zendframework/zend-servicemanager/src/ServiceManager.php:{lineNumber}
+
+Exception 'Zend\Db\Adapter\Exception\InvalidArgumentException' with message 'createDriver expects a &quot;driver&quot; key to be present inside the parameters' in {projectPath}/vendor/zendframework/zend-db/src/Adapter/Adapter.php:{lineNumber}</code></pre>
 
 
-<p>From this error message it is clear that not all our dependencies are available
-in the service manager. Let us take a look how can we fix this.</p>
+<p>Based on the exception messages, it appears we are unable to create a zend-db
+adapter instance, due to missing configuration!</p>
 <h2 id="configuring-the-service-manager-for-the-tests">Configuring the service manager for the tests</h2>
 <p>The error says that the service manager can not create an instance of a database
 adapter for us. The database adapter is indirectly used by our
@@ -618,73 +574,110 @@ create it at some point).</p>
 which retrieves the list of albums from the database. Remember, we are now
 testing our controller, so we can mock out the actual call to <code>fetchAll</code> and
 replace the return values with dummy values. At this point, we are not
-interested in how <code>fetchAll</code> retrieves the albums, but only that it gets called
+interested in how <code>fetchAll()</code> retrieves the albums, but only that it gets called
 and that it returns an array of albums; these facts allow us to provide mock
 instances. When we test <code>AlbumTable</code> itself, we can write the actual tests for
 the <code>fetchAll</code> method.</p>
-<p>Here is how we can accomplish this, by modifying the
-<code>testIndexActionCanBeAccessed</code> test method as follows:</p>
+<p>First, let's do some setup.</p>
+<p>Add an import statement to the top of the test class file for the <code>AlbumTable</code>:</p>
+<pre class="codehilite"><code class="language-php">use Album\Model\AlbumTable;</code></pre>
+
+
+<p>Now add the following property to the test class:</p>
+<pre class="codehilite"><code class="language-php">protected $albumTable;</code></pre>
+
+
+<p>Next, we'll create three new methods that we'll invoke during setup:</p>
+<pre class="codehilite"><code class="language-php">protected function configureServiceManager(ServiceManager $services)
+{
+    $services-&gt;setAllowOverride(true);
+
+    $services-&gt;setService('config', $this-&gt;updateConfig($services-&gt;get('config')));
+    $services-&gt;setService(AlbumTable::class, $this-&gt;mockAlbumTable()-&gt;reveal());
+
+    $services-&gt;setAllowOverride(false);
+}
+
+protected function updateConfig($config)
+{
+    $config['db'] = [];
+    return $config;
+}
+
+protected function mockAlbumTable()
+{
+    $this-&gt;albumTable = $this-&gt;prophesize(AlbumTable::class);
+    return $this-&gt;albumTable;
+}</code></pre>
+
+
+<p>By default, the <code>ServiceManager</code> does not allow us to replace existing services.
+<code>configureServiceManager()</code> calls a special method on the instance to enable
+overriding services, and then we inject specific overrides we wish to use.
+When done, we disable overrides to ensure that if, during dispatch, any code
+attempts to override a service, an exception will be raised.</p>
+<p>The last method above creates a mock instance of our <code>AlbumTable</code> using
+<a href="https://github.com/phpspec/prophecy">Prophecy</a>, an object mocking framework
+that's bundled and integrated in PHPUnit. The instance returned by
+<code>prophesize()</code> is a scaffold object; calling <code>reveal()</code> on it, as done in the
+<code>configureServiceManager()</code> method above, provides the underlying mock object
+that will then be asserted against.</p>
+<p>With this in place, we can update our <code>setUp()</code> method to read as follows:</p>
+<pre class="codehilite"><code class="language-php">public function setUp()
+{
+    // The module configuration should still be applicable for tests.
+    // You can override configuration here with test case specific values,
+    // such as sample view templates, path stacks, module_listener_options,
+    // etc.
+    $configOverrides = [];
+
+    $this-&gt;setApplicationConfig(ArrayUtils::merge(
+        include __DIR__ . '/../../../../config/application.config.php',
+        $configOverrides
+    ));
+
+    parent::setUp();
+
+    $this-&gt;configureServiceManager($this-&gt;getApplicationServiceLocator());
+}</code></pre>
+
+
+<p>Now update the <code>testIndexActionCanBeAccessed()</code> method to add a line asserting
+the <code>AlbumTable</code>'s <code>fetchAll()</code> method will be called, and return an array:</p>
 <pre class="codehilite"><code class="language-php">public function testIndexActionCanBeAccessed()
 {
-    $albumTableMock = $this-&gt;getMockBuilder(AlbumTable::class)
-        -&gt;disableOriginalConstructor()
-        -&gt;getMock();
+    $this-&gt;albumTable-&gt;fetchAll()-&gt;willReturn([]);
 
-    $albumTableMock-&gt;expects($this-&gt;once())
-        -&gt;method('fetchAll')
-        -&gt;will($this-&gt;returnValue([]));
-
-    $serviceManager = $this-&gt;getApplicationServiceLocator();
-    $serviceManager-&gt;setAllowOverride(true);
-    $serviceManager-&gt;setService(AlbumTable::class, $albumTableMock);
-
-    $this-&gt;dispatch('/album');
+    $this-&gt;dispatch('/album', 'GET');
     $this-&gt;assertResponseStatusCode(200);
-
     $this-&gt;assertModuleName('Album');
-    $this-&gt;assertControllerName('Album\Controller\Album');
+    $this-&gt;assertControllerName(AlbumController::class);
     $this-&gt;assertControllerClass('AlbumController');
     $this-&gt;assertMatchedRouteName('album');
 }</code></pre>
 
 
-<p>By default, the <code>ServiceManager</code> does not allow us to replace existing services.
-As the <code>Album\Model\AlbumTable</code> was already set, we are allowing for overrides
-(via the <code>setAllowOverride()</code> call), and then replacing the real instance of the
-<code>AlbumTable</code> with a mock.  The mock is created so that it will return just an
-empty array when the <code>fetchAll</code> method is called. This allows us to test for
-what we care about in this test, and that is that by dispatching to the <code>/album</code>
-URL we get to the Album module's AlbumController.</p>
 <p>Running <code>phpunit</code> at this point, we will get the following output as the tests
 now pass:</p>
-<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+<pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album
+PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
 
-Configuration read from /var/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+.                                                                   1 / 1 (100%)
 
-.
+Time: 105 ms, Memory: 10.75MB
 
-Time: 0 seconds, Memory: 9.00Mb
-
-OK (1 test, 6 assertions)</code></pre>
+OK (1 test, 5 assertions)</code></pre>
 
 
 <h2 id="testing-actions-with-post">Testing actions with POST</h2>
-<p>One of the most common actions happening in controllers is submitting a form
-with some POST data; those tests look similar to the following:</p>
+<p>A common scenario with controllers is processing POST data submitted via a form,
+as we do in the <code>AlbumController::addAction()</code>. Let's write a test for that.</p>
 <pre class="codehilite"><code class="language-php"> :linenos:}
 public function testAddActionRedirectsAfterValidPost()
 {
-    $albumTableMock = $this-&gt;getMockBuilder(AlbumTable::class)
-        -&gt;disableOriginalConstructor()
-        -&gt;getMock();
-
-    $albumTableMock-&gt;expects($this-&gt;once())
-        -&gt;method('saveAlbum')
-        -&gt;will($this-&gt;returnValue(null));
-
-    $serviceManager = $this-&gt;getApplicationServiceLocator();
-    $serviceManager-&gt;setAllowOverride(true);
-    $serviceManager-&gt;setService(AlbumTable::class, $albumTableMock);
+    $this-&gt;albumTable
+        -&gt;saveAlbum(Argument::type(Album::class))
+        -&gt;shouldBeCalled();
 
     $postData = [
         'title'  =&gt; 'Led Zeppelin III',
@@ -693,35 +686,56 @@ public function testAddActionRedirectsAfterValidPost()
     ];
     $this-&gt;dispatch('/album/add', 'POST', $postData);
     $this-&gt;assertResponseStatusCode(302);
-
-    $this-&gt;assertRedirectTo('/album/');
+    $this-&gt;assertRedirectTo('/album');
 }</code></pre>
 
 
-<p>Here we test that when we make a POST request against the <code>/album/add</code> URL, the
-<code>Album\Model\AlbumTable</code>'s <code>saveAlbum()</code> method will be called, and after that
-we will be redirected back to the <code>/album</code> URL.</p>
+<p>This test case references two new classes that we need to import; add the
+following import statements at the top of the class file:</p>
+<pre class="codehilite"><code class="language-php">use Album\Model\Album;
+use Prophecy\Argument;</code></pre>
+
+
+<p><code>Prophecy\Argument</code> allows us to perform assertions against the values passed as
+arguments to mock objects. In this case, we want to assert that we received an
+<code>Album</code> instance. (We could have also done deeper assertions to ensure the
+<code>Album</code> instance contained expected data.)</p>
+<p>When we dispatch the application this time, we use the request method POST, and
+pass data to it. This test case then asserts a 302 response status, and
+introduces a new assertion against the location to which the response redirects.</p>
 <p>Running <code>phpunit</code> gives us the following output:</p>
-<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+<pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album
+PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
 
-Configuration read from /home/robert/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+..                                                                  2 / 2 (100%)
 
-..
+Time: 1.49 seconds, Memory: 13.25MB
 
-Time: 0 seconds, Memory: 10.75Mb
-
-OK (2 tests, 9 assertions)</code></pre>
-
-
-<p>Testing the <code>editAction()</code> and <code>deleteAction()</code> methods can be easily done in a
-manner similar as shown for the <code>addAction()</code>.</p>
-<p>When testing the <code>editAction()</code> method, you will also need to mock out the
-<code>getAlbum()</code> method:</p>
-<pre class="codehilite"><code class="language-php">$albumTableMock-&gt;expects($this-&gt;once())
-    -&gt;method('getAlbum')
-    -&gt;will($this-&gt;returnValue(new Album()));</code></pre>
+OK (2 tests, 8 assertions)</code></pre>
 
 
+<p>Testing the <code>editAction()</code> and <code>deleteAction()</code> methods can be performed
+similarly; however, when testing the <code>editAction()</code> method, you will also need
+to assert against the <code>AlbumTable::getAlbum()</code> method:</p>
+<pre class="codehilite"><code class="language-php">$this-&gt;albumTable-&gt;getAlbum($id)-&gt;willReturn(new Album());</code></pre>
+
+
+<p>Ideally, you should test all the various paths through each method. For example:</p>
+<ul>
+<li>Test that a non-POST request to <code>addAction()</code> displays an empty form.</li>
+<li>Test that a invalid data provided to <code>addAction()</code> re-displays the form, but
+  with error messages.</li>
+<li>Test that absence of an identifier in the route parameters when invoking
+  either <code>editAction()</code> or <code>deleteAction()</code> will redirect to the appropriate
+  location.</li>
+<li>Test that an invalid identifier passed to <code>editAction()</code> will redirect to the
+  album landing page.</li>
+<li>Test that non-POST requests to <code>editAction()</code> and <code>deleteAction()</code> display
+  forms.</li>
+</ul>
+<p>and so on. Doing so will help you understand the paths through your application
+and controllers, as well as ensure that changes in behavior bubble up as test
+failures.</p>
 <h2 id="testing-model-entities">Testing model entities</h2>
 <p>Now that we know how to test our controllers, let us move to an other important
 part of our application: the model entity.</p>
@@ -738,24 +752,13 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class AlbumTest extends TestCase
 {
-    public function testAlbumInitialState()
+    public function testInitialAlbumValuesAreNull()
     {
         $album = new Album();
 
-        $this-&gt;assertNull(
-            $album-&gt;artist,
-            '&quot;artist&quot; should initially be null'
-        );
-
-        $this-&gt;assertNull(
-            $album-&gt;id,
-            '&quot;id&quot; should initially be null'
-        );
-
-        $this-&gt;assertNull(
-            $album-&gt;title,
-            '&quot;title&quot; should initially be null'
-        );
+        $this-&gt;assertNull($album-&gt;artist, '&quot;artist&quot; should be null by default');
+        $this-&gt;assertNull($album-&gt;id, '&quot;id&quot; should be null by default');
+        $this-&gt;assertNull($album-&gt;title, '&quot;title&quot; should be null by default');
     }
 
     public function testExchangeArraySetsPropertiesCorrectly()
@@ -799,20 +802,9 @@ class AlbumTest extends TestCase
         ]);
         $album-&gt;exchangeArray([]);
 
-        $this-&gt;assertNull(
-            $album-&gt;artist,
-            '&quot;artist&quot; should have defaulted to null'
-        );
-
-        $this-&gt;assertNull(
-            $album-&gt;id,
-            '&quot;id&quot; should have defaulted to null'
-        );
-
-        $this-&gt;assertNull(
-            $album-&gt;title,
-            '&quot;title&quot; should have defaulted to null'
-        );
+        $this-&gt;assertNull($album-&gt;artist, '&quot;artist&quot; should default to null');
+        $this-&gt;assertNull($album-&gt;id, '&quot;id&quot; should default to null');
+        $this-&gt;assertNull($album-&gt;title, '&quot;title&quot; should default to null');
     }
 
     public function testGetArrayCopyReturnsAnArrayWithPropertyValues()
@@ -827,23 +819,9 @@ class AlbumTest extends TestCase
         $album-&gt;exchangeArray($data);
         $copyArray = $album-&gt;getArrayCopy();
 
-        $this-&gt;assertSame(
-            $data['artist'],
-            $copyArray['artist'],
-            '&quot;artist&quot; was not set correctly'
-        );
-
-        $this-&gt;assertSame(
-            $data['id'],
-            $copyArray['id'],
-            '&quot;id&quot; was not set correctly'
-        );
-
-        $this-&gt;assertSame(
-            $data['title'],
-            $copyArray['title'],
-            '&quot;title&quot; was not set correctly'
-        );
+        $this-&gt;assertSame($data['artist'], $copyArray['artist'], '&quot;artist&quot; was not set correctly');
+        $this-&gt;assertSame($data['id'], $copyArray['id'], '&quot;id&quot; was not set correctly');
+        $this-&gt;assertSame($data['title'], $copyArray['title'], '&quot;title&quot; was not set correctly');
     }
 
     public function testInputFiltersAreSetCorrectly()
@@ -870,15 +848,14 @@ class AlbumTest extends TestCase
 </ol>
 <p>If we run <code>phpunit</code> again, we will get the following output, confirming that our
 model is indeed correct:</p>
-<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+<pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album
+PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
 
-Configuration read from /var/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+.......                                                             7 / 7 (100%)
 
-.......
+Time: 186 ms, Memory: 13.75MB
 
-Time: 0 seconds, Memory: 11.00Mb
-
-OK (7 tests, 25 assertions)</code></pre>
+OK (7 tests, 24 assertions)</code></pre>
 
 
 <h2 id="testing-model-tables">Testing model tables</h2>
@@ -888,36 +865,32 @@ writing tests for our model tables.</p>
 that we can save and delete albums from the database.</p>
 <p>To avoid actual interaction with the database itself, we will replace certain
 parts with mocks.</p>
-<p>Create a file <code>AlbumTableTest.php</code> in <code>module/Album/test/Model</code> with
-the following contents:</p>
+<p>Create a file <code>AlbumTableTest.php</code> in <code>module/Album/test/Model/</code> with the
+following contents:</p>
 <pre class="codehilite"><code class="language-php">&lt;?php
 namespace AlbumTest\Model;
 
 use Album\Model\AlbumTable;
 use Album\Model\Album;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Db\ResultSet\ResultSet;
+use RuntimeException;
+use Zend\Db\ResultSet\ResultSetInterface;
+use Zend\Db\TableGateway\TableGatewayInterface;
 
 class AlbumTableTest extends TestCase
 {
+    protected function setUp()
+    {
+        $this-&gt;tableGateway = $this-&gt;prophesize(TableGatewayInterface::class);
+        $this-&gt;albumTable = new AlbumTable($this-&gt;tableGateway-&gt;reveal());
+    }
+
     public function testFetchAllReturnsAllAlbums()
     {
-        $resultSet = new ResultSet();
-        $mockTableGateway = $this-&gt;getMock(
-            'Zend\Db\TableGateway\TableGateway',
-            ['select'],
-            [],
-            '',
-            false
-        );
-        $mockTableGateway-&gt;expects($this-&gt;once())
-            -&gt;method('select')
-            -&gt;with()
-            -&gt;will($this-&gt;returnValue($resultSet));
+        $resultSet = $this-&gt;prophesize(ResultSetInterface::class)-&gt;reveal();
+        $this-&gt;tableGateway-&gt;select()-&gt;willReturn($resultSet);
 
-        $albumTable = new AlbumTable($mockTableGateway);
-
-        $this-&gt;assertSame($resultSet, $albumTable-&gt;fetchAll());
+        $this-&gt;assertSame($resultSet, $this-&gt;albumTable-&gt;fetchAll());
     }
 }</code></pre>
 
@@ -927,55 +900,14 @@ class AlbumTableTest extends TestCase
 that our <code>AlbumTable</code> class is interacting with the <code>TableGateway</code> class the way
 that we expect it to. Above, we're testing to see if the <code>fetchAll()</code> method of
 <code>AlbumTable</code> will call the <code>select()</code> method of the <code>$tableGateway</code> property
-with no parameters. If it does, it should return a <code>ResultSet</code> object. Finally,
+with no parameters. If it does, it should return a <code>ResultSet</code> instance. Finally,
 we expect that this same <code>ResultSet</code> object will be returned to the calling
 method. This test should run fine, so now we can add the rest of the test
 methods:</p>
-<pre class="codehilite"><code class="language-php">public function testCanRetrieveAnAlbumByItsId()
+<pre class="codehilite"><code class="language-php">public function testCanDeleteAnAlbumByItsId()
 {
-    $album = new Album();
-    $album-&gt;exchangeArray([
-        'id'     =&gt; 123,
-        artist' =&gt; 'The Military Wives',
-        title'  =&gt; 'In My Dreams'
-    ]);
-
-    $resultSet = new ResultSet();
-    $resultSet-&gt;setArrayObjectPrototype(new Album());
-    $resultSet-&gt;initialize(array($album));
-
-    $mockTableGateway = $this-&gt;getMock(
-        'Zend\Db\TableGateway\TableGateway',
-        ['select'],
-        [],
-        '',
-        false
-    );
-    $mockTableGateway-&gt;expects($this-&gt;once())
-        -&gt;method('select')
-        -&gt;with(['id' =&gt; 123])
-        -&gt;will($this-&gt;returnValue($resultSet));
-
-    $albumTable = new AlbumTable($mockTableGateway);
-
-    $this-&gt;assertSame($album, $albumTable-&gt;getAlbum(123));
-}
-
-public function testCanDeleteAnAlbumByItsId()
-{
-    $mockTableGateway = $this-&gt;getMock(
-        'Zend\Db\TableGateway\TableGateway',
-        ['delete'],
-        [],
-        '',
-        false
-    );
-    $mockTableGateway-&gt;expects($this-&gt;once())
-        -&gt;method('delete')
-        -&gt;with(['id' =&gt; 123]);
-
-    $albumTable = new AlbumTable($mockTableGateway);
-    $albumTable-&gt;deleteAlbum(123);
+    $this-&gt;tableGateway-&gt;delete(['id' =&gt; 123])-&gt;shouldBeCalled();
+    $this-&gt;albumTable-&gt;deleteAlbum(123);
 }
 
 public function testSaveAlbumWillInsertNewAlbumsIfTheyDontAlreadyHaveAnId()
@@ -987,19 +919,8 @@ public function testSaveAlbumWillInsertNewAlbumsIfTheyDontAlreadyHaveAnId()
     $album = new Album();
     $album-&gt;exchangeArray($albumData);
 
-    $mockTableGateway = $this-&gt;getMock(
-        'Zend\Db\TableGateway\TableGateway',
-        ['insert'],
-        [],
-        '',
-        false
-    );
-    $mockTableGateway-&gt;expects($this-&gt;once())
-        -&gt;method('insert')
-        -&gt;with($albumData);
-
-    $albumTable = new AlbumTable($mockTableGateway);
-    $albumTable-&gt;saveAlbum($album);
+    $this-&gt;tableGateway-&gt;insert($albumData)-&gt;shouldBeCalled();
+    $this-&gt;albumTable-&gt;saveAlbum($album);
 }
 
 public function testSaveAlbumWillUpdateExistingAlbumsIfTheyAlreadyHaveAnId()
@@ -1012,89 +933,69 @@ public function testSaveAlbumWillUpdateExistingAlbumsIfTheyAlreadyHaveAnId()
     $album = new Album();
     $album-&gt;exchangeArray($albumData);
 
-    $resultSet = new ResultSet();
-    $resultSet-&gt;setArrayObjectPrototype(new Album());
-    $resultSet-&gt;initialize([$album]);
+    $resultSet = $this-&gt;prophesize(ResultSetInterface::class);
+    $resultSet-&gt;current()-&gt;willReturn($album);
 
-    $mockTableGateway = $this-&gt;getMock(
-        'Zend\Db\TableGateway\TableGateway',
-        ['select', 'update'],
-        [],
-        '',
-        false
-    );
-    $mockTableGateway-&gt;expects($this-&gt;once())
-        -&gt;method('select')
-        -&gt;with(['id' =&gt; 123])
-        -&gt;will($this-&gt;returnValue($resultSet));
-    $mockTableGateway-&gt;expects($this-&gt;once())
-        -&gt;method('update')
-        -&gt;with(
-            [
-                'artist' =&gt; 'The Military Wives',
-                'title'  =&gt; 'In My Dreams'
-            ],
+    $this-&gt;tableGateway
+        -&gt;select(['id' =&gt; 123])
+        -&gt;willReturn($resultSet-&gt;reveal());
+    $this-&gt;tableGateway
+        -&gt;update(
+            array_filter($albumData, function ($key) {
+                return in_array($key, ['artist', 'title']);
+            }, ARRAY_FILTER_USE_KEY),
             ['id' =&gt; 123]
-        );
+        )-&gt;shouldBeCalled();
 
-    $albumTable = new AlbumTable($mockTableGateway);
-    $albumTable-&gt;saveAlbum($album);
+    $this-&gt;albumTable-&gt;saveAlbum($album);
 }
 
 public function testExceptionIsThrownWhenGettingNonExistentAlbum()
 {
-    $resultSet = new ResultSet();
-    $resultSet-&gt;setArrayObjectPrototype(new Album());
-    $resultSet-&gt;initialize([]);
+    $resultSet = $this-&gt;prophesize(ResultSetInterface::class);
+    $resultSet-&gt;current()-&gt;willReturn(null);
 
-    $mockTableGateway = $this-&gt;getMock(
-        'Zend\Db\TableGateway\TableGateway',
-        ['select'],
-        [],
-        '',
-        false
+    $this-&gt;tableGateway
+        -&gt;select(['id' =&gt; 123])
+        -&gt;willReturn($resultSet-&gt;reveal());
+
+    $this-&gt;setExpectedException(
+        RuntimeException::class,
+        'Could not find row with identifier 123'
     );
-    $mockTableGateway-&gt;expects($this-&gt;once())
-        -&gt;method('select')
-        -&gt;with(['id' =&gt; 123])
-        -&gt;will($this-&gt;returnValue($resultSet));
-
-    $albumTable = new AlbumTable($mockTableGateway);
-
-    $this-&gt;setExpectedException('Exception', 'Could not find row 123');
-    $albumTable-&gt;getAlbum(123);
+    $this-&gt;albumTable-&gt;getAlbum(123);
 }</code></pre>
 
 
-<p>These tests are nothing complicated and they should be self explanatory. In each
-test we are injecting a mock table gateway into our <code>AlbumTable</code>, and we then
-set our expectations accordingly.</p>
+<p>These tests are nothing complicated and should be self explanatory. In each
+test, we add assertions to our mock table gateway, and then call and assert
+against methods in our <code>AlbumTable</code>.</p>
 <p>We are testing that:</p>
 <ol>
 <li>We can retrieve an individual album by its ID.</li>
 <li>We can delete albums.</li>
 <li>We can save a new album.</li>
 <li>We can update existing albums.</li>
-<li>We will encounter an exception if we're trying to retrieve an album that doesn't exist.</li>
+<li>We will encounter an exception if we're trying to retrieve an album that
+   doesn't exist.</li>
 </ol>
 <p>Running <code>phpunit</code> one last time, we get the output as follows:</p>
-<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+<pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album
+PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
 
-Configuration read from /var/www/zf2-tutorial/module/Album/test/phpunit.xml.dist
+.............                                                     13 / 13 (100%)
 
-.............
+Time: 151 ms, Memory: 14.00MB
 
-Time: 0 seconds, Memory: 11.50Mb
-
-OK (13 tests, 34 assertions)</code></pre>
+OK (13 tests, 31 assertions)</code></pre>
 
 
 <h2 id="conclusion">Conclusion</h2>
 <p>In this short tutorial, we gave a few examples how different parts of a zend-mvc
 application can be tested. We covered setting up the environment for testing,
-how to test controllers and actions, how to approach failing test cases , how to
+how to test controllers and actions, how to approach failing test cases, how to
 configure the service manager, as well as how to test model entities and model
-tables .</p>
+tables.</p>
 <p>This tutorial is by no means a definitive guide to writing unit tests, just a
 small stepping stone helping you develop applications of higher quality.</p>
 
