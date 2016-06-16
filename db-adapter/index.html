@@ -74,8 +74,8 @@
                 
                 
                 
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MVC Tutorials <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
@@ -127,6 +127,24 @@
         
     </ul>
   </li>
+
+                        
+                            
+<li >
+    <a href="../unit-testing/">Unit Testing A zend-mvc Application</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../navigation/">Adding zend-navigation to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../pagination/">Adding zend-paginator to the Album Module</a>
+</li>
 
                         
                             
@@ -193,6 +211,21 @@
 
                         
                             
+<li >
+    <a href="../i18n/">Internationalization</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Component Tutorials <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
 <li class="active">
     <a href="./">Setting Up A Database Adapter</a>
 </li>
@@ -204,28 +237,40 @@
 </li>
 
                         
-                            
-<li >
-    <a href="../i18n/">Internationalization</a>
-</li>
-
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Migration <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
                         
                             
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">To Version 3</a>
+    <ul class="dropdown-menu">
+        
+            
 <li >
-    <a href="../navigation/">Adding zend-navigation to the Album Module</a>
+    <a href="../migration/to-v3/overview/">Overview</a>
 </li>
 
-                        
-                            
+        
+            
 <li >
-    <a href="../pagination/">Adding zend-paginator to the Album Module</a>
+    <a href="../migration/to-v3/components/">Components</a>
 </li>
 
-                        
-                            
+        
+            
 <li >
-    <a href="../unit-testing/">Unit Testing A zend-mvc Application</a>
+    <a href="../migration/to-v3/application/">Applications</a>
 </li>
+
+        
+    </ul>
+  </li>
 
                         
                         </ul>
@@ -270,12 +315,11 @@
     
         <li class="main active"><a href="#setting-up-a-database-adapter">Setting up a database adapter</a></li>
         
-            <li><a href="#todo">TODO</a></li>
+            <li><a href="#installing-zend-db">Installing zend-db</a></li>
         
-            <li><a href="#basic-setup">Basic setup</a></li>
+            <li><a href="#configuring-the-default-adapter">Configuring the default adapter</a></li>
         
-    
-        <li class="main "><a href="#setting-a-static-adapter">Setting a static adapter</a></li>
+            <li><a href="#configuring-named-adapters">Configuring named adapters</a></li>
         
     
     </ul>
@@ -283,7 +327,7 @@
     
     <ul class="pager hidden-print">
       <li class="previous">
-        <a rel="prev" href="../advanced-config/"><i class="fa fa-arrow-left"></i> Previous</a>
+        <a rel="prev" href="../i18n/"><i class="fa fa-arrow-left"></i> Previous</a>
       </li>
       <li class="next">
         <a rel="next" href="../event-manager/">Next <i class="fa fa-arrow-right"></i></a>
@@ -298,7 +342,7 @@
   
     
       
-        <li>Tutorials &raquo;</li>
+        <li>Component Tutorials &raquo;</li>
       
     
   
@@ -306,95 +350,122 @@
 </ol>
 
 <h1 id="setting-up-a-database-adapter">Setting up a database adapter</h1>
-<blockquote>
-<h2 id="todo">TODO</h2>
-<p>Completely rewrite this to only demonstrate:</p>
-<ul>
-<li>Using factories to inject adapters into controllers, etc.</li>
-<li>Demonstrating configuration of the default adapter</li>
-<li>Demonstrating retrieval of the default adapter for purposes of injection</li>
-<li>Using the abstract factory to create named adapters</li>
-<li>Demonstrating configuration of named adapters</li>
-<li>Demonstrating retrieval of named adapters for purposes of injection</li>
-</ul>
-</blockquote>
-<p>In most cases, e.g. in your controllers, your database adapter can be fetched
-directly from the service manager. Some classes however, like
-<code>Zend\Validator\DbRecordExists</code>, are not aware of the service manager, but still
-need an adapter to function.</p>
-<p>There are many different ways to provide this functionality to your application.
-Below are a few examples.</p>
-<h2 id="basic-setup">Basic setup</h2>
-<p>Normally you will setup your database adapter using a factory in the service
-manager in your configuration. It might look something like this:</p>
-<pre class="codehilite"><code class="language-php">// config/autoload/global.php
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\AdapterServiceFactory;
+<p>zend-db provides a general purpose database abstraction layer. At its heart is
+the <code>Adapter</code>, which abstracts common database operations across the variety of
+drivers we support.</p>
+<p>In this guide, we will document how to configure both a single, default adapter
+as well as multiple adapters (which may be useful in architectures that have a
+cluster of read-only replicated servers and a single writable server of record).</p>
+<h2 id="installing-zend-db">Installing zend-db</h2>
+<p>First, install zend-db using Composer:</p>
+<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-db</code></pre>
 
-return [
+
+<p>If you are using <a href="https://zendframework.github.io/zend-component-installer/">zend-component-installer</a>
+(installed by default with the skeleton application, and optionally for
+Expressive applications), you will be prompted to install the package
+configuration.</p>
+<ul>
+<li>For zend-mvc applications, choose either <code>application.config.php</code> or
+  <code>modules.config.php</code>.</li>
+<li>For Expressive applications, choose <code>config/config.php</code>.</li>
+</ul>
+<p>If you are not using the installer, you will need to manually configure add the
+component to your application.</p>
+<ul>
+<li>For zend-mvc applications, update your list of modules in either
+  <code>config/application.config.php</code> or <code>config/modules.config.php</code> to add an
+  entry for <code>'Zend\Db'</code> at the top of the list.</li>
+<li>For Expressive applications, create a new file,
+  <code>config/autoload/zend-db.global.php</code>, with the following contents:</li>
+</ul>
+<pre class="codehilite"><code class="language-php">&lt;?php
+use Zend\Db\ConfigProvider;
+
+return (new ConfigProvider())();</code></pre>
+
+
+<h2 id="configuring-the-default-adapter">Configuring the default adapter</h2>
+<p>Within your service factories, you may retrieve the default adapter from your application container using the
+class name <code>Zend\Db\Adapter\AdapterInterface</code>:</p>
+<pre class="codehilite"><code class="language-php">use Zend\Db\Adapter\AdapterInterface;
+
+function ($container) {
+    return new SomeServiceObject($container-&gt;get(AdapterInterface::class));
+}</code></pre>
+
+
+<p>When installed and configured, the factory associated with <code>AdapterInterface</code>
+will look for a top-level <code>db</code> key in the configuration, and use it to create an
+adapter. As an example, the following would connect to a MySQL database using
+PDO, and the supplied PDO DSN:</p>
+<pre class="codehilite"><code class="language-php">return [
     'db' =&gt; [
         'driver' =&gt; 'Pdo',
         'dsn'    =&gt; 'mysql:dbname=zf2tutorial;host=localhost',
     ],
-    'service_manager' =&gt; [
-        'factories' =&gt; [
-            Adapter::class =&gt; AdapterServiceFactory::class,
+];</code></pre>
+
+
+<p>More information on adapter configuration can be found in the docs for
+<a href="http://zendframework.github.io/zend-db/adapter/#creating-an-adapter-using-dependency-injection">Zend\Db\Adapter</a>.</p>
+<h2 id="configuring-named-adapters">Configuring named adapters</h2>
+<p>Sometimes you may need multiple adapters. As an example, if you work with a
+cluster of databases, one may allow write operations, while another may be
+read-only.</p>
+<p>zend-db provides an <a href="https://zendframework.github.io/zend-servicemanager/configuring-the-service-manager/#abstract-factories">abstract factory</a>,
+<code>Zend\Db\Adapter\AdapterAbstractServiceFactory</code>, for this purpose. To use it,
+you will need to create named configuration keys under <code>db.adapters</code>, each with
+configuration for an adapter:</p>
+<pre class="codehilite"><code class="language-php">return [
+    'db' =&gt; [
+        'adapters' =&gt; [
+            'Application\Db\WriteAdapter' =&gt; [
+                'driver' =&gt; 'Pdo',
+                'dsn'    =&gt; 'mysql:dbname=application;host=canonical.example.com',
+            ],
+            'Application\Db\ReadOnlyAdapter' =&gt; [
+                'driver' =&gt; 'Pdo',
+                'dsn'    =&gt; 'mysql:dbname=application;host=replica.example.com',
+            ],
         ],
     ],
 ];</code></pre>
 
 
-<p>The adapter can then be accessed in any ServiceLocatorAware classes.</p>
-<pre class="codehilite"><code class="language-php">public function getAdapter()
-{
-    if (! $this-&gt;adapter) {
-        $sm = $this-&gt;getServiceLocator();
-        $this-&gt;adapter = $sm-&gt;get('Zend\Db\Adapter\Adapter');
-    }
-    return $this-&gt;adapter;
+<p>You retrieve the database adapters using the keys you define, so ensure they are
+unique to your application, and descriptive of their purpose!</p>
+<h3 id="retrieving-named-adapters">Retrieving named adapters</h3>
+<p>Retrieve named adapters in your service factories just as you would another
+service:</p>
+<pre class="codehilite"><code class="language-php">function ($container) {
+    return new SomeServiceObject($container-&gt;get('Application\Db\ReadOnlyAdapter));
 }</code></pre>
 
 
-<p>More information on adapter options can be found in the docs for
-<a href="http://zendframework.github.io/zend-db/adapter/#creating-an-adapter-using-dependency-injection">Zend\Db\Adapter</a>.</p>
-<h1 id="setting-a-static-adapter">Setting a static adapter</h1>
-<p>In order to utilize this adapter in non-ServiceLocatorAware classes, you can use
-<code>Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter()</code> to set a
-static adapter:</p>
-<pre class="codehilite"><code class="language-php">// config/autoload/global.php
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\AdapterServiceFactory;
-use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
+<h3 id="using-the-adapterabstractservicefactory-as-a-factory">Using the AdapterAbstractServiceFactory as a factory</h3>
+<p>Depending on what application container you use, abstract factories may not be
+available. Alternately, you may want to reduce lookup time when retrieving an
+adapter from the container (abstract factories are consulted last!).
+zend-servicemanager abstract factories work as factories in their own right, and
+are passed the service name as an argument, allowing them to vary their return
+value based on requested service name. As such, you can add the following
+service configuration as well:</p>
+<pre class="codehilite"><code class="language-php">use Zend\Db\Adapter\AdapterAbstractServiceFactory;
 
-return [
-    'db' =&gt; [
-        'driver'         =&gt; 'Pdo',
-        'dsn'            =&gt; 'mysql:dbname=zf2tutorial;host=localhost',
+// If using zend-mvc:
+'service_manager' =&gt; [
+    'factories' =&gt; [
+        'Application\Db\WriteAdapter' =&gt; AdapterAbstractServiceFactory::class,
     ],
-    'service_manager' =&gt; [
-        'factories' =&gt; [
-            Adapter::class =&gt; function ($serviceManager) {
-                $adapterFactory = new AdapterServiceFactory();
-                $adapter = $adapterFactory-&gt;createService($serviceManager);
-                GlobalAdapterFeature::setStaticAdapter($adapter);
-                return $adapter;
-            }
-        ],
+],
+
+// If using Expressive
+'dependencies' =&gt; [
+    'factories' =&gt; [
+        'Application\Db\WriteAdapter' =&gt; AdapterAbstractServiceFactory::class,
     ],
-];</code></pre>
-
-
-<p>The adapter can then later be fetched using
-<code>Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter()</code> for use
-in e.g. <code>Zend\Validator\DbRecordExists</code>:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
-use Zend\Validator\Db\RecordExists;
-
-$validator = new RecordExists([
-    'table'   =&gt; 'users',
-    'field'   =&gt; 'emailaddress',
-    'adapter' =&gt; GlobalAdapterFeature::getStaticAdapter()
-]);</code></pre>
+],</code></pre>
 
 <hr />
 
@@ -402,7 +473,7 @@ $validator = new RecordExists([
 <nav>
   <ul class="pager hidden-print">
     <li class="previous">
-      <a rel="prev" href="../advanced-config/"><i class="fa fa-arrow-left"></i> Previous</a>
+      <a rel="prev" href="../i18n/"><i class="fa fa-arrow-left"></i> Previous</a>
     </li>
     <li class="next">
       <a rel="next" href="../event-manager/">Next <i class="fa fa-arrow-right"></i></a>

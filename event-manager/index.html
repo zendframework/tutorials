@@ -74,8 +74,8 @@
                 
                 
                 
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MVC Tutorials <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
@@ -127,6 +127,24 @@
         
     </ul>
   </li>
+
+                        
+                            
+<li >
+    <a href="../unit-testing/">Unit Testing A zend-mvc Application</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../navigation/">Adding zend-navigation to the Album Module</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../pagination/">Adding zend-paginator to the Album Module</a>
+</li>
 
                         
                             
@@ -194,6 +212,21 @@
                         
                             
 <li >
+    <a href="../i18n/">Internationalization</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Component Tutorials <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
     <a href="../db-adapter/">Setting Up A Database Adapter</a>
 </li>
 
@@ -204,28 +237,40 @@
 </li>
 
                         
-                            
-<li >
-    <a href="../i18n/">Internationalization</a>
-</li>
-
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Migration <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
                         
                             
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">To Version 3</a>
+    <ul class="dropdown-menu">
+        
+            
 <li >
-    <a href="../navigation/">Adding zend-navigation to the Album Module</a>
+    <a href="../migration/to-v3/overview/">Overview</a>
 </li>
 
-                        
-                            
+        
+            
 <li >
-    <a href="../pagination/">Adding zend-paginator to the Album Module</a>
+    <a href="../migration/to-v3/components/">Components</a>
 </li>
 
-                        
-                            
+        
+            
 <li >
-    <a href="../unit-testing/">Unit Testing A zend-mvc Application</a>
+    <a href="../migration/to-v3/application/">Applications</a>
 </li>
+
+        
+    </ul>
+  </li>
 
                         
                         </ul>
@@ -270,8 +315,6 @@
     
         <li class="main active"><a href="#using-the-eventmanager">Using the EventManager</a></li>
         
-            <li><a href="#todo">TODO</a></li>
-        
             <li><a href="#terminology">Terminology</a></li>
         
             <li><a href="#getting-started">Getting started</a></li>
@@ -284,7 +327,7 @@
         
             <li><a href="#custom-event-objects">Custom event objects</a></li>
         
-            <li><a href="#putting-it-together-implementing-a-simple-caching-system">Putting it together: Implementing a simple caching system</a></li>
+            <li><a href="#putting-it-together-implementing-a-caching-system">Putting it together: Implementing a caching system</a></li>
         
             <li><a href="#conclusion">Conclusion</a></li>
         
@@ -297,7 +340,7 @@
         <a rel="prev" href="../db-adapter/"><i class="fa fa-arrow-left"></i> Previous</a>
       </li>
       <li class="next">
-        <a rel="next" href="../i18n/">Next <i class="fa fa-arrow-right"></i></a>
+        <a rel="next" href="../migration/to-v3/overview/">Next <i class="fa fa-arrow-right"></i></a>
       </li>
     </ul>
     
@@ -309,7 +352,7 @@
   
     
       
-        <li>Tutorials &raquo;</li>
+        <li>Component Tutorials &raquo;</li>
       
     
   
@@ -317,14 +360,7 @@
 </ol>
 
 <h1 id="using-the-eventmanager">Using the EventManager</h1>
-<blockquote>
-<h2 id="todo">TODO</h2>
-<ul>
-<li>Weasel words</li>
-<li>Ensure usage is up-to-date with current API</li>
-</ul>
-</blockquote>
-<p>This tutorial explores the various features of <code>Zend\EventManager</code>.</p>
+<p>This tutorial explores the features of zend-eventmanager in-depth.</p>
 <h2 id="terminology">Terminology</h2>
 <ul>
 <li>An <strong>Event</strong> is a named action.</li>
@@ -344,7 +380,7 @@ event.</p>
 <li>One or more listeners on one or more events</li>
 <li>A call to <code>trigger()</code> an event</li>
 </ul>
-<p>The simplest example looks something like this:</p>
+<p>A basic example looks something like this:</p>
 <pre class="codehilite"><code class="language-php">use Zend\EventManager\EventManager;
 
 $events = new EventManager();
@@ -371,10 +407,30 @@ $events-&gt;trigger('do', null, $params);</code></pre>
 <p>Throughout this tutorial, we use closures as listeners. However, any valid PHP
 callback can be attached as a listeners: PHP function names, static class
 methods, object instance methods, functors, or closures. We use closures
-within this post simply for illustration and simplicity.</p>
+within this post for illustration only.</p>
 </blockquote>
-<p>If you were paying attention to the example, you will have noted the <code>null</code>
-argument. Why is it there?</p>
+<h3 id="event-instances">Event instances</h3>
+<p><code>trigger()</code> is useful as it will create a <code>Zend\EventManager\Event</code> instance for
+you. You may want to create such an instance manually; for instance, you may
+want to re-use the same event instance to trigger multiple events, or you may
+want to use a custom instance.</p>
+<p><code>Zend\EventManager\Event</code>, which is the shipped event type and the one used by
+the <code>EventManager</code> by default  has a constructor that accepts the same three
+arguments passed to <code>trigger()</code>:</p>
+<pre class="codehilite"><code class="language-php">use Zend\EventManager\Event;
+
+$event = new Event('do', null, $params);</code></pre>
+
+
+<p>When you have an instance available, you will use a different <code>EventManager</code>
+method to trigger the event: <code>triggerEvent()</code>. As an example:</p>
+<pre class="codehilite"><code class="language-php">$events-&gt;triggerEvent($event);</code></pre>
+
+
+<h3 id="event-targets">Event targets</h3>
+<p>If you were paying attention to the first example, you will have noted the
+<code>null</code> second argument both when calling <code>trigger()</code> as well as creating an
+<code>Event</code> instance. Why is it there?</p>
 <p>Typically, you will compose an <code>EventManager</code> within a class, to allow
 triggering actions within methods. The middle argument to <code>trigger()</code> is the
 "target", and in the case described, would be the current object instance. This
@@ -464,8 +520,8 @@ $sharedEvents-&gt;attach('Example', 'do', function ($e) {
 
 <p>This looks almost identical to the previous example; the key difference is that
 there is an additional argument at the <em>start</em> of the list, <code>'Example'</code>. This
-code is basically saying, "Listen to the 'do' event of the 'Example' target,
-and, when notified, execute this callback."</p>
+code is saying, "Listen to the 'do' event of the 'Example' target, and, when
+notified, execute this callback."</p>
 <p>This is where the <code>setIdentifiers()</code> argument of <code>EventManager</code> comes into play.
 The method allows passing a string, or an array of strings, defining the name or
 names of the context or targets the given instance will be interested in. If an
@@ -517,9 +573,9 @@ the <code>SharedEventManager</code> instance:</p>
 
 <h3 id="wildcards">Wildcards</h3>
 <p>So far, with both a normal <code>EventManager</code> instance and with the
-<code>SharedEventManager</code> instance, we've seen the usage of singular strings
-representing the event and target names to which we want to attach. What if you
-want to attach a listener to multiple events or targets?</p>
+<code>SharedEventManager</code> instance, we've seen the usage of string event and string
+target names to which we want to attach. What if you want to attach a listener
+to multiple events or targets?</p>
 <p>The answer is to supply an array of events or targets, or a wildcard, <code>*</code>.</p>
 <p>Consider the following examples:</p>
 <pre class="codehilite"><code class="language-php">// Multiple named events:
@@ -579,25 +635,43 @@ $sharedEvents-&gt;attach(
 
 <p>The ability to specify multiple targets and/or events when attaching can slim
 down your code immensely.</p>
+<blockquote>
+<h3 id="wildcards-can-cause-problems">Wildcards can cause problems</h3>
+<p>Wildcards, while they simplify listener attachment, can cause some problems.
+First, the listener must either be able to accept any incoming event, or it
+must have logic to branch based on the type of event, the target, or the
+event parameters. This can quickly become difficult to manage.</p>
+<p>Additionally, there are performance considerations. Each time an event is
+triggered, it loops through all attached listeners; if your listener cannot
+actually handle the event, but was attached as a wildcard listener, you're
+introducing needless cycles both in aggregating the listeners to trigger, and
+by handling the event itself.</p>
+<p>We recommend being specific about what you attach a listener to, in order
+to prevent these problems.</p>
+</blockquote>
 <h3 id="listener-aggregates">Listener aggregates</h3>
 <p>Another approach to listening to multiple events is via a concept of listener
 aggregates, represented by <code>Zend\EventManager\ListenerAggregateInterface</code>. Via
 this approach, a single class can listen to multiple events, attaching one or
 more instance methods as listeners.</p>
 <p>This interface defines two methods, <code>attach(EventManagerInterface $events)</code> and
-<code>detach(EventManagerInterface $events)</code>. Basically, you pass an <code>EventManager</code>
-instance to one and/or the other, and then it's up to the implementing class to
-determine what to do.</p>
-<p>As an example:</p>
+<code>detach(EventManagerInterface $events)</code>. You pass an <code>EventManager</code> instance to
+one and/or the other, and then it's up to the implementing class to determine
+what to do.</p>
+<p>The trait <code>Zend\EventManager\ListenerAggregateTrait</code> defines a <code>$listeners</code>
+property and common logic for detaching an aggregate's listeners. We'll use that
+to demonstrate creating an aggregate logging listener:</p>
 <pre class="codehilite"><code class="language-php">use Zend\EventManager\EventInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
+use Zend\EventManager\ListenerAggregateTrait;
 use Zend\Log\Logger;
 
 class LogEvents implements ListenerAggregateInterface
 {
-    protected $listeners = [];
-    protected $log;
+    use ListenerAggregateTrait;
+
+    private $log;
 
     public function __construct(Logger $log)
     {
@@ -610,15 +684,6 @@ class LogEvents implements ListenerAggregateInterface
         $this-&gt;listeners[] = $events-&gt;attach('doSomethingElse', [$this, 'log']);
     }
 
-    public function detach(EventCollection $events)
-    {
-        foreach ($this-&gt;listeners as $index =&gt; $listener) {
-            if ($events-&gt;detach($listener)) {
-                unset($this-&gt;listeners[$index]);
-            }
-        }
-    }
-
     public function log(EventInterface $e)
     {
         $event  = $e-&gt;getName();
@@ -628,11 +693,9 @@ class LogEvents implements ListenerAggregateInterface
 }</code></pre>
 
 
-<p>You can attach this using either <code>attach()</code> or <code>attachAggregate()</code>:</p>
+<p>Attach the aggregate by passing it an event manager instance:</p>
 <pre class="codehilite"><code class="language-php">$logListener = new LogEvents($logger);
-
-$events-&gt;attachAggregate($logListener); // OR
-$events-&gt;attach($logListener);</code></pre>
+$logListener-&gt;attach($events);</code></pre>
 
 
 <p>Any events the aggregate attaches to will then be notified when triggered.</p>
@@ -641,11 +704,8 @@ $events-&gt;attach($logListener);</code></pre>
 <li>Aggregates allow you to have stateful listeners. The above example
   demonstrates this via the composition of the logger; another example would be
   tracking configuration options.</li>
-<li>Aggregates make detaching listeners easier. When you call <code>attach()</code>
-  normally, you receive a <code>Zend\Stdlib\CallbackHandler</code> instance; the only way
-  to <code>detach()</code> a listener is to pass that instance back &mdash; which means
-  if you want to detach later, you need to keep that instance somewhere.
-  Aggregates typically do this for you &mdash; as you can see in the example above.</li>
+<li>Aggregates make detaching listeners easier, as you can detach all
+  listeners a class defines at once.</li>
 </ul>
 <h2 id="introspecting-results">Introspecting results</h2>
 <p>Sometimes you'll want to know what your listeners returned. One thing to
@@ -660,34 +720,48 @@ implements the following methods:</p>
 <li><code>first()</code> will retrieve the first result received</li>
 <li><code>last()</code> will retrieve the last result received</li>
 <li><code>contains($value)</code> allows you to test all values to see if a given one was
-  received, and returns simply a boolean <code>true</code> if found, and <code>false</code> if not.</li>
+  received, and returns a boolean <code>true</code> if found, and <code>false</code> if not.</li>
+<li><code>stopped()</code> will return a boolean value indicating whether or not a
+  short-circuit occured; more on this in the next section.</li>
 </ul>
 <p>Typically, you should not worry about the return values from events, as the
 object triggering the event shouldn't really have much insight into what
 listeners are attached. However, sometimes you may want to short-circuit
-execution if interesting results are obtained.</p>
+execution if interesting results are obtained. (zend-mvc uses this feature to
+check for listeners returning responses, which are then returned immediately.)</p>
 <h3 id="short-circuiting-listener-execution">Short-circuiting listener execution</h3>
-<p>You may want to short-ciruit execution if a particular result is obtained, or if
+<p>You may want to short-circuit execution if a particular result is obtained, or if
 a listener determines that something is wrong, or that it can return something
 quicker than the target.</p>
 <p>As examples, one rationale for adding an <code>EventManager</code> is as a caching
 mechanism. You can trigger one event early in the method, returning if a cache
 is found, and trigger another event late in the method, seeding the cache.</p>
-<p>The <code>EventManager</code> component offers two ways to handle this. The first is to
-pass a callback as the last argument to <code>trigger()</code>; if that callback returns a
-boolean <code>true</code>, execution is halted.</p>
+<p>The <code>EventManager</code> component offers two ways to handle this, depending on
+whether you have an event instance already, or want the event manager to create
+one for you.</p>
+<ul>
+<li><code>triggerEventUntil(callable $callback, EventInterface $event)</code></li>
+<li><code>triggerUntil(callable $callback, $eventName, $target = null, $argv = [])</code></li>
+</ul>
+<p>In each case, <code>$callback</code> will be any PHP callable, and will be passed the
+return value from the most recently executed listener. The <code>$callback</code> must then
+return a boolean value indicating whether or not to halt execution; boolean
+<code>true</code> indicates execution should halt.</p>
+<p>Your consuming code can then check to see if execution was short-circuited by
+using the <code>stopped()</code> method of the returned <code>ResponseCollection</code>.</p>
 <p>Here's an example:</p>
 <pre class="codehilite"><code class="language-php">public function someExpensiveCall($criteria1, $criteria2)
 {
     $params  = compact('criteria1', 'criteria2');
-    $results = $this-&gt;getEventManager()-&gt;trigger(
-        __FUNCTION__, 
-        $this, 
-        $params, 
+    $results = $this-&gt;getEventManager()-&gt;triggerUntil(
         function ($r) {
             return ($r instanceof SomeResultClass);
-        }
+        },
+        __FUNCTION__, 
+        $this, 
+        $params
     );
+
     if ($results-&gt;stopped()) {
         return $results-&gt;last();
     }
@@ -697,8 +771,8 @@ boolean <code>true</code>, execution is halted.</p>
 
 
 <p>With this paradigm, we know that the likely reason of execution halting is due
-to the last result meeting the test callback criteria; as such, we simply return
-that last result.</p>
+to the last result meeting the test callback criteria; as such, we return that
+last result.</p>
 <p>The other way to halt execution is within a listener, acting on the <code>Event</code>
 object it receives. In this case, the listener calls <code>stopPropagation(true)</code>,
 and the <code>EventManager</code> will then return without notifying any additional
@@ -715,7 +789,7 @@ on. As such, we recommend that you standardize on one approach or the other.</p>
 <h2 id="keeping-it-in-order">Keeping it in order</h2>
 <p>On occasion, you may be concerned about the order in which listeners execute. As
 an example, you may want to do any logging early, to ensure that if
-short-circuiting occurs, you've logged; or if implementing a cache, you may want
+short-circuiting occurs, you've logged; if implementing a cache, you may want
 to return early if a cache hit is found, and execute late when saving to a
 cache.</p>
 <p>Each of <code>EventManager::attach()</code> and <code>SharedEventManager::attach()</code> accept one
@@ -723,8 +797,8 @@ additional argument, a <em>priority</em>. By default, if this is omitted, listen
 a priority of 1, and are executed in the order in which they are attached.
 However, if you provide a priority value, you can influence order of execution.</p>
 <ul>
-<li>Higher priority values execute <em>earlier</em>.</li>
-<li>Lower (negative) priority values execute <em>later</em>.</li>
+<li><em>Higher</em> priority values execute <em>earlier</em>.</li>
+<li><em>Lower</em> (negative) priority values execute <em>later</em>.</li>
 </ul>
 <p>To borrow an example from earlier:</p>
 <pre class="codehilite"><code class="language-php">$priority = 100;
@@ -746,31 +820,33 @@ changed <code>$priority</code> to <code>-100</code>, it would execute with low p
 late.</p>
 <p>While you can't necessarily know all the listeners attached, chances are you can
 make adequate guesses when necessary in order to set appropriate priority
-values. We advise avoiding setting a priority value unless absolutely necessary.</p>
+values.</p>
+<p>We advise avoiding setting a priority value unless absolutely necessary.</p>
 <h2 id="custom-event-objects">Custom event objects</h2>
-<p>Hopefully some of you have been wondering, "where and when is the Event object
-created"? In all of the examples above, it's created based on the arguments
-passed to <code>trigger()</code> &mdash; the event name, target, and parameters. Sometimes,
-however, you may want greater control over the object.</p>
-<p>As an example, one thing that looks like a code smell is when you have code like
-this:</p>
+<p>As noted earlier, an <code>Event</code> instance is created when you call either
+<code>trigger()</code> or <code>triggerUntil()</code>, using the arguments passed to each;
+additionally, you can manually create an instance. Why would you do so, however?</p>
+<p>One thing that looks like a code smell is when you have code like this:</p>
 <pre class="codehilite"><code class="language-php">$routeMatch = $e-&gt;getParam('route-match', false);
 if (! $routeMatch) {
     // Oh noes! we cannot do our work! whatever shall we do?!?!?!
 }</code></pre>
 
 
-<p>The problems with this are several. First, relying on string keys is going to
-very quickly run into problems &mdash; typos when setting or retrieving the
-argument can lead to hard to debug situations. Second, we now have a
-documentation issue; how do we document expected arguments? how do we document
-what we're shoving into the event? Third, as a side effect, we can't use IDE or
-editor hinting support &mdash; string keys give these tools nothing to work
-with.</p>
+<p>The problems with this are several: </p>
+<ul>
+<li>Relying on string keys for event parameters is going to very quickly run into
+  problems &mdash; typos when setting or retrieving the argument can lead to
+  hard to debug situations.</li>
+<li>Second, we now have a documentation issue; how do we document expected
+  arguments? how do we document what we're shoving into the event?</li>
+<li>Third, as a side effect, we can't use IDE or editor hinting support &mdash;
+  string keys give these tools nothing to work with.</li>
+</ul>
 <p>Similarly, consider how you might represent a computational result of a method
 when triggering an event. As an example:</p>
 <pre class="codehilite"><code class="language-php">// in the method:
-$params['__RESULT'] = $computedResult;
+$params['__RESULT__'] = $computedResult;
 $events-&gt;trigger(__FUNCTION__ . '.post', $this, $params);
 
 // in the listener:
@@ -781,9 +857,9 @@ if (! $result) {
 
 
 <p>Sure, that key may be unique, but it suffers from a lot of the same issues.</p>
-<p>So, the solution is to create custom events. As an example, we have a custom
-<code>MvcEvent</code> in the ZF2 MVC layer. This event composes the application instance,
-the router, the route match object, request and response objects, the view
+<p>The solution is to create <em>custom event types</em>. As an example, zend-mvc defines
+a custom <code>MvcEvent</code>; this event composes the application instance,
+the router, the route match, the request and response instances, the view
 model, and also a result. We end up with code like this in our listeners:</p>
 <pre class="codehilite"><code class="language-php">$response = $e-&gt;getResponse();
 $result   = $e-&gt;getResult();
@@ -793,95 +869,142 @@ if (is_string($result)) {
 }</code></pre>
 
 
-<p>But how do we use this custom event? Simple: <code>trigger()</code> can accept an event
-object instead of any of the event name, target, or params arguments.</p>
-<pre class="codehilite"><code class="language-php">$event = new CustomEvent();
-$event-&gt;setSomeKey($value);
-
-// Injected with event name and target:
-$events-&gt;trigger('foo', $this, $event);
-
-// Injected with event name:
-$event-&gt;setTarget($this);
-$events-&gt;trigger('foo', $event);
-
-// Fully encapsulates all necessary properties:
-$event-&gt;setName('foo');
-$event-&gt;setTarget($this);
-$events-&gt;trigger($event);
-
-// Passing a callback following the event object works for 
-// short-circuiting, too.
-$results = $events-&gt;trigger('foo', $this, $event, $callback);</code></pre>
-
-
-<p>This is a really powerful technique for domain-specific event systems, and
-definitely worth experimenting with.</p>
-<h2 id="putting-it-together-implementing-a-simple-caching-system">Putting it together: Implementing a simple caching system</h2>
+<p>As noted earlier, if using a custom event, you will need to use the
+<code>triggerEvent()</code> and/or <code>triggerEventUntil()</code> methods instead of the normal
+<code>trigger()</code> and <code>triggerUntil()</code>.</p>
+<h2 id="putting-it-together-implementing-a-caching-system">Putting it together: Implementing a caching system</h2>
 <p>In previous sections, I indicated that short-circuiting is a way to potentially
 implement a caching solution. Let's create a full example.</p>
 <p>First, let's define a method that could use caching. You'll note that in most of
-the examples, I've used <code>__FUNCTION__</code> as the event name; this is a good
-practice, as it makes it simple to create a macro for triggering events, as well
-as helps to keep event names unique (as they're usually within the context of
-the triggering class). However, in the case of a caching example, this would
-lead to identical events being triggered. As such, I recommend postfixing the
-event name with semantic names: "do.pre", "do.post", "do.error", etc. I'll use
-that convention in this example.</p>
-<p>Additionally, you'll notice that the <code>$params</code> I pass to the event is usually
-the list of parameters passed to the method. This is because those are often not
+the examples, we use <code>__FUNCTION__</code> as the event name; this is a good practice,
+as it makes code completion simpler, maps event names directly to the method
+triggering the event, and typically keeps the event names unique.  However, in
+the case of a caching example, this might lead to identical events being
+triggered, as we will be triggering multiple events from the same method. In
+such cases, we recommend adding a semantic suffix: <code>__FUNCTION__ . 'pre'</code>,
+<code>__FUNCTION__ . 'post'</code>, <code>__FUNCTION__ . 'error'</code>, etc.  We will use this
+convention in the upcoming example.</p>
+<p>Additionally, you'll notice that the <code>$params</code> passed to the event are usually
+the parameters passed to the method. This is because those are often not
 stored in the object, and also to ensure the listeners have the exact same
-context as the calling method. But it raises an interesting problem in this
-example: what name do we give the result of the method? One standard that has
-emerged is the use of <code>__RESULT__</code>, as double-underscored variables are
-typically reserved for the sytem.</p>
-<p>Here's what the method will look like:</p>
+context as the calling method. In the upcoming example, however, we will be
+triggering an event using the <em>results of execution</em>, and will need a way of
+representing that. We have two possibilities:</p>
+<ul>
+<li>Use a "magic" key, such as <code>__RESULT__</code>, and add that to our parameter list.</li>
+<li>Create a custom event that allows injecting the result.</li>
+</ul>
+<p>The latter is a more correct approach, as it introduces type safety, and
+prevents typographical errors. Let's create that event now:</p>
+<pre class="codehilite"><code class="language-php">use Zend\EventManager\Event;
+
+class ExpensiveCallEvent extends Event
+{
+    private $criteria1;
+    private $criteria2;
+    private $result;
+
+    public function __construct($target, $criteria1, $criteria2)
+    {
+        // Set the default event name:
+        $this-&gt;setName('someExpensiveCall');
+        $this-&gt;setTarget($target);
+        $this-&gt;criteria1 = $criteria1;
+        $this-&gt;criteria2 = $criteria2;
+    }
+
+    public function getCriteria1()
+    {
+        return $this-&gt;criteria1;
+    }
+
+    public function getCriteria2()
+    {
+        return $this-&gt;criteria2;
+    }
+
+    public function setResult(SomeResultClass $result)
+    {
+        $this-&gt;result = $result;
+    }
+
+    public function getResult()
+    {
+        return $this-&gt;result;
+    }
+}</code></pre>
+
+
+<p>We can now create an instance of this within our class method, and use it to
+trigger listeners:</p>
 <pre class="codehilite"><code class="language-php">public function someExpensiveCall($criteria1, $criteria2)
 {
-    $params  = compact('criteria1', 'criteria2');
-    $results = $this-&gt;getEventManager()-&gt;trigger(
-        __FUNCTION__ . '.pre',
-        $this,
-        $params,
+    $event = new ExpensiveCallEvent($this, $criteria1, $criteria2);
+    $event-&gt;setName(__FUNCTION__ . '.pre');
+    $results = $this-&gt;getEventManager()-&gt;triggerEventUntil(
         function ($r) {
             return ($r instanceof SomeResultClass);
-        }
+        },
+        $event
     );
+
     if ($results-&gt;stopped()) {
         return $results-&gt;last();
     }
 
     // ... do some work ...
 
-    $params['__RESULT__'] = $calculatedResult;
-    $this-&gt;events()-&gt;trigger(__FUNCTION__ . '.post', $this, $params);
+    $event-&gt;setName(__FUNCTION__ . '.post');
+    $event-&gt;setResult($calculatedResult);
+    $this-&gt;events()-&gt;triggerEvent($event);
     return $calculatedResult;
 }</code></pre>
 
 
-<p>Now, to provide some caching listeners. We'll need to attach to each of the
-"someExpensiveCall.pre" and "someExpensiveCall.post" methods. In the former
-case, if a cache hit is detected, we return it, and move on. In the latter, we
-store the value in the cache.</p>
-<p>We'll assume <code>$cache</code> is defined, and follows the paradigms of <code>Zend\Cache</code>.
-We'll want to return early if a hit is detected, and execute late when saving a
-cache (in case the result is modified by another listener). As such, we'll set
-the "someExpensiveCall.pre" listener to execute with priority <code>100</code>, and the
-"someExpensiveCall.post" listener to execute with priority <code>-100</code>.</p>
-<pre class="codehilite"><code class="language-php">$events-&gt;attach('someExpensiveCall.pre', function($e) use ($cache) {
-    $params = $e-&gt;getParams();
-    $key    = md5(json_encode($params));
-    $hit    = $cache-&gt;load($key);
-    return $hit;
-}, 100);
+<p>Before triggering either event, we set the event name in the instance to ensure
+the correct listeners are notified. The first trigger checks to see if we get a
+result class returned, and, if so, we return it. The second trigger is a
+fire-and-forget; we don't care what is returned, and only want to notify
+listeners of the result.</p>
+<p>To provide some caching listeners, we'll need to attach to each of the
+<code>someExpensiveCall.pre</code> and <code>someExpensiveCall.post</code> events. In the former case,
+if a cache hit is detected, we return it. In the latter, we store the value in
+the cache.</p>
+<p>The following listeners attach to the <code>.pre</code> and <code>.post</code> events triggered by the
+above method. We'll assume <code>$cache</code> is defined, and is a
+<a href="https://zendframework.github.io/zend-cache/">zend-cache</a> storage adapter. The
+first listener will return a result when a cache hit occurs, and the second will
+store a result in the cache if one is provided.</p>
+<pre class="codehilite"><code class="language-php">$events-&gt;attach('someExpensiveCall.pre', function (ExpensiveCallEvent $e) use ($cache) {
+    $key = md5(json_encode([
+        'criteria1' =&gt; $e-&gt;getCriteria1(),
+        'criteria2' =&gt; $e-&gt;getCriteria2(),
+    ]));
 
-$events-&gt;attach('someExpensiveCall.post', function($e) use ($cache) {
-    $params = $e-&gt;getParams();
-    $result = $params['__RESULT__'];
-    unset($params['__RESULT__']);
-    $key    = md5(json_encode($params));
-    $cache-&gt;save($result, $key);
-}, -100);</code></pre>
+    $result = $cache-&gt;getItem($key, $success);
+
+    if (! $success) {
+        return;
+    }
+
+    $result = new SomeResultClass($result);
+    $e-&gt;setResult($result);
+    return $result;
+});
+
+$events-&gt;attach('someExpensiveCall.post', function (ExpensiveCallEvent $e) use ($cache) {
+    $result = $e-&gt;getResult();
+    if (! $result instanceof SomeResultClass) {
+        return;
+    }
+
+    $key = md5(json_encode([
+        'criteria1' =&gt; $e-&gt;getCriteria1(),
+        'criteria2' =&gt; $e-&gt;getCriteria2(),
+    ]));
+
+    $cache-&gt;setItem($key, $result);
+});</code></pre>
 
 
 <blockquote>
@@ -891,8 +1014,10 @@ allowed keeping the <code>$cache</code> instance as a stateful property, instead
 importing it into closures.</p>
 </blockquote>
 <p>Another approach would be to move the body of the method to a listener as well,
-which would allow using the priority system in order to implement caching. That
-would look like this:</p>
+which would allow using the priority system in order to implement caching.</p>
+<p>If we did that, we'd modify the <code>ExpensiveCallEvent</code> to omit the <code>.pre</code> suffix
+on the default event name, and then implement the class that triggers the event
+as follows:</p>
 <pre class="codehilite"><code class="language-php">public function setEventManager(EventManagerInterface $events)
 {
     $this-&gt;events = $events;
@@ -902,41 +1027,62 @@ would look like this:</p>
 
 public function someExpensiveCall($criteria1, $criteria2)
 {
-    $params  = compact('criteria1', 'criteria2');
-    $results = $this-&gt;getEventManager()-&gt;trigger(
-        __FUNCTION__,
-        $this,
-        $params,
+    $event = new ExpensiveCallEvent($this, $criteria1, $criteria2);
+    $this-&gt;getEventManager()-&gt;triggerEventUntil(
         function ($r) {
-            return ($r instanceof SomeResultClass);
-        }
+            return $r instanceof SomeResultClass;
+        },
+        $event
     );
-    return $results-&gt;last();
+    return $event-&gt;getResult();
 }
 
-public function doSomeExpensiveCall($e)
+public function doSomeExpensiveCall(ExpensiveCallEvent $e)
 {
     // ... do some work ...
-    $e-&gt;setParam('__RESULT__', $calculatedResult);
-    return $calculatedResult;
+    $e-&gt;setResult($calculatedResult);
 }</code></pre>
 
 
-<p>The listeners would then attach to the "someExpensiveCall" event, with the cache
-lookup listener listening at high priority, and the cache storage listener
-listening at low (negative) priority.</p>
-<p>Sure, we could probably simply add caching to the object itself &mdash; but this
-approach allows the same handlers to be attached to multiple events, or to
-attach multiple listeners to the same events (e.g. an argument validator, a
-logger and a cache manager). The point is that if you design your object with
-events in mind, you can easily make it more flexible and extensible, without
-requiring developers to actually extend it &mdash; they can simply attach
-listeners.</p>
+<p>Note that the <code>doSomeExpensiveCall</code> method does not return the result directly;
+this allows what was originally our <code>.post</code> listener to trigger. You'll also
+notice that we return the result from the <code>Event</code> instance; this is why the
+first listener passes the result into the event, as we can then use it from the
+calling method!</p>
+<p>We will need to change how we attach the listeners; they will now attach
+directly to the <code>someExpensiveCall</code> event, without any suffixes; they will also
+now use priority in order to intercept before and after the default listener
+registered by the class. The first listener will listen at priority <code>100</code> to
+ensure it executes before the default listener, and the second will listen at
+priority <code>-100</code> to ensure it triggers after we already have a result:</p>
+<pre class="codehilite"><code class="language-php">$events-&gt;attach('someExpensiveCall', function (ExpensiveCallEvent $e) use ($cache) {
+    // listener for checking against the cache
+}, 100);
+
+$events-&gt;attach('someExpensiveCall', function (ExpensiveCallEvent $e) use ($cache) {
+    // listener for injecting into the cache
+}, -100);</code></pre>
+
+
+<p>The workflow ends up being approximately the same, but eliminates the
+conditional logic from the original version, and reduces the number of events to
+one.</p>
+<p>The alternative, of course, is to have the object compose a cache instance and
+use it directly. However, the event-based approach
+allows:</p>
+<ul>
+<li>Re-using the listeners with multiple events.</li>
+<li>Attaching multiple listeners to the event; as an example, to implement
+  argument validation, or to add logging.</li>
+</ul>
+<p>The point is that if you design your object with events in mind, you can add
+flexibility and extension points without requiring decoration or class
+extension.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>The <code>EventManager</code> is a powerful component. It drives the workflow of the MVC
-layer, and is used in countless components to provide hook points for developers
-to manipulate the workflow. It can be put to any number of uses inside your own
-code, and is an important part of your Zend Framework toolbox.</p>
+<p>zend-eventmanager is a powerful component. It drives the workflow of zend-mvc,
+and is used in many Zend Framework components to provide hook points for
+developers to manipulate the workflow. It can be a powerful tool in your
+development toolbox.</p>
 
 <hr />
 
@@ -947,7 +1093,7 @@ code, and is an important part of your Zend Framework toolbox.</p>
       <a rel="prev" href="../db-adapter/"><i class="fa fa-arrow-left"></i> Previous</a>
     </li>
     <li class="next">
-      <a rel="next" href="../i18n/">Next <i class="fa fa-arrow-right"></i></a>
+      <a rel="next" href="../migration/to-v3/overview/">Next <i class="fa fa-arrow-right"></i></a>
     </li>
   </ul>
 </nav>

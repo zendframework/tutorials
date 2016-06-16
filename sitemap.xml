@@ -18,31 +18,7 @@
     </url>
         
     <url>
-     <loc>None</loc>
-     <lastmod></lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>None/advanced-config/</loc>
-     <lastmod>2016-06-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>None/db-adapter/</loc>
-     <lastmod>2016-06-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>None/event-manager/</loc>
-     <lastmod>2016-06-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>None/i18n/</loc>
+     <loc>None/unit-testing/</loc>
      <lastmod>2016-06-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -60,8 +36,46 @@
     </url>
         
     <url>
-     <loc>None/unit-testing/</loc>
+     <loc>None</loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/advanced-config/</loc>
      <lastmod>2016-06-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/i18n/</loc>
+     <lastmod>2016-06-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>None/db-adapter/</loc>
+     <lastmod>2016-06-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/event-manager/</loc>
+     <lastmod>2016-06-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>None</loc>
+     <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
         
