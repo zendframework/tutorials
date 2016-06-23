@@ -323,6 +323,10 @@
         
             <li><a href="#bootstrap">Bootstrap</a></li>
         
+            <li><a href="#scripts">Scripts</a></li>
+        
+            <li><a href="#development-mode">Development mode</a></li>
+        
     
     </ul>
 
@@ -432,7 +436,7 @@ your application, you will need to install
 <a href="https://zendframework.github.io/zend-servicemanager-di/">zend-servicemanager-di</a>.</p>
 <h2 id="autoloading">Autoloading</h2>
 <p>If you are doing a partial upgrade per the above recommendations (vs. upgrading
-the zendframework package), one change is that zend-loader is no longer
+the full zendframework package), one change is that zend-loader is no longer
 installed by default, nor recommended. Instead, we recommend using
 <a href="https://getcomposer.org/doc/04-schema.md#autoload">Composer for autoloading</a>.</p>
 <p>As such, you will need to setup autoloading rules for each module specific to
@@ -515,6 +519,43 @@ if (! class_exists(Application::class)) {
 
 // Run the application!
 Application::init(require __DIR__ . '/../config/application.config.php')-&gt;run();</code></pre>
+
+
+<h2 id="scripts">Scripts</h2>
+<p>The skeleton application for version 2 shipped three scripts with it:</p>
+<ul>
+<li><code>bin/classmap_generator.php</code></li>
+<li><code>bin/pluginmap_generator.php</code></li>
+<li><code>bin/templatemap_generator.php</code></li>
+</ul>
+<p>If you are upgrading an existing application, these will still be present.
+However, if you are starting a new application, and used these previously, they
+are no longer present.</p>
+<ul>
+<li><code>classmap_generator.php</code> was removed as it's unnecessary when using Composer
+  for autoloading. When preparing a production installation, run <code>composer
+  dump-autoload -o</code> and/or <code>composer dump-autoload -a</code>; both will generate
+  optimized class map autoloading rules for you.</li>
+<li><code>pluginmap_generator.php</code> was essentially obsolete due to the presence of
+  <code>classmap_generator.php</code> anyways.</li>
+<li><code>templatemap_generator.php</code> was moved to the zend-view component with the
+  2.8.0 release of that component, and is now available via
+  <code>./vendor/bin/templatemap_generator.php</code>. Additionally, its usage signature
+  has changed; please use the <code>--help</code> or <code>-h</code> switches on first invocation to
+  discover how to use it.</li>
+</ul>
+<h2 id="development-mode">Development mode</h2>
+<p>Version 3 of the skeleton application adds a requirement on
+<a href="https://github.com/zfcampus/zf-development-mode">zfcampus/zf-development-mode</a>,
+which provides a way to store common development-specific settings in your
+repository and then selectively enable/disable them during development.</p>
+<p>If you are upgrading from an existing application, you can install this feature:</p>
+<pre class="codehilite"><code class="language-bash">$ composer require zfcampus/zf-development-mode</code></pre>
+
+
+<p>Please refer to the <a href="https://github.com/zfcampus/zf-development-mode">package documentation</a>
+for details on how to setup your application configuration to make use of this
+feature.</p>
 
 <hr />
 

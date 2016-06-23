@@ -467,29 +467,18 @@ reference it by its fully qualified class name, and use the zend-servicemanager
 for the <code>Album</code> module that are stored in our <code>view/</code> directory.</p>
 <h2 id="informing-the-application-about-our-new-module">Informing the application about our new module</h2>
 <p>We now need to tell the <code>ModuleManager</code> that this new module exists. This is
-done in the application’s <code>config/application.config.php</code> file which is provided
-by the skeleton application. Update this file so that its <code>modules</code> section
+done in the application’s <code>config/modules.config.php</code> file which is provided
+by the skeleton application. Update this file so that the array it returns
 contains the <code>Album</code> module as well, so the file now looks like this:</p>
 <p>(Changes required are highlighted using comments; original comments from the
 file are omitted for brevity.)</p>
 <pre class="codehilite"><code class="language-php">return [
-    'modules' =&gt; [
-        'Zend\Form',
-        'Zend\Db',
-        'Zend\Router',
-        'Zend\Validator',
-        'Application',
-        'Album',                  // &lt;-- Add this line
-    ],
-    'module_listener_options' =&gt; [
-        'config_glob_paths'    =&gt; [
-            'config/autoload/{{,*.}global,{,*.}local}.php',
-        ],
-        'module_paths' =&gt; [
-            './module',
-            './vendor',
-        ],
-    ],
+    'Zend\Form',
+    'Zend\Db',
+    'Zend\Router',
+    'Zend\Validator',
+    'Application',
+    'Album',          // &lt;-- Add this line
 ];</code></pre>
 
 

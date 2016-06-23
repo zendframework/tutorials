@@ -407,19 +407,15 @@ class Module
 Let's add this module to our application. Although our module doesn't do
 anything yet, just having the <code>Module.php</code> class allows it to be loaded by the
 ModuleManager.  To do this, add an entry for <code>Blog</code> to the modules array inside
-the main application config file at <code>/config/application.config.php</code>:</p>
+<code>config/modules.config.php</code>:</p>
 <pre class="codehilite"><code class="language-php">&lt;?php
-// In config/application.config.php:
+// In config/modules.config.php:
 
 return [
-    'modules' =&gt; [(
-        /* ... */
-        'Application',
-        'Album',
-        'Blog',
-    ],
-
     /* ... */
+    'Application',
+    'Album',
+    'Blog',
 ];</code></pre>
 
 
