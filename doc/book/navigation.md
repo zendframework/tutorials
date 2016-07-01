@@ -153,10 +153,10 @@ however, we can make it look even better:
 <div class="collapse navbar-collapse">
     <?php // update to: ?>
     <?= $this->navigation('navigation')
-        ->menu()
-        ->setMinDepth(0)
-        ->setMaxDepth(0)
-        ->setUlClass('nav navbar-nav') ?>
+           ->menu()
+           ->setMinDepth(0)
+           ->setMaxDepth(0)
+           ->setUlClass('nav navbar-nav') ?>
 </div>
 ```
 
@@ -182,7 +182,9 @@ output the content from the view, let's add a breadcrumb by using the
 <?php // module/Application/view/layout/layout.phtml: ?>
 <div class="container">
     <?php // add the following line: ?>
-    <?= $this->navigation('navigation')->breadcrumbs()->setMinDepth(0) ?>
+    <?= $this->navigation('navigation')
+             ->breadcrumbs()
+             ->setMinDepth(0) ?>
     <?= $this->content ?>
 </div>
 ```
