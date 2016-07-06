@@ -625,7 +625,7 @@ Let's start with the action code in `AlbumController::deleteAction()`:
 
             if ($del == 'Yes') {
                 $id = (int) $request->getPost('id');
-                $this->getAlbumTable()->deleteAlbum($id);
+                $this->table->deleteAlbum($id);
             }
 
             // Redirect to list of albums
@@ -634,7 +634,7 @@ Let's start with the action code in `AlbumController::deleteAction()`:
 
         return array(
             'id'    => $id,
-            'album' => $this->getAlbumTable()->getAlbum($id)
+            'album' => $this->table->getAlbum($id)
         );
     }
 //...
