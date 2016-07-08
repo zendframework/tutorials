@@ -187,6 +187,7 @@ with two exceptions:
 Update the 'blog' `child_routes` to add the new route:
 
 ```php
+<?php
 // In module/Blog/config/module.config.php:
 
 return [

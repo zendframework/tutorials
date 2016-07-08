@@ -42,7 +42,7 @@ existing implementation is useless to us. And in a few years later, when a new
 persistence engine pops up, we have to start over yet again.
 
 If we hadn't created an interface first, we'd also likely need to change our
-consuming code! 
+consuming code!
 
 On top of that, we may find that we want to use some sort of distributed caching
 layer for *read* operations (fetching items), while *write* operations will be
@@ -74,6 +74,8 @@ Let's create a new interface, `Blog\Model\PostCommandInterface`, in
 `module/Blog/src/Model/PostCommandInterface.php`, and have it read as follows:
 
 ```php
+<?php
+
 namespace Blog\Model;
 
 interface PostCommandInterface

@@ -34,6 +34,8 @@ album actions. This is the updated module config file with the new code
 highlighted using comments.
 
 ```php
+<?php
+
 namespace Album;
 
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -118,6 +120,8 @@ Let’s go ahead and create our controller class in the file
 `zf2-tutorials/module/Album/src/Controller/AlbumController.php`:
 
 ```php
+<?php
+
 namespace Album\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;

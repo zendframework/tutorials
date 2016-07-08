@@ -193,6 +193,8 @@ We now need to tell our module where to find this controller named
 `module/Blog/config/module.config.php`.
 
 ```php
+<?php
+
 namespace Blog;
 
 use Zend\ServiceManager\Factory\InvokableFactory;

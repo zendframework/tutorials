@@ -37,6 +37,8 @@ Let's start by creating the interface at
 `module/Blog/src/Model/PostRepositoryInterface.php`
 
 ```php
+<?php
+
 namespace Blog\Model;
 
 interface PostRepositoryInterface
@@ -72,6 +74,8 @@ will fill these in later). You then should have a class that looks like the
 following:
 
 ```php
+<?php
+
 namespace Blog\Model;
 
 class PostRepository implements PostRepositoryInterface
@@ -100,6 +104,8 @@ Since our `PostRepository` will return `Post` instances, we must create that
 class, too. Let's create `module/Blog/src/Model/Post.php`:
 
 ```php
+<?php
+
 namespace Blog\Model;
 
 class Post
@@ -169,6 +175,8 @@ Create a property inside the `PostRepository` called `$data` and make this an ar
 of our `Post` type. Edit `PostReepository` as follows:
 
 ```php
+<?php
+
 namespace Blog\Model;
 
 class PostRepository implements PostRepositoryInterface
@@ -223,6 +231,8 @@ Now that we have some data, let's modify our `find*()` functions to return the
 appropriate entities:
 
 ```php
+<?php
+
 namespace Blog\Model;
 
 use DomainException;
@@ -313,6 +323,8 @@ will always get the appropriate dependency, we will first define the dependency
 inside the `ListController` constructor. Modify `ListController` as follows:
 
 ```php
+<?php
+
 namespace Blog\Controller;
 
 use Blog\Model\PostRepositoryInterface;
@@ -465,7 +477,7 @@ injection systems if desired. We pull a service matching the
 `PostRepositoryInterface` fully qualified class name and pass it directly to the
 controller's constructor.
 
-There's no magic happening; it's just PHP code. 
+There's no magic happening; it's just PHP code.
 
 Refresh your browser and you will see this error message:
 
@@ -552,12 +564,12 @@ class ListController extends AbstractActionController
      * @var PostRepositoryInterface
      */
     private $postRepository;
-    
+
     public function __construct(PostRepositoryInterface $postRepository)
     {
         $this->postRepository = $postRepository;
     }
-    
+
     // Add the following method:
     public function indexAction()
     {
@@ -610,7 +622,7 @@ returns:
 <?php foreach ($this->posts as $post): ?>
 <article>
   <h1 id="post<?= $post->getId() ?>"><?= $post->getTitle() ?></h1>
-  
+
   <p><?= $post->getText() ?></p>
 </article>
 <?php endforeach ?>

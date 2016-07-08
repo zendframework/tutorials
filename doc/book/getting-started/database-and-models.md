@@ -79,6 +79,8 @@ Let's start by creating a file called `Album.php` under
 `module/Album/src/Model`:
 
 ```php
+<?php
+
 namespace Album\Model;
 
 class Album
@@ -104,6 +106,8 @@ will add an input filter later to ensure the values injected are valid.
 Next, we create our `AlbumTable.php` file in `module/Album/src/Model` directory like this:
 
 ```php
+<?php
+
 namespace Album\Model;
 
 use RuntimeException;
@@ -199,6 +203,8 @@ by implementing `getServiceConfig()` to provide a factory that creates an
 file:
 
 ```php
+<?php
+
 namespace Album;
 
 // Add these import statements:
@@ -258,7 +264,7 @@ for more details.
 > - You can extend the factory if desired.
 > - You can re-use the factory across multiple instances that have related
 >   construction.
-> 
+>
 > Creating factories is covered in the [zend-servicemanager documentation](https://zendframework.github.io/zend-servicemanager/configuring-the-service-manager/#factories).
 
 The `Zend\Db\Adapter\AdapterInterface` service is registered by the zend-db
@@ -266,6 +272,8 @@ component.  You may have noticed earlier that `config/modules.config.php`
 contains the following entries:
 
 ```php
+<?php
+
 return [
     'Zend\Form',
     'Zend\Db',
@@ -294,6 +302,8 @@ store the credentials for your database if you want to. Modify
 module) with following code:
 
 ```php
+<?php
+
 return [
     'db' => [
         'driver' => 'Pdo',
@@ -319,6 +329,8 @@ Firstly, we'll add a constructor to our controller. Open the file
 and constructor:
 
 ```php
+<?php
+
 namespace Album\Controller;
 
 // Add the following import:
@@ -347,6 +359,8 @@ create in in our `Module` class, only this time, under a new method,
 `Album\Module::getControllerConfig()`:
 
 ```php
+<?php
+
 namespace Album;
 
 use Zend\Db\Adapter\Adapter;
@@ -380,6 +394,7 @@ Because we're now defining our own factory, we can modify our
 
 ```php
 <?php
+
 namespace Album;
 
 // Remove this:
@@ -485,7 +500,7 @@ links.
 > We always use the `escapeHtml()` view helper to help protect ourselves from
 > [Cross Site Scripting (XSS) vulnerabilities](http://en.wikipedia.org/wiki/Cross-site_scripting).
 
-If you open `http://localhost:8080/album` (or `http://zf2-tutorial.localhost/album` 
+If you open `http://localhost:8080/album` (or `http://zf2-tutorial.localhost/album`
 if you are using self-hosted Apache) you should see this:
 
 ![Initial album listing](../images/user-guide.database-and-models.album-list.png)
