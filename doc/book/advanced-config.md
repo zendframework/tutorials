@@ -30,6 +30,8 @@ When using the skeleton application, the **system configuration** is by default
 in `config/application.config.php`. The defaults look like this:
 
 ```php
+<?php
+
 return [
     // Retrieve list of modules used in this application.
     'modules' => require __DIR__ . '/modules.config.php',
@@ -156,6 +158,8 @@ As such, to accomplish our goals, we will do the following:
   of modules:
 
   ```php
+  <?php
+
   'modules' => [
       'ZendDeveloperTools',
   ],
