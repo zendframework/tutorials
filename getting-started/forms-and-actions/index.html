@@ -432,9 +432,13 @@ namespace Album\Model;
 
 // Add the following import statements:
 use DomainException;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Filter\ToInt;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\Validator\StringLength;
 
 class Album implements InputFilterAwareInterface
 {
@@ -447,9 +451,9 @@ class Album implements InputFilterAwareInterface
 
     public function exchangeArray(array $data)
     {
-        $this-&gt;id     = ! empty($data['id']) ? $data['id'] : null;
-        $this-&gt;artist = ! empty($data['artist']) ? $data['artist'] : null;
-        $this-&gt;title  = ! empty($data['title']) ? $data['title'] : null;
+        $this-&gt;id     = !empty($data['id']) ? $data['id'] : null;
+        $this-&gt;artist = !empty($data['artist']) ? $data['artist'] : null;
+        $this-&gt;title  = !empty($data['title']) ? $data['title'] : null;
     }
 
     public function getArrayCopy()
@@ -483,7 +487,7 @@ class Album implements InputFilterAwareInterface
             'name' =&gt; 'id',
             'required' =&gt; true,
             'filters' =&gt; [
-                ['name' =&gt; 'int'],
+                ['name' =&gt; ToInt::class],
             ],
         ]);
 
@@ -491,12 +495,12 @@ class Album implements InputFilterAwareInterface
             'name' =&gt; 'artist',
             'required' =&gt; true,
             'filters' =&gt; [
-                ['name' =&gt; 'StripTags'],
-                ['name' =&gt; 'StringTrim'],
+                ['name' =&gt; StripTags::class],
+                ['name' =&gt; StringTrim::class],
             ],
             'validators' =&gt; [
                 [
-                    'name' =&gt; 'StringLength',
+                    'name' =&gt; StringLength::class,
                     'options' =&gt; [
                         'encoding' =&gt; 'UTF-8',
                         'min' =&gt; 1,
@@ -510,12 +514,12 @@ class Album implements InputFilterAwareInterface
             'name' =&gt; 'title',
             'required' =&gt; true,
             'filters' =&gt; [
-                ['name' =&gt; 'StripTags'],
-                ['name' =&gt; 'StringTrim'],
+                ['name' =&gt; StripTags::class],
+                ['name' =&gt; StringTrim::class],
             ],
             'validators' =&gt; [
                 [
-                    'name' =&gt; 'StringLength',
+                    'name' =&gt; StringLength::class,
                     'options' =&gt; [
                         'encoding' =&gt; 'UTF-8',
                         'min' =&gt; 1,
@@ -620,7 +624,7 @@ data from the request instance to the form.</p>
 contains information about what fields failed validation, and why, and this
 information will be communicated to the view layer.</p>
 <pre class="codehilite"><code class="language-php">$album-&gt;exchangeArray($form-&gt;getData());
-$this-&gt;getAlbumTable()-&gt;saveAlbum($album);</code></pre>
+$this-&gt;table-&gt;saveAlbum($album);</code></pre>
 
 
 <p>If the form is valid, then we grab the data from the form and store to the model
@@ -828,9 +832,9 @@ entity, so we now need to write <code>getArrayCopy()</code>:</p>
 
     public function exchangeArray($data)
     {
-        $this-&gt;id     = (isset($data['id']))     ? $data['id']     : null;
-        $this-&gt;artist = (isset($data['artist'])) ? $data['artist'] : null;
-        $this-&gt;title  = (isset($data['title']))  ? $data['title']  : null;
+        $this-&gt;id     = isset($data['id']) ? $data['id'] : null;
+        $this-&gt;artist = isset($data['artist']) ? $data['artist'] : null;
+        $this-&gt;title  = isset($data['title']) ? $data['title'] : null;
     }
 
     // Add the following method:
@@ -925,17 +929,17 @@ directly into our view (zend-form is, after all, optional!).</p>
 
             if ($del == 'Yes') {
                 $id = (int) $request-&gt;getPost('id');
-                $this-&gt;getAlbumTable()-&gt;deleteAlbum($id);
+                $this-&gt;table-&gt;deleteAlbum($id);
             }
 
             // Redirect to list of albums
             return $this-&gt;redirect()-&gt;toRoute('album');
         }
 
-        return array(
+        return [
             'id'    =&gt; $id,
-            'album' =&gt; $this-&gt;getAlbumTable()-&gt;getAlbum($id)
-        );
+            'album' =&gt; $this-&gt;table-&gt;getAlbum($id),
+        ];
     }
 //...</code></pre>
 
@@ -971,13 +975,13 @@ $this-&gt;headTitle($title);
 with "Yes" and "No" buttons. In the action, we checked specifically for the
 "Yes" value when doing the deletion.</p>
 <h2 id="ensuring-that-the-home-page-displays-the-list-of-albums">Ensuring that the home page displays the list of albums</h2>
-<p>One final point. At the moment, the home page, <code>http://zf2-tutorial.localhost/</code>
+<p>One final point. At the moment, the home page, <code>http://zf-tutorial.localhost/</code>
 doesn't display the list of albums.</p>
 <p>This is due to a route set up in the <code>Application</code> module's <code>module.config.php</code>.
 To change it, open <code>module/Application/config/module.config.php</code> and find the
 home route:</p>
 <pre class="codehilite"><code class="language-php">'home' =&gt; [
-    'type' =&gt; Literal::class,
+    'type' =&gt; \Zend\Router\Http\Literal::class,
     'options' =&gt; [
         'route'    =&gt; '/',
         'defaults' =&gt; [
@@ -994,7 +998,7 @@ home route:</p>
 
 <p>and change the <code>controller</code> from <code>Controller\IndexController::class</code> to <code>AlbumController::class</code>:</p>
 <pre class="codehilite"><code class="language-php">'home' =&gt; [
-    'type' =&gt; Literal::class,
+    'type' =&gt; \Zend\Router\Http\Literal::class,
     'options' =&gt; [
         'route'    =&gt; '/',
         'defaults' =&gt; [

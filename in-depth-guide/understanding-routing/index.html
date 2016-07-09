@@ -380,7 +380,7 @@ and the action method on that controller to use. As an example:</p>
 <pre class="codehilite"><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'about' =&gt; [
-            'type' =&gt; 'literal',
+            'type' =&gt; \Zend\Router\Http\Literal::class,
             'options' =&gt; [
                 'route'    =&gt; '/about-me',
                 'defaults' =&gt; [
@@ -428,7 +428,7 @@ matched, we should use the <code>ArchiveController</code> and its <code>byYear</
 <pre class="codehilite"><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'archives' =&gt; [
-            'type' =&gt; 'segment',
+            'type' =&gt; \Zend\Router\Http\Segment::class,
             'options' =&gt; [
                 'route'    =&gt; '/news/archive[/:year]',
                 'defaults' =&gt; [
@@ -454,8 +454,8 @@ match if and only if it is exactly four digits. As such, the URL
 <p>The definition marks an optional segment, denoted by <code>[/:year]</code>. This has a
 couple of implications. First, it means that we can also match:</p>
 <ul>
-<li><code>//example.com/news/archive</code> </li>
-<li><code>//example.com/news/archive/</code> </li>
+<li><code>//example.com/news/archive</code></li>
+<li><code>//example.com/news/archive/</code></li>
 </ul>
 <p>In both cases, we'll also still receive a value for the <code>:year</code> segment, because
 we defined a default for it: the expression <code>date('Y')</code> (returning the current
@@ -477,12 +477,12 @@ A common approach is to write a route that matches the controller and action:</p
 <pre class="codehilite"><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'default' =&gt; [
-            'type' =&gt; 'segment',
+            'type' =&gt; \Zend\Router\Http\Segment::class,
             'options' =&gt; [
                 'route'    =&gt; '/[:controller[/:action]]',
                 'defaults' =&gt; [
-                    'controller'    =&gt; Application\Controller\IndexController::class,
-                    'action'        =&gt; 'index',
+                    'controller' =&gt; Application\Controller\IndexController::class,
+                    'action'     =&gt; 'index',
                 ],
                 'constraints' =&gt; [
                     'controller' =&gt; '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -523,12 +523,12 @@ simply failed to match. This is both a performance and a security consideration,
 as an attacker could use this fact to launch a Denial of Service.</p>
 <h3 id="basic-routing">Basic routing</h3>
 <p>By now, you should be convinced that generic routes, while nice for prototyping,
-should likely be avoided. That means defining explicit routes. </p>
+should likely be avoided. That means defining explicit routes.</p>
 <p>Your initial approach might be to create one route for every permutation:</p>
 <pre class="codehilite"><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'news' =&gt; [
-            'type' =&gt; 'literal',
+            'type' =&gt; \Zend\Router\Http\Literal::class,
             'options' =&gt; [
                 'route'    =&gt; '/news',
                 'defaults' =&gt; [
@@ -538,7 +538,7 @@ should likely be avoided. That means defining explicit routes. </p>
             ],
         ],
         'news-archive' =&gt; [
-            'type' =&gt; 'segment',
+            'type' =&gt; \Zend\Router\Http\Segment::class,
             'options' =&gt; [
                 'route'    =&gt; '/news/archive[/:year]',
                 'defaults' =&gt; [
@@ -551,7 +551,7 @@ should likely be avoided. That means defining explicit routes. </p>
             ],
         ],
         'news-single' =&gt; [
-            'type' =&gt; 'segment',
+            'type' =&gt; \Zend\Router\Http\Segment::class,
             'options' =&gt; [
                 'route'    =&gt; '/news/:id',
                 'defaults' =&gt; [
@@ -600,7 +600,7 @@ above:</p>
     'routes' =&gt; [
         'news' =&gt; [
             // First we define the basic options for the parent route:
-            'type' =&gt; 'literal',
+            'type' =&gt; \Zend\Router\Http\Literal::class,
             'options' =&gt; [
                 'route'    =&gt; '/news',
                 'defaults' =&gt; [
@@ -616,7 +616,7 @@ above:</p>
             // Child routes begin:
             'child_routes' =&gt; [
                 'archive' =&gt; [
-                    'type' =&gt; 'segment',
+                    'type' =&gt; \Zend\Router\Http\Segment::class,
                     'options' =&gt; [
                         'route'    =&gt; '/archive[/:year]',
                         'defaults' =&gt; [
@@ -628,7 +628,7 @@ above:</p>
                     ],
                 ],
                 'single' =&gt; [
-                    'type' =&gt; 'segment',
+                    'type' =&gt; \Zend\Router\Http\Segment::class,
                     'options' =&gt; [
                         'route'    =&gt; '/:id',
                         'defaults' =&gt; [
@@ -687,15 +687,17 @@ child route of our existing route. Let's update our configuration:</p>
 <pre class="codehilite"><code class="language-php">// In module/Blog/config/module.config.php:
 namespace Blog;
 
+use Zend\Router\Http\Literal;
+use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'service_manager' =&gt; [ /* ... */ ],
     'controllers'     =&gt; [ /* ... */ ],
-    'router' =&gt; [
+    'router'          =&gt; [
         'routes' =&gt; [
             'blog' =&gt; [
-                'type' =&gt; 'literal',
+                'type' =&gt; Literal::class,
                 'options' =&gt; [
                     'route'    =&gt; '/blog',
                     'defaults' =&gt; [
@@ -703,12 +705,10 @@ return [
                         'action'     =&gt; 'index',
                     ],
                 ],
-
                 'may_terminate' =&gt; true,
-
                 'child_routes'  =&gt; [
                     'detail' =&gt; [
-                        'type' =&gt; 'segment',
+                        'type' =&gt; Segment::class,
                         'options' =&gt; [
                             'route'    =&gt; '/:id',
                             'defaults' =&gt; [
@@ -787,7 +787,7 @@ in the view model. We'll now update the <code>ListController</code> to provide t
     $id = $this-&gt;params()-&gt;fromRoute('id');
 
     return new ViewModel([
-        'post' =&gt; $this-&gt;postRepository-&gt;findPost($id)
+        'post' =&gt; $this-&gt;postRepository-&gt;findPost($id),
     ]);
 }</code></pre>
 
@@ -825,14 +825,14 @@ have the controller redirect to the blog post overview.</p>
     $id = $this-&gt;params()-&gt;fromRoute('id');
 
     try {
-        $post = $this-&gt;postService-&gt;findPost($id);
+        $post = $this-&gt;postRepository-&gt;findPost($id);
     } catch (\InvalidArgumentException $ex) {
         return $this-&gt;redirect()-&gt;toRoute('blog');
     }
 
-    return new ViewModel(array(
-        'post' =&gt; $post
-    ));
+    return new ViewModel([
+        'post' =&gt; $post,
+    ]);
 }</code></pre>
 
 

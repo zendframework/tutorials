@@ -316,8 +316,6 @@
     
         <li class="main active"><a href="#using-zend-paginator-in-your-album-module">Using zend-paginator in your Album Module</a></li>
         
-            <li><a href="#todo">TODO</a></li>
-        
             <li><a href="#preparation">Preparation</a></li>
         
             <li><a href="#install-zend-paginator">Install zend-paginator</a></li>
@@ -359,14 +357,6 @@
 </ol>
 
 <h1 id="using-zend-paginator-in-your-album-module">Using zend-paginator in your Album Module</h1>
-<blockquote>
-<h3 id="todo">TODO</h3>
-<p>Update to:</p>
-<ul>
-<li>follow the changes in the user-guide</li>
-<li>use SQLite-compatible SQL syntax, and provide a script for inserting the data</li>
-</ul>
-</blockquote>
 <p>In this tutorial, we will use the <a href="https://zendframework.github.io/zend-paginator/intro/">zend-paginator component</a>
 to add a handy pagination controller to the bottom of the album list.</p>
 <p>Currently, we only have a handful of albums to display, so showing everything on
@@ -377,9 +367,8 @@ these pages using a pagination control. Just type "Zend Framework" into Google,
 and you can see their pagination control at the bottom of the page:</p>
 <p><img alt="Example pagination control" src="../images/pagination.sample.png" class="img-responsive"/></p>
 <h2 id="preparation">Preparation</h2>
-<p>In order for us to have lots of albums in our database, you'll need to run the
-following SQL insert statement to insert the current 150 top iTunes albums (at
-the time of writing!):</p>
+<p>As before, we are going to use sqlite, via PHP's PDO driver. Create a text file
+<code>data/album-fixtures.sql</code> with the following contents:</p>
 <pre class="codehilite"><code class="language-sql">INSERT INTO &quot;album&quot; (&quot;artist&quot;, &quot;title&quot;)
 VALUES
     (&quot;David Bowie&quot;, &quot;The Next Day (Deluxe Version)&quot;),
@@ -535,27 +524,30 @@ VALUES
 );</code></pre>
 
 
+<p>(The test data chosen happens to be the current 150 top iTunes albums at the
+time of writing!)</p>
+<p>Now create the database using the following:</p>
+<pre class="codehilite"><code class="language-bash">$ sqlite data/zftutorial.db &lt; data/album-fixtures.sql</code></pre>
+
+
+<p>Some systems, including Ubuntu, use the command <code>sqlite3</code>; check to see which
+one to use on your system.</p>
 <blockquote>
-<h3 id="populating-the-database">Populating the database</h3>
-<p>You have a number of options for populating the database, based on your
-operating system and installed applications.</p>
-<p>First, copy the above into the file <code>data/bulk_albums.sql</code>.</p>
-<p>Next, if you have the <code>sqlite</code> or <code>sqlite3</code> command installed, run:</p>
-<pre class="codehilite"><code class="language-bash">$ sqlite data/zftutorial.db &lt; data/bulk_albums.sql</code></pre>
-
-
-<p>(If you have <code>sqlite3</code> on your system, use that, as sqlite typically refers to
-the SQLite v2 binary.)</p>
-<p>If you do not, you can use PHP. Create a new file, <code>data/load_bulk_albums.php</code>,
-with the following contents:</p>
+<h3 id="using-php-to-create-the-database">Using PHP to create the database</h3>
+<p>If you do not have Sqlite installed on your system, you can use PHP to load
+the database using the same SQL schema file created earlier. Create the file
+<code>data/load_album_fixtures.php</code> with the following contents:</p>
 <pre class="codehilite"><code class="language-php">&lt;?php
 $db = new PDO('sqlite:' . realpath(__DIR__) . '/zftutorial.db');
-$sql = file_get_contents(__DIR__ . '/bulk_albums.sql');
-$db-&gt;exec($sql);</code></pre>
+$fh = fopen(__DIR__ . '/album-fixtures.sql', 'r');
+while ($line = fread($fh, 4096)) {
+    $db-&gt;exec($line);
+}
+fclose($fh);</code></pre>
 
 
-<p>Then, execute it with:</p>
-<pre class="codehilite"><code class="language-bash">$ php data/load_bulk_albums.php</code></pre>
+<p>Once created, execute it:</p>
+<pre class="codehilite"><code class="language-bash">$ php data/load_album_fixtures.php</code></pre>
 
 
 </blockquote>
@@ -609,7 +601,7 @@ namespace Album\Model;
 use RuntimeException;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Select;
-use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\TableGateway\TableGatewayInterface;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
@@ -695,7 +687,15 @@ we want to display 10 albums per page.</p>
 <h2 id="updating-the-view-script">Updating the View Script</h2>
 <p>Now, tell the view script to iterate over the <code>pagination</code> view variable, rather
 than the <code>albums</code> variable:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Album/view/album/album/index.phtml: ?&gt;
+<pre class="codehilite"><code class="language-php">&lt;?php // in module/Album/view/album/album/index.phtml:
+$title = 'My albums';
+$this-&gt;headTitle($title);
+?&gt;
+&lt;h1&gt;&lt;?= $this-&gt;escapeHtml($title); ?&gt;&lt;/h1&gt;
+&lt;p&gt;
+    &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action' =&gt; 'add']) ?&gt;&quot;&gt;Add new album&lt;/a&gt;
+&lt;/p&gt;
+
 &lt;table class=&quot;table&quot;&gt;
     &lt;tr&gt;
         &lt;th&gt;Title&lt;/th&gt;
@@ -707,7 +707,7 @@ than the <code>albums</code> variable:</p>
             &lt;td&gt;&lt;?= $this-&gt;escapeHtml($album-&gt;title) ?&gt;&lt;/td&gt;
             &lt;td&gt;&lt;?= $this-&gt;escapeHtml($album-&gt;artist) ?&gt;&lt;/td&gt;
             &lt;td&gt;
-                &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action' =&gt; 'edit', 'id' =&gt; $album-&gt;id)] ?&gt;&quot;&gt;Edit&lt;/a&gt;
+                &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action' =&gt; 'edit', 'id' =&gt; $album-&gt;id]) ?&gt;&quot;&gt;Edit&lt;/a&gt;
                 &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action' =&gt; 'delete', 'id' =&gt; $album-&gt;id]) ?&gt;&quot;&gt;Delete&lt;/a&gt;
             &lt;/td&gt;
         &lt;/tr&gt;
@@ -750,12 +750,12 @@ our modules:</p>
     &lt;?php if ($page !== $this-&gt;current): ?&gt;
       &lt;li&gt;
         &lt;a href=&quot;&lt;?= $this-&gt;url($this-&gt;route, [], ['query' =&gt; ['page' =&gt; $page]]) ?&gt;&quot;&gt;
-          &lt;?= $page; ?&gt;
+          &lt;?= $page ?&gt;
         &lt;/a&gt;
       &lt;/li&gt;
     &lt;?php else: ?&gt;
       &lt;li class=&quot;active&quot;&gt;
-        &lt;a href=&quot;#&quot;&gt;&lt;?= $page; ?&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;&lt;?= $page ?&gt;&lt;/a&gt;
       &lt;/li&gt;
     &lt;?php endif ?&gt;
   &lt;?php endforeach ?&gt;
@@ -792,7 +792,7 @@ already told our controller to use to display the current page.</p>
 <a href="https://zendframework.github.io/zend-paginator/usage/#rendering-pages-with-view-scripts">paginationControl view helper</a>
 to display our pagination control:</p>
 <pre class="codehilite"><code class="language-php">&lt;?php
-// In module/Album/view/album/album/index.phtml.
+// In module/Album/view/album/album/index.phtml:
 // Add at the end of the file after the table:
 ?&gt;
 &lt;?= $this-&gt;paginationControl(
@@ -803,7 +803,7 @@ to display our pagination control:</p>
     // The partial to use to render the control:
     'partial/paginator',
     // The route to link to when a user clicks a control link:
-    [ 'route' =&gt; 'album' ]
+    ['route' =&gt; 'album']
 ) ?&gt;</code></pre>
 
 

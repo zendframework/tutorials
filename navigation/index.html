@@ -384,7 +384,7 @@ discrete entry points to the app, a home page, and an albums area.</p>
 <p>(You can also now remove the import for the <code>Album\Controller\AlbumController</code>
 class.)</p>
 <p>This change means that if you go to the home page of your application
-(<code>http://localhost:8080/</code> or <code>http://zf2-tutorial.localhost/</code>), you see the
+(<code>http://localhost:8080/</code> or <code>http://zf-tutorial.localhost/</code>), you see the
 default skeleton application introduction. Your list of albums is still
 available at the <code>/album</code> route.</p>
 <h2 id="setting-up-zend-navigation">Setting Up zend-navigation</h2>
@@ -441,18 +441,18 @@ return [
                 'route' =&gt; 'album',
                 'pages' =&gt; [
                     [
-                        'label' =&gt; 'Add',
-                        'route' =&gt; 'album',
+                        'label'  =&gt; 'Add',
+                        'route'  =&gt; 'album',
                         'action' =&gt; 'add',
                     ],
                     [
-                        'label' =&gt; 'Edit',
-                        'route' =&gt; 'album',
+                        'label'  =&gt; 'Edit',
+                        'route'  =&gt; 'album',
                         'action' =&gt; 'edit',
                     ],
                     [
-                        'label' =&gt; 'Delete',
-                        'route' =&gt; 'album',
+                        'label'  =&gt; 'Delete',
+                        'route'  =&gt; 'album',
                         'action' =&gt; 'delete',
                     ],
                 ],
@@ -534,12 +534,12 @@ rather than album specific):</p>
             // if this isn't the last page, add a link and the separator:
             if ($key &lt; count($this-&gt;pages) - 1):
             ?&gt;
-                &lt;a href=&quot;&lt;?= $page-&gt;getHref(); ?&gt;&quot;&gt;&lt;?= $page-&gt;getLabel(); ?&gt;&lt;/a&gt;
+                &lt;a href=&quot;&lt;?= $page-&gt;getHref() ?&gt;&quot;&gt;&lt;?= $page-&gt;getLabel() ?&gt;&lt;/a&gt;
             &lt;?php
             // otherwise, output the name only:
             else:
             ?&gt;
-                &lt;?= $page-&gt;getLabel(); ?&gt;
+                &lt;?= $page-&gt;getLabel() ?&gt;
             &lt;?php endif; ?&gt;
         &lt;/li&gt;
     &lt;?php endforeach; ?&gt;

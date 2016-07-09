@@ -369,7 +369,7 @@ the <code>Application</code> module as required.</p>
 <h2 id="setting-up-the-album-module">Setting up the Album module</h2>
 <p>Start by creating a directory called <code>Album</code> under <code>module</code> with the following
 subdirectories to hold the module’s files:</p>
-<pre class="codehilite"><code class="language-text">zf2-tutorial/
+<pre class="codehilite"><code class="language-text">zf-tutorial/
     /module
         /Album
             /config
@@ -399,7 +399,7 @@ class Module implements ConfigProviderInterface
 {
     public function getConfig()
     {
-        return include __DIR__ . '/../config/module.config.php';
+        return include __DIR__ . '/config/module.config.php';
     }
 }</code></pre>
 
@@ -438,7 +438,7 @@ autoloading rules:</p>
 method in <code>Album\Module</code>. This method loads the <code>config/module.config.php</code> file
 under the module's root directory.</p>
 <p>Create a file called <code>module.config.php</code> under
-<code>zf2-tutorial/module/Album/config/</code>:</p>
+<code>zf-tutorial/module/Album/config/</code>:</p>
 <pre class="codehilite"><code class="language-php">namespace Album;
 
 use Zend\ServiceManager\Factory\InvokableFactory;

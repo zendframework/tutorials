@@ -371,13 +371,13 @@ classes.</p>
 tutorial, and that you've already populated the <code>data/zftutorial.db</code> SQLite
 database. We will be re-using it, and adding another table to it.</p>
 <p>Create the file <code>data/posts.schema.sql</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-sql">CREATE TABLE posts ( id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100) NOT NULL, text TEXT NOT NULL);
+<pre class="codehilite"><code class="language-sql">CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100) NOT NULL, text TEXT NOT NULL);
 
-INSERT INTO posts (title, text) VALUES  ('Blog #1',  'Welcome to my first blog post');
-INSERT INTO posts (title, text) VALUES  ('Blog #2',  'Welcome to my second blog post');
-INSERT INTO posts (title, text) VALUES  ('Blog #3',  'Welcome to my third blog post');
-INSERT INTO posts (title, text) VALUES  ('Blog #4',  'Welcome to my fourth blog post');
-INSERT INTO posts (title, text) VALUES  ('Blog #5',  'Welcome to my fifth blog post');</code></pre>
+INSERT INTO posts (title, text) VALUES ('Blog #1', 'Welcome to my first blog post');
+INSERT INTO posts (title, text) VALUES ('Blog #2', 'Welcome to my second blog post');
+INSERT INTO posts (title, text) VALUES ('Blog #3', 'Welcome to my third blog post');
+INSERT INTO posts (title, text) VALUES ('Blog #4', 'Welcome to my fourth blog post');
+INSERT INTO posts (title, text) VALUES ('Blog #5', 'Welcome to my fifth blog post');</code></pre>
 
 
 <p>Now we will execute this against the existing <code>data/zftutorial.db</code> SQLite
@@ -454,8 +454,8 @@ need a working implementation of the <code>AdapterInterface</code>. This is a
 <em>requirement</em>, and therefore will be injected using <em>constructor injection</em>.
 Create a <code>__construct()</code> method that accepts an <code>AdapterInterface</code> as its sole
 parameter, and stores it as an instance property:</p>
-<pre class="codehilite"><code class="language-php">// In module/Blog/src/Model/ZendDbSqlModel.php:
-namespace Blog\Mapper;
+<pre class="codehilite"><code class="language-php">// In module/Blog/src/Model/ZendDbSqlRepository.php:
+namespace Blog\Model;
 
 use InvalidArgumentException;
 use RuntimeException;
@@ -514,7 +514,7 @@ class ZendDbSqlRepositoryFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new ZendDbSqlMapper($container-&gt;get(AdapterInterface::class));
+        return new ZendDbSqlRepository($container-&gt;get(AdapterInterface::class));
     }
 }</code></pre>
 
@@ -582,7 +582,7 @@ class ZendDbSqlRepository implements PostRepositoryInterface
      */
     public function findAllPosts()
     {
-        $sql    = new Sql($this-&gt;dbAdapter);
+        $sql    = new Sql($this-&gt;db);
         $select = $sql-&gt;select('posts');
         $stmt   = $sql-&gt;prepareStatementForSqlObject($select);
         $result = $stmt-&gt;execute();
@@ -608,7 +608,7 @@ class ZendDbSqlRepository implements PostRepositoryInterface
 we get here. Change the <code>findAllPosts()</code> method and dump the result:</p>
 <pre class="codehilite"><code class="language-php">public function findAllPosts()
 {
-    $sql    = new Sql($this-&gt;dbAdapter);
+    $sql    = new Sql($this-&gt;db);
     $select = $sql-&gt;select('posts');
     $stmt   = $sql-&gt;prepareStatementForSqlObject($select);
     $result = $stmt-&gt;execute();
@@ -622,20 +622,17 @@ we get here. Change the <code>findAllPosts()</code> method and dump the result:<
 
 <p>Refreshing the application you should now see output similar to the following:</p>
 <pre class="codehilite"><code class="language-text">Zend\Db\Adapter\Driver\Pdo\Result::__set_state(array(
-   'statementMode' =&gt; 'forward',
-   'fetchMode' =&gt; 2,
-   'resource' =&gt; 
-  PDOStatement::__set_state(array(
-     'queryString' =&gt; 'SELECT &quot;posts&quot;.* FROM &quot;posts&quot;',
-  )),
-   'options' =&gt; NULL,
-   'currentComplete' =&gt; false,
-   'currentData' =&gt; NULL,
-   'position' =&gt; -1,
-   'generatedValue' =&gt; '0',
-   'rowCount' =&gt; 
-  Closure::__set_state(array(
-  )),
+    'statementMode'   =&gt; 'forward',
+    'fetchMode'       =&gt; 2,
+    'resource'        =&gt; PDOStatement::__set_state(array(
+        'queryString' =&gt; 'SELECT &quot;posts&quot;.* FROM &quot;posts&quot;',
+    )),
+    'options'         =&gt; null,
+    'currentComplete' =&gt; false,
+    'currentData'     =&gt; null,
+    'position'        =&gt; -1,
+    'generatedValue'  =&gt; '0',
+    'rowCount'        =&gt; Closure::__set_state(array()),
 ))</code></pre>
 
 
@@ -651,9 +648,9 @@ use Zend\Db\ResultSet\ResultSet;</code></pre>
 
 
 <p>Now update the <code>findAllPosts()</code> method as follows:</p>
-<pre class="codehilite"><code class="language-php">public function findAll()
+<pre class="codehilite"><code class="language-php">public function findAllPosts()
 {
-    $sql    = new Sql($this-&gt;dbAdapter);
+    $sql    = new Sql($this-&gt;db);
     $select = $sql-&gt;select('posts');
     $stmt   = $sql-&gt;prepareStatementForSqlObject($select);
     $result = $stmt-&gt;execute();
@@ -671,36 +668,36 @@ use Zend\Db\ResultSet\ResultSet;</code></pre>
 
 <p>Refreshing the page, you should now see the dump of a <code>ResultSet</code> instance:</p>
 <pre class="codehilite"><code class="language-text">Zend\Db\ResultSet\ResultSet::__set_state(array(
-   'allowedReturnTypes' =&gt;
-  array (
-    0 =&gt; 'arrayobject',
-    1 =&gt; 'array',
-  ),
-   'arrayObjectPrototype' =&gt;
-  ArrayObject::__set_state(array(
-  )),
-   'returnType' =&gt; 'arrayobject',
-   'buffer' =&gt; NULL,
-   'count' =&gt; NULL,
-   'dataSource' =&gt;
-  Zend\Db\Adapter\Driver\Pdo\Result::__set_state(array(
-     'statementMode' =&gt; 'forward',
-     'fetchMode' =&gt; 2,
-     'resource' =&gt;
-    PDOStatement::__set_state(array(
-       'queryString' =&gt; 'SELECT &quot;album&quot;.* FROM &quot;album&quot;',
-    )),
-     'options' =&gt; NULL,
-     'currentComplete' =&gt; false,
-     'currentData' =&gt; NULL,
-     'position' =&gt; -1,
-     'generatedValue' =&gt; '0',
-     'rowCount' =&gt;
-    Closure::__set_state(array(
-    )),
-  )),
-   'fieldCount' =&gt; 3,
-   'position' =&gt; 0,
+    'allowedReturnTypes'   =&gt;
+        array(
+            0 =&gt; 'arrayobject',
+            1 =&gt; 'array',
+        ),
+    'arrayObjectPrototype' =&gt;
+        ArrayObject::__set_state(array(
+        )),
+    'returnType'           =&gt; 'arrayobject',
+    'buffer'               =&gt; null,
+    'count'                =&gt; null,
+    'dataSource'           =&gt;
+        Zend\Db\Adapter\Driver\Pdo\Result::__set_state(array(
+            'statementMode'   =&gt; 'forward',
+            'fetchMode'       =&gt; 2,
+            'resource'        =&gt;
+                PDOStatement::__set_state(array(
+                    'queryString' =&gt; 'SELECT &quot;album&quot;.* FROM &quot;album&quot;',
+                )),
+            'options'         =&gt; null,
+            'currentComplete' =&gt; false,
+            'currentData'     =&gt; null,
+            'position'        =&gt; -1,
+            'generatedValue'  =&gt; '0',
+            'rowCount'        =&gt;
+                Closure::__set_state(array(
+                )),
+        )),
+    'fieldCount'           =&gt; 3,
+    'position'             =&gt; 0,
 ))</code></pre>
 
 
@@ -793,11 +790,11 @@ class ZendDbSqlRepository implements PostRepositoryInterface
     public function __construct(
         AdapterInterface $db,
         HydratorInterface $hydrator,
-        PostInterface $postPrototype
+        Post $postPrototype
     ) {
-        $this-&gt;db             = $db;
-        $this-&gt;hydrator       = $hydrator;
-        $this-&gt;postPrototype  = $postPrototype;
+        $this-&gt;db            = $db;
+        $this-&gt;hydrator      = $hydrator;
+        $this-&gt;postPrototype = $postPrototype;
     }
 
     /**
@@ -902,7 +899,7 @@ several differences.</p>
 <ul>
 <li>We need to add a condition to the query to select only the row matching the
   provided identifier; this is done using the <code>where()</code> method of the <code>Sql</code>
-  object. </li>
+  object.</li>
 <li>We check if the <code>$result</code> is valid, using <code>isQueryResult()</code>; if not, an error
   occurred during the query that we report via a <code>RuntimeException</code>.</li>
 <li>We pull the <code>current()</code> item off the result set we create, and test to make

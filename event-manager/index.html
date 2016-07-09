@@ -448,7 +448,7 @@ class Example implements EventManagerAwareInterface
     {
         $events-&gt;setIdentifiers([
             __CLASS__,
-            get_class($this)
+            get_class($this),
         ]);
         $this-&gt;events = $events;
     }

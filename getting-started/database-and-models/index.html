@@ -368,12 +368,12 @@ database. We will make use of zend-db's <code>Zend\Db\TableGateway\TableGateway<
 find, insert, update, and delete rows from a database table.</p>
 <p>We are going to use Sqlite, via PHP's PDO driver. Create a text file
 <code>data/schema.sql</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-sql">CREATE TABLE album ( id INTEGER PRIMARY KEY AUTOINCREMENT, artist varchar(100) NOT NULL, title varchar(100) NOT NULL);
-INSERT INTO album (artist, title) VALUES  ('The  Military  Wives',  'In  My  Dreams');
-INSERT INTO album (artist, title) VALUES  ('Adele',  '21');
-INSERT INTO album (artist, title) VALUES  ('Bruce  Springsteen',  'Wrecking Ball (Deluxe)');
-INSERT INTO album (artist, title) VALUES  ('Lana  Del  Rey',  'Born  To  Die');
-INSERT INTO album (artist, title) VALUES  ('Gotye',  'Making  Mirrors');</code></pre>
+<pre class="codehilite"><code class="language-sql">CREATE TABLE album (id INTEGER PRIMARY KEY AUTOINCREMENT, artist varchar(100) NOT NULL, title varchar(100) NOT NULL);
+INSERT INTO album (artist, title) VALUES ('The Military Wives', 'In My Dreams');
+INSERT INTO album (artist, title) VALUES ('Adele', '21');
+INSERT INTO album (artist, title) VALUES ('Bruce Springsteen', 'Wrecking Ball (Deluxe)');
+INSERT INTO album (artist, title) VALUES ('Lana Del Rey', 'Born To Die');
+INSERT INTO album (artist, title) VALUES ('Gotye', 'Making Mirrors');</code></pre>
 
 
 <p>(The test data chosen happens to be the Bestsellers on Amazon UK at the time of writing!)</p>
@@ -431,9 +431,9 @@ class Album
 
     public function exchangeArray(array $data)
     {
-        $this-&gt;id     = (!empty($data['id'])) ? $data['id'] : null;
-        $this-&gt;artist = (!empty($data['artist'])) ? $data['artist'] : null;
-        $this-&gt;title  = (!empty($data['title'])) ? $data['title'] : null;
+        $this-&gt;id     = !empty($data['id']) ? $data['id'] : null;
+        $this-&gt;artist = !empty($data['artist']) ? $data['artist'] : null;
+        $this-&gt;title  = !empty($data['title']) ? $data['title'] : null;
     }
 }</code></pre>
 
@@ -548,7 +548,7 @@ class Module implements ConfigProviderInterface
     {
         return [
             'factories' =&gt; [
-                Model\AlbumTable::class =&gt;  function($container) {
+                Model\AlbumTable::class =&gt; function($container) {
                     $tableGateway = $container-&gt;get(Model\AlbumTableGateway::class);
                     return new Model\AlbumTable($tableGateway);
                 },
@@ -624,7 +624,7 @@ module) with following code:</p>
         'driver' =&gt; 'Pdo',
         'dsn'    =&gt; sprintf('sqlite:%s/data/zftutorial.db', realpath(getcwd())),
     ],
-);</code></pre>
+];</code></pre>
 
 
 <p>If you were configuring a database that required credentials, you would put the
@@ -681,7 +681,7 @@ class Module implements ConfigProviderInterface
     {
         return [
             'factories' =&gt; [
-                Controller\AlbumController::class =&gt;  function($container) {
+                Controller\AlbumController::class =&gt; function($container) {
                     return new Controller\AlbumController(
                         $container-&gt;get(Model\AlbumTable::class)
                     );
@@ -742,9 +742,9 @@ name}</code>. We can now fill in the <code>index.phtml</code> view script:</p>
 $title = 'My albums';
 $this-&gt;headTitle($title);
 ?&gt;
-&lt;h1&gt;&lt;?= $this-&gt;escapeHtml($title); ?&gt;&lt;/h1&gt;
+&lt;h1&gt;&lt;?= $this-&gt;escapeHtml($title) ?&gt;&lt;/h1&gt;
 &lt;p&gt;
-    &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action'=&gt;'add']) ?&gt;&quot;&gt;Add new album&lt;/a&gt;
+    &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action' =&gt; 'add']) ?&gt;&quot;&gt;Add new album&lt;/a&gt;
 &lt;/p&gt;
 
 &lt;table class=&quot;table&quot;&gt;
@@ -754,14 +754,14 @@ $this-&gt;headTitle($title);
     &lt;th&gt;&amp;nbsp;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;?php foreach ($albums as $album) : ?&gt;
-&lt;tr&gt;
-    &lt;td&gt;&lt;?= $this-&gt;escapeHtml($album-&gt;title) ?&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;?= $this-&gt;escapeHtml($album-&gt;artist) ?&gt;&lt;/td&gt;
-    &lt;td&gt;
-        &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action'=&gt;'edit', 'id' =&gt; $album-&gt;id]) ?&gt;&quot;&gt;Edit&lt;/a&gt;
-        &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action'=&gt;'delete', 'id' =&gt; $album-&gt;id]) ?&gt;&quot;&gt;Delete&lt;/a&gt;
-    &lt;/td&gt;
-&lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;?= $this-&gt;escapeHtml($album-&gt;title) ?&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;?= $this-&gt;escapeHtml($album-&gt;artist) ?&gt;&lt;/td&gt;
+        &lt;td&gt;
+            &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action' =&gt; 'edit', 'id' =&gt; $album-&gt;id]) ?&gt;&quot;&gt;Edit&lt;/a&gt;
+            &lt;a href=&quot;&lt;?= $this-&gt;url('album', ['action' =&gt; 'delete', 'id' =&gt; $album-&gt;id]) ?&gt;&quot;&gt;Delete&lt;/a&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
 &lt;?php endforeach; ?&gt;
 &lt;/table&gt;</code></pre>
 
@@ -791,7 +791,7 @@ links.</p>
 <p>We always use the <code>escapeHtml()</code> view helper to help protect ourselves from
 <a href="http://en.wikipedia.org/wiki/Cross-site_scripting">Cross Site Scripting (XSS) vulnerabilities</a>.</p>
 </blockquote>
-<p>If you open <code>http://localhost:8080/album</code> (or <code>http://zf2-tutorial.localhost/album</code> 
+<p>If you open <code>http://localhost:8080/album</code> (or <code>http://zf-tutorial.localhost/album</code> 
 if you are using self-hosted Apache) you should see this:</p>
 <p><img alt="Initial album listing" src="../../images/user-guide.database-and-models.album-list.png" class="img-responsive"/></p>
 

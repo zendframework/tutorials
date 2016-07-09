@@ -427,6 +427,7 @@ album actions. This is the updated module config file with the new code
 highlighted using comments.</p>
 <pre class="codehilite"><code class="language-php">namespace Album;
 
+use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -440,9 +441,9 @@ return [
     'router' =&gt; [
         'routes' =&gt; [
             'album' =&gt; [
-                'type'    =&gt; 'segment',
+                'type'    =&gt; Segment::class,
                 'options' =&gt; [
-                    'route'    =&gt; '/album[/:action[/:id]]',
+                    'route' =&gt; '/album[/:action[/:id]]',
                     'constraints' =&gt; [
                         'action' =&gt; '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     =&gt; '[0-9]+',
@@ -526,7 +527,7 @@ interface. The framework provides two abstract classes that do this for us:
 service, <code>AbstractRestfulController</code> may be useful.</p>
 </blockquote>
 <p>Let’s go ahead and create our controller class in the file
-<code>zf2-tutorials/module/Album/src/Controller/AlbumController.php</code>:</p>
+<code>zf-tutorials/module/Album/src/Controller/AlbumController.php</code>:</p>
 <pre class="codehilite"><code class="language-php">namespace Album\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -563,19 +564,19 @@ until we set up the views. The URLs for each action are:</p>
 </thead>
 <tbody>
 <tr>
-<td><code>http://zf2-tutorial.localhost/album</code></td>
+<td><code>http://zf-tutorial.localhost/album</code></td>
 <td><code>Album\Controller\AlbumController::indexAction</code></td>
 </tr>
 <tr>
-<td><code>http://zf2-tutorial.localhost/album/add</code></td>
+<td><code>http://zf-tutorial.localhost/album/add</code></td>
 <td><code>Album\Controller\AlbumController::addAction</code></td>
 </tr>
 <tr>
-<td><code>http://zf2-tutorial.localhost/album/edit</code></td>
+<td><code>http://zf-tutorial.localhost/album/edit</code></td>
 <td><code>Album\Controller\AlbumController::editAction</code></td>
 </tr>
 <tr>
-<td><code>http://zf2-tutorial.localhost/album/delete</code></td>
+<td><code>http://zf-tutorial.localhost/album/delete</code></td>
 <td><code>Album\Controller\AlbumController::deleteAction</code></td>
 </tr>
 </tbody>

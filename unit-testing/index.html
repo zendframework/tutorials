@@ -399,8 +399,15 @@ installed, you can run these:</p>
 <pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit</code></pre>
 
 
+<blockquote>
+<h3 id="phpunit-invocation-on-windows">PHPUnit invocation on Windows</h3>
+<p>On Windows, you need to wrap the command in double quotes:</p>
+<pre class="codehilite"><code class="language-bash">$ &quot;vendor/bin/phpunit&quot;</code></pre>
+
+
+</blockquote>
 <p>You should see output similar to the following:</p>
-<pre class="codehilite"><code class="language-text">PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
+<pre class="codehilite"><code class="language-text">PHPUnit 5.4.6 by Sebastian Bergmann and contributors.
 
 ...                                                                 3 / 3 (100%)
 
@@ -409,6 +416,9 @@ Time: 116 ms, Memory: 11.00MB
 OK (3 tests, 7 assertions)</code></pre>
 
 
+<p>There might be 2 failing tests if you followed the getting started guide. This
+is because the <code>Application\IndexController</code> is overridden by the
+<code>AlbumController</code>. This can be ignored for now.</p>
 <p>Now it's time to write our own tests!</p>
 <h2 id="setting-up-the-tests-directory">Setting up the tests directory</h2>
 <p>As zend-mvc applications are built from modules that should be
@@ -457,9 +467,19 @@ test suite to it. When done, it should read as follows:</p>
 &lt;/phpunit&gt;</code></pre>
 
 
-<p>Now run <code>phpunit -- testsuite Album</code> from the project root; you should get
-similar output to the following:</p>
-<pre class="codehilite"><code class="language-text">PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+<p>Now run your new Album test suite from the project root:</p>
+<pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album</code></pre>
+
+
+<blockquote>
+<h3 id="windows-and-phpunit">Windows and PHPUnit</h3>
+<p>On Windows, don't forget to wrap the <code>phpunit</code> command in double quotes:</p>
+<pre class="codehilite"><code class="language-bash">$ &quot;vendor/bin/phpunit&quot; --testsuite Album</code></pre>
+
+
+</blockquote>
+<p>You should get similar output to the following:</p>
+<pre class="codehilite"><code class="language-text">PHPUnit 5.4.6 by Sebastian Bergmann and contributors.
 
 Time: 0 seconds, Memory: 1.75Mb
 
@@ -536,7 +556,7 @@ module.</p>
 
 
 <p>again, you should see something like the following:</p>
-<pre class="codehilite"><code class="language-text">PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
+<pre class="codehilite"><code class="language-text">PHPUnit 5.4.6 by Sebastian Bergmann and contributors.
 
 .                                                                   1 / 1 (100%)
 
@@ -550,7 +570,7 @@ OK (1 test, 5 assertions)</code></pre>
 <p>We likely don't want to hit the same database during testing as we use for our
 web property. Let's add some configuration to the test case to remove the
 database configuration. In your <code>AlbumControllerTest::setUp()</code> method, add the
-following lines following the call to <code>parent::setUp();</code>:</p>
+following lines right after the call to <code>parent::setUp();</code>:</p>
 <pre class="codehilite"><code class="language-php">$services = $this-&gt;getApplicationServiceLocator();
 $config = $services-&gt;get('config');
 unset($config['db']);
@@ -563,7 +583,7 @@ $services-&gt;setAllowOverride(false);</code></pre>
 something else before long.</p>
 <p>When we run the tests now:</p>
 <pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album
-PHPUnit 5.3.4 by Sebastian Bergmann and contributors.
+PHPUnit 5.4.6 by Sebastian Bergmann and contributors.
 
 F
 
@@ -574,7 +594,7 @@ There was 1 failure:
 1) AlbumTest\Controller\AlbumControllerTest::testIndexActionCanBeAccessed
 Failed asserting response code &quot;200&quot;, actual status code is &quot;500&quot;
 
-{projectPath}/vendor/ZF2/library/Zend/Test/PHPUnit/Controller/AbstractControllerTestCase.php:{lineNumber}
+{projectPath}/vendor/zendframework/zend-test/src/PHPUnit/Controller/AbstractControllerTestCase.php:{lineNumber}
 {projectPath}/module/Album/test/AlbumTest/Controller/AlbumControllerTest.php:{lineNumber}
 
 FAILURES!
@@ -625,8 +645,10 @@ and that it returns an array of albums; these facts allow us to provide mock
 instances. When we test <code>AlbumTable</code> itself, we can write the actual tests for
 the <code>fetchAll</code> method.</p>
 <p>First, let's do some setup.</p>
-<p>Add an import statement to the top of the test class file for the <code>AlbumTable</code>:</p>
-<pre class="codehilite"><code class="language-php">use Album\Model\AlbumTable;</code></pre>
+<p>Add import statements to the top of the test class file for each of the
+<code>AlbumTable</code> and <code>ServiceManager</code> classes:</p>
+<pre class="codehilite"><code class="language-php">use Album\Model\AlbumTable;
+use Zend\ServiceManager\ServiceManager;</code></pre>
 
 
 <p>Now add the following property to the test class:</p>
@@ -706,7 +728,7 @@ the <code>AlbumTable</code>'s <code>fetchAll()</code> method will be called, and
 <p>Running <code>phpunit</code> at this point, we will get the following output as the tests
 now pass:</p>
 <pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album
-PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
+PHPUnit 5.4.6 by Sebastian Bergmann and contributors.
 
 .                                                                   1 / 1 (100%)
 
@@ -718,8 +740,7 @@ OK (1 test, 5 assertions)</code></pre>
 <h2 id="testing-actions-with-post">Testing actions with POST</h2>
 <p>A common scenario with controllers is processing POST data submitted via a form,
 as we do in the <code>AlbumController::addAction()</code>. Let's write a test for that.</p>
-<pre class="codehilite"><code class="language-php"> :linenos:}
-public function testAddActionRedirectsAfterValidPost()
+<pre class="codehilite"><code class="language-php">public function testAddActionRedirectsAfterValidPost()
 {
     $this-&gt;albumTable
         -&gt;saveAlbum(Argument::type(Album::class))
@@ -751,7 +772,7 @@ pass data to it. This test case then asserts a 302 response status, and
 introduces a new assertion against the location to which the response redirects.</p>
 <p>Running <code>phpunit</code> gives us the following output:</p>
 <pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album
-PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
+PHPUnit 5.4.6 by Sebastian Bergmann and contributors.
 
 ..                                                                  2 / 2 (100%)
 
@@ -895,7 +916,7 @@ class AlbumTest extends TestCase
 <p>If we run <code>phpunit</code> again, we will get the following output, confirming that our
 model is indeed correct:</p>
 <pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album
-PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
+PHPUnit 5.4.6 by Sebastian Bergmann and contributors.
 
 .......                                                             7 / 7 (100%)
 
@@ -1027,7 +1048,7 @@ against methods in our <code>AlbumTable</code>.</p>
 </ol>
 <p>Running <code>phpunit</code> one last time, we get the output as follows:</p>
 <pre class="codehilite"><code class="language-bash">$ ./vendor/bin/phpunit --testsuite Album
-PHPUnit 5.4.5 by Sebastian Bergmann and contributors.
+PHPUnit 5.4.6 by Sebastian Bergmann and contributors.
 
 .............                                                     13 / 13 (100%)
 

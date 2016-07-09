@@ -474,6 +474,8 @@ we add the new route to our configuration file:</p>
 <pre class="codehilite"><code class="language-php">// In /module/Blog/config/module.config.php:
 namespace Blog;
 
+use Zend\Router\Http\Literal;
+
 return [
     // This lines opens the configuration for the RouteManager
     'router' =&gt; [
@@ -482,11 +484,11 @@ return [
             // Define a new route called &quot;blog&quot;
             'blog' =&gt; [
                 // Define a &quot;literal&quot; route type:
-                'type' =&gt; 'literal',
+                'type' =&gt; Literal::class,
                 // Configure the route itself
                 'options' =&gt; [
                     // Listen to &quot;/blog&quot; as uri:
-                    'route'    =&gt; '/blog',
+                    'route' =&gt; '/blog',
                     // Define default controller and action to be called when
                     // this route is matched
                     'defaults' =&gt; [

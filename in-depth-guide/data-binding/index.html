@@ -536,6 +536,8 @@ with two exceptions:</p>
 <p>Update the 'blog' <code>child_routes</code> to add the new route:</p>
 <pre class="codehilite"><code class="language-php">// In module/Blog/config/module.config.php:
 
+use Zend\Router\Http\Segment;
+
 return [
     'service_manager' =&gt; [ /* ... */ ],
     'controllers'     =&gt; [ /* ... */ ],
@@ -544,16 +546,16 @@ return [
             'blog' =&gt; [
                 /* ... */
 
-                'child_routes'  =&gt; [
+                'child_routes' =&gt; [
                     /* ... */
 
                     'edit' =&gt; [
-                        'type' =&gt; 'segment',
+                        'type' =&gt; Segment::class,
                         'options' =&gt; [
                             'route'    =&gt; '/edit/:id',
                             'defaults' =&gt; [
                                 'controller' =&gt; Controller\WriteController::class,
-                                'action' =&gt; 'edit'
+                                'action'     =&gt; 'edit',
                             ],
                             'constraints' =&gt; [
                                 'id' =&gt; '[1-9]\d*',
@@ -656,7 +658,7 @@ a parameter: <code>$this-&gt;url('blog/edit/', ['id' =&gt; $id])</code>. This wo
 we pass the original <code>Post</code> instance or the identifier we pull from it to the
 view, however. zend-router allows another option, however: you can tell it to
 re-use currently matched parameters.  This is done by setting the last parameter
-of the view-helper to <code>true</code>: <code>$this-&gt;url('blog/edit', array(), true)</code>.</p>
+of the view-helper to <code>true</code>: <code>$this-&gt;url('blog/edit', [], true)</code>.</p>
 <p>If you try and update the post, it'll be successful, but you'll notice that no
 edits were saved! Why? Because we have not yet implemented the functionality in
 our command class. Let's do that now.</p>
@@ -858,12 +860,12 @@ and make the following edits.</p>
                 /* ... */
 
                 'delete' =&gt; [
-                    'type' =&gt; 'segment',
+                    'type' =&gt; Segment::class,
                     'options' =&gt; [
                         'route' =&gt; '/delete/:id',
                         'defaults' =&gt; [
                             'controller' =&gt; Controller\DeleteController::class,
-                            'action' =&gt; 'delete',
+                            'action'     =&gt; 'delete',
                         ],
                         'constraints' =&gt; [
                             'id' =&gt; '[1-9]\d*',

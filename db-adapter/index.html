@@ -374,11 +374,34 @@ configuration.</p>
 <p>If you are not using the installer, you will need to manually configure add the
 component to your application.</p>
 <ul>
-<li>For zend-mvc applications, update your list of modules in either
+<li>
+<p>For zend-mvc applications, update your list of modules in either
   <code>config/application.config.php</code> or <code>config/modules.config.php</code> to add an
-  entry for <code>'Zend\Db'</code> at the top of the list.</li>
-<li>For Expressive applications, create a new file,
-  <code>config/autoload/zend-db.global.php</code>, with the following contents:</li>
+  entry for <code>'Zend\Db'</code> at the top of the list:
+  <pre class="codehilite"><code class="language-php">&lt;?php
+  // In config/modules.config.php
+  return [
+    'Zend\Db', // &lt;-- This line
+    'Zend\Form', 
+    /* ... */
+  ];
+
+  // OR in config/application.config.php
+  return [
+  /* ... */
+  // Retrieve list of modules used in this application.
+  'modules' =&gt; [
+    'Zend\Db', // &lt;-- This line
+    'Zend\Form', 
+    /* ... */
+  ],
+  /* ... */</code></pre>
+</p>
+</li>
+<li>
+<p>For Expressive applications, create a new file,
+  <code>config/autoload/zend-db.global.php</code>, with the following contents:</p>
+</li>
 </ul>
 <pre class="codehilite"><code class="language-php">&lt;?php
 use Zend\Db\ConfigProvider;
@@ -400,10 +423,11 @@ function ($container) {
 will look for a top-level <code>db</code> key in the configuration, and use it to create an
 adapter. As an example, the following would connect to a MySQL database using
 PDO, and the supplied PDO DSN:</p>
-<pre class="codehilite"><code class="language-php">return [
+<pre class="codehilite"><code class="language-php">// In config/autoload/global.php
+return [
     'db' =&gt; [
         'driver' =&gt; 'Pdo',
-        'dsn'    =&gt; 'mysql:dbname=zf2tutorial;host=localhost',
+        'dsn'    =&gt; 'mysql:dbname=zftutorial;host=localhost;charset=utf8',
     ],
 ];</code></pre>
 
@@ -418,16 +442,17 @@ read-only.</p>
 <code>Zend\Db\Adapter\AdapterAbstractServiceFactory</code>, for this purpose. To use it,
 you will need to create named configuration keys under <code>db.adapters</code>, each with
 configuration for an adapter:</p>
-<pre class="codehilite"><code class="language-php">return [
+<pre class="codehilite"><code class="language-php">// In config/autoload/global.php
+return [
     'db' =&gt; [
         'adapters' =&gt; [
             'Application\Db\WriteAdapter' =&gt; [
                 'driver' =&gt; 'Pdo',
-                'dsn'    =&gt; 'mysql:dbname=application;host=canonical.example.com',
+                'dsn'    =&gt; 'mysql:dbname=application;host=canonical.example.com;charset=utf8',
             ],
             'Application\Db\ReadOnlyAdapter' =&gt; [
                 'driver' =&gt; 'Pdo',
-                'dsn'    =&gt; 'mysql:dbname=application;host=replica.example.com',
+                'dsn'    =&gt; 'mysql:dbname=application;host=replica.example.com;charset=utf8',
             ],
         ],
     ],
@@ -455,6 +480,7 @@ service configuration as well:</p>
 <pre class="codehilite"><code class="language-php">use Zend\Db\Adapter\AdapterAbstractServiceFactory;
 
 // If using zend-mvc:
+// In module/YourModule/config/module.config.php
 'service_manager' =&gt; [
     'factories' =&gt; [
         'Application\Db\WriteAdapter' =&gt; AdapterAbstractServiceFactory::class,

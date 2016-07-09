@@ -527,7 +527,6 @@ class WriteController extends AbstractActionController
 
     public function addAction()
     {
-
     }
 }</code></pre>
 
@@ -594,6 +593,8 @@ to it:</p>
 // In module/Blog/config/module.config.php:
 namespace Blog;
 
+use Zend\Router\Http\Literal;
+use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -602,34 +603,32 @@ return [
     'router'          =&gt; [
         'routes' =&gt; [
             'blog' =&gt; [
-                'type' =&gt; 'literal',
+                'type' =&gt; Literal::class,
                 'options' =&gt; [
                     'route'    =&gt; '/blog',
                     'defaults' =&gt; [
                         'controller' =&gt; Controller\ListController::class,
                         'action'     =&gt; 'index',
-                    ]
+                    ],
                 ],
-
                 'may_terminate' =&gt; true,
-
                 'child_routes'  =&gt; [
                     'detail' =&gt; [
-                        'type' =&gt; 'segment',
+                        'type' =&gt; Segment::class,
                         'options' =&gt; [
                             'route'    =&gt; '/:id',
                             'defaults' =&gt; [
-                                'action' =&gt; 'detail'
+                                'action' =&gt; 'detail',
                             ],
                             'constraints' =&gt; [
-                                'id' =&gt; '\d+'
-                            ]
-                        ]
+                                'id' =&gt; '\d+',
+                            ],
+                        ],
                     ],
 
                     // Add the following route:
                     'add' =&gt; [
-                        'type' =&gt; 'literal',
+                        'type' =&gt; Literal::class,
                         'options' =&gt; [
                             'route'    =&gt; '/add',
                             'defaults' =&gt; [
@@ -642,7 +641,7 @@ return [
             ],
         ],
     ],
-    'view_manager' =&gt; [ /* ... */ ],
+    'view_manager'    =&gt; [ /* ... */ ],
 ];</code></pre>
 
 
