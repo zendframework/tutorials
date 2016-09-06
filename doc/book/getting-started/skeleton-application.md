@@ -118,19 +118,18 @@ prompts that you may not want to enable by default is `Zend\Test`.)
 Once the installation is done, the skeleton installer removes itself, and the
 new application is ready to start!
 
-> ### Small DB configuration
->
-> When you have chosen "y" for database support with 'Zend\Db', you need to create a minimal database configuration in `config/autoload/global.php`. In [Database and models](/tutorials/getting-started/database-and-models) chapter we will explain more about this configuration, but for now it's enough to just add the following.
-> 
-> ```php
-> return [
->      'db' => [
->          'driver' => 'Pdo',
->          'dsn' => 'sqlite::memory:',
->      ],
->  ];
-> ```
-> 
+### Small DB configuration
+
+When you have chosen "y" for database support with 'Zend\Db', you need to create a minimal database configuration in `config/autoload/global.php`. In [Database and models](/tutorials/getting-started/database-and-models) chapter we will explain more about this configuration, but for now it's enough to just add the following.
+
+```php
+return [
+    'db' => [
+        'driver' => 'Pdo',
+        'dsn' => 'sqlite::memory:',
+    ],
+];
+```
 
 > ### Downloading the skeleton
 >
