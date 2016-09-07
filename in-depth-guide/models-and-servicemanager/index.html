@@ -782,7 +782,7 @@ class ListControllerFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new ListController($container-&gt;get(PostRepositoryInterface::class);
+        return new ListController($container-&gt;get(PostRepositoryInterface::class));
     }
 }</code></pre>
 
@@ -847,7 +847,7 @@ return [
 <p>This aliases <code>PostRepositoryInterface</code> to our <code>PostRepository</code> implementation,
 and then creates a factory for the <code>PostRepository</code> class by mapping it to the
 <code>InvokableFactory</code> (like we originally did for the <code>ListController</code>); we can do
-this latter as our implementation has no dependencies of its own.</p>
+this as our <code>PostRepository</code> implementation has no dependencies of its own.</p>
 <p>Try refreshing your browser. You should see no more error messages, but rather
 exactly the page that we have created in the previous chapter of the tutorial.</p>
 <h2 id="using-the-repository-in-our-controller">Using the repository in our controller</h2>

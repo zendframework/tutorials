@@ -547,7 +547,7 @@ locally within the test using the <code>$configOverrides</code> variable.</p>
 <h3 id="assert-against-controller-service-names">Assert against controller service names</h3>
 <p>For asserting the <em>controller name</em> we are using the controller name we
 defined in our  routing configuration for the Album module. In our example
-this should be defined on line 19 of the <code>module.config.php</code> file in the Album
+this should be defined on line 16 of the <code>module.config.php</code> file in the Album
 module.</p>
 </blockquote>
 <p>If you run:</p>
@@ -715,7 +715,7 @@ the <code>AlbumTable</code>'s <code>fetchAll()</code> method will be called, and
 {
     $this-&gt;albumTable-&gt;fetchAll()-&gt;willReturn([]);
 
-    $this-&gt;dispatch('/album', 'GET');
+    $this-&gt;dispatch('/album');
     $this-&gt;assertResponseStatusCode(200);
     $this-&gt;assertModuleName('Album');
     $this-&gt;assertControllerName(AlbumController::class);
