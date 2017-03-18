@@ -16,6 +16,7 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf-web.css" rel="stylesheet">
     <link href="../css/zf.css" rel="stylesheet">
     <link href="../css/prism-zf.css" rel="stylesheet">
 
@@ -56,7 +57,7 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
               <a href="..">tutorials</a>
             </span>
         </div>
@@ -308,7 +309,7 @@
 </div>
 
     <!-- content:begin -->
-    <div class="container">
+    <div id="page-top" class="container docs">
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -338,7 +339,7 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">Docs</a> &raquo;</li>
+  <li><a href="..">tutorials</a> &raquo;</li>
   
     
       
@@ -358,8 +359,7 @@ as well as multiple adapters (which may be useful in architectures that have a
 cluster of read-only replicated servers and a single writable server of record).</p>
 <h2 id="installing-zend-db">Installing zend-db</h2>
 <p>First, install zend-db using Composer:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-db</code></pre>
-
+<pre class="codehilite"><code class="language-bash linenums">$ composer require zendframework/zend-db</code></pre>
 
 <p>If you are using <a href="https://zendframework.github.io/zend-component-installer/">zend-component-installer</a>
 (installed by default with the skeleton application, and optionally for
@@ -377,7 +377,7 @@ component to your application.</p>
 <p>For zend-mvc applications, update your list of modules in either
   <code>config/application.config.php</code> or <code>config/modules.config.php</code> to add an
   entry for <code>'Zend\Db'</code> at the top of the list:
-  <pre class="codehilite"><code class="language-php">&lt;?php
+  <pre class="codehilite"><code class="language-php linenums">&lt;?php
   // In config/modules.config.php
   return [
     'Zend\Db', // &lt;-- This line
@@ -394,42 +394,38 @@ component to your application.</p>
     'Zend\Form', 
     /* ... */
   ],
-  /* ... */</code></pre>
-</p>
+  /* ... */</code></pre></p>
 </li>
 <li>
 <p>For Expressive applications, create a new file,
   <code>config/autoload/zend-db.global.php</code>, with the following contents:</p>
 </li>
 </ul>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 use Zend\Db\ConfigProvider;
 
 return (new ConfigProvider())();</code></pre>
 
-
 <h2 id="configuring-the-default-adapter">Configuring the default adapter</h2>
 <p>Within your service factories, you may retrieve the default adapter from your application container using the
 class name <code>Zend\Db\Adapter\AdapterInterface</code>:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Db\Adapter\AdapterInterface;
+<pre class="codehilite"><code class="language-php linenums">use Zend\Db\Adapter\AdapterInterface;
 
 function ($container) {
     return new SomeServiceObject($container-&gt;get(AdapterInterface::class));
 }</code></pre>
 
-
 <p>When installed and configured, the factory associated with <code>AdapterInterface</code>
 will look for a top-level <code>db</code> key in the configuration, and use it to create an
 adapter. As an example, the following would connect to a MySQL database using
 PDO, and the supplied PDO DSN:</p>
-<pre class="codehilite"><code class="language-php">// In config/autoload/global.php
+<pre class="codehilite"><code class="language-php linenums">// In config/autoload/global.php
 return [
     'db' =&gt; [
         'driver' =&gt; 'Pdo',
         'dsn'    =&gt; 'mysql:dbname=zftutorial;host=localhost;charset=utf8',
     ],
 ];</code></pre>
-
 
 <p>More information on adapter configuration can be found in the docs for
 <a href="http://zendframework.github.io/zend-db/adapter/#creating-an-adapter-using-dependency-injection">Zend\Db\Adapter</a>.</p>
@@ -441,7 +437,7 @@ read-only.</p>
 <code>Zend\Db\Adapter\AdapterAbstractServiceFactory</code>, for this purpose. To use it,
 you will need to create named configuration keys under <code>db.adapters</code>, each with
 configuration for an adapter:</p>
-<pre class="codehilite"><code class="language-php">// In config/autoload/global.php
+<pre class="codehilite"><code class="language-php linenums">// In config/autoload/global.php
 return [
     'db' =&gt; [
         'adapters' =&gt; [
@@ -457,16 +453,14 @@ return [
     ],
 ];</code></pre>
 
-
 <p>You retrieve the database adapters using the keys you define, so ensure they are
 unique to your application, and descriptive of their purpose!</p>
 <h3 id="retrieving-named-adapters">Retrieving named adapters</h3>
 <p>Retrieve named adapters in your service factories just as you would another
 service:</p>
-<pre class="codehilite"><code class="language-php">function ($container) {
+<pre class="codehilite"><code class="language-php linenums">function ($container) {
     return new SomeServiceObject($container-&gt;get('Application\Db\ReadOnlyAdapter));
 }</code></pre>
-
 
 <h3 id="using-the-adapterabstractservicefactory-as-a-factory">Using the AdapterAbstractServiceFactory as a factory</h3>
 <p>Depending on what application container you use, abstract factories may not be
@@ -476,7 +470,7 @@ zend-servicemanager abstract factories work as factories in their own right, and
 are passed the service name as an argument, allowing them to vary their return
 value based on requested service name. As such, you can add the following
 service configuration as well:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Db\Adapter\AdapterAbstractServiceFactory;
+<pre class="codehilite"><code class="language-php linenums">use Zend\Db\Adapter\AdapterAbstractServiceFactory;
 
 // If using zend-mvc:
 // In module/YourModule/config/module.config.php
@@ -511,13 +505,49 @@ service configuration as well:</p>
     </div>
     <!-- content:end -->
 
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
-        </p>
-        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
-    </footer>
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
@@ -557,7 +587,7 @@ service configuration as well:</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -662,7 +692,7 @@ service configuration as well:</p>
     // Fetch the component list and display it.
     function loadComponentList () {
       $.ajax({
-        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
         dataType: "text json",
         success: parseComponentList,
         error: function (e) {

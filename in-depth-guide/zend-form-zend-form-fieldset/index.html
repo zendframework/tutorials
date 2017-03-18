@@ -16,6 +16,7 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/zf-web.css" rel="stylesheet">
     <link href="../../css/zf.css" rel="stylesheet">
     <link href="../../css/prism-zf.css" rel="stylesheet">
 
@@ -56,7 +57,7 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
               <a href="../..">tutorials</a>
             </span>
         </div>
@@ -308,7 +309,7 @@
 </div>
 
     <!-- content:begin -->
-    <div class="container">
+    <div id="page-top" class="container docs">
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -348,7 +349,7 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="../..">Docs</a> &raquo;</li>
+  <li><a href="../..">tutorials</a> &raquo;</li>
   
     
       
@@ -400,7 +401,7 @@ the input elements that we need to work with our blog data:</p>
 </ul>
 <p>Create the file <code>module/Blog/src/Form/PostFieldset.php</code> with the following
 contents:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 namespace Blog\Form;
 
 use Zend\Form\Fieldset;
@@ -432,7 +433,6 @@ class PostFieldset extends Fieldset
     }
 }</code></pre>
 
-
 <p>This new class creates an extension of <code>Zend\Form\Fieldset</code> that, in an <code>init()</code>
 method (more on this later),  adds elements for each aspect of our blog post. We
 can now re-use this fieldset in as many forms as we want. Let's create our first
@@ -442,7 +442,7 @@ form.</p>
 The form will use the <code>PostFieldset</code>, and also include a submit button so that
 the user can submit the data.</p>
 <p>Create the file <code>module/Blog/src/Form/PostForm.php</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 namespace Blog\Form;
 
 use Zend\Form\Form;
@@ -465,7 +465,6 @@ class PostForm extends Form
         ]);
     }
 }</code></pre>
-
 
 <p>And that's our form. Nothing special here, we add our <code>PostFieldset</code> to the
 form, we add a submit button to the form, and nothing more.</p>
@@ -493,7 +492,7 @@ in our <code>PostForm</code> in a previous section of this chapter.</p>
 <p>Let's create this new class now. Open a new file,
 <code>module/Blog/src/Controller/WriteController.php</code>, and add the following
 contents:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 namespace Blog\Controller;
 
 use Blog\Form\PostForm;
@@ -529,11 +528,10 @@ class WriteController extends AbstractActionController
     }
 }</code></pre>
 
-
 <p>We'll now create a factory for this new controller; create a new file,
 <code>module/Blog/src/Factory/WriteControllerFactory.php</code>, with the following
 contents:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 namespace Blog\Factory;
 
 use Blog\Controller\WriteController;
@@ -560,7 +558,6 @@ class WriteControllerFactory implements FactoryInterface
     }
 }</code></pre>
 
-
 <p>The above factory introduces something new: the <code>FormElementManager</code>. This is a
 plugin manager implementation that is specifically for forms. We don't
 necessarily need to register our forms with it, as it will check to see if a
@@ -577,7 +574,7 @@ does provide a couple nice features: </p>
 <p>Finally, we need to configure the new factory; in
 <code>module/Blog/config/module.config.php</code>, add an entry in the <code>controllers</code>
 configuration section:</p>
-<pre class="codehilite"><code class="language-php">'controllers' =&gt; [
+<pre class="codehilite"><code class="language-php linenums">'controllers' =&gt; [
     'factories' =&gt; [
         Controller\ListController::class =&gt; Factory\ListControllerFactory::class,
         // Add the following line:
@@ -585,10 +582,9 @@ configuration section:</p>
     ],
 ],</code></pre>
 
-
 <p>Now that we have the basics for our controller in place, we can create a route
 to it:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 // In module/Blog/config/module.config.php:
 namespace Blog;
 
@@ -643,16 +639,14 @@ return [
     'view_manager'    =&gt; [ /* ... */ ],
 ];</code></pre>
 
-
 <p>Finally, we'll create a dummy template:</p>
-<pre class="codehilite"><code class="language-html">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
+<pre class="codehilite"><code class="language-html linenums">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
 &lt;h1&gt;WriteController::addAction()&lt;/h1&gt;</code></pre>
-
 
 <h3 id="check-in">Check-in</h3>
 <p>If you try to access the new route <code>localhost:8080/blog/add</code> you're supposed to
 see the following error message:</p>
-<pre class="codehilite"><code class="language-text">An error occurred
+<pre class="codehilite"><code class="language-text linenums">An error occurred
 
 An error occurred during execution; please try again later.
 
@@ -666,7 +660,6 @@ File:
 Message:
 Unable to resolve service &quot;Blog\Model\PostCommandInterface&quot; to a factory; are you certain you provided it during configuration?</code></pre>
 
-
 <p>If this is not the case, be sure to follow the tutorial correctly and carefully
 check all your files.</p>
 <p>The error is due to the fact that we have not yet defined an <em>implementation</em> of
@@ -675,7 +668,7 @@ application!</p>
 <p>Let's create a dummy implementation, as we did when we first started working
 with repositories. Create the file <code>module/Blog/src/Model/PostCommand.php</code> with
 the following contents:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 namespace Blog\Model;
 
 class PostCommand implements PostCommandInterface
@@ -702,9 +695,8 @@ class PostCommand implements PostCommandInterface
     }
 }</code></pre>
 
-
 <p>Now add service configuration in <code>module/Blog/config/module.config.php</code>:</p>
-<pre class="codehilite"><code class="language-php">'service_manager' =&gt; [
+<pre class="codehilite"><code class="language-php linenums">'service_manager' =&gt; [
     'aliases' =&gt; [
         /* ... */
         // Add the following line:
@@ -717,12 +709,11 @@ class PostCommand implements PostCommandInterface
     ],
 ],</code></pre>
 
-
 <p>Reloading your application now will yield you the desired result.</p>
 <h2 id="displaying-the-form">Displaying the form</h2>
 <p>Now that we have new controller working, it's time to pass this form to the view
 and render it.  Change your controller so that the form is passed to the view:</p>
-<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Controller/WriteController.php:
+<pre class="codehilite"><code class="language-php linenums">// In /module/Blog/src/Controller/WriteController.php:
 public function addAction()
 {
     return new ViewModel([
@@ -730,9 +721,8 @@ public function addAction()
     ]);
 }</code></pre>
 
-
 <p>And then we need to modify our view to render the form:</p>
-<pre class="codehilite"><code class="language-php">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
+<pre class="codehilite"><code class="language-php linenums">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
 &lt;h1&gt;Add a blog post&lt;/h1&gt;
 
 &lt;?php
@@ -743,7 +733,6 @@ $form-&gt;prepare();
 echo $this-&gt;form()-&gt;openTag($form);
 echo $this-&gt;formCollection($form);
 echo $this-&gt;form()-&gt;closeTag();</code></pre>
-
 
 <p>The above does the following:</p>
 <ul>
@@ -761,8 +750,7 @@ echo $this-&gt;form()-&gt;closeTag();</code></pre>
 <h3 id="form-method">Form method</h3>
 <p>HTML forms can be sent using <code>POST</code> and <code>GET</code>. zend-form defaults to <code>POST</code>.
 If you want to switch to <code>GET</code>:</p>
-<pre class="codehilite"><code class="language-php">$form-&gt;setAttribute('method', 'GET');</code></pre>
-
+<pre class="codehilite"><code class="language-php linenums">$form-&gt;setAttribute('method', 'GET');</code></pre>
 
 </blockquote>
 <p>Refreshing the browser you will now see your form properly displayed. It's not
@@ -770,7 +758,7 @@ pretty, though, as the default markup does not follow semantics for Bootstrap
 (which is used in the skeleton application by default). Let's update it a bit to
 make it look better; we'll do that in the view script itself, as markup-related
 concerns belong in the view layer:</p>
-<pre class="codehilite"><code class="language-php">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
+<pre class="codehilite"><code class="language-php linenums">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
 &lt;h1&gt;Add a blog post&lt;/h1&gt;
 
 &lt;?php
@@ -814,7 +802,6 @@ echo $this-&gt;formSubmit($submit);
 echo $this-&gt;formHidden($fieldset-&gt;get('id'));
 echo $this-&gt;form()-&gt;closeTag();</code></pre>
 
-
 <p>The above adds HTML attributes to a number of the elements we've defined, and
 uses more specific view helpers to allow us to render the exact markup we want
 for our form.</p>
@@ -838,7 +825,7 @@ regardless of form and entities:</p>
    messages.</li>
 </ol>
 <p>Modify your <code>WriteController:addAction()</code> to read as follows:</p>
-<pre class="codehilite"><code class="language-php">public function addAction()
+<pre class="codehilite"><code class="language-php linenums">public function addAction()
 {
     $request   = $this-&gt;getRequest();
     $viewModel = new ViewModel(['form' =&gt; $this-&gt;form]);
@@ -870,7 +857,6 @@ regardless of form and entities:</p>
     );
 }</code></pre>
 
-
 <p>Stepping through the code:</p>
 <ul>
 <li>We retrieve the current request.</li>
@@ -891,16 +877,15 @@ name is of the form <code>&lt;parent&gt;/&lt;child&gt;</code> &mdash; i.e., the 
 name are separated with a slash.</p>
 </blockquote>
 <p>Submitting the form right now will return into the following error</p>
-<pre class="codehilite"><code class="language-text">Fatal error: Call to a member function getId() on null in
+<pre class="codehilite"><code class="language-text linenums">Fatal error: Call to a member function getId() on null in
 {projectPath}/module/Blog/src/Controller/WriteController.php
 on line {lineNumber}</code></pre>
-
 
 <p>This is because our stub <code>PostCommand</code> class does not return a new <code>Post</code>
 instance, violating the contract!</p>
 <p>Let's create a new implementation to work against zend-db. Create the file
 <code>module/Blog/src/Model/ZendDbSqlCommand.php</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 namespace Blog\Model;
 
 use RuntimeException;
@@ -971,7 +956,6 @@ class ZendDbSqlCommand implements PostCommandInterface
     }
 }</code></pre>
 
-
 <p>In the <code>insertPost()</code> method, we do the following:</p>
 <ul>
 <li>We create a <code>Zend\Db\Sql\Insert</code> instance, providing it the table name.</li>
@@ -984,7 +968,7 @@ class ZendDbSqlCommand implements PostCommandInterface
 <p>Now that we have this in place, we'll create a factory for it; create the file
 <code>module/Blog/src/Factory/ZendDbSqlCommandFactory.php</code> with the following
 contents:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 namespace Blog\Factory;
 
 use Interop\Container\ContainerInterface;
@@ -1000,10 +984,9 @@ class ZendDbSqlCommandFactory implements FactoryInterface
     }
 }</code></pre>
 
-
 <p>And finally, we'll wire it up in the configuration; update the <code>service_manager</code>
 section of <code>module/Blog/config/module.config.php</code> to read as follows:</p>
-<pre class="codehilite"><code class="language-php">'service_manager' =&gt; [
+<pre class="codehilite"><code class="language-php linenums">'service_manager' =&gt; [
     'aliases' =&gt; [
         Model\PostRepositoryInterface::class =&gt; Model\ZendDbSqlRepository::class,
         // Update the following alias:
@@ -1018,15 +1001,13 @@ section of <code>module/Blog/config/module.config.php</code> to read as follows:
     ],
 ],</code></pre>
 
-
 <p>Submitting your form again, it should process the form and redirect you to the
 detail page for the new entry!</p>
 <p>Let's see if we an improve this a bit.</p>
 <h2 id="using-zend-hydrator-with-zend-form">Using zend-hydrator with zend-form</h2>
 <p>In our controller currently, we have the following:</p>
-<pre class="codehilite"><code class="language-php">$data = $this-&gt;form-&gt;getData()['post'];
+<pre class="codehilite"><code class="language-php linenums">$data = $this-&gt;form-&gt;getData()['post'];
 $post = new Post($data['title'], $data['text']);</code></pre>
-
 
 <p>What if we could automate that, so we didn't need to worry about:</p>
 <ul>
@@ -1037,13 +1018,12 @@ $post = new Post($data['title'], $data['text']);</code></pre>
 us to return a <code>Post</code> instance when we retrieve the validated values!</p>
 <p>Let's udpate our fieldset to provide a hydrator and a prototype object.</p>
 <p>First, add two import statements to the top of the class file:</p>
-<pre class="codehilite"><code class="language-php">// In module/Blog/src/Form/PostFieldset.php:
+<pre class="codehilite"><code class="language-php linenums">// In module/Blog/src/Form/PostFieldset.php:
 use Blog\Model\Post;
 use Zend\Hydrator\Reflection as ReflectionHydrator;</code></pre>
 
-
 <p>Next, update the <code>init()</code> method to add the following two lines:</p>
-<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Form/PostFieldset.php:
+<pre class="codehilite"><code class="language-php linenums">// In /module/Blog/src/Form/PostFieldset.php:
 
 public function init()
 {
@@ -1053,7 +1033,6 @@ public function init()
     /* ... */
 }</code></pre>
 
-
 <p>When you grab the data from this fiedlset, it will be returned as a <code>Post</code>
 instance.</p>
 <p>However, we grab data <em>from the form</em>; how can we simplify that interaction?</p>
@@ -1062,7 +1041,7 @@ This hints to the form that when we retrieve data from it, it should return the
 values from the specified fieldset instead; since our fieldset returns the
 <code>Post</code> instance, we'll have exactly what we need.</p>
 <p>Modify your <code>PostForm</code> class as follows:</p>
-<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Form/PostForm.php:
+<pre class="codehilite"><code class="language-php linenums">// In /module/Blog/src/Form/PostForm.php:
 
 public function init()
 {
@@ -1076,16 +1055,13 @@ public function init()
 
     /* ... */</code></pre>
 
-
 <p>Let's update our <code>WriteController</code>; modify the <code>addAction()</code> method to replace
 the following two lines:</p>
-<pre class="codehilite"><code class="language-php">$data = $this-&gt;form-&gt;getData()['post'];
+<pre class="codehilite"><code class="language-php linenums">$data = $this-&gt;form-&gt;getData()['post'];
 $post = new Post($data['title'], $data['text']);</code></pre>
 
-
 <p>to:</p>
-<pre class="codehilite"><code class="language-php">$post = $this-&gt;form-&gt;getData();</code></pre>
-
+<pre class="codehilite"><code class="language-php linenums">$post = $this-&gt;form-&gt;getData();</code></pre>
 
 <p>Everything should continue to work. The changes done serve the purpose of
 de-coupling the details of how the form is structured from the controller,
@@ -1115,13 +1091,49 @@ update and delete routines for the blog module.</p>
     </div>
     <!-- content:end -->
 
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
-        </p>
-        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
-    </footer>
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="../../js/jquery-1.10.2.min.js"></script>
     <script src="../../js/bootstrap-3.0.3.min.js"></script>
@@ -1161,7 +1173,7 @@ update and delete routines for the blog module.</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -1266,7 +1278,7 @@ update and delete routines for the blog module.</p>
     // Fetch the component list and display it.
     function loadComponentList () {
       $.ajax({
-        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
         dataType: "text json",
         success: parseComponentList,
         error: function (e) {

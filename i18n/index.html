@@ -16,6 +16,7 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf-web.css" rel="stylesheet">
     <link href="../css/zf.css" rel="stylesheet">
     <link href="../css/prism-zf.css" rel="stylesheet">
 
@@ -56,7 +57,7 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
               <a href="..">tutorials</a>
             </span>
         </div>
@@ -308,7 +309,7 @@
 </div>
 
     <!-- content:begin -->
-    <div class="container">
+    <div id="page-top" class="container docs">
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -340,7 +341,7 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">Docs</a> &raquo;</li>
+  <li><a href="..">tutorials</a> &raquo;</li>
   
     
       
@@ -362,8 +363,7 @@ integration with zend-mvc via the <a href="https://zendframework.github.io/zend-
 component.</p>
 <h2 id="installation">Installation</h2>
 <p>Install zend-mvc-i18n via Composer:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-mvc-i18n</code></pre>
-
+<pre class="codehilite"><code class="language-bash linenums">$ composer require zendframework/zend-mvc-i18n</code></pre>
 
 <p>Assuming you are using <a href="https://zendframework.github.io/zend-component-installer">zend-component-installer</a>
 (which is installed by default with the skeleton application), this will prompt
@@ -406,7 +406,7 @@ that provides:</p>
 <li>a file pattern for identifying the files to use</li>
 </ul>
 <p>As examples:</p>
-<pre class="codehilite"><code class="language-php">// in a module's module.config.php:
+<pre class="codehilite"><code class="language-php linenums">// in a module's module.config.php:
 'translator' =&gt; [
     'locale' =&gt; 'en_US',
     'translation_file_patterns' =&gt; [
@@ -430,7 +430,6 @@ that provides:</p>
     ],
 ],</code></pre>
 
-
 <p>Once the above configuration is in place, the translator will be active in your
 application, allowing you to use it.</p>
 <h2 id="translating-strings-in-templates">Translating strings in templates</h2>
@@ -440,8 +439,7 @@ and <a href="https://zendframework.github.io/zend-i18n/view-helpers/#translatepl
 view helpers allow you to provide translations within your view scripts.</p>
 <p>As an example, you might want to translate the string "All rights reserved" in
 your footer. You could do the following in your layout script:</p>
-<pre class="codehilite"><code class="language-php">&lt;p&gt;&amp;copy; 2016 by Examples Ltd. &lt;?= $this-&gt;translate('All rights reserved') ?&gt;&lt;/p&gt;</code></pre>
-
+<pre class="codehilite"><code class="language-php linenums">&lt;p&gt;&amp;copy; 2016 by Examples Ltd. &lt;?= $this-&gt;translate('All rights reserved') ?&gt;&lt;/p&gt;</code></pre>
 
 <h2 id="translating-route-segments">Translating route segments</h2>
 <p>In order to enable route translation, you need to do two things:</p>
@@ -452,7 +450,7 @@ your footer. You could do the following in your layout script:</p>
 <p>To tell the application to use the translation-aware route class, we can update
 our routing configuration. Underneath the top-level <code>router</code> key, we'll add the
 <code>router_class</code> key:</p>
-<pre class="codehilite"><code class="language-php">// In a module.config.php file, or config/autoload/global.php:
+<pre class="codehilite"><code class="language-php linenums">// In a module.config.php file, or config/autoload/global.php:
 'router' =&gt; [
     'router_class' =&gt; Zend\Mvc\I18n\Router\TranslatorAwareTreeRouteStack::class,
     'routes' =&gt; [
@@ -460,10 +458,9 @@ our routing configuration. Underneath the top-level <code>router</code> key, we'
     ],
 ],</code></pre>
 
-
 <p>If you want to use an alternate text domain, you can do so via the
 <code>translator_text_domain</code> key, also directly below the <code>router</code> key:</p>
-<pre class="codehilite"><code class="language-php">// In a module.config.php file, or config/autoload/global.php:
+<pre class="codehilite"><code class="language-php linenums">// In a module.config.php file, or config/autoload/global.php:
 'router' =&gt; [
     'router_class' =&gt; Zend\Mvc\I18n\Router\TranslatorAwareTreeRouteStack::class,
     'translator_text_domain' =&gt; 'router',
@@ -472,12 +469,10 @@ our routing configuration. Underneath the top-level <code>router</code> key, we'
     ],
 ],</code></pre>
 
-
 <p>Now that the router is aware of translations, we can use translatable strings in
 our routes. To do so, surround the string capable of translation with braces
 (<code>{}</code>). As an example:</p>
-<pre class="codehilite"><code class="language-php">'route' =&gt; '/{login}',</code></pre>
-
+<pre class="codehilite"><code class="language-php linenums">'route' =&gt; '/{login}',</code></pre>
 
 <p>specifies the word "login" as translatable.</p>
 
@@ -499,13 +494,49 @@ our routes. To do so, surround the string capable of translation with braces
     </div>
     <!-- content:end -->
 
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
-        </p>
-        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
-    </footer>
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
@@ -545,7 +576,7 @@ our routes. To do so, surround the string capable of translation with braces
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -650,7 +681,7 @@ our routes. To do so, surround the string capable of translation with braces
     // Fetch the component list and display it.
     function loadComponentList () {
       $.ajax({
-        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
         dataType: "text json",
         success: parseComponentList,
         error: function (e) {

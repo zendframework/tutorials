@@ -16,6 +16,7 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/zf-web.css" rel="stylesheet">
     <link href="../../css/zf.css" rel="stylesheet">
     <link href="../../css/prism-zf.css" rel="stylesheet">
 
@@ -56,7 +57,7 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
               <a href="../..">tutorials</a>
             </span>
         </div>
@@ -308,7 +309,7 @@
 </div>
 
     <!-- content:begin -->
-    <div class="container">
+    <div id="page-top" class="container docs">
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -340,7 +341,7 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="../..">Docs</a> &raquo;</li>
+  <li><a href="../..">tutorials</a> &raquo;</li>
   
     
       
@@ -367,7 +368,7 @@ well as their validation, the latter of which is handled by the zend-inputfilter
 component. We'll start by creating a new class, <code>Album\Form\AlbumForm</code>,
 extending from <code>Zend\Form\Form</code>. Create the file
 <code>module/Album/src/Form/AlbumForm.php</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-php">namespace Album\Form;
+<pre class="codehilite"><code class="language-php linenums">namespace Album\Form;
 
 use Zend\Form\Form;
 
@@ -407,7 +408,6 @@ class AlbumForm extends Form
     }
 }</code></pre>
 
-
 <p>Within the constructor of <code>AlbumForm</code> we do several things. First, we set the
 name of the form as we call the parent's constructor. The, we create four form
 elements: the id, title, artist, and submit button. For each item we set various
@@ -417,8 +417,7 @@ attributes and options, including the label to be displayed.</p>
 <p>HTML forms can be sent using <code>POST</code> and <code>GET</code>. zend-form defaults to <code>POST</code>;
 therefore you don't have to be explicit in setting this option. If you want to
 change it to <code>GET</code> however, set the method attribute in the constructor:</p>
-<pre class="codehilite"><code class="language-php">$this-&gt;setAttribute('method', 'GET');</code></pre>
-
+<pre class="codehilite"><code class="language-php linenums">$this-&gt;setAttribute('method', 'GET');</code></pre>
 
 </blockquote>
 <p>We also need to set up validation for this form.  <a href="https://zendframework.github.io/zend-inputfilter">zend-inputfilter</a>
@@ -426,7 +425,7 @@ provides a general purpose mechanism for input validation. It also provides an
 interface, <code>InputFilterAwareInterface</code>, which zend-form will use in order to
 bind an input filter to a given form. We'll add this capability now to our
 <code>Album</code> class.</p>
-<pre class="codehilite"><code class="language-php">// module/Album/src/Model/Album.php:
+<pre class="codehilite"><code class="language-php linenums">// module/Album/src/Model/Album.php:
 namespace Album\Model;
 
 // Add the following import statements:
@@ -524,7 +523,6 @@ class Album implements InputFilterAwareInterface
     }
 }</code></pre>
 
-
 <p>The <code>InputFilterAwareInterface</code> defines two methods: <code>setInputFilter()</code> and
 <code>getInputFilter()</code>. We only need to implement <code>getInputFilter()</code> so we
 throw an exception from <code>setInputFilter()</code>.</p>
@@ -537,7 +535,7 @@ them to be <em>required</em> and add a <code>StringLength</code> validator to en
 doesn't enter more characters than we can store into the database.</p>
 <p>We now need to get the form to display and then process it on submission. This
 is done within the <code>AlbumController::addAction()</code>:</p>
-<pre class="codehilite"><code class="language-php">// module/Album/src/Controller/AlbumController.php:
+<pre class="codehilite"><code class="language-php linenums">// module/Album/src/Controller/AlbumController.php:
 
 // Add the following import statements at the top of the file:
 use Album\Form\AlbumForm;
@@ -575,57 +573,50 @@ class AlbumController extends AbstractActionController
     /* ... */
 }</code></pre>
 
-
 <p>After adding the <code>Album</code> and <code>AlbumForm</code> classes to the import list, we
 implement <code>addAction()</code>. Let's look at the <code>addAction()</code> code in a little more
 detail:</p>
-<pre class="codehilite"><code class="language-php">$form = new AlbumForm();
+<pre class="codehilite"><code class="language-php linenums">$form = new AlbumForm();
 $form-&gt;get('submit')-&gt;setValue('Add');</code></pre>
-
 
 <p>We instantiate <code>AlbumForm</code> and set the label on the submit button to "Add". We
 do this here as we'll want to re-use the form when editing an album and will use
 a different label.</p>
-<pre class="codehilite"><code class="language-php">$request = $this-&gt;getRequest();
+<pre class="codehilite"><code class="language-php linenums">$request = $this-&gt;getRequest();
 
 if (! $request-&gt;isPost()) {
     return ['form' =&gt; $form];
 }</code></pre>
 
-
 <p>If the request is not a <code>POST</code> request, then no form data has been submitted,
 and we need to display the form. zend-mvc allows you to return an array of data
 instead of a view model if desired; if you do, the array will be used to create
 a view model.</p>
-<pre class="codehilite"><code class="language-php">$album = new Album();
+<pre class="codehilite"><code class="language-php linenums">$album = new Album();
 $form-&gt;setInputFilter($album-&gt;getInputFilter());
 $form-&gt;setData($request-&gt;getPost());</code></pre>
-
 
 <p>At this point, we know we have a form submission. We create an <code>Album</code> instance,
 and pass its input filter on to the form; additionally, we pass the submitted
 data from the request instance to the form.</p>
-<pre class="codehilite"><code class="language-php">if (! $form-&gt;isValid()) {
+<pre class="codehilite"><code class="language-php linenums">if (! $form-&gt;isValid()) {
     return ['form' =&gt; $form];
 }</code></pre>
-
 
 <p>If form validation fails, we want to redisplay the form. At this point, the form
 contains information about what fields failed validation, and why, and this
 information will be communicated to the view layer.</p>
-<pre class="codehilite"><code class="language-php">$album-&gt;exchangeArray($form-&gt;getData());
+<pre class="codehilite"><code class="language-php linenums">$album-&gt;exchangeArray($form-&gt;getData());
 $this-&gt;table-&gt;saveAlbum($album);</code></pre>
-
 
 <p>If the form is valid, then we grab the data from the form and store to the model
 using <code>saveAlbum()</code>.</p>
-<pre class="codehilite"><code class="language-php">return $this-&gt;redirect()-&gt;toRoute('album');</code></pre>
-
+<pre class="codehilite"><code class="language-php linenums">return $this-&gt;redirect()-&gt;toRoute('album');</code></pre>
 
 <p>After we have saved the new album row, we redirect back to the list of albums
 using the <code>Redirect</code> controller plugin.</p>
 <p>We now need to render the form in the <code>add.phtml</code> view script:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 // module/Album/view/album/album/add.phtml:
 
 $title = 'Add new album';
@@ -643,7 +634,6 @@ echo $this-&gt;formRow($form-&gt;get('artist'));
 echo $this-&gt;formSubmit($form-&gt;get('submit'));
 echo $this-&gt;form()-&gt;closeTag();</code></pre>
 
-
 <p>We display a title as before, and then we render the form. zend-form provides
 several view helpers to make this a little easier. The <code>form()</code> view helper has
 an <code>openTag()</code> and <code>closeTag()</code> method which we use to open and close the form.
@@ -654,8 +644,7 @@ standalone and have no validation rules, we use <code>formHidden()</code> and
 <p>Alternatively, the process of rendering the form can be simplified by using the
 bundled <code>formCollection</code> view helper. For example, in the view script above
 replace all the form-rendering echo statements with:</p>
-<pre class="codehilite"><code class="language-php">echo $this-&gt;formCollection($form);</code></pre>
-
+<pre class="codehilite"><code class="language-php linenums">echo $this-&gt;formCollection($form);</code></pre>
 
 <p>This will iterate over the form structure, calling the appropriate label,
 element, and error view helpers for each element, but you still have to wrap
@@ -675,7 +664,7 @@ can address that in our view script by:</p>
 <li>Adding attributes to elements.</li>
 </ul>
 <p>Update your <code>add.phtml</code> view script to read as follows:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 $title = 'Add new album';
 $this-&gt;headTitle($title);
 ?&gt;
@@ -719,7 +708,6 @@ echo $this-&gt;formSubmit($submit);
 echo $this-&gt;formHidden($form-&gt;get('id'));
 echo $this-&gt;form()-&gt;closeTag();</code></pre>
 
-
 <p>The results we get are much better:</p>
 <p><img alt="Add Album Form" src="../../images/user-guide.forms-and-actions.add-album-form.png" class="img-responsive"/></p>
 <p>The above is meant to demonstrate both the ease of use of the default form
@@ -728,7 +716,7 @@ You should be able to generate any markup necessary for your site.</p>
 <h2 id="editing-an-album">Editing an album</h2>
 <p>Editing an album is almost identical to adding one, so the code is very similar.
 This time we use <code>editAction()</code> in the <code>AlbumController</code>:</p>
-<pre class="codehilite"><code class="language-php">// module/Album/src/Controller/AlbumController.php:
+<pre class="codehilite"><code class="language-php linenums">// module/Album/src/Controller/AlbumController.php:
 // ...
 
     public function editAction()
@@ -772,11 +760,10 @@ This time we use <code>editAction()</code> in the <code>AlbumController</code>:<
         return $this-&gt;redirect()-&gt;toRoute('album', ['action' =&gt; 'index']);
     }</code></pre>
 
-
 <p>This code should look comfortably familiar. Let's look at the differences from
 adding an album. Firstly, we look for the <code>id</code> that is in the matched route and
 use it to load the album to be edited:</p>
-<pre class="codehilite"><code class="language-php">$id = (int) $this-&gt;params()-&gt;fromRoute('id', 0);
+<pre class="codehilite"><code class="language-php linenums">$id = (int) $this-&gt;params()-&gt;fromRoute('id', 0);
 
 if (0 === $id) {
     return $this-&gt;redirect()-&gt;toRoute('album', ['action' =&gt; 'add']);
@@ -791,7 +778,6 @@ try {
     return $this-&gt;redirect()-&gt;toRoute('album', ['action' =&gt; 'index']);
 }</code></pre>
 
-
 <p><code>params</code> is a controller plugin that provides a convenient way to retrieve
 parameters from the matched route. We use it to retrieve the <code>id</code> from the route
 we created within the Album module's <code>module.config.php</code>. If the <code>id</code> is zero,
@@ -800,10 +786,9 @@ entity from the database.</p>
 <p>We have to check to make sure that the album with the specified <code>id</code> can
 actually be found. If it cannot, then the data access method throws an
 exception. We catch that exception and re-route the user to the index page.</p>
-<pre class="codehilite"><code class="language-php">$form = new AlbumForm();
+<pre class="codehilite"><code class="language-php linenums">$form = new AlbumForm();
 $form-&gt;bind($album);
 $form-&gt;get('submit')-&gt;setAttribute('value', 'Edit');</code></pre>
-
 
 <p>The form's <code>bind()</code> method attaches the model to the form. This is used in two ways:</p>
 <ul>
@@ -817,7 +802,7 @@ hydrators, but the default one is <code>Zend\Hydrator\ArraySerializable</code> w
 expects to find two methods in the model: <code>getArrayCopy()</code> and
 <code>exchangeArray()</code>. We have already written <code>exchangeArray()</code> in our <code>Album</code>
 entity, so we now need to write <code>getArrayCopy()</code>:</p>
-<pre class="codehilite"><code class="language-php">// module/Album/src/Model/Album.php:
+<pre class="codehilite"><code class="language-php linenums">// module/Album/src/Model/Album.php:
 // ...
 
     public function exchangeArray($data)
@@ -839,13 +824,12 @@ entity, so we now need to write <code>getArrayCopy()</code>:</p>
 
 // ...</code></pre>
 
-
 <p>As a result of using <code>bind()</code> with its hydrator, we do not need to populate the
 form's data back into the <code>$album</code> as that's already been done, so we can just
 call the mapper's <code>saveAlbum()</code> method to store the changes back to the
 database.</p>
 <p>The view template, <code>edit.phtml</code>, looks very similar to the one for adding an album:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 // module/Album/view/album/album/edit.phtml:
 
 $title = 'Edit album';
@@ -889,7 +873,6 @@ echo $this-&gt;formSubmit($submit);
 echo $this-&gt;formHidden($form-&gt;get('id'));
 echo $this-&gt;form()-&gt;closeTag();</code></pre>
 
-
 <p>The only changes are to use the ‘Edit Album' title and set the form's action to
 the 'edit' action too, using the current album identifier.</p>
 <p>You should now be able to edit albums.</p>
@@ -903,7 +886,7 @@ POST instead.</p>
 click "yes", we will do the deletion. As the form is trivial, we'll code it
 directly into our view (zend-form is, after all, optional!).</p>
 <p>Let's start with the action code in <code>AlbumController::deleteAction()</code>:</p>
-<pre class="codehilite"><code class="language-php">// module/Album/src/Album/Controller/AlbumController.php:
+<pre class="codehilite"><code class="language-php linenums">// module/Album/src/Album/Controller/AlbumController.php:
 //...
     // Add content to the following method:
     public function deleteAction()
@@ -933,10 +916,9 @@ directly into our view (zend-form is, after all, optional!).</p>
     }
 //...</code></pre>
 
-
 <p>As before, we get the <code>id</code> from the matched route, and check the request object's <code>isPost()</code> to determine whether to show the confirmation page or to delete the album. We use the table object to delete the row using the <code>deleteAlbum()</code> method and then redirect back the list of albums. If the request is not a POST, then we retrieve the correct database record and assign to the view, along with the <code>id</code>.</p>
 <p>The view script is a simple form:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 // module/Album/view/album/album/delete.phtml:
 
 $title = 'Delete album';
@@ -960,7 +942,6 @@ $this-&gt;headTitle($title);
 &lt;/div&gt;
 &lt;/form&gt;</code></pre>
 
-
 <p>In this script, we display a confirmation message to the user and then a form
 with "Yes" and "No" buttons. In the action, we checked specifically for the
 "Yes" value when doing the deletion.</p>
@@ -970,7 +951,7 @@ doesn't display the list of albums.</p>
 <p>This is due to a route set up in the <code>Application</code> module's <code>module.config.php</code>.
 To change it, open <code>module/Application/config/module.config.php</code> and find the
 home route:</p>
-<pre class="codehilite"><code class="language-php">'home' =&gt; [
+<pre class="codehilite"><code class="language-php linenums">'home' =&gt; [
     'type' =&gt; \Zend\Router\Http\Literal::class,
     'options' =&gt; [
         'route'    =&gt; '/',
@@ -981,13 +962,11 @@ home route:</p>
     ],
 ],</code></pre>
 
-
 <p>Import <code>Album\Controller\AlbumController</code> at the top of the file:</p>
-<pre class="codehilite"><code class="language-php">use Album\Controller\AlbumController;</code></pre>
-
+<pre class="codehilite"><code class="language-php linenums">use Album\Controller\AlbumController;</code></pre>
 
 <p>and change the <code>controller</code> from <code>Controller\IndexController::class</code> to <code>AlbumController::class</code>:</p>
-<pre class="codehilite"><code class="language-php">'home' =&gt; [
+<pre class="codehilite"><code class="language-php linenums">'home' =&gt; [
     'type' =&gt; \Zend\Router\Http\Literal::class,
     'options' =&gt; [
         'route'    =&gt; '/',
@@ -997,7 +976,6 @@ home route:</p>
         ],
     ],
 ],</code></pre>
-
 
 <p>That's it &mdash; you now have a fully working application!</p>
 
@@ -1019,13 +997,49 @@ home route:</p>
     </div>
     <!-- content:end -->
 
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
-        </p>
-        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
-    </footer>
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="../../js/jquery-1.10.2.min.js"></script>
     <script src="../../js/bootstrap-3.0.3.min.js"></script>
@@ -1065,7 +1079,7 @@ home route:</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -1170,7 +1184,7 @@ home route:</p>
     // Fetch the component list and display it.
     function loadComponentList () {
       $.ajax({
-        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
         dataType: "text json",
         success: parseComponentList,
         error: function (e) {

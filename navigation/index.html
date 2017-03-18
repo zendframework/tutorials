@@ -16,6 +16,7 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf-web.css" rel="stylesheet">
     <link href="../css/zf.css" rel="stylesheet">
     <link href="../css/prism-zf.css" rel="stylesheet">
 
@@ -56,7 +57,7 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
               <a href="..">tutorials</a>
             </span>
         </div>
@@ -308,7 +309,7 @@
 </div>
 
     <!-- content:begin -->
-    <div class="container">
+    <div id="page-top" class="container docs">
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -342,7 +343,7 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">Docs</a> &raquo;</li>
+  <li><a href="..">tutorials</a> &raquo;</li>
   
     
       
@@ -367,7 +368,7 @@ In order to make this change, we need to undo some work we did earlier.
 Currently, navigating to the root of your app (<code>/</code>) routes you to the
 <code>AlbumController</code>'s default action. Let's undo this route change so we have two
 discrete entry points to the app, a home page, and an albums area.</p>
-<pre class="codehilite"><code class="language-php">// In module/Application/config/module.config.php:
+<pre class="codehilite"><code class="language-php linenums">// In module/Application/config/module.config.php:
 'home' =&gt; [
    'type' =&gt; Literal::class,
     'options' =&gt; [
@@ -379,7 +380,6 @@ discrete entry points to the app, a home page, and an albums area.</p>
     ],
 ],</code></pre>
 
-
 <p>(You can also now remove the import for the <code>Album\Controller\AlbumController</code>
 class.)</p>
 <p>This change means that if you go to the home page of your application
@@ -389,8 +389,7 @@ available at the <code>/album</code> route.</p>
 <h2 id="setting-up-zend-navigation">Setting Up zend-navigation</h2>
 <p>First, we need to install zend-navigation. From your root directory, execute the
 following:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-navigation</code></pre>
-
+<pre class="codehilite"><code class="language-bash linenums">$ composer require zendframework/zend-navigation</code></pre>
 
 <p>Assuming you followed the <a href="../getting-started/overview/">Getting Started tutorial</a>,
 you will be prompted by the <a href="https://zendframework.github.io/zend-component-installer">zend-component-installer</a>
@@ -410,13 +409,12 @@ configuration manually. You can do this in one of two ways:</p>
 <li>Alternately, add a new file, <code>config/autoload/navigation.global.php</code>, with
   the following contents:</li>
 </ul>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 use Zend\Navigation\ConfigProvider;
 
 return [
     'service_manager' =&gt; (new ConfigProvider())-&gt;getDependencyConfig(),
 ];</code></pre>
-
 
 </blockquote>
 <p>Once installed, our application is now aware of zend-navigation, and even has
@@ -425,7 +423,7 @@ some default factories in place, which we will now make use of.</p>
 <p>Next up, we need zend-navigation to understand the hierarchy of our site.
 To do this, we can add a <code>navigation</code> key to our configuration, with the site
 structure details. We'll do that in the <code>Application</code> module configuration:</p>
-<pre class="codehilite"><code class="language-php">// in module/Application/config/module.config.php:
+<pre class="codehilite"><code class="language-php linenums">// in module/Application/config/module.config.php:
 return [
     /* ... */
 
@@ -462,7 +460,6 @@ return [
     /* ... */
 ];</code></pre>
 
-
 <p>This configuration maps out the pages we've defined in our Album module, with
 labels linking to the given route names and actions. You can define highly complex
 hierarchical sites here with pages and sub-pages linking to route names,
@@ -472,18 +469,17 @@ controller/action pairs, or external uris. For more information, see the
 <p>Now that we have the navigation helper configured by our service manager and
 merged config, we can add the menu to the title bar to our layout by
 using the <a href="https://zendframework.github.io/zend-navigation/helpers/menu/">menu view helper</a>:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+<pre class="codehilite"><code class="language-php linenums">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
 &lt;div class=&quot;collapse navbar-collapse&quot;&gt;
     &lt;?php // add this: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')-&gt;menu() ?&gt;
 &lt;/div&gt;</code></pre>
 
-
 <p>The navigation helper is provided by default with zend-view, and uses the service
 manager configuration we've already defined to configure itself automatically.
 Refreshing your application, you will see a working menu; with just a few tweaks
 however, we can make it look even better:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+<pre class="codehilite"><code class="language-php linenums">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
 &lt;div class=&quot;collapse navbar-collapse&quot;&gt;
     &lt;?php // update to: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')
@@ -492,7 +488,6 @@ however, we can make it look even better:</p>
         -&gt;setMaxDepth(0)
         -&gt;setUlClass('nav navbar-nav') ?&gt;
 &lt;/div&gt;</code></pre>
-
 
 <p>Here we tell the renderer to give the root <code>&lt;ul&gt;</code> the class of <code>nav</code> (so that
 Bootstrap styles the menu correctly), and only render the first level of any
@@ -508,13 +503,12 @@ add breadcrumbs above the main content pane, so our users know exactly
 where they are in our website. Inside the container <code>&lt;div&gt;</code>, before we
 output the content from the view, let's add a breadcrumb by using the
 <a href="https://zendframework.github.io/zend-navigation/helpers/breadcrumbs/">breadcrumbs view helper</a>.</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // module/Application/view/layout/layout.phtml: ?&gt;
+<pre class="codehilite"><code class="language-php linenums">&lt;?php // module/Application/view/layout/layout.phtml: ?&gt;
 &lt;div class=&quot;container&quot;&gt;
     &lt;?php // add the following line: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')-&gt;breadcrumbs()-&gt;setMinDepth(0) ?&gt;
     &lt;?= $this-&gt;content ?&gt;
 &lt;/div&gt;</code></pre>
-
 
 <p>This adds a simple but functional breadcrumb to every page (we tell it to render
 from a depth of 0 so we see all page levels), but we can do better than that!
@@ -522,7 +516,7 @@ Because Bootstrap has a styled breadcrumb as part of its base CSS, let's add
 a partial that outputs the <code>&lt;ul&gt;</code> using Bootstrap styles. We'll create it in the
 <code>view</code> directory of the <code>Application</code> module (this partial is application wide,
 rather than album specific):</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/partial/breadcrumb.phtml: ?&gt;
+<pre class="codehilite"><code class="language-php linenums">&lt;?php // in module/Application/view/partial/breadcrumb.phtml: ?&gt;
 &lt;ul class=&quot;breadcrumb&quot;&gt;
     &lt;?php
     // iterate through the pages
@@ -544,12 +538,11 @@ rather than album specific):</p>
     &lt;?php endforeach; ?&gt;
 &lt;/ul&gt;</code></pre>
 
-
 <p>Notice how the partial is passed a <code>Zend\View\Model\ViewModel</code> instance with the
 <code>pages</code> property set to an array of pages to render.</p>
 <p>Now we need to tell the breadcrumb helper to use the partial we have just
 written:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+<pre class="codehilite"><code class="language-php linenums">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
 &lt;div class=&quot;container&quot;&gt;
     &lt;?php // Update to: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')
@@ -558,7 +551,6 @@ written:</p>
             -&gt;setPartial('partial/breadcrumb') ?&gt;
     &lt;?= $this-&gt;content ?&gt;
 &lt;/div&gt;</code></pre>
-
 
 <p>Refreshing the page now gives us a styled set of breadcrumbs on each page.</p>
 
@@ -580,13 +572,49 @@ written:</p>
     </div>
     <!-- content:end -->
 
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
-        </p>
-        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
-    </footer>
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
@@ -626,7 +654,7 @@ written:</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -731,7 +759,7 @@ written:</p>
     // Fetch the component list and display it.
     function loadComponentList () {
       $.ajax({
-        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
         dataType: "text json",
         success: parseComponentList,
         error: function (e) {

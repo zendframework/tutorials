@@ -16,6 +16,7 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf-web.css" rel="stylesheet">
     <link href="../css/zf.css" rel="stylesheet">
     <link href="../css/prism-zf.css" rel="stylesheet">
 
@@ -56,7 +57,7 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
               <a href="..">tutorials</a>
             </span>
         </div>
@@ -308,7 +309,7 @@
 </div>
 
     <!-- content:begin -->
-    <div class="container">
+    <div id="page-top" class="container docs">
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -344,7 +345,7 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">Docs</a> &raquo;</li>
+  <li><a href="..">tutorials</a> &raquo;</li>
   
     
       
@@ -381,7 +382,7 @@ optionally seed the <code>ServiceManager</code>. For purposes of this tutorial w
 this the <strong>system configuration</strong>.</p>
 <p>When using the skeleton application, the <strong>system configuration</strong> is by default
 in <code>config/application.config.php</code>. The defaults look like this:</p>
-<pre class="codehilite"><code class="language-php">return [
+<pre class="codehilite"><code class="language-php linenums">return [
     // Retrieve list of modules used in this application.
     'modules' =&gt; require __DIR__ . '/modules.config.php',
 
@@ -443,7 +444,6 @@ in <code>config/application.config.php</code>. The defaults look like this:</p>
     // 'service_manager' =&gt; [],
 ];</code></pre>
 
-
 <p>The system configuration is for the bits and pieces related to the MVC that run
 before your application is ready. The configuration is usually brief, and quite
 minimal.</p>
@@ -469,8 +469,7 @@ provides a concise and conventions-based approach to switching between
 specifically production and development.  The package is installed by default
 with version 3+ skeletons, and can be installed with existing v2 skeletons
 using the following:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zfcampus/zf-development-mode</code></pre>
-
+<pre class="codehilite"><code class="language-bash linenums">$ composer require zfcampus/zf-development-mode</code></pre>
 
 <p>The approach it takes is as follows:</p>
 <ul>
@@ -485,8 +484,7 @@ using the following:</p>
   the application configuration prior to configuring the <code>Application</code> instance.</li>
 </ul>
 <p>When you execute:</p>
-<pre class="codehilite"><code class="language-bash">$ ./vendor/bin/zf-development-mode enable</code></pre>
-
+<pre class="codehilite"><code class="language-bash linenums">$ ./vendor/bin/zf-development-mode enable</code></pre>
 
 <p>The <code>.dist</code> files are copied to versions removing the suffix; doing so ensures
 they will then be used when invoking the application.</p>
@@ -495,22 +493,19 @@ they will then be used when invoking the application.</p>
 <li>In <code>config/development.config.php.dist</code>, add <code>ZendDeveloperTools</code> to the list
   of modules:</li>
 </ul>
-<pre class="codehilite"><code class="language-php">'modules' =&gt; [
+<pre class="codehilite"><code class="language-php linenums">'modules' =&gt; [
     'ZendDeveloperTools',
 ],</code></pre>
-
 
 <ul>
 <li>Also in <code>config/development.config.php.dist</code>, we will disable config caching:</li>
 </ul>
-<pre class="codehilite"><code class="language-php">'config_cache_enable' =&gt; false,</code></pre>
-
+<pre class="codehilite"><code class="language-php linenums">'config_cache_enable' =&gt; false,</code></pre>
 
 <ul>
 <li>In <code>config/application.config.php</code>, we will enable config caching:</li>
 </ul>
-<pre class="codehilite"><code class="language-php">'config_cache_enable' =&gt; true,</code></pre>
-
+<pre class="codehilite"><code class="language-php linenums">'config_cache_enable' =&gt; true,</code></pre>
 
 <p>Enabling development mode now enables the selected module, and disables
 configuration caching; disabling development mode enables configuration
@@ -562,8 +557,7 @@ their own specific overrides?</p>
 configuration, <code>APP_ENV</code>. In Apache, you'd put a directive like the following
 in either your system-wide apache.conf or httpd.conf, or in the definition for
 your virtual host; alternately, it can be placed in an .htaccess file.</p>
-<pre class="codehilite"><code class="language-apacheconf">SetEnv &quot;APP_ENV&quot; &quot;development&quot;</code></pre>
-
+<pre class="codehilite"><code class="language-apacheconf linenums">SetEnv &quot;APP_ENV&quot; &quot;development&quot;</code></pre>
 
 <p>For other web servers, consult the web server documentation to determine how to
 set environment variables.</p>
@@ -571,16 +565,15 @@ set environment variables.</p>
 environment variable is present.</p>
 <p>With that in place, We can alter the glob path in the system configuration
 slightly:</p>
-<pre class="codehilite"><code class="language-php">'config_glob_paths' =&gt; [
+<pre class="codehilite"><code class="language-php linenums">'config_glob_paths' =&gt; [
     realpath(__DIR__) . sprintf('config/autoload/{,*.}{global,%s,local}.php', getenv('APP_ENV') ?: 'production')
 ],</code></pre>
-
 
 <p>The above will allow you to define an additional set of application
 configuration files per environment; furthermore, these will be loaded <em>only</em> if
 that environment is detected!</p>
 <p>As an example, consider the following tree of configuration files:</p>
-<pre class="codehilite"><code class="language-text">config/
+<pre class="codehilite"><code class="language-text linenums">config/
     autoload/
         global.php
         local.php
@@ -588,14 +581,12 @@ that environment is detected!</p>
         users.testing.php
         users.local.php</code></pre>
 
-
 <p>If <code>$env</code> evaluates to <code>testing</code>, then the following files will be merged, in
 the following order:</p>
-<pre class="codehilite"><code class="language-text">global.php
+<pre class="codehilite"><code class="language-text linenums">global.php
 users.testing.php
 local.php
 users.local.php</code></pre>
-
 
 <p>Note that <code>users.development.php</code> is not loaded &mdash; this is because it will
 not match the glob pattern!</p>
@@ -616,11 +607,10 @@ application. Modules have two general mechanisms for doing this.</p>
 <code>Zend\ModuleManager\Feature\ConfigProviderInterface</code> and/or a <code>getConfig()</code>
 method can return their configuration. The default, recommended implementation
 of the <code>getConfig()</code> method is:</p>
-<pre class="codehilite"><code class="language-php">public function getConfig()
+<pre class="codehilite"><code class="language-php linenums">public function getConfig()
 {
     return include __DIR__ . '/config/module.config.php';
 }</code></pre>
-
 
 <p>where <code>module.config.php</code> returns a PHP array. From that PHP array you can
 provide general configuration as well as configuration for all the available
@@ -755,7 +745,7 @@ it.</p>
 <p>The <code>ConfigListener</code> itself listens to the event at priority 1000 (i.e., very
 high), which is when the configuration is merged. You can tie into this to
 modify the merged configuration from your module, via the <code>init()</code> method.</p>
-<pre class="codehilite"><code class="language-php">namespace Foo;
+<pre class="codehilite"><code class="language-php linenums">namespace Foo;
 
 use Zend\ModuleManager\ModuleEvent;
 use Zend\ModuleManager\ModuleManager;
@@ -785,7 +775,6 @@ class Module
         $configListener-&gt;setMergedConfig($config);
     }
 }</code></pre>
-
 
 <p>At this point, the merged application configuration will no longer contain the
 key <code>some_key</code>.</p>
@@ -841,13 +830,49 @@ merged.</p>
     </div>
     <!-- content:end -->
 
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
-        </p>
-        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
-    </footer>
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
@@ -887,7 +912,7 @@ merged.</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -992,7 +1017,7 @@ merged.</p>
     // Fetch the component list and display it.
     function loadComponentList () {
       $.ajax({
-        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
         dataType: "text json",
         success: parseComponentList,
         error: function (e) {

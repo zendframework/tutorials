@@ -3,8 +3,8 @@
 
     
     <url>
-     <loc>None/</loc>
-     <lastmod>2016-09-07</lastmod>
+     <loc>/</loc>
+     <lastmod>2017-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,60 +12,44 @@
     
         
     <url>
-     <loc>None</loc>
+     <loc></loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/unit-testing/</loc>
-     <lastmod>2016-09-07</lastmod>
+     <loc>/unit-testing/</loc>
+     <lastmod>2017-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/navigation/</loc>
-     <lastmod>2016-09-07</lastmod>
+     <loc>/navigation/</loc>
+     <lastmod>2017-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/pagination/</loc>
-     <lastmod>2016-09-07</lastmod>
+     <loc>/pagination/</loc>
+     <lastmod>2017-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None</loc>
+     <loc></loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/advanced-config/</loc>
-     <lastmod>2016-09-07</lastmod>
+     <loc>/advanced-config/</loc>
+     <lastmod>2017-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/i18n/</loc>
-     <lastmod>2016-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>None/db-adapter/</loc>
-     <lastmod>2016-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>None/event-manager/</loc>
-     <lastmod>2016-09-07</lastmod>
+     <loc>/i18n/</loc>
+     <lastmod>2017-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -74,7 +58,23 @@
     
         
     <url>
-     <loc>None</loc>
+     <loc>/db-adapter/</loc>
+     <lastmod>2017-03-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/event-manager/</loc>
+     <lastmod>2017-03-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc></loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>

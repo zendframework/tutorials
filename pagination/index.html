@@ -16,6 +16,7 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf-web.css" rel="stylesheet">
     <link href="../css/zf.css" rel="stylesheet">
     <link href="../css/prism-zf.css" rel="stylesheet">
 
@@ -56,7 +57,7 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
               <a href="..">tutorials</a>
             </span>
         </div>
@@ -308,7 +309,7 @@
 </div>
 
     <!-- content:begin -->
-    <div class="container">
+    <div id="page-top" class="container docs">
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -344,7 +345,7 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">Docs</a> &raquo;</li>
+  <li><a href="..">tutorials</a> &raquo;</li>
   
     
       
@@ -368,7 +369,7 @@ and you can see their pagination control at the bottom of the page:</p>
 <h2 id="preparation">Preparation</h2>
 <p>As before, we are going to use sqlite, via PHP's PDO driver. Create a text file
 <code>data/album-fixtures.sql</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-sql">INSERT INTO &quot;album&quot; (&quot;artist&quot;, &quot;title&quot;)
+<pre class="codehilite"><code class="language-sql linenums">INSERT INTO &quot;album&quot; (&quot;artist&quot;, &quot;title&quot;)
 VALUES
     (&quot;David Bowie&quot;, &quot;The Next Day (Deluxe Version)&quot;),
     (&quot;Bastille&quot;, &quot;Bad Blood&quot;),
@@ -522,12 +523,10 @@ VALUES
     (&quot;Various Artists&quot;, &quot;Call the Midwife (Music From the TV Series)&quot;
 );</code></pre>
 
-
 <p>(The test data chosen happens to be the current 150 top iTunes albums at the
 time of writing!)</p>
 <p>Now create the database using the following:</p>
-<pre class="codehilite"><code class="language-bash">$ sqlite data/zftutorial.db &lt; data/album-fixtures.sql</code></pre>
-
+<pre class="codehilite"><code class="language-bash linenums">$ sqlite data/zftutorial.db &lt; data/album-fixtures.sql</code></pre>
 
 <p>Some systems, including Ubuntu, use the command <code>sqlite3</code>; check to see which
 one to use on your system.</p>
@@ -536,7 +535,7 @@ one to use on your system.</p>
 <p>If you do not have Sqlite installed on your system, you can use PHP to load
 the database using the same SQL schema file created earlier. Create the file
 <code>data/load_album_fixtures.php</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 $db = new PDO('sqlite:' . realpath(__DIR__) . '/zftutorial.db');
 $fh = fopen(__DIR__ . '/album-fixtures.sql', 'r');
 while ($line = fread($fh, 4096)) {
@@ -544,10 +543,8 @@ while ($line = fread($fh, 4096)) {
 }
 fclose($fh);</code></pre>
 
-
 <p>Once created, execute it:</p>
-<pre class="codehilite"><code class="language-bash">$ php data/load_album_fixtures.php</code></pre>
-
+<pre class="codehilite"><code class="language-bash linenums">$ php data/load_album_fixtures.php</code></pre>
 
 </blockquote>
 <p>This gives us a handy extra 150 rows to play with. If you now visit your album
@@ -555,8 +552,7 @@ list at <code>/album</code>, you'll see a huge long list of 150+ albums; it's ug
 <h2 id="install-zend-paginator">Install zend-paginator</h2>
 <p>zend-paginator is not installed or configured by default, so we will need to do
 that. Run the following from the application root:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-paginator</code></pre>
-
+<pre class="codehilite"><code class="language-bash linenums">$ composer require zendframework/zend-paginator</code></pre>
 
 <p>Assuming you followed the <a href="../getting-started/overview/">Getting Started tutorial</a>,
 you will be prompted by the <a href="https://zendframework.github.io/zend-component-installer">zend-component-installer</a>
@@ -576,13 +572,12 @@ configuration manually. You can do this in one of two ways:</p>
 <li>Alternately, add a new file, <code>config/autoload/paginator.global.php</code>, with
   the following contents:</li>
 </ul>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 use Zend\Paginator\ConfigProvider;
 
 return [
     'service_manager' =&gt; (new ConfigProvider())-&gt;getDependencyConfig(),
 ];</code></pre>
-
 
 </blockquote>
 <p>Once installed, our application is now aware of zend-paginator, and even has
@@ -594,7 +589,7 @@ This will automatically manipulate and run a <code>Zend\Db\Sql\Select</code> obj
 include the correct <code>LIMIT</code> and <code>WHERE</code> clauses so that it returns only the
 configured amount of data for the given page. Let's modify the <code>fetchAll</code> method
 of the <code>AlbumTable</code> model, so that it can optionally return a paginator object:</p>
-<pre class="codehilite"><code class="language-php">// in module/Album/src/Model/AlbumTable.php:
+<pre class="codehilite"><code class="language-php linenums">// in module/Album/src/Model/AlbumTable.php:
 namespace Album\Model;
 
 use RuntimeException;
@@ -643,7 +638,6 @@ class AlbumTable
     /* ... */
 }</code></pre>
 
-
 <p>This will return a fully configured <code>Paginator</code> instance. We've already told the
 <code>DbSelect</code> adapter to use our created <code>Select</code> object, to use the adapter that
 the <code>TableGateway</code> object uses, and also how to hydrate the result into a
@@ -655,7 +649,7 @@ exactly the same fashion as the non-paginated results.</p>
 <code>Pagination</code> object instead of a <code>ResultSet</code>. Both these objects can by iterated
 over to return hydrated <code>Album</code> objects, so we won't need to make many changes
 to the view script:</p>
-<pre class="codehilite"><code class="language-php">// in module/Album/src/Controller/AlbumController.php:
+<pre class="codehilite"><code class="language-php linenums">// in module/Album/src/Controller/AlbumController.php:
 
 /* ... */
 
@@ -678,7 +672,6 @@ public function indexAction()
 
 /* ... */</code></pre>
 
-
 <p>Here we are getting the configured <code>Paginator</code> object from the <code>AlbumTable</code>, and
 then telling it to use the page that is optionally passed in the querystring
 <code>page</code> parameter (after first validating it). We are also telling the paginator
@@ -686,7 +679,7 @@ we want to display 10 albums per page.</p>
 <h2 id="updating-the-view-script">Updating the View Script</h2>
 <p>Now, tell the view script to iterate over the <code>pagination</code> view variable, rather
 than the <code>albums</code> variable:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Album/view/album/album/index.phtml:
+<pre class="codehilite"><code class="language-php linenums">&lt;?php // in module/Album/view/album/album/index.phtml:
 $title = 'My albums';
 $this-&gt;headTitle($title);
 ?&gt;
@@ -713,7 +706,6 @@ $this-&gt;headTitle($title);
     &lt;?php endforeach; ?&gt;
 &lt;/table&gt;</code></pre>
 
-
 <p>Checking the <code>/album</code> route on your website should now give you a list of just
 10 albums, but with no method to navigate through the pages. Let's correct that
 now.</p>
@@ -725,7 +717,7 @@ we want it. Again, because we are using Bootstrap, this will primarily involve
 outputting correctly formatted HTML. Let's create the partial in the
 <code>module/Application/view/partial/</code> folder, so that we can use the control in all
 our modules:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/partial/paginator.phtml: ?&gt;
+<pre class="codehilite"><code class="language-php linenums">&lt;?php // in module/Application/view/partial/paginator.phtml: ?&gt;
 &lt;?php if ($this-&gt;pageCount): ?&gt;
 &lt;div&gt;
   &lt;ul class=&quot;pagination&quot;&gt;
@@ -777,7 +769,6 @@ our modules:</p>
 &lt;/div&gt;
 &lt;?php endif ?&gt;</code></pre>
 
-
 <p>This partial creates a pagination control with links to the correct pages (if
 there is more than one page in the pagination object). It will render a previous
 page link (and mark it disabled if you are at the first page), then render a
@@ -790,7 +781,7 @@ already told our controller to use to display the current page.</p>
 <p>To page through the albums, we need to invoke the
 <a href="https://zendframework.github.io/zend-paginator/usage/#rendering-pages-with-view-scripts">paginationControl view helper</a>
 to display our pagination control:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<pre class="codehilite"><code class="language-php linenums">&lt;?php
 // In module/Album/view/album/album/index.phtml:
 // Add at the end of the file after the table:
 ?&gt;
@@ -804,7 +795,6 @@ to display our pagination control:</p>
     // The route to link to when a user clicks a control link:
     ['route' =&gt; 'album']
 ) ?&gt;</code></pre>
-
 
 <p>The above echoes the <code>paginationControl</code> helper, and tells it to use our
 paginator instance, the <a href="https://zendframework.github.io/zend-paginator/advanced/#custom-scrolling-styles">sliding scrolling style</a>,
@@ -829,13 +819,49 @@ your application now should give you Bootstrap-styled pagination controls!</p>
     </div>
     <!-- content:end -->
 
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
-        </p>
-        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
-    </footer>
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
@@ -875,7 +901,7 @@ your application now should give you Bootstrap-styled pagination controls!</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -980,7 +1006,7 @@ your application now should give you Bootstrap-styled pagination controls!</p>
     // Fetch the component list and display it.
     function loadComponentList () {
       $.ajax({
-        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
         dataType: "text json",
         success: parseComponentList,
         error: function (e) {
