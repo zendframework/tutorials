@@ -79,6 +79,7 @@ Let's start by creating a file called `Album.php` under
 `module/Album/src/Model`:
 
 ```php
+<?php
 namespace Album\Model;
 
 class Album
@@ -104,6 +105,7 @@ will add an input filter later to ensure the values injected are valid.
 Next, we create our `AlbumTable.php` file in `module/Album/src/Model` directory like this:
 
 ```php
+<?php
 namespace Album\Model;
 
 use RuntimeException;

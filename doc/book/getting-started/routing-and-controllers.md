@@ -119,6 +119,7 @@ Let’s go ahead and create our controller class in the file
 `zf-tutorials/module/Album/src/Controller/AlbumController.php`:
 
 ```php
+<?php
 namespace Album\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;

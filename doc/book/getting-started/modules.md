@@ -46,6 +46,7 @@ namespace (i.e., `Album`); in the case of our new module, that means the class
 Let's create that file now, with the following contents:
 
 ```php
+<?php
 namespace Album;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -107,6 +108,7 @@ Create a file called `module.config.php` under
 `zf-tutorial/module/Album/config/`:
 
 ```php
+<?php
 namespace Album;
 
 use Zend\ServiceManager\Factory\InvokableFactory;

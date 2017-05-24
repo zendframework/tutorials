@@ -14,6 +14,7 @@ extending from `Zend\Form\Form`. Create the file
 `module/Album/src/Form/AlbumForm.php` with the following contents:
 
 ```php
+<?php
 namespace Album\Form;
 
 use Zend\Form\Form;
