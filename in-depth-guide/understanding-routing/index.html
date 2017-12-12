@@ -4,36 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend Framework Tutorials">  
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>Understanding the Router - tutorials</title>
 
-    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
-    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="../../css/base.css" rel="stylesheet">
-    <link href="../../css/zf-web.css" rel="stylesheet">
-    <link href="../../css/zf.css" rel="stylesheet">
-    <link href="../../css/prism-zf.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/styles-482aa2add1.css">
 
     
 </head>
@@ -57,8 +36,8 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
-              <a href="../..">tutorials</a>
+                <a class="logo-link" href="https://framework.zend.com/" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+                <a href="../..">tutorials</a>
             </span>
         </div>
 
@@ -339,15 +318,15 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="../..">tutorials</a> &raquo;</li>
+  <li><a href="../..">tutorials</a></li>
   
     
       
-        <li>MVC Tutorials &raquo;</li>
+        <li>MVC Tutorials</li>
       
     
       
-        <li>In-Depth Tutorial &raquo;</li>
+        <li>In-Depth Tutorial</li>
       
     
   
@@ -376,7 +355,7 @@ a specific string. Examples of URLs that can utilize literal routes include:</p>
 the "defaults" to return on a match. The "defaults" are then returned as route
 match parameters; one use case for these is to specify the controller to invoke
 and the action method on that controller to use. As an example:</p>
-<pre class="codehilite"><code class="language-php linenums">'router' =&gt; [
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'about' =&gt; [
             'type' =&gt; \Zend\Router\Http\Literal::class,
@@ -423,7 +402,7 @@ The primary differences are:</p>
 <p>As an example, let's consider a route where we want to specify a variable "year"
 segment, and indicate that the segment must contain exactly four digits; when
 matched, we should use the <code>ArchiveController</code> and its <code>byYear</code> action:</p>
-<pre class="codehilite"><code class="language-php linenums">'router' =&gt; [
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'archives' =&gt; [
             'type' =&gt; \Zend\Router\Http\Segment::class,
@@ -471,7 +450,7 @@ When writing these routes you have two options:</p>
 <h3 id="generic-routes">Generic routes</h3>
 <p>A generic route is greedy, and will match as many URLs as possible.
 A common approach is to write a route that matches the controller and action:</p>
-<pre class="codehilite"><code class="language-php linenums">'router' =&gt; [
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'default' =&gt; [
             'type' =&gt; \Zend\Router\Http\Segment::class,
@@ -521,7 +500,7 @@ as an attacker could use this fact to launch a Denial of Service.</p>
 <p>By now, you should be convinced that generic routes, while nice for prototyping,
 should likely be avoided. That means defining explicit routes.</p>
 <p>Your initial approach might be to create one route for every permutation:</p>
-<pre class="codehilite"><code class="language-php linenums">'router' =&gt; [
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'news' =&gt; [
             'type' =&gt; \Zend\Router\Http\Literal::class,
@@ -591,7 +570,7 @@ several optimizations:</p>
 </ul>
 <p>Let's take a look at a child routes configuration using the same example as
 above:</p>
-<pre class="codehilite"><code class="language-php linenums">'router' =&gt; [
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'news' =&gt; [
             // First we define the basic options for the parent route:
@@ -678,7 +657,7 @@ only a single blog entry based on internal identifier.  Given that ID is a
 variable parameter, we need a segment route. Furthermore, we know that the route
 will also match against the same <code>/blog</code> path prefix, so we can define it as a
 child route of our existing route. Let's update our configuration:</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/config/module.config.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/config/module.config.php:
 namespace Blog;
 
 use Zend\Router\Http\Literal;
@@ -726,7 +705,7 @@ positive digits, not beginning with 0.</p>
 <p>The route will call the same <code>controller</code> as the parent route, but using
 the <code>detailAction()</code> method instead. Go to your browser and request the URL
 <code>http://localhost:8080/blog/2</code>; you'll see the following error message:</p>
-<pre class="codehilite"><code class="language-text linenums">A 404 error occurred
+<pre class="codehilite"><code class="language-text">A 404 error occurred
 
 Page not found.
 
@@ -741,7 +720,7 @@ No Exception available</code></pre>
 <code>detailAction()</code>, which does not yet exist. We'll create this action now; go to
 your <code>ListController</code> and add the following action, which will return an empty
 view model</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/src/Controller/ListController.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/src/Controller/ListController.php:
 
 /* .. */
 
@@ -760,7 +739,7 @@ was unable to be rendered.</p>
 <p>Let's create this template now and assume that we will get a <code>Post</code> instance
 passed to the template to see the details of our blog. Create a new view file
 under <code>module/Blog/view/blog/list/detail.phtml</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;h1&gt;Post Details&lt;/h1&gt;
+<pre class="codehilite"><code class="language-php">&lt;h1&gt;Post Details&lt;/h1&gt;
 
 &lt;dl&gt;
     &lt;dt&gt;Post Title&lt;/dt&gt;
@@ -772,7 +751,7 @@ under <code>module/Blog/view/blog/list/detail.phtml</code>:</p>
 
 <p>The above template is expecting a <code>$post</code> variable referencing a <code>Post</code> instance
 in the view model. We'll now update the <code>ListController</code> to provide that:</p>
-<pre class="codehilite"><code class="language-php linenums">public function detailAction()
+<pre class="codehilite"><code class="language-php">public function detailAction()
 {
     $id = $this-&gt;params()-&gt;fromRoute('id');
 
@@ -787,7 +766,7 @@ have our repository set up to throw an <code>InvalidArgumentException</code> whe
 is found matching a given identifier, we do not check for it in our controller.</p>
 <p>Go to your browser and open the URL <code>http://localhost:8080/blog/99</code>; you will
 see the following error message:</p>
-<pre class="codehilite"><code class="language-text linenums">An error occurred
+<pre class="codehilite"><code class="language-text">An error occurred
 
 An error occurred during execution; please try again later.
 
@@ -804,10 +783,10 @@ Blog post with identifier &quot;99&quot; not found.</code></pre>
 whenever an <code>InvalidArgumentException</code> is thrown by the <code>PostService</code>. Let's
 have the controller redirect to the blog post overview.</p>
 <p>First, add a new import to the <code>ListController</code> class file:</p>
-<pre class="codehilite"><code class="language-php linenums">use InvalidArgumentException;</code></pre>
+<pre class="codehilite"><code class="language-php">use InvalidArgumentException;</code></pre>
 
 <p>Now add the following try-catch statement to the <code>detailAction()</code> method:</p>
-<pre class="codehilite"><code class="language-php linenums">public function detailAction()
+<pre class="codehilite"><code class="language-php">public function detailAction()
 {
     $id = $this-&gt;params()-&gt;fromRoute('id');
 
@@ -849,7 +828,7 @@ route <code>blog</code>, which is our list of blog posts!</p>
             <div class="col-lg-3">
               <p>
                 <strong>Zend Framework</strong><br />
-                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://framework.zend.com/">framework.zend.com</a><br />
                 <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
                 <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
                 <a href="https://apigility.org">apigility.org</a><br />
@@ -870,14 +849,15 @@ route <code>blog</code>, which is our list of blog posts!</p>
                 <h4>Copyright</h4>
                 <div class="hline-w"></div>
 
-                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2017 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
             </div>
 
             <div class="col-lg-4">
                 <h4>Contacts</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://discourse.zendframework.com" class="btn-social btn-outline" alt="Forum" title="Forum"><i class="fa fa-comments"></i></a>
+                    <a href="https://zendframework-slack.herokuapp.com" class="btn-social btn-outline" alt="Slack" title="Slack"><i class="fa fa-slack"></i></a>
                     <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
                     <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
                 </p>
@@ -886,14 +866,11 @@ route <code>blog</code>, which is our list of blog posts!</p>
     </div>
 </div>
 
-
-    <script src="../../js/jquery-1.10.2.min.js"></script>
-    <script src="../../js/bootstrap-3.0.3.min.js"></script>
-    <script src="../../js/prism-zf.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script>var base_url = '../..';</script>
+    <script src="../../js/scripts-0b6185f4a5.js"></script>
     <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
-    <script src="../../js/base.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -925,7 +902,7 @@ route <code>blog</code>, which is our list of blog posts!</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+      <a href="https://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -934,112 +911,6 @@ route <code>blog</code>, which is our list of blog posts!</p>
   </div>
 </div>
 
-    <script>
-  // Prepare the component list dropdown for display
-  $(function () {
-    var components = $(".zf-components"),
-        componentList = components.find(".component-list"),
-        sidebar = $(".bs-sidebar.affix"),
-        sidebarInitialPos = sidebar.css("position"),
-        hidden,
-        componentToggle = $(".component-toggle"),
-        navbar = $(".navbar-fixed-top"),
-        rollUpLink = $(".zf-components-rollup a");
-
-    // Initial setup on document load
-    components.insertBefore(navbar);
-    $(".zf-logo a").tooltip();
-    componentToggle.tooltip();
-    rollUpLink.attr({ href: "#", alt: "Hide component list" });
-
-    // Cast initial sidebar position value
-    if (undefined === sidebarInitialPos) {
-      sidebarInitialPos = "fixed";
-    }
-
-    // Setup onclick events to toggle list
-    componentToggle.click(toggleComponentList);
-    rollUpLink.click(toggleComponentList);
-
-    // Toggle the component list display
-    function toggleComponentList(event) {
-      event.preventDefault();
-
-      if (hidden === undefined) {
-        // Not loaded yet; load and display.
-        loadComponentList();
-        return;
-      }
-
-      if (hidden) {
-        // Hidden; display.
-        showComponentList();
-        return;
-      }
-
-      // Currently visible; hide
-      hideComponentList();
-    }
-
-    // Show the component list
-    function showComponentList() {
-      navbar.css({position: "relative"});
-      sidebar.css({position: "relative"});
-      components
-        .css({"margin-top": "-" + components.outerHeight() + "px"})
-        .show()
-        .animate({"margin-top": 0}, {
-          complete: function () {
-            componentToggle
-              .data("placement", "top")
-              .attr("data-original-title", "Hide component list");
-            hidden = false;
-          },
-          queue: false
-        });
-    }
-
-    // Hide the component list
-    function hideComponentList() {
-      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
-        complete: function () {
-          navbar.css({position: "fixed"});
-          sidebar.css({position: sidebarInitialPos});
-          componentToggle
-            .data("placement", "bottom")
-            .attr("data-original-title", "Show component list");
-          components.hide();
-          hidden = true;
-        },
-        queue: false
-      });
-      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
-    }
-
-    // Inject a component into the componet list DOM.
-    function injectComponent(index, component) {
-      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
-    }
-
-    // Parse the component list, build the DOM, and display it.
-    function parseComponentList(components) {
-      $.each(components, injectComponent);
-      showComponentList();
-    }
-
-    // Fetch the component list and display it.
-    function loadComponentList () {
-      $.ajax({
-        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
-        dataType: "text json",
-        success: parseComponentList,
-        error: function (e) {
-          console.log("Error occurred with XHR call", e);
-        }
-      });
-    }
-  });
-</script>
-    </body>
+</body>
 
 </html>

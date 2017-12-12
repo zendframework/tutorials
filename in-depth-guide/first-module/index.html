@@ -4,36 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend Framework Tutorials">  
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>Introducing the Blog Module - tutorials</title>
 
-    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
-    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="../../css/base.css" rel="stylesheet">
-    <link href="../../css/zf-web.css" rel="stylesheet">
-    <link href="../../css/zf.css" rel="stylesheet">
-    <link href="../../css/prism-zf.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/styles-482aa2add1.css">
 
     
 </head>
@@ -57,8 +36,8 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
-              <a href="../..">tutorials</a>
+                <a class="logo-link" href="https://framework.zend.com/" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+                <a href="../..">tutorials</a>
             </span>
         </div>
 
@@ -337,15 +316,15 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="../..">tutorials</a> &raquo;</li>
+  <li><a href="../..">tutorials</a></li>
   
     
       
-        <li>MVC Tutorials &raquo;</li>
+        <li>MVC Tutorials</li>
       
     
       
-        <li>In-Depth Tutorial &raquo;</li>
+        <li>In-Depth Tutorial</li>
       
     
   
@@ -363,7 +342,7 @@ whole tutorial.</p>
 <h2 id="writing-a-new-module">Writing a new Module</h2>
 <p>Let's start by creating a new folder under the <code>/module</code> directory called
 <code>Blog</code>, with the following stucture:</p>
-<pre class="codehilite"><code class="language-text linenums">module/
+<pre class="codehilite"><code class="language-text">module/
     Blog/
         config/
         src/
@@ -379,7 +358,7 @@ we need to do three things:</p>
 <p>Let's tell Composer about our new module. Open the <code>composer.json</code> file in the
 project root, and edit the <code>autoload</code> section to add a new PSR-4 entry for the
 <code>Blog</code> module; when you're done, it should read:</p>
-<pre class="codehilite"><code class="language-json linenums">&quot;autoload&quot;: {
+<pre class="codehilite"><code class="language-json">&quot;autoload&quot;: {
    &quot;psr-4&quot;: {
         &quot;Application\\&quot;: &quot;module/Application/src/&quot;,
         &quot;Album\\&quot;: &quot;module/Album/src/&quot;,
@@ -388,11 +367,11 @@ project root, and edit the <code>autoload</code> section to add a new PSR-4 entr
 }</code></pre>
 
 <p>Once you're done, tell Composer to update its autoloading definitions:</p>
-<pre class="codehilite"><code class="language-bash linenums">$ composer dump-autoload</code></pre>
+<pre class="codehilite"><code class="language-bash">$ composer dump-autoload</code></pre>
 
 <p>Next, we will create a <code>Module</code> class under the <code>Blog</code> namespace. Create the
 file <code>module/Blog/src/Module.php</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog;
 
 class Module
@@ -405,7 +384,7 @@ Let's add this module to our application. Although our module doesn't do
 anything yet, just having the <code>Module.php</code> class allows it to be loaded by the
 ModuleManager.  To do this, add an entry for <code>Blog</code> to the modules array inside
 <code>config/modules.config.php</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 // In config/modules.config.php:
 
 return [
@@ -434,7 +413,7 @@ returns the configuration. (This method is defined in the
 <code>ConfigProviderInterface</code>, although explicitly implementing this interface in the
 module class is optional.) This method should return either an <code>array</code> or a
 <code>Traversable</code> object. Continue by editing <code>module/Blog/src/Module.php</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">// In /module/Blog/Module.php:
+<pre class="codehilite"><code class="language-php">// In /module/Blog/Module.php:
 class Module
 {
     public function getConfig()
@@ -448,12 +427,12 @@ become quite big, though, and keeping everything inside the <code>getConfig()</c
 won't be optimal. To help keep our project organized, we're going to put our
 array configuration in a separate file. Go ahead and create this file at
 <code>module/Blog/config/module.config.php</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 return [];</code></pre>
 
 <p>Now rewrite the <code>getConfig()</code> function to include this newly created
 file instead of directly returning the array:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 // In /module/Blog/Module.php:
 
 public function getConfig()
@@ -463,7 +442,7 @@ public function getConfig()
 
 <p>Reload your application and you'll see that everything remains as it was. Next
 we add the new route to our configuration file:</p>
-<pre class="codehilite"><code class="language-php linenums">// In /module/Blog/config/module.config.php:
+<pre class="codehilite"><code class="language-php">// In /module/Blog/config/module.config.php:
 namespace Blog;
 
 use Zend\Router\Http\Literal;
@@ -498,7 +477,7 @@ return [
 function of the class <code>Blog\Controller\ListController</code> will be executed.
 However, this controller does not exist yet, so if you reload the page you will
 see this error message:</p>
-<pre class="codehilite"><code class="language-text linenums">A 404 error occurred
+<pre class="codehilite"><code class="language-text">A 404 error occurred
 Page not found.
 The requested controller could not be mapped by routing.
 
@@ -509,7 +488,7 @@ Blog\Controller\ListController(resolves to invalid controller class or alias: Bl
 <code>Blog\Controller\ListController</code>. To achieve this we have to add this key to the
 <code>controllers</code> configuration key inside your
 <code>module/Blog/config/module.config.php</code>.</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Blog;
+<pre class="codehilite"><code class="language-php">namespace Blog;
 
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -526,14 +505,14 @@ return [
 <code>Blog\Controller\ListController</code>, using the zend-servicemanager
 <code>InvokableFactory</code> (which, internally, instantiates the class with no
 arguments).  Reloading the page should then give you:</p>
-<pre class="codehilite"><code class="language-text linenums">Fatal error: Class 'Blog\Controller\ListController' not found in {projectPath}/vendor/zendframework/zend-servicemanager/src/Factory/InvokableFactory.php on line 32</code></pre>
+<pre class="codehilite"><code class="language-text">Fatal error: Class 'Blog\Controller\ListController' not found in {projectPath}/vendor/zendframework/zend-servicemanager/src/Factory/InvokableFactory.php on line 32</code></pre>
 
 <p>This error tells us that the application knows what class to load, but was not
 able to autoload it. In our case, we've already setup autoloading, but have not
 yet defined the controller class!</p>
 <p>Create the file <code>module/Blog/src/Controller/ListController.php</code> with the
 following contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog\Controller;
 
 class ListController
@@ -541,7 +520,7 @@ class ListController
 }</code></pre>
 
 <p>Reloading the page now will finally result into a new screen. The new error message looks like this:</p>
-<pre class="codehilite"><code class="language-html linenums">A 404 error occurred
+<pre class="codehilite"><code class="language-html">A 404 error occurred
 Page not found.
 The requested controller was not dispatchable.
 
@@ -563,7 +542,7 @@ in order to be 'dispatched' (or run) by zend-mvc. zend-mvc provides a base
 controller implementation of it with
 <a href="https://github.com/zendframework/zend-mvc/blob/9fc7f2cf569760d6a0cdc62f56e042a0aee3a4c9/src/Controller/AbstractActionController.php">AbstractActionController</a>,
 which we are going to use. Let's modify our controller now:</p>
-<pre class="codehilite"><code class="language-php linenums">// In /module/Blog/src/Blog/Controller/ListController.php:
+<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Blog/Controller/ListController.php:
 
 namespace Blog\Controller;
 
@@ -574,7 +553,7 @@ class ListController extends AbstractActionController
 }</code></pre>
 
 <p>It's now time for another refresh of the site. You should now see a new error message:</p>
-<pre class="codehilite"><code class="language-text linenums">An error occurred
+<pre class="codehilite"><code class="language-text">An error occurred
 
 An error occurred during execution; please try again later.
 
@@ -592,7 +571,7 @@ Zend\View\Renderer\PhpRenderer::render: Unable to render template &quot;blog/lis
 which is to be expected as we've not created it yet. The application is
 expecting it to be at <code>module/Blog/view/blog/list/index.phtml</code>. Create this
 file and add some dummy content to it:</p>
-<pre class="codehilite"><code class="language-html linenums">&lt;!-- Filename: module/Blog/view/blog/list/index.phtml --&gt;
+<pre class="codehilite"><code class="language-html">&lt;!-- Filename: module/Blog/view/blog/list/index.phtml --&gt;
 &lt;h1&gt;Blog\ListController::indexAction()&lt;/h1&gt;</code></pre>
 
 <p>Before we continue let us quickly take a look at where we placed this file. Note
@@ -608,7 +587,7 @@ standard but you have the freedom to specify custom paths if desired.</p>
 topic of this part of the tutorial. We need to let the application know where
 to look for view files. We do this within our module's configuration file,
 <code>module.config.php</code>.</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/config/module.config.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/config/module.config.php:
 
 return [
     'controllers' =&gt; [ /** Controller Configuration */ ],
@@ -654,7 +633,7 @@ tutorial, and let's create a module that actually does something.</p>
             <div class="col-lg-3">
               <p>
                 <strong>Zend Framework</strong><br />
-                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://framework.zend.com/">framework.zend.com</a><br />
                 <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
                 <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
                 <a href="https://apigility.org">apigility.org</a><br />
@@ -675,14 +654,15 @@ tutorial, and let's create a module that actually does something.</p>
                 <h4>Copyright</h4>
                 <div class="hline-w"></div>
 
-                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2017 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
             </div>
 
             <div class="col-lg-4">
                 <h4>Contacts</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://discourse.zendframework.com" class="btn-social btn-outline" alt="Forum" title="Forum"><i class="fa fa-comments"></i></a>
+                    <a href="https://zendframework-slack.herokuapp.com" class="btn-social btn-outline" alt="Slack" title="Slack"><i class="fa fa-slack"></i></a>
                     <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
                     <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
                 </p>
@@ -691,14 +671,11 @@ tutorial, and let's create a module that actually does something.</p>
     </div>
 </div>
 
-
-    <script src="../../js/jquery-1.10.2.min.js"></script>
-    <script src="../../js/bootstrap-3.0.3.min.js"></script>
-    <script src="../../js/prism-zf.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script>var base_url = '../..';</script>
+    <script src="../../js/scripts-0b6185f4a5.js"></script>
     <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
-    <script src="../../js/base.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -730,7 +707,7 @@ tutorial, and let's create a module that actually does something.</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+      <a href="https://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -739,112 +716,6 @@ tutorial, and let's create a module that actually does something.</p>
   </div>
 </div>
 
-    <script>
-  // Prepare the component list dropdown for display
-  $(function () {
-    var components = $(".zf-components"),
-        componentList = components.find(".component-list"),
-        sidebar = $(".bs-sidebar.affix"),
-        sidebarInitialPos = sidebar.css("position"),
-        hidden,
-        componentToggle = $(".component-toggle"),
-        navbar = $(".navbar-fixed-top"),
-        rollUpLink = $(".zf-components-rollup a");
-
-    // Initial setup on document load
-    components.insertBefore(navbar);
-    $(".zf-logo a").tooltip();
-    componentToggle.tooltip();
-    rollUpLink.attr({ href: "#", alt: "Hide component list" });
-
-    // Cast initial sidebar position value
-    if (undefined === sidebarInitialPos) {
-      sidebarInitialPos = "fixed";
-    }
-
-    // Setup onclick events to toggle list
-    componentToggle.click(toggleComponentList);
-    rollUpLink.click(toggleComponentList);
-
-    // Toggle the component list display
-    function toggleComponentList(event) {
-      event.preventDefault();
-
-      if (hidden === undefined) {
-        // Not loaded yet; load and display.
-        loadComponentList();
-        return;
-      }
-
-      if (hidden) {
-        // Hidden; display.
-        showComponentList();
-        return;
-      }
-
-      // Currently visible; hide
-      hideComponentList();
-    }
-
-    // Show the component list
-    function showComponentList() {
-      navbar.css({position: "relative"});
-      sidebar.css({position: "relative"});
-      components
-        .css({"margin-top": "-" + components.outerHeight() + "px"})
-        .show()
-        .animate({"margin-top": 0}, {
-          complete: function () {
-            componentToggle
-              .data("placement", "top")
-              .attr("data-original-title", "Hide component list");
-            hidden = false;
-          },
-          queue: false
-        });
-    }
-
-    // Hide the component list
-    function hideComponentList() {
-      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
-        complete: function () {
-          navbar.css({position: "fixed"});
-          sidebar.css({position: sidebarInitialPos});
-          componentToggle
-            .data("placement", "bottom")
-            .attr("data-original-title", "Show component list");
-          components.hide();
-          hidden = true;
-        },
-        queue: false
-      });
-      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
-    }
-
-    // Inject a component into the componet list DOM.
-    function injectComponent(index, component) {
-      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
-    }
-
-    // Parse the component list, build the DOM, and display it.
-    function parseComponentList(components) {
-      $.each(components, injectComponent);
-      showComponentList();
-    }
-
-    // Fetch the component list and display it.
-    function loadComponentList () {
-      $.ajax({
-        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
-        dataType: "text json",
-        success: parseComponentList,
-        error: function (e) {
-          console.log("Error occurred with XHR call", e);
-        }
-      });
-    }
-  });
-</script>
-    </body>
+</body>
 
 </html>

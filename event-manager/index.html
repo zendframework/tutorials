@@ -4,36 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend Framework Tutorials">  
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Using the EventManager - tutorials</title>
 
-    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
-    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="../css/base.css" rel="stylesheet">
-    <link href="../css/zf-web.css" rel="stylesheet">
-    <link href="../css/zf.css" rel="stylesheet">
-    <link href="../css/prism-zf.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/styles-482aa2add1.css">
 
     
 </head>
@@ -57,8 +36,8 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
-              <a href="..">tutorials</a>
+                <a class="logo-link" href="https://framework.zend.com/" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+                <a href="..">tutorials</a>
             </span>
         </div>
 
@@ -349,11 +328,11 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">tutorials</a> &raquo;</li>
+  <li><a href="..">tutorials</a></li>
   
     
       
-        <li>Component Tutorials &raquo;</li>
+        <li>Component Tutorials</li>
       
     
   
@@ -382,7 +361,7 @@ event.</p>
 <li>A call to <code>trigger()</code> an event</li>
 </ul>
 <p>A basic example looks something like this:</p>
-<pre class="codehilite"><code class="language-php linenums">use Zend\EventManager\EventManager;
+<pre class="codehilite"><code class="language-php">use Zend\EventManager\EventManager;
 
 $events = new EventManager();
 $events-&gt;attach('do', function ($e) {
@@ -399,7 +378,7 @@ $params = ['foo' =&gt; 'bar', 'baz' =&gt; 'bat'];
 $events-&gt;trigger('do', null, $params);</code></pre>
 
 <p>The above will result in the following:</p>
-<pre class="codehilite"><code class="language-text linenums">Handled event &quot;do&quot;, with parameters {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;bat&quot;}</code></pre>
+<pre class="codehilite"><code class="language-text">Handled event &quot;do&quot;, with parameters {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;bat&quot;}</code></pre>
 
 <blockquote>
 <h3 id="closures-are-not-required">Closures are not required</h3>
@@ -416,13 +395,13 @@ want to use a custom instance.</p>
 <p><code>Zend\EventManager\Event</code>, which is the shipped event type and the one used by
 the <code>EventManager</code> by default  has a constructor that accepts the same three
 arguments passed to <code>trigger()</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">use Zend\EventManager\Event;
+<pre class="codehilite"><code class="language-php">use Zend\EventManager\Event;
 
 $event = new Event('do', null, $params);</code></pre>
 
 <p>When you have an instance available, you will use a different <code>EventManager</code>
 method to trigger the event: <code>triggerEvent()</code>. As an example:</p>
-<pre class="codehilite"><code class="language-php linenums">$events-&gt;triggerEvent($event);</code></pre>
+<pre class="codehilite"><code class="language-php">$events-&gt;triggerEvent($event);</code></pre>
 
 <h3 id="event-targets">Event targets</h3>
 <p>If you were paying attention to the first example, you will have noted the
@@ -432,7 +411,7 @@ method to trigger the event: <code>triggerEvent()</code>. As an example:</p>
 triggering actions within methods. The middle argument to <code>trigger()</code> is the
 "target", and in the case described, would be the current object instance. This
 gives event listeners access to the calling object, which can often be useful.</p>
-<pre class="codehilite"><code class="language-php linenums">use Zend\EventManager\EventManager;
+<pre class="codehilite"><code class="language-php">use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 
@@ -498,7 +477,7 @@ listeners on identifiers it's interested in, and trigger those listeners as
 well.</p>
 <p>How does this work, exactly?</p>
 <p>Consider the following:</p>
-<pre class="codehilite"><code class="language-php linenums">use Zend\EventManager\SharedEventManager;
+<pre class="codehilite"><code class="language-php">use Zend\EventManager\SharedEventManager;
 
 $sharedEvents = new SharedEventManager();
 $sharedEvents-&gt;attach('Example', 'do', function ($e) {
@@ -524,15 +503,15 @@ array is given, then any listener on any of the targets given will be notified.<
 <p>So, getting back to our example, let's assume that the above shared listener is
 registered, and also that the <code>Example</code> class is defined as above. We can then
 execute the following:</p>
-<pre class="codehilite"><code class="language-php linenums">$example = new Example();
+<pre class="codehilite"><code class="language-php">$example = new Example();
 $example-&gt;getEventManager()-&gt;setSharedManager($sharedEvents);
 $example-&gt;do('bar', 'bat');</code></pre>
 
 <p>and expect the following to be <code>echo</code>'d:</p>
-<pre class="codehilite"><code class="language-text linenums">Handled event &quot;do&quot; on target &quot;Example&quot;, with parameters {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;bat&quot;}</code></pre>
+<pre class="codehilite"><code class="language-text">Handled event &quot;do&quot; on target &quot;Example&quot;, with parameters {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;bat&quot;}</code></pre>
 
 <p>Now, let's say we extended <code>Example</code> as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">class SubExample extends Example
+<pre class="codehilite"><code class="language-php">class SubExample extends Example
 {
 }</code></pre>
 
@@ -555,11 +534,11 @@ related classes a single operation.</p>
 </blockquote>
 <p>At any point, if you do not want to notify shared listeners, pass a <code>null</code> value
 to <code>setSharedManager()</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">$events-&gt;setSharedManager(null);</code></pre>
+<pre class="codehilite"><code class="language-php">$events-&gt;setSharedManager(null);</code></pre>
 
 <p>and they will be ignored. If at any point, you want to enable them again, pass
 the <code>SharedEventManager</code> instance:</p>
-<pre class="codehilite"><code class="language-php linenums">$events-&gt;setSharedManager($sharedEvents);</code></pre>
+<pre class="codehilite"><code class="language-php">$events-&gt;setSharedManager($sharedEvents);</code></pre>
 
 <h3 id="wildcards">Wildcards</h3>
 <p>So far, with both a normal <code>EventManager</code> instance and with the
@@ -568,7 +547,7 @@ target names to which we want to attach. What if you want to attach a listener
 to multiple events or targets?</p>
 <p>The answer is to supply an array of events or targets, or a wildcard, <code>*</code>.</p>
 <p>Consider the following examples:</p>
-<pre class="codehilite"><code class="language-php linenums">// Multiple named events:
+<pre class="codehilite"><code class="language-php">// Multiple named events:
 $events-&gt;attach(
     ['foo', 'bar', 'baz'], // events
     $listener
@@ -650,7 +629,7 @@ what to do.</p>
 <p>The trait <code>Zend\EventManager\ListenerAggregateTrait</code> defines a <code>$listeners</code>
 property and common logic for detaching an aggregate's listeners. We'll use that
 to demonstrate creating an aggregate logging listener:</p>
-<pre class="codehilite"><code class="language-php linenums">use Zend\EventManager\EventInterface;
+<pre class="codehilite"><code class="language-php">use Zend\EventManager\EventInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\ListenerAggregateTrait;
@@ -682,7 +661,7 @@ class LogEvents implements ListenerAggregateInterface
 }</code></pre>
 
 <p>Attach the aggregate by passing it an event manager instance:</p>
-<pre class="codehilite"><code class="language-php linenums">$logListener = new LogEvents($logger);
+<pre class="codehilite"><code class="language-php">$logListener = new LogEvents($logger);
 $logListener-&gt;attach($events);</code></pre>
 
 <p>Any events the aggregate attaches to will then be notified when triggered.</p>
@@ -737,7 +716,7 @@ return a boolean value indicating whether or not to halt execution; boolean
 <p>Your consuming code can then check to see if execution was short-circuited by
 using the <code>stopped()</code> method of the returned <code>ResponseCollection</code>.</p>
 <p>Here's an example:</p>
-<pre class="codehilite"><code class="language-php linenums">public function someExpensiveCall($criteria1, $criteria2)
+<pre class="codehilite"><code class="language-php">public function someExpensiveCall($criteria1, $criteria2)
 {
     $params  = compact('criteria1', 'criteria2');
     $results = $this-&gt;getEventManager()-&gt;triggerUntil(
@@ -763,7 +742,7 @@ last result.</p>
 object it receives. In this case, the listener calls <code>stopPropagation(true)</code>,
 and the <code>EventManager</code> will then return without notifying any additional
 listeners.</p>
-<pre class="codehilite"><code class="language-php linenums">$events-&gt;attach('do', function ($e) {
+<pre class="codehilite"><code class="language-php">$events-&gt;attach('do', function ($e) {
     $e-&gt;stopPropagation();
     return new SomeResultClass();
 });</code></pre>
@@ -786,7 +765,7 @@ However, if you provide a priority value, you can influence order of execution.<
 <li><em>Lower</em> (negative) priority values execute <em>later</em>.</li>
 </ul>
 <p>To borrow an example from earlier:</p>
-<pre class="codehilite"><code class="language-php linenums">$priority = 100;
+<pre class="codehilite"><code class="language-php">$priority = 100;
 $events-&gt;attach('Example', 'do', function($e) {
     $event  = $e-&gt;getName();
     $target = get_class($e-&gt;getTarget()); // &quot;Example&quot;
@@ -811,7 +790,7 @@ values.</p>
 <code>trigger()</code> or <code>triggerUntil()</code>, using the arguments passed to each;
 additionally, you can manually create an instance. Why would you do so, however?</p>
 <p>One thing that looks like a code smell is when you have code like this:</p>
-<pre class="codehilite"><code class="language-php linenums">$routeMatch = $e-&gt;getParam('route-match', false);
+<pre class="codehilite"><code class="language-php">$routeMatch = $e-&gt;getParam('route-match', false);
 if (! $routeMatch) {
     // Oh noes! we cannot do our work! whatever shall we do?!?!?!
 }</code></pre>
@@ -828,7 +807,7 @@ if (! $routeMatch) {
 </ul>
 <p>Similarly, consider how you might represent a computational result of a method
 when triggering an event. As an example:</p>
-<pre class="codehilite"><code class="language-php linenums">// in the method:
+<pre class="codehilite"><code class="language-php">// in the method:
 $params['__RESULT__'] = $computedResult;
 $events-&gt;trigger(__FUNCTION__ . '.post', $this, $params);
 
@@ -843,7 +822,7 @@ if (! $result) {
 a custom <code>MvcEvent</code>; this event composes the application instance,
 the router, the route match, the request and response instances, the view
 model, and also a result. We end up with code like this in our listeners:</p>
-<pre class="codehilite"><code class="language-php linenums">$response = $e-&gt;getResponse();
+<pre class="codehilite"><code class="language-php">$response = $e-&gt;getResponse();
 $result   = $e-&gt;getResult();
 if (is_string($result)) {
     $content = $view-&gt;render('layout.phtml', ['content' =&gt; $result]);
@@ -877,7 +856,7 @@ representing that. We have two possibilities:</p>
 </ul>
 <p>The latter is a more correct approach, as it introduces type safety, and
 prevents typographical errors. Let's create that event now:</p>
-<pre class="codehilite"><code class="language-php linenums">use Zend\EventManager\Event;
+<pre class="codehilite"><code class="language-php">use Zend\EventManager\Event;
 
 class ExpensiveCallEvent extends Event
 {
@@ -917,7 +896,7 @@ class ExpensiveCallEvent extends Event
 
 <p>We can now create an instance of this within our class method, and use it to
 trigger listeners:</p>
-<pre class="codehilite"><code class="language-php linenums">public function someExpensiveCall($criteria1, $criteria2)
+<pre class="codehilite"><code class="language-php">public function someExpensiveCall($criteria1, $criteria2)
 {
     $event = new ExpensiveCallEvent($this, $criteria1, $criteria2);
     $event-&gt;setName(__FUNCTION__ . '.pre');
@@ -954,7 +933,7 @@ above method. We'll assume <code>$cache</code> is defined, and is a
 <a href="https://zendframework.github.io/zend-cache/">zend-cache</a> storage adapter. The
 first listener will return a result when a cache hit occurs, and the second will
 store a result in the cache if one is provided.</p>
-<pre class="codehilite"><code class="language-php linenums">$events-&gt;attach('someExpensiveCall.pre', function (ExpensiveCallEvent $e) use ($cache) {
+<pre class="codehilite"><code class="language-php">$events-&gt;attach('someExpensiveCall.pre', function (ExpensiveCallEvent $e) use ($cache) {
     $key = md5(json_encode([
         'criteria1' =&gt; $e-&gt;getCriteria1(),
         'criteria2' =&gt; $e-&gt;getCriteria2(),
@@ -996,10 +975,10 @@ which would allow using the priority system in order to implement caching.</p>
 <p>If we did that, we'd modify the <code>ExpensiveCallEvent</code> to omit the <code>.pre</code> suffix
 on the default event name, and then implement the class that triggers the event
 as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">public function setEventManager(EventManagerInterface $events)
+<pre class="codehilite"><code class="language-php">public function setEventManager(EventManagerInterface $events)
 {
     $this-&gt;events = $events;
-    $events-&gt;setIdentifiers([__CLASS__, get_class($this)));
+    $events-&gt;setIdentifiers([__CLASS__, get_class($this)]);
     $events-&gt;attach('someExpensiveCall', [$this, 'doSomeExpensiveCall']);
 }
 
@@ -1032,7 +1011,7 @@ now use priority in order to intercept before and after the default listener
 registered by the class. The first listener will listen at priority <code>100</code> to
 ensure it executes before the default listener, and the second will listen at
 priority <code>-100</code> to ensure it triggers after we already have a result:</p>
-<pre class="codehilite"><code class="language-php linenums">$events-&gt;attach('someExpensiveCall', function (ExpensiveCallEvent $e) use ($cache) {
+<pre class="codehilite"><code class="language-php">$events-&gt;attach('someExpensiveCall', function (ExpensiveCallEvent $e) use ($cache) {
     // listener for checking against the cache
 }, 100);
 
@@ -1084,7 +1063,7 @@ development toolbox.</p>
             <div class="col-lg-3">
               <p>
                 <strong>Zend Framework</strong><br />
-                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://framework.zend.com/">framework.zend.com</a><br />
                 <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
                 <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
                 <a href="https://apigility.org">apigility.org</a><br />
@@ -1105,14 +1084,15 @@ development toolbox.</p>
                 <h4>Copyright</h4>
                 <div class="hline-w"></div>
 
-                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2017 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
             </div>
 
             <div class="col-lg-4">
                 <h4>Contacts</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://discourse.zendframework.com" class="btn-social btn-outline" alt="Forum" title="Forum"><i class="fa fa-comments"></i></a>
+                    <a href="https://zendframework-slack.herokuapp.com" class="btn-social btn-outline" alt="Slack" title="Slack"><i class="fa fa-slack"></i></a>
                     <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
                     <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
                 </p>
@@ -1121,14 +1101,11 @@ development toolbox.</p>
     </div>
 </div>
 
-
-    <script src="../js/jquery-1.10.2.min.js"></script>
-    <script src="../js/bootstrap-3.0.3.min.js"></script>
-    <script src="../js/prism-zf.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script>var base_url = '..';</script>
+    <script src="../js/scripts-0b6185f4a5.js"></script>
     <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
-    <script src="../js/base.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -1160,7 +1137,7 @@ development toolbox.</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+      <a href="https://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -1169,112 +1146,6 @@ development toolbox.</p>
   </div>
 </div>
 
-    <script>
-  // Prepare the component list dropdown for display
-  $(function () {
-    var components = $(".zf-components"),
-        componentList = components.find(".component-list"),
-        sidebar = $(".bs-sidebar.affix"),
-        sidebarInitialPos = sidebar.css("position"),
-        hidden,
-        componentToggle = $(".component-toggle"),
-        navbar = $(".navbar-fixed-top"),
-        rollUpLink = $(".zf-components-rollup a");
-
-    // Initial setup on document load
-    components.insertBefore(navbar);
-    $(".zf-logo a").tooltip();
-    componentToggle.tooltip();
-    rollUpLink.attr({ href: "#", alt: "Hide component list" });
-
-    // Cast initial sidebar position value
-    if (undefined === sidebarInitialPos) {
-      sidebarInitialPos = "fixed";
-    }
-
-    // Setup onclick events to toggle list
-    componentToggle.click(toggleComponentList);
-    rollUpLink.click(toggleComponentList);
-
-    // Toggle the component list display
-    function toggleComponentList(event) {
-      event.preventDefault();
-
-      if (hidden === undefined) {
-        // Not loaded yet; load and display.
-        loadComponentList();
-        return;
-      }
-
-      if (hidden) {
-        // Hidden; display.
-        showComponentList();
-        return;
-      }
-
-      // Currently visible; hide
-      hideComponentList();
-    }
-
-    // Show the component list
-    function showComponentList() {
-      navbar.css({position: "relative"});
-      sidebar.css({position: "relative"});
-      components
-        .css({"margin-top": "-" + components.outerHeight() + "px"})
-        .show()
-        .animate({"margin-top": 0}, {
-          complete: function () {
-            componentToggle
-              .data("placement", "top")
-              .attr("data-original-title", "Hide component list");
-            hidden = false;
-          },
-          queue: false
-        });
-    }
-
-    // Hide the component list
-    function hideComponentList() {
-      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
-        complete: function () {
-          navbar.css({position: "fixed"});
-          sidebar.css({position: sidebarInitialPos});
-          componentToggle
-            .data("placement", "bottom")
-            .attr("data-original-title", "Show component list");
-          components.hide();
-          hidden = true;
-        },
-        queue: false
-      });
-      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
-    }
-
-    // Inject a component into the componet list DOM.
-    function injectComponent(index, component) {
-      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
-    }
-
-    // Parse the component list, build the DOM, and display it.
-    function parseComponentList(components) {
-      $.each(components, injectComponent);
-      showComponentList();
-    }
-
-    // Fetch the component list and display it.
-    function loadComponentList () {
-      $.ajax({
-        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
-        dataType: "text json",
-        success: parseComponentList,
-        error: function (e) {
-          console.log("Error occurred with XHR call", e);
-        }
-      });
-    }
-  });
-</script>
-    </body>
+</body>
 
 </html>

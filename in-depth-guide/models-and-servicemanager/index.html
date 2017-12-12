@@ -4,36 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend Framework Tutorials">  
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>Models and the ServiceManager - tutorials</title>
 
-    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
-    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="../../css/base.css" rel="stylesheet">
-    <link href="../../css/zf-web.css" rel="stylesheet">
-    <link href="../../css/zf.css" rel="stylesheet">
-    <link href="../../css/prism-zf.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/styles-482aa2add1.css">
 
     
 </head>
@@ -57,8 +36,8 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
-              <a href="../..">tutorials</a>
+                <a class="logo-link" href="https://framework.zend.com/" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+                <a href="../..">tutorials</a>
             </span>
         </div>
 
@@ -353,15 +332,15 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="../..">tutorials</a> &raquo;</li>
+  <li><a href="../..">tutorials</a></li>
   
     
       
-        <li>MVC Tutorials &raquo;</li>
+        <li>MVC Tutorials</li>
       
     
       
-        <li>In-Depth Tutorial &raquo;</li>
+        <li>In-Depth Tutorial</li>
       
     
   
@@ -397,7 +376,7 @@ things: we will define a method that will give us all posts, and another method
 that will give us a single post.</p>
 <p>Let's start by creating the interface at
 <code>module/Blog/src/Model/PostRepositoryInterface.php</code></p>
-<pre class="codehilite"><code class="language-php linenums">namespace Blog\Model;
+<pre class="codehilite"><code class="language-php">namespace Blog\Model;
 
 interface PostRepositoryInterface
 {
@@ -428,7 +407,7 @@ will create the <code>PostRepository</code> class.</p>
 be sure to implement the <code>PostRepositoryInterface</code> and its required method (we
 will fill these in later). You then should have a class that looks like the
 following:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Blog\Model;
+<pre class="codehilite"><code class="language-php">namespace Blog\Model;
 
 class PostRepository implements PostRepositoryInterface
 {
@@ -452,7 +431,7 @@ class PostRepository implements PostRepositoryInterface
 <h2 id="create-an-entity">Create an entity</h2>
 <p>Since our <code>PostRepository</code> will return <code>Post</code> instances, we must create that
 class, too. Let's create <code>module/Blog/src/Model/Post.php</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Blog\Model;
+<pre class="codehilite"><code class="language-php">namespace Blog\Model;
 
 class Post
 {
@@ -516,7 +495,7 @@ be unchangeable, allowing us to cache instances in the repository as necessary.<
 will only return some hard-coded content from our <code>PostRepository</code> class directly.
 Create a property inside the <code>PostRepository</code> called <code>$data</code> and make this an array
 of our <code>Post</code> type. Edit <code>PostReepository</code> as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Blog\Model;
+<pre class="codehilite"><code class="language-php">namespace Blog\Model;
 
 class PostRepository implements PostRepositoryInterface
 {
@@ -567,7 +546,7 @@ class PostRepository implements PostRepositoryInterface
 
 <p>Now that we have some data, let's modify our <code>find*()</code> functions to return the
 appropriate entities:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Blog\Model;
+<pre class="codehilite"><code class="language-php">namespace Blog\Model;
 
 use DomainException;
 
@@ -650,7 +629,7 @@ the class <code>ListController</code>; without the <code>PostRepository</code>, 
 will not be able to function properly. To make sure that our <code>ListController</code>
 will always get the appropriate dependency, we will first define the dependency
 inside the <code>ListController</code> constructor. Modify <code>ListController</code> as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Blog\Controller;
+<pre class="codehilite"><code class="language-php">namespace Blog\Controller;
 
 use Blog\Model\PostRepositoryInterface;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -672,7 +651,7 @@ class ListController extends AbstractActionController
 instances of this class anymore without providing a <code>PostRepositoryInterface</code>
 implementation. If you were to go back to your browser and reload your project
 with the url <code>localhost:8080/blog</code>, you'd see the following error message:</p>
-<pre class="codehilite"><code class="language-text linenums">Catchable fatal error: Argument 1 passed to Blog\Controller\ListController::__construct()
+<pre class="codehilite"><code class="language-text">Catchable fatal error: Argument 1 passed to Blog\Controller\ListController::__construct()
 must be an instance of Blog\Model\PostRepositoryInterface, none given,
 called in {projectPath}/vendor/zendframework/src/Factory/InvokableFactory.php on line {lineNumber}
 and defined in {projectPath}/module/Blog/src/Controller/ListController.php on line {lineNumber}</code></pre>
@@ -684,7 +663,7 @@ receive such an implementation? To solve this, we need to tell the application
 how to create instances of the <code>Blog\Controller\ListController</code>. If you remember
 back to when we created the controller, we mapped it to the <code>InvokableFactory</code>
 in the module configuration:</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/config/module.config.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/config/module.config.php:
 namespace Blog;
 
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -703,7 +682,7 @@ return [
 arguments.  Since our <code>ListController</code> now has a required argument, we need to
 change this. We will now create a custom factory for our <code>ListController</code>.
 First, update the configuration as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/config/module.config.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/config/module.config.php:
 namespace Blog;
 
 // Remove the InvokableFactory import statement
@@ -722,7 +701,7 @@ return [
 <p>The above changes the mapping for the <code>ListController</code> to use a new factory
 class we'll be creating, <code>Blog\Factory\ListControllerFactory</code>.  If you refresh
 your browser you'll see a different error message:</p>
-<pre class="codehilite"><code class="language-html linenums">An error occurred
+<pre class="codehilite"><code class="language-html">An error occurred
 
 An error occurred during execution; please try again later.
 
@@ -755,7 +734,7 @@ argument can be ignored; however, you can create re-usable factories by
 implementing the second argument, so this is a good one to consider when writing
 your factories! For our purposes, this is a one-off factory, so we'll only use
 the first argument. Let's implement our factory class:</p>
-<pre class="codehilite"><code class="language-php linenums">// In /module/Blog/src/Factory/ListControllerFactory.php:
+<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Factory/ListControllerFactory.php:
 namespace Blog\Factory;
 
 use Blog\Controller\ListController;
@@ -785,7 +764,7 @@ injection systems if desired. We pull a service matching the
 controller's constructor.</p>
 <p>There's no magic happening; it's just PHP code. </p>
 <p>Refresh your browser and you will see this error message:</p>
-<pre class="codehilite"><code class="language-text linenums">An error occurred
+<pre class="codehilite"><code class="language-text">An error occurred
 
 An error occurred during execution; please try again later.
 
@@ -811,7 +790,7 @@ We will modify our <code>module.config.php</code> and add a new key
 called <code>service_manager</code>; the configuration of this key is the same as that for
 the <code>controllers</code> key. We will add two entries, one for <code>aliases</code> and one for
 <code>factories</code>, as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/config/module.config.php
+<pre class="codehilite"><code class="language-php">// In module/Blog/config/module.config.php
 namespace Blog;
 
 // Re-add the following import:
@@ -842,7 +821,7 @@ exactly the page that we have created in the previous chapter of the tutorial.</
 <p>Let's now use the <code>PostRepository</code> within our <code>ListController</code>. For this we will
 need to overwrite the default <code>indexAction()</code> and return a view with the results
 from the <code>PostRepository</code>. Modify <code>ListController</code> as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/src/Controller/ListController.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/src/Controller/ListController.php:
 namespace Blog\Controller;
 
 use Blog\Model\PostRepositoryInterface;
@@ -884,7 +863,7 @@ template to display the data.</p>
 <p>You do not actually need to return an instance of <code>ViewModel</code>; when you return
 a normal PHP array, zend-mvc internally converts it into a <code>ViewModel</code>. The
 following are equivalent:</p>
-<pre class="codehilite"><code class="language-php linenums">// Explicit ViewModel:
+<pre class="codehilite"><code class="language-php">// Explicit ViewModel:
 return new ViewModel(['foo' =&gt; 'bar']);
 
 // Implicit ViewModel:
@@ -900,7 +879,7 @@ recommend using <code>$this</code> notation to visually differentiate between va
 passed to the view, and those created within the script itself.</p>
 <p>Let's modify our view to display a table of all blog posts that our repository
 returns:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;!-- Filename: module/Blog/view/blog/list/index.phtml --&gt;
+<pre class="codehilite"><code class="language-php">&lt;!-- Filename: module/Blog/view/blog/list/index.phtml --&gt;
 &lt;h1&gt;Blog&lt;/h1&gt;
 
 &lt;?php foreach ($this-&gt;posts as $post): ?&gt;
@@ -952,7 +931,7 @@ we want to get data from a database.</p>
             <div class="col-lg-3">
               <p>
                 <strong>Zend Framework</strong><br />
-                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://framework.zend.com/">framework.zend.com</a><br />
                 <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
                 <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
                 <a href="https://apigility.org">apigility.org</a><br />
@@ -973,14 +952,15 @@ we want to get data from a database.</p>
                 <h4>Copyright</h4>
                 <div class="hline-w"></div>
 
-                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2017 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
             </div>
 
             <div class="col-lg-4">
                 <h4>Contacts</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://discourse.zendframework.com" class="btn-social btn-outline" alt="Forum" title="Forum"><i class="fa fa-comments"></i></a>
+                    <a href="https://zendframework-slack.herokuapp.com" class="btn-social btn-outline" alt="Slack" title="Slack"><i class="fa fa-slack"></i></a>
                     <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
                     <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
                 </p>
@@ -989,14 +969,11 @@ we want to get data from a database.</p>
     </div>
 </div>
 
-
-    <script src="../../js/jquery-1.10.2.min.js"></script>
-    <script src="../../js/bootstrap-3.0.3.min.js"></script>
-    <script src="../../js/prism-zf.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script>var base_url = '../..';</script>
+    <script src="../../js/scripts-0b6185f4a5.js"></script>
     <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
-    <script src="../../js/base.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -1028,7 +1005,7 @@ we want to get data from a database.</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+      <a href="https://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -1037,112 +1014,6 @@ we want to get data from a database.</p>
   </div>
 </div>
 
-    <script>
-  // Prepare the component list dropdown for display
-  $(function () {
-    var components = $(".zf-components"),
-        componentList = components.find(".component-list"),
-        sidebar = $(".bs-sidebar.affix"),
-        sidebarInitialPos = sidebar.css("position"),
-        hidden,
-        componentToggle = $(".component-toggle"),
-        navbar = $(".navbar-fixed-top"),
-        rollUpLink = $(".zf-components-rollup a");
-
-    // Initial setup on document load
-    components.insertBefore(navbar);
-    $(".zf-logo a").tooltip();
-    componentToggle.tooltip();
-    rollUpLink.attr({ href: "#", alt: "Hide component list" });
-
-    // Cast initial sidebar position value
-    if (undefined === sidebarInitialPos) {
-      sidebarInitialPos = "fixed";
-    }
-
-    // Setup onclick events to toggle list
-    componentToggle.click(toggleComponentList);
-    rollUpLink.click(toggleComponentList);
-
-    // Toggle the component list display
-    function toggleComponentList(event) {
-      event.preventDefault();
-
-      if (hidden === undefined) {
-        // Not loaded yet; load and display.
-        loadComponentList();
-        return;
-      }
-
-      if (hidden) {
-        // Hidden; display.
-        showComponentList();
-        return;
-      }
-
-      // Currently visible; hide
-      hideComponentList();
-    }
-
-    // Show the component list
-    function showComponentList() {
-      navbar.css({position: "relative"});
-      sidebar.css({position: "relative"});
-      components
-        .css({"margin-top": "-" + components.outerHeight() + "px"})
-        .show()
-        .animate({"margin-top": 0}, {
-          complete: function () {
-            componentToggle
-              .data("placement", "top")
-              .attr("data-original-title", "Hide component list");
-            hidden = false;
-          },
-          queue: false
-        });
-    }
-
-    // Hide the component list
-    function hideComponentList() {
-      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
-        complete: function () {
-          navbar.css({position: "fixed"});
-          sidebar.css({position: sidebarInitialPos});
-          componentToggle
-            .data("placement", "bottom")
-            .attr("data-original-title", "Show component list");
-          components.hide();
-          hidden = true;
-        },
-        queue: false
-      });
-      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
-    }
-
-    // Inject a component into the componet list DOM.
-    function injectComponent(index, component) {
-      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
-    }
-
-    // Parse the component list, build the DOM, and display it.
-    function parseComponentList(components) {
-      $.each(components, injectComponent);
-      showComponentList();
-    }
-
-    // Fetch the component list and display it.
-    function loadComponentList () {
-      $.ajax({
-        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
-        dataType: "text json",
-        success: parseComponentList,
-        error: function (e) {
-          console.log("Error occurred with XHR call", e);
-        }
-      });
-    }
-  });
-</script>
-    </body>
+</body>
 
 </html>

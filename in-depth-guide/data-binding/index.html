@@ -4,36 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend Framework Tutorials">  
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>Editing and Deleting Data - tutorials</title>
 
-    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
-    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="../../css/base.css" rel="stylesheet">
-    <link href="../../css/zf-web.css" rel="stylesheet">
-    <link href="../../css/zf.css" rel="stylesheet">
-    <link href="../../css/prism-zf.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/styles-482aa2add1.css">
 
     
 </head>
@@ -57,8 +36,8 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
-              <a href="../..">tutorials</a>
+                <a class="logo-link" href="https://framework.zend.com/" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+                <a href="../..">tutorials</a>
             </span>
         </div>
 
@@ -345,15 +324,15 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="../..">tutorials</a> &raquo;</li>
+  <li><a href="../..">tutorials</a></li>
   
     
       
-        <li>MVC Tutorials &raquo;</li>
+        <li>MVC Tutorials</li>
       
     
       
-        <li>In-Depth Tutorial &raquo;</li>
+        <li>In-Depth Tutorial</li>
       
     
   
@@ -387,7 +366,7 @@ bind it to the form. To do this, we will need to:</p>
 <li>We will add the <code>editAction()</code> implementation.</li>
 </ul>
 <p>The final result will look like the following:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 // In module/Blog/src/Controller/WriteController.php:
 
 namespace Blog\Controller;
@@ -505,11 +484,11 @@ display, and, once validated, the same instance is updated. This means that we
 can omit the call to <code>getData()</code> after validating the form.</p>
 <p>Now we need to update our <code>WriteControllerFactory</code>. First, add a new import
 statement to it:</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/src/Factory/WriteControllerFactory.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/src/Factory/WriteControllerFactory.php:
 use Blog\Model\PostRepositoryInterface;</code></pre>
 
 <p>Next, update the body of the factory to read as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/src/Factory/WriteControllerFactory.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/src/Factory/WriteControllerFactory.php:
 public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
 {
     $formManager = $container-&gt;get('FormElementManager');
@@ -531,7 +510,7 @@ with two exceptions:</p>
 <li>it will route to our <code>WriteController</code></li>
 </ul>
 <p>Update the 'blog' <code>child_routes</code> to add the new route:</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/config/module.config.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/config/module.config.php:
 
 use Zend\Router\Http\Segment;
 
@@ -573,7 +552,7 @@ create a new <em>partial</em> script for the form, update the <code>add</code> t
 and create a new <code>edit</code> template.</p>
 <p>Create a new file, <code>module/Blog/view/blog/write/form.phtml</code>, with the following
 contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 $form = $this-&gt;form;
 $fieldset = $form-&gt;get('post');
 
@@ -615,7 +594,7 @@ echo $this-&gt;form()-&gt;closeTag();</code></pre>
 
 <p>Now, update the <code>add</code> template, <code>module/Blog/view/write/add.phtml</code> to read as
 follows:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;h1&gt;Add a blog post&lt;/h1&gt;
+<pre class="codehilite"><code class="language-php">&lt;h1&gt;Add a blog post&lt;/h1&gt;
 
 &lt;?php
 $form = $this-&gt;form;
@@ -629,7 +608,7 @@ echo $this-&gt;partial('blog/write/form', [
 context-appropriate label for the submit button, and renders it with our new
 partial view script.</p>
 <p>Next in line is the creation of the new template, <code>blog/write/edit</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;h1&gt;Edit blog post&lt;/h1&gt;
+<pre class="codehilite"><code class="language-php">&lt;h1&gt;Edit blog post&lt;/h1&gt;
 
 &lt;?php
 $form = $this-&gt;form;
@@ -657,7 +636,7 @@ edits were saved! Why? Because we have not yet implemented the functionality in
 our command class. Let's do that now.</p>
 <p>Edit the file <code>module/Blog/src/Model/ZendDbSqlCommand.php</code>, and update the
 <code>updatePost()</code> method to read as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">public function updatePost(Post $post)
+<pre class="codehilite"><code class="language-php">public function updatePost(Post $post)
 {
     if (! $post-&gt;getId()) {
         throw new RuntimeException('Cannot update post; missing identifier');
@@ -698,7 +677,7 @@ success.</p>
 <h2 id="implementing-the-delete-functionality">Implementing the delete functionality</h2>
 <p>Last but not least, it's time to delete some data. We start this process by
 implementing the <code>deletePost()</code> method in our <code>ZendDbSqlCommand</code> class:</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/src/Model/ZendDbSqlCommand.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/src/Model/ZendDbSqlCommand.php:
 
 public function deletePost(Post $post)
 {
@@ -725,7 +704,7 @@ post with the given identifier, which we then execute.</p>
 <p>Next, let's create a new controller, <code>Blog\Controller\DeleteController</code>, in a
 new file <code>module/Blog/src/Controller/DeleteController.php</code>, with the following
 contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog\Controller;
 
 use Blog\Model\Post;
@@ -799,7 +778,7 @@ blog listing page.</p>
 <p>Like the other controllers, we now need a factory. Create the file
 <code>module/Blog/src/Factory/DeleteControllerFactory.php</code> with the following
 contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog\Factory;
 
 use Blog\Controller\DeleteController;
@@ -829,7 +808,7 @@ class DeleteControllerFactory implements FactoryInterface
 and providing a new route. Open the file <code>module/Blog/config/module.config.php</code>
 and make the following edits.</p>
 <p>First, map the controller to its factory:</p>
-<pre class="codehilite"><code class="language-php linenums">'controllers' =&gt; [
+<pre class="codehilite"><code class="language-php">'controllers' =&gt; [
     'factories' =&gt; [
         Controller\ListController::class =&gt; Factory\ListControllerFactory::class,
         Controller\WriteController::class =&gt; Factory\WriteControllerFactory::class,
@@ -839,7 +818,7 @@ and make the following edits.</p>
 ],</code></pre>
 
 <p>Now add another child route to our "blog" route:</p>
-<pre class="codehilite"><code class="language-php linenums">'router' =&gt; [
+<pre class="codehilite"><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'blog' =&gt; [
             /* ... */
@@ -867,7 +846,7 @@ and make the following edits.</p>
 
 <p>Finally, we'll create a new view script,
 <code>module/Blog/view/blog/delete/delete.phtml</code>, with the following contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;h1&gt;Delete post&lt;/h1&gt;
+<pre class="codehilite"><code class="language-php">&lt;h1&gt;Delete post&lt;/h1&gt;
 
 &lt;p&gt;Are you sure you want to delete the following post?&lt;/p&gt;
 
@@ -904,7 +883,7 @@ determine if the edit and delete links will be displayed; we'll leave that for
 another tutorial, however.</p>
 <p>Open your <code>module/Blog/view/blog/list/index.phtml</code> file, and update it to read
 as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;h1&gt;Blog Posts&lt;/h1&gt;
+<pre class="codehilite"><code class="language-php">&lt;h1&gt;Blog Posts&lt;/h1&gt;
 
 &lt;div class=&quot;list-group&quot;&gt;
 &lt;?php foreach ($this-&gt;posts as $post): ?&gt;
@@ -968,7 +947,7 @@ during the course of this tutorial.</p>
             <div class="col-lg-3">
               <p>
                 <strong>Zend Framework</strong><br />
-                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://framework.zend.com/">framework.zend.com</a><br />
                 <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
                 <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
                 <a href="https://apigility.org">apigility.org</a><br />
@@ -989,14 +968,15 @@ during the course of this tutorial.</p>
                 <h4>Copyright</h4>
                 <div class="hline-w"></div>
 
-                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2017 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
             </div>
 
             <div class="col-lg-4">
                 <h4>Contacts</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://discourse.zendframework.com" class="btn-social btn-outline" alt="Forum" title="Forum"><i class="fa fa-comments"></i></a>
+                    <a href="https://zendframework-slack.herokuapp.com" class="btn-social btn-outline" alt="Slack" title="Slack"><i class="fa fa-slack"></i></a>
                     <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
                     <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
                 </p>
@@ -1005,14 +985,11 @@ during the course of this tutorial.</p>
     </div>
 </div>
 
-
-    <script src="../../js/jquery-1.10.2.min.js"></script>
-    <script src="../../js/bootstrap-3.0.3.min.js"></script>
-    <script src="../../js/prism-zf.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script>var base_url = '../..';</script>
+    <script src="../../js/scripts-0b6185f4a5.js"></script>
     <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
-    <script src="../../js/base.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -1044,7 +1021,7 @@ during the course of this tutorial.</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+      <a href="https://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -1053,112 +1030,6 @@ during the course of this tutorial.</p>
   </div>
 </div>
 
-    <script>
-  // Prepare the component list dropdown for display
-  $(function () {
-    var components = $(".zf-components"),
-        componentList = components.find(".component-list"),
-        sidebar = $(".bs-sidebar.affix"),
-        sidebarInitialPos = sidebar.css("position"),
-        hidden,
-        componentToggle = $(".component-toggle"),
-        navbar = $(".navbar-fixed-top"),
-        rollUpLink = $(".zf-components-rollup a");
-
-    // Initial setup on document load
-    components.insertBefore(navbar);
-    $(".zf-logo a").tooltip();
-    componentToggle.tooltip();
-    rollUpLink.attr({ href: "#", alt: "Hide component list" });
-
-    // Cast initial sidebar position value
-    if (undefined === sidebarInitialPos) {
-      sidebarInitialPos = "fixed";
-    }
-
-    // Setup onclick events to toggle list
-    componentToggle.click(toggleComponentList);
-    rollUpLink.click(toggleComponentList);
-
-    // Toggle the component list display
-    function toggleComponentList(event) {
-      event.preventDefault();
-
-      if (hidden === undefined) {
-        // Not loaded yet; load and display.
-        loadComponentList();
-        return;
-      }
-
-      if (hidden) {
-        // Hidden; display.
-        showComponentList();
-        return;
-      }
-
-      // Currently visible; hide
-      hideComponentList();
-    }
-
-    // Show the component list
-    function showComponentList() {
-      navbar.css({position: "relative"});
-      sidebar.css({position: "relative"});
-      components
-        .css({"margin-top": "-" + components.outerHeight() + "px"})
-        .show()
-        .animate({"margin-top": 0}, {
-          complete: function () {
-            componentToggle
-              .data("placement", "top")
-              .attr("data-original-title", "Hide component list");
-            hidden = false;
-          },
-          queue: false
-        });
-    }
-
-    // Hide the component list
-    function hideComponentList() {
-      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
-        complete: function () {
-          navbar.css({position: "fixed"});
-          sidebar.css({position: sidebarInitialPos});
-          componentToggle
-            .data("placement", "bottom")
-            .attr("data-original-title", "Show component list");
-          components.hide();
-          hidden = true;
-        },
-        queue: false
-      });
-      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
-    }
-
-    // Inject a component into the componet list DOM.
-    function injectComponent(index, component) {
-      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
-    }
-
-    // Parse the component list, build the DOM, and display it.
-    function parseComponentList(components) {
-      $.each(components, injectComponent);
-      showComponentList();
-    }
-
-    // Fetch the component list and display it.
-    function loadComponentList () {
-      $.ajax({
-        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
-        dataType: "text json",
-        success: parseComponentList,
-        error: function (e) {
-          console.log("Error occurred with XHR call", e);
-        }
-      });
-    }
-  });
-</script>
-    </body>
+</body>
 
 </html>

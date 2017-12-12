@@ -4,36 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend Framework Tutorials">  
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>Making Use of Forms and Fieldsets - tutorials</title>
 
-    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
-    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="../../css/base.css" rel="stylesheet">
-    <link href="../../css/zf-web.css" rel="stylesheet">
-    <link href="../../css/zf.css" rel="stylesheet">
-    <link href="../../css/prism-zf.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/styles-482aa2add1.css">
 
     
 </head>
@@ -57,8 +36,8 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
-              <a href="../..">tutorials</a>
+                <a class="logo-link" href="https://framework.zend.com/" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+                <a href="../..">tutorials</a>
             </span>
         </div>
 
@@ -349,15 +328,15 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="../..">tutorials</a> &raquo;</li>
+  <li><a href="../..">tutorials</a></li>
   
     
       
-        <li>MVC Tutorials &raquo;</li>
+        <li>MVC Tutorials</li>
       
     
       
-        <li>In-Depth Tutorial &raquo;</li>
+        <li>In-Depth Tutorial</li>
       
     
   
@@ -401,7 +380,7 @@ the input elements that we need to work with our blog data:</p>
 </ul>
 <p>Create the file <code>module/Blog/src/Form/PostFieldset.php</code> with the following
 contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog\Form;
 
 use Zend\Form\Fieldset;
@@ -442,7 +421,7 @@ form.</p>
 The form will use the <code>PostFieldset</code>, and also include a submit button so that
 the user can submit the data.</p>
 <p>Create the file <code>module/Blog/src/Form/PostForm.php</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog\Form;
 
 use Zend\Form\Form;
@@ -492,7 +471,7 @@ in our <code>PostForm</code> in a previous section of this chapter.</p>
 <p>Let's create this new class now. Open a new file,
 <code>module/Blog/src/Controller/WriteController.php</code>, and add the following
 contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog\Controller;
 
 use Blog\Form\PostForm;
@@ -531,7 +510,7 @@ class WriteController extends AbstractActionController
 <p>We'll now create a factory for this new controller; create a new file,
 <code>module/Blog/src/Factory/WriteControllerFactory.php</code>, with the following
 contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog\Factory;
 
 use Blog\Controller\WriteController;
@@ -574,7 +553,7 @@ does provide a couple nice features: </p>
 <p>Finally, we need to configure the new factory; in
 <code>module/Blog/config/module.config.php</code>, add an entry in the <code>controllers</code>
 configuration section:</p>
-<pre class="codehilite"><code class="language-php linenums">'controllers' =&gt; [
+<pre class="codehilite"><code class="language-php">'controllers' =&gt; [
     'factories' =&gt; [
         Controller\ListController::class =&gt; Factory\ListControllerFactory::class,
         // Add the following line:
@@ -584,7 +563,7 @@ configuration section:</p>
 
 <p>Now that we have the basics for our controller in place, we can create a route
 to it:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 // In module/Blog/config/module.config.php:
 namespace Blog;
 
@@ -640,13 +619,13 @@ return [
 ];</code></pre>
 
 <p>Finally, we'll create a dummy template:</p>
-<pre class="codehilite"><code class="language-html linenums">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
+<pre class="codehilite"><code class="language-html">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
 &lt;h1&gt;WriteController::addAction()&lt;/h1&gt;</code></pre>
 
 <h3 id="check-in">Check-in</h3>
 <p>If you try to access the new route <code>localhost:8080/blog/add</code> you're supposed to
 see the following error message:</p>
-<pre class="codehilite"><code class="language-text linenums">An error occurred
+<pre class="codehilite"><code class="language-text">An error occurred
 
 An error occurred during execution; please try again later.
 
@@ -668,7 +647,7 @@ application!</p>
 <p>Let's create a dummy implementation, as we did when we first started working
 with repositories. Create the file <code>module/Blog/src/Model/PostCommand.php</code> with
 the following contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog\Model;
 
 class PostCommand implements PostCommandInterface
@@ -696,7 +675,7 @@ class PostCommand implements PostCommandInterface
 }</code></pre>
 
 <p>Now add service configuration in <code>module/Blog/config/module.config.php</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">'service_manager' =&gt; [
+<pre class="codehilite"><code class="language-php">'service_manager' =&gt; [
     'aliases' =&gt; [
         /* ... */
         // Add the following line:
@@ -713,7 +692,7 @@ class PostCommand implements PostCommandInterface
 <h2 id="displaying-the-form">Displaying the form</h2>
 <p>Now that we have new controller working, it's time to pass this form to the view
 and render it.  Change your controller so that the form is passed to the view:</p>
-<pre class="codehilite"><code class="language-php linenums">// In /module/Blog/src/Controller/WriteController.php:
+<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Controller/WriteController.php:
 public function addAction()
 {
     return new ViewModel([
@@ -722,7 +701,7 @@ public function addAction()
 }</code></pre>
 
 <p>And then we need to modify our view to render the form:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
+<pre class="codehilite"><code class="language-php">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
 &lt;h1&gt;Add a blog post&lt;/h1&gt;
 
 &lt;?php
@@ -750,7 +729,7 @@ echo $this-&gt;form()-&gt;closeTag();</code></pre>
 <h3 id="form-method">Form method</h3>
 <p>HTML forms can be sent using <code>POST</code> and <code>GET</code>. zend-form defaults to <code>POST</code>.
 If you want to switch to <code>GET</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">$form-&gt;setAttribute('method', 'GET');</code></pre>
+<pre class="codehilite"><code class="language-php">$form-&gt;setAttribute('method', 'GET');</code></pre>
 
 </blockquote>
 <p>Refreshing the browser you will now see your form properly displayed. It's not
@@ -758,7 +737,7 @@ pretty, though, as the default markup does not follow semantics for Bootstrap
 (which is used in the skeleton application by default). Let's update it a bit to
 make it look better; we'll do that in the view script itself, as markup-related
 concerns belong in the view layer:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
+<pre class="codehilite"><code class="language-php">&lt;!-- Filename: module/Blog/view/blog/write/add.phtml --&gt;
 &lt;h1&gt;Add a blog post&lt;/h1&gt;
 
 &lt;?php
@@ -825,7 +804,7 @@ regardless of form and entities:</p>
    messages.</li>
 </ol>
 <p>Modify your <code>WriteController:addAction()</code> to read as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">public function addAction()
+<pre class="codehilite"><code class="language-php">public function addAction()
 {
     $request   = $this-&gt;getRequest();
     $viewModel = new ViewModel(['form' =&gt; $this-&gt;form]);
@@ -877,7 +856,7 @@ name is of the form <code>&lt;parent&gt;/&lt;child&gt;</code> &mdash; i.e., the 
 name are separated with a slash.</p>
 </blockquote>
 <p>Submitting the form right now will return into the following error</p>
-<pre class="codehilite"><code class="language-text linenums">Fatal error: Call to a member function getId() on null in
+<pre class="codehilite"><code class="language-text">Fatal error: Call to a member function getId() on null in
 {projectPath}/module/Blog/src/Controller/WriteController.php
 on line {lineNumber}</code></pre>
 
@@ -885,7 +864,7 @@ on line {lineNumber}</code></pre>
 instance, violating the contract!</p>
 <p>Let's create a new implementation to work against zend-db. Create the file
 <code>module/Blog/src/Model/ZendDbSqlCommand.php</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog\Model;
 
 use RuntimeException;
@@ -968,7 +947,7 @@ class ZendDbSqlCommand implements PostCommandInterface
 <p>Now that we have this in place, we'll create a factory for it; create the file
 <code>module/Blog/src/Factory/ZendDbSqlCommandFactory.php</code> with the following
 contents:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 namespace Blog\Factory;
 
 use Interop\Container\ContainerInterface;
@@ -986,7 +965,7 @@ class ZendDbSqlCommandFactory implements FactoryInterface
 
 <p>And finally, we'll wire it up in the configuration; update the <code>service_manager</code>
 section of <code>module/Blog/config/module.config.php</code> to read as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">'service_manager' =&gt; [
+<pre class="codehilite"><code class="language-php">'service_manager' =&gt; [
     'aliases' =&gt; [
         Model\PostRepositoryInterface::class =&gt; Model\ZendDbSqlRepository::class,
         // Update the following alias:
@@ -1006,7 +985,7 @@ detail page for the new entry!</p>
 <p>Let's see if we an improve this a bit.</p>
 <h2 id="using-zend-hydrator-with-zend-form">Using zend-hydrator with zend-form</h2>
 <p>In our controller currently, we have the following:</p>
-<pre class="codehilite"><code class="language-php linenums">$data = $this-&gt;form-&gt;getData()['post'];
+<pre class="codehilite"><code class="language-php">$data = $this-&gt;form-&gt;getData()['post'];
 $post = new Post($data['title'], $data['text']);</code></pre>
 
 <p>What if we could automate that, so we didn't need to worry about:</p>
@@ -1018,12 +997,12 @@ $post = new Post($data['title'], $data['text']);</code></pre>
 us to return a <code>Post</code> instance when we retrieve the validated values!</p>
 <p>Let's udpate our fieldset to provide a hydrator and a prototype object.</p>
 <p>First, add two import statements to the top of the class file:</p>
-<pre class="codehilite"><code class="language-php linenums">// In module/Blog/src/Form/PostFieldset.php:
+<pre class="codehilite"><code class="language-php">// In module/Blog/src/Form/PostFieldset.php:
 use Blog\Model\Post;
 use Zend\Hydrator\Reflection as ReflectionHydrator;</code></pre>
 
 <p>Next, update the <code>init()</code> method to add the following two lines:</p>
-<pre class="codehilite"><code class="language-php linenums">// In /module/Blog/src/Form/PostFieldset.php:
+<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Form/PostFieldset.php:
 
 public function init()
 {
@@ -1041,7 +1020,7 @@ This hints to the form that when we retrieve data from it, it should return the
 values from the specified fieldset instead; since our fieldset returns the
 <code>Post</code> instance, we'll have exactly what we need.</p>
 <p>Modify your <code>PostForm</code> class as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">// In /module/Blog/src/Form/PostForm.php:
+<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Form/PostForm.php:
 
 public function init()
 {
@@ -1057,11 +1036,11 @@ public function init()
 
 <p>Let's update our <code>WriteController</code>; modify the <code>addAction()</code> method to replace
 the following two lines:</p>
-<pre class="codehilite"><code class="language-php linenums">$data = $this-&gt;form-&gt;getData()['post'];
+<pre class="codehilite"><code class="language-php">$data = $this-&gt;form-&gt;getData()['post'];
 $post = new Post($data['title'], $data['text']);</code></pre>
 
 <p>to:</p>
-<pre class="codehilite"><code class="language-php linenums">$post = $this-&gt;form-&gt;getData();</code></pre>
+<pre class="codehilite"><code class="language-php">$post = $this-&gt;form-&gt;getData();</code></pre>
 
 <p>Everything should continue to work. The changes done serve the purpose of
 de-coupling the details of how the form is structured from the controller,
@@ -1097,7 +1076,7 @@ update and delete routines for the blog module.</p>
             <div class="col-lg-3">
               <p>
                 <strong>Zend Framework</strong><br />
-                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://framework.zend.com/">framework.zend.com</a><br />
                 <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
                 <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
                 <a href="https://apigility.org">apigility.org</a><br />
@@ -1118,14 +1097,15 @@ update and delete routines for the blog module.</p>
                 <h4>Copyright</h4>
                 <div class="hline-w"></div>
 
-                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2017 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
             </div>
 
             <div class="col-lg-4">
                 <h4>Contacts</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://discourse.zendframework.com" class="btn-social btn-outline" alt="Forum" title="Forum"><i class="fa fa-comments"></i></a>
+                    <a href="https://zendframework-slack.herokuapp.com" class="btn-social btn-outline" alt="Slack" title="Slack"><i class="fa fa-slack"></i></a>
                     <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
                     <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
                 </p>
@@ -1134,14 +1114,11 @@ update and delete routines for the blog module.</p>
     </div>
 </div>
 
-
-    <script src="../../js/jquery-1.10.2.min.js"></script>
-    <script src="../../js/bootstrap-3.0.3.min.js"></script>
-    <script src="../../js/prism-zf.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script>var base_url = '../..';</script>
+    <script src="../../js/scripts-0b6185f4a5.js"></script>
     <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
-    <script src="../../js/base.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -1173,7 +1150,7 @@ update and delete routines for the blog module.</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+      <a href="https://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -1182,112 +1159,6 @@ update and delete routines for the blog module.</p>
   </div>
 </div>
 
-    <script>
-  // Prepare the component list dropdown for display
-  $(function () {
-    var components = $(".zf-components"),
-        componentList = components.find(".component-list"),
-        sidebar = $(".bs-sidebar.affix"),
-        sidebarInitialPos = sidebar.css("position"),
-        hidden,
-        componentToggle = $(".component-toggle"),
-        navbar = $(".navbar-fixed-top"),
-        rollUpLink = $(".zf-components-rollup a");
-
-    // Initial setup on document load
-    components.insertBefore(navbar);
-    $(".zf-logo a").tooltip();
-    componentToggle.tooltip();
-    rollUpLink.attr({ href: "#", alt: "Hide component list" });
-
-    // Cast initial sidebar position value
-    if (undefined === sidebarInitialPos) {
-      sidebarInitialPos = "fixed";
-    }
-
-    // Setup onclick events to toggle list
-    componentToggle.click(toggleComponentList);
-    rollUpLink.click(toggleComponentList);
-
-    // Toggle the component list display
-    function toggleComponentList(event) {
-      event.preventDefault();
-
-      if (hidden === undefined) {
-        // Not loaded yet; load and display.
-        loadComponentList();
-        return;
-      }
-
-      if (hidden) {
-        // Hidden; display.
-        showComponentList();
-        return;
-      }
-
-      // Currently visible; hide
-      hideComponentList();
-    }
-
-    // Show the component list
-    function showComponentList() {
-      navbar.css({position: "relative"});
-      sidebar.css({position: "relative"});
-      components
-        .css({"margin-top": "-" + components.outerHeight() + "px"})
-        .show()
-        .animate({"margin-top": 0}, {
-          complete: function () {
-            componentToggle
-              .data("placement", "top")
-              .attr("data-original-title", "Hide component list");
-            hidden = false;
-          },
-          queue: false
-        });
-    }
-
-    // Hide the component list
-    function hideComponentList() {
-      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
-        complete: function () {
-          navbar.css({position: "fixed"});
-          sidebar.css({position: sidebarInitialPos});
-          componentToggle
-            .data("placement", "bottom")
-            .attr("data-original-title", "Show component list");
-          components.hide();
-          hidden = true;
-        },
-        queue: false
-      });
-      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
-    }
-
-    // Inject a component into the componet list DOM.
-    function injectComponent(index, component) {
-      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
-    }
-
-    // Parse the component list, build the DOM, and display it.
-    function parseComponentList(components) {
-      $.each(components, injectComponent);
-      showComponentList();
-    }
-
-    // Fetch the component list and display it.
-    function loadComponentList () {
-      $.ajax({
-        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
-        dataType: "text json",
-        success: parseComponentList,
-        error: function (e) {
-          console.log("Error occurred with XHR call", e);
-        }
-      });
-    }
-  });
-</script>
-    </body>
+</body>
 
 </html>

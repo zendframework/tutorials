@@ -4,36 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend Framework Tutorials">  
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>Forms and Actions - tutorials</title>
 
-    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
-    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="../../css/base.css" rel="stylesheet">
-    <link href="../../css/zf-web.css" rel="stylesheet">
-    <link href="../../css/zf.css" rel="stylesheet">
-    <link href="../../css/prism-zf.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/styles-482aa2add1.css">
 
     
 </head>
@@ -57,8 +36,8 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
-              <a href="../..">tutorials</a>
+                <a class="logo-link" href="https://framework.zend.com/" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+                <a href="../..">tutorials</a>
             </span>
         </div>
 
@@ -341,15 +320,15 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="../..">tutorials</a> &raquo;</li>
+  <li><a href="../..">tutorials</a></li>
   
     
       
-        <li>MVC Tutorials &raquo;</li>
+        <li>MVC Tutorials</li>
       
     
       
-        <li>Getting Started with Zend Framework &raquo;</li>
+        <li>Getting Started with Zend Framework</li>
       
     
   
@@ -368,7 +347,7 @@ well as their validation, the latter of which is handled by the zend-inputfilter
 component. We'll start by creating a new class, <code>Album\Form\AlbumForm</code>,
 extending from <code>Zend\Form\Form</code>. Create the file
 <code>module/Album/src/Form/AlbumForm.php</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Album\Form;
+<pre class="codehilite"><code class="language-php">namespace Album\Form;
 
 use Zend\Form\Form;
 
@@ -409,7 +388,7 @@ class AlbumForm extends Form
 }</code></pre>
 
 <p>Within the constructor of <code>AlbumForm</code> we do several things. First, we set the
-name of the form as we call the parent's constructor. The, we create four form
+name of the form as we call the parent's constructor. Then, we create four form
 elements: the id, title, artist, and submit button. For each item we set various
 attributes and options, including the label to be displayed.</p>
 <blockquote>
@@ -417,7 +396,7 @@ attributes and options, including the label to be displayed.</p>
 <p>HTML forms can be sent using <code>POST</code> and <code>GET</code>. zend-form defaults to <code>POST</code>;
 therefore you don't have to be explicit in setting this option. If you want to
 change it to <code>GET</code> however, set the method attribute in the constructor:</p>
-<pre class="codehilite"><code class="language-php linenums">$this-&gt;setAttribute('method', 'GET');</code></pre>
+<pre class="codehilite"><code class="language-php">$this-&gt;setAttribute('method', 'GET');</code></pre>
 
 </blockquote>
 <p>We also need to set up validation for this form.  <a href="https://zendframework.github.io/zend-inputfilter">zend-inputfilter</a>
@@ -425,7 +404,7 @@ provides a general purpose mechanism for input validation. It also provides an
 interface, <code>InputFilterAwareInterface</code>, which zend-form will use in order to
 bind an input filter to a given form. We'll add this capability now to our
 <code>Album</code> class.</p>
-<pre class="codehilite"><code class="language-php linenums">// module/Album/src/Model/Album.php:
+<pre class="codehilite"><code class="language-php">// module/Album/src/Model/Album.php:
 namespace Album\Model;
 
 // Add the following import statements:
@@ -535,7 +514,7 @@ them to be <em>required</em> and add a <code>StringLength</code> validator to en
 doesn't enter more characters than we can store into the database.</p>
 <p>We now need to get the form to display and then process it on submission. This
 is done within the <code>AlbumController::addAction()</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">// module/Album/src/Controller/AlbumController.php:
+<pre class="codehilite"><code class="language-php">// module/Album/src/Controller/AlbumController.php:
 
 // Add the following import statements at the top of the file:
 use Album\Form\AlbumForm;
@@ -576,13 +555,13 @@ class AlbumController extends AbstractActionController
 <p>After adding the <code>Album</code> and <code>AlbumForm</code> classes to the import list, we
 implement <code>addAction()</code>. Let's look at the <code>addAction()</code> code in a little more
 detail:</p>
-<pre class="codehilite"><code class="language-php linenums">$form = new AlbumForm();
+<pre class="codehilite"><code class="language-php">$form = new AlbumForm();
 $form-&gt;get('submit')-&gt;setValue('Add');</code></pre>
 
 <p>We instantiate <code>AlbumForm</code> and set the label on the submit button to "Add". We
 do this here as we'll want to re-use the form when editing an album and will use
 a different label.</p>
-<pre class="codehilite"><code class="language-php linenums">$request = $this-&gt;getRequest();
+<pre class="codehilite"><code class="language-php">$request = $this-&gt;getRequest();
 
 if (! $request-&gt;isPost()) {
     return ['form' =&gt; $form];
@@ -592,31 +571,31 @@ if (! $request-&gt;isPost()) {
 and we need to display the form. zend-mvc allows you to return an array of data
 instead of a view model if desired; if you do, the array will be used to create
 a view model.</p>
-<pre class="codehilite"><code class="language-php linenums">$album = new Album();
+<pre class="codehilite"><code class="language-php">$album = new Album();
 $form-&gt;setInputFilter($album-&gt;getInputFilter());
 $form-&gt;setData($request-&gt;getPost());</code></pre>
 
 <p>At this point, we know we have a form submission. We create an <code>Album</code> instance,
 and pass its input filter on to the form; additionally, we pass the submitted
 data from the request instance to the form.</p>
-<pre class="codehilite"><code class="language-php linenums">if (! $form-&gt;isValid()) {
+<pre class="codehilite"><code class="language-php">if (! $form-&gt;isValid()) {
     return ['form' =&gt; $form];
 }</code></pre>
 
 <p>If form validation fails, we want to redisplay the form. At this point, the form
 contains information about what fields failed validation, and why, and this
 information will be communicated to the view layer.</p>
-<pre class="codehilite"><code class="language-php linenums">$album-&gt;exchangeArray($form-&gt;getData());
+<pre class="codehilite"><code class="language-php">$album-&gt;exchangeArray($form-&gt;getData());
 $this-&gt;table-&gt;saveAlbum($album);</code></pre>
 
 <p>If the form is valid, then we grab the data from the form and store to the model
 using <code>saveAlbum()</code>.</p>
-<pre class="codehilite"><code class="language-php linenums">return $this-&gt;redirect()-&gt;toRoute('album');</code></pre>
+<pre class="codehilite"><code class="language-php">return $this-&gt;redirect()-&gt;toRoute('album');</code></pre>
 
 <p>After we have saved the new album row, we redirect back to the list of albums
 using the <code>Redirect</code> controller plugin.</p>
 <p>We now need to render the form in the <code>add.phtml</code> view script:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 // module/Album/view/album/album/add.phtml:
 
 $title = 'Add new album';
@@ -644,7 +623,7 @@ standalone and have no validation rules, we use <code>formHidden()</code> and
 <p>Alternatively, the process of rendering the form can be simplified by using the
 bundled <code>formCollection</code> view helper. For example, in the view script above
 replace all the form-rendering echo statements with:</p>
-<pre class="codehilite"><code class="language-php linenums">echo $this-&gt;formCollection($form);</code></pre>
+<pre class="codehilite"><code class="language-php">echo $this-&gt;formCollection($form);</code></pre>
 
 <p>This will iterate over the form structure, calling the appropriate label,
 element, and error view helpers for each element, but you still have to wrap
@@ -664,7 +643,7 @@ can address that in our view script by:</p>
 <li>Adding attributes to elements.</li>
 </ul>
 <p>Update your <code>add.phtml</code> view script to read as follows:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 $title = 'Add new album';
 $this-&gt;headTitle($title);
 ?&gt;
@@ -716,7 +695,7 @@ You should be able to generate any markup necessary for your site.</p>
 <h2 id="editing-an-album">Editing an album</h2>
 <p>Editing an album is almost identical to adding one, so the code is very similar.
 This time we use <code>editAction()</code> in the <code>AlbumController</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">// module/Album/src/Controller/AlbumController.php:
+<pre class="codehilite"><code class="language-php">// module/Album/src/Controller/AlbumController.php:
 // ...
 
     public function editAction()
@@ -763,7 +742,7 @@ This time we use <code>editAction()</code> in the <code>AlbumController</code>:<
 <p>This code should look comfortably familiar. Let's look at the differences from
 adding an album. Firstly, we look for the <code>id</code> that is in the matched route and
 use it to load the album to be edited:</p>
-<pre class="codehilite"><code class="language-php linenums">$id = (int) $this-&gt;params()-&gt;fromRoute('id', 0);
+<pre class="codehilite"><code class="language-php">$id = (int) $this-&gt;params()-&gt;fromRoute('id', 0);
 
 if (0 === $id) {
     return $this-&gt;redirect()-&gt;toRoute('album', ['action' =&gt; 'add']);
@@ -786,7 +765,7 @@ entity from the database.</p>
 <p>We have to check to make sure that the album with the specified <code>id</code> can
 actually be found. If it cannot, then the data access method throws an
 exception. We catch that exception and re-route the user to the index page.</p>
-<pre class="codehilite"><code class="language-php linenums">$form = new AlbumForm();
+<pre class="codehilite"><code class="language-php">$form = new AlbumForm();
 $form-&gt;bind($album);
 $form-&gt;get('submit')-&gt;setAttribute('value', 'Edit');</code></pre>
 
@@ -802,7 +781,7 @@ hydrators, but the default one is <code>Zend\Hydrator\ArraySerializable</code> w
 expects to find two methods in the model: <code>getArrayCopy()</code> and
 <code>exchangeArray()</code>. We have already written <code>exchangeArray()</code> in our <code>Album</code>
 entity, so we now need to write <code>getArrayCopy()</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">// module/Album/src/Model/Album.php:
+<pre class="codehilite"><code class="language-php">// module/Album/src/Model/Album.php:
 // ...
 
     public function exchangeArray($data)
@@ -829,7 +808,7 @@ form's data back into the <code>$album</code> as that's already been done, so we
 call the mapper's <code>saveAlbum()</code> method to store the changes back to the
 database.</p>
 <p>The view template, <code>edit.phtml</code>, looks very similar to the one for adding an album:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 // module/Album/view/album/album/edit.phtml:
 
 $title = 'Edit album';
@@ -886,7 +865,7 @@ POST instead.</p>
 click "yes", we will do the deletion. As the form is trivial, we'll code it
 directly into our view (zend-form is, after all, optional!).</p>
 <p>Let's start with the action code in <code>AlbumController::deleteAction()</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">// module/Album/src/Album/Controller/AlbumController.php:
+<pre class="codehilite"><code class="language-php">// module/Album/src/Album/Controller/AlbumController.php:
 //...
     // Add content to the following method:
     public function deleteAction()
@@ -918,7 +897,7 @@ directly into our view (zend-form is, after all, optional!).</p>
 
 <p>As before, we get the <code>id</code> from the matched route, and check the request object's <code>isPost()</code> to determine whether to show the confirmation page or to delete the album. We use the table object to delete the row using the <code>deleteAlbum()</code> method and then redirect back the list of albums. If the request is not a POST, then we retrieve the correct database record and assign to the view, along with the <code>id</code>.</p>
 <p>The view script is a simple form:</p>
-<pre class="codehilite"><code class="language-php linenums">&lt;?php
+<pre class="codehilite"><code class="language-php">&lt;?php
 // module/Album/view/album/album/delete.phtml:
 
 $title = 'Delete album';
@@ -951,7 +930,7 @@ doesn't display the list of albums.</p>
 <p>This is due to a route set up in the <code>Application</code> module's <code>module.config.php</code>.
 To change it, open <code>module/Application/config/module.config.php</code> and find the
 home route:</p>
-<pre class="codehilite"><code class="language-php linenums">'home' =&gt; [
+<pre class="codehilite"><code class="language-php">'home' =&gt; [
     'type' =&gt; \Zend\Router\Http\Literal::class,
     'options' =&gt; [
         'route'    =&gt; '/',
@@ -963,10 +942,10 @@ home route:</p>
 ],</code></pre>
 
 <p>Import <code>Album\Controller\AlbumController</code> at the top of the file:</p>
-<pre class="codehilite"><code class="language-php linenums">use Album\Controller\AlbumController;</code></pre>
+<pre class="codehilite"><code class="language-php">use Album\Controller\AlbumController;</code></pre>
 
 <p>and change the <code>controller</code> from <code>Controller\IndexController::class</code> to <code>AlbumController::class</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">'home' =&gt; [
+<pre class="codehilite"><code class="language-php">'home' =&gt; [
     'type' =&gt; \Zend\Router\Http\Literal::class,
     'options' =&gt; [
         'route'    =&gt; '/',
@@ -1003,7 +982,7 @@ home route:</p>
             <div class="col-lg-3">
               <p>
                 <strong>Zend Framework</strong><br />
-                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://framework.zend.com/">framework.zend.com</a><br />
                 <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
                 <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
                 <a href="https://apigility.org">apigility.org</a><br />
@@ -1024,14 +1003,15 @@ home route:</p>
                 <h4>Copyright</h4>
                 <div class="hline-w"></div>
 
-                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2017 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
             </div>
 
             <div class="col-lg-4">
                 <h4>Contacts</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://discourse.zendframework.com" class="btn-social btn-outline" alt="Forum" title="Forum"><i class="fa fa-comments"></i></a>
+                    <a href="https://zendframework-slack.herokuapp.com" class="btn-social btn-outline" alt="Slack" title="Slack"><i class="fa fa-slack"></i></a>
                     <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
                     <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
                 </p>
@@ -1040,14 +1020,11 @@ home route:</p>
     </div>
 </div>
 
-
-    <script src="../../js/jquery-1.10.2.min.js"></script>
-    <script src="../../js/bootstrap-3.0.3.min.js"></script>
-    <script src="../../js/prism-zf.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script>var base_url = '../..';</script>
+    <script src="../../js/scripts-0b6185f4a5.js"></script>
     <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
-    <script src="../../js/base.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -1079,7 +1056,7 @@ home route:</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+      <a href="https://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -1088,112 +1065,6 @@ home route:</p>
   </div>
 </div>
 
-    <script>
-  // Prepare the component list dropdown for display
-  $(function () {
-    var components = $(".zf-components"),
-        componentList = components.find(".component-list"),
-        sidebar = $(".bs-sidebar.affix"),
-        sidebarInitialPos = sidebar.css("position"),
-        hidden,
-        componentToggle = $(".component-toggle"),
-        navbar = $(".navbar-fixed-top"),
-        rollUpLink = $(".zf-components-rollup a");
-
-    // Initial setup on document load
-    components.insertBefore(navbar);
-    $(".zf-logo a").tooltip();
-    componentToggle.tooltip();
-    rollUpLink.attr({ href: "#", alt: "Hide component list" });
-
-    // Cast initial sidebar position value
-    if (undefined === sidebarInitialPos) {
-      sidebarInitialPos = "fixed";
-    }
-
-    // Setup onclick events to toggle list
-    componentToggle.click(toggleComponentList);
-    rollUpLink.click(toggleComponentList);
-
-    // Toggle the component list display
-    function toggleComponentList(event) {
-      event.preventDefault();
-
-      if (hidden === undefined) {
-        // Not loaded yet; load and display.
-        loadComponentList();
-        return;
-      }
-
-      if (hidden) {
-        // Hidden; display.
-        showComponentList();
-        return;
-      }
-
-      // Currently visible; hide
-      hideComponentList();
-    }
-
-    // Show the component list
-    function showComponentList() {
-      navbar.css({position: "relative"});
-      sidebar.css({position: "relative"});
-      components
-        .css({"margin-top": "-" + components.outerHeight() + "px"})
-        .show()
-        .animate({"margin-top": 0}, {
-          complete: function () {
-            componentToggle
-              .data("placement", "top")
-              .attr("data-original-title", "Hide component list");
-            hidden = false;
-          },
-          queue: false
-        });
-    }
-
-    // Hide the component list
-    function hideComponentList() {
-      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
-        complete: function () {
-          navbar.css({position: "fixed"});
-          sidebar.css({position: sidebarInitialPos});
-          componentToggle
-            .data("placement", "bottom")
-            .attr("data-original-title", "Show component list");
-          components.hide();
-          hidden = true;
-        },
-        queue: false
-      });
-      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
-    }
-
-    // Inject a component into the componet list DOM.
-    function injectComponent(index, component) {
-      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
-    }
-
-    // Parse the component list, build the DOM, and display it.
-    function parseComponentList(components) {
-      $.each(components, injectComponent);
-      showComponentList();
-    }
-
-    // Fetch the component list and display it.
-    function loadComponentList () {
-      $.ajax({
-        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
-        dataType: "text json",
-        success: parseComponentList,
-        error: function (e) {
-          console.log("Error occurred with XHR call", e);
-        }
-      });
-    }
-  });
-</script>
-    </body>
+</body>
 
 </html>
