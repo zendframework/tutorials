@@ -215,7 +215,7 @@ class AlbumController extends AbstractActionController
         }
 
         $album = new Album();
-        $form->setInputFilter($album->getInputFilter());
+        $form->setInputFilter($form->getInputFilter($album));
         $form->setData($request->getPost());
 
         if (! $form->isValid()) {
@@ -443,7 +443,7 @@ This time we use `editAction()` in the `AlbumController`:
             return $viewData;
         }
 
-        $form->setInputFilter($album->getInputFilter());
+        $form->setInputFilter($form->getInputFilter($album));
         $form->setData($request->getPost());
 
         if (! $form->isValid()) {
