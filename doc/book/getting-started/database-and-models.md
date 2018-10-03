@@ -96,8 +96,13 @@ class Album
 }
 ```
 
-Our `Album` entity object is a PHP class. In order to work with zend-db's
-`TableGateway` class, we need to implement the `exchangeArray()` method; this
+Our `Album` entity object is a PHP class. In order to work with `Zend\Db\TableGateway\TableGatewayInterface` ensure you have require the zend-db package https://zendframework.github.io/zend-db/, for example:
+
+```
+composer require zendframework/zend-db
+```
+
+We need to implement the `exchangeArray()` method; this
 method copies the data from the provided array to our entity's properties. We
 will add an input filter later to ensure the values injected are valid.
 
