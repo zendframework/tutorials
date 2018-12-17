@@ -471,11 +471,11 @@ interface PostRepositoryInterface
     public function findPost($id);
 }</code></pre>
 
-<p>The first method, <code>findAllPosts()</code>, will return return all posts, and the second
+<p>The first method, <code>findAllPosts()</code>, will return all posts, and the second
 method, <code>findPost($id)</code>, will return the post matching the given identifier
-<code>$id</code>. What's new in here is the fact that we actually define a return value
-that doesn't exist yet. We will define this class at a later point; for now, we
-will create the <code>PostRepository</code> class.</p>
+<code>$id</code>. What's new in here is the fact that we actually define a return value -
+<code>Post</code> - that doesn't exist yet. We will define this <code>Post</code> class at a later
+point; for now, we will create the <code>PostRepository</code> class.</p>
 <p>Create the class <code>PostRepository</code> at <code>module/Blog/src/Model/PostRepository.php</code>;
 be sure to implement the <code>PostRepositoryInterface</code> and its required method (we
 will fill these in later). You then should have a class that looks like the
@@ -566,8 +566,8 @@ be unchangeable, allowing us to cache instances in the repository as necessary.<
 <p>Now that we have our entity in place, we can bring life into our
 <code>PostRepository</code> class. To keep the repository easy to understand, for now we
 will only return some hard-coded content from our <code>PostRepository</code> class directly.
-Create a property inside the <code>PostRepository</code> called <code>$data</code> and make this an array
-of our <code>Post</code> type. Edit <code>PostReepository</code> as follows:</p>
+Create a property inside the <code>PostRepository</code> class called <code>$data</code> and make this an array
+of our <code>Post</code> type. Edit <code>PostRepository</code> as follows:</p>
 <pre class="codehilite"><code class="language-php">namespace Blog\Model;
 
 class PostRepository implements PostRepositoryInterface
@@ -691,7 +691,7 @@ that is able to give us some data in a way that is defined by our
 <code>PostRepositoryInterface</code>.</p>
 <h2 id="bringing-the-service-into-the-controller">Bringing the Service into the Controller</h2>
 <p>Now that we have our <code>PostRepository</code> written, we want to get access to this
-repository in our controllers. For this task, we will step foot into a new topic
+repository in our controllers. For this task, we will step into a new topic
 called "Dependency Injection" (DI).</p>
 <p>When we're talking about dependency injection, we're talking about a way to get
 dependencies into our classes. The most common form, "Constructor Injection", is
@@ -830,9 +830,9 @@ class ListControllerFactory implements FactoryInterface
 }</code></pre>
 
 <p>The factory receives an instance of the application container, which, in our
-case, is a <code>Zend\ServiceManager\ServiceManager</code> instance; these also conform to
-<code>Interop\Container\ContainerInterface</code>, allowing re-use in other dependency
-injection systems if desired. We pull a service matching the
+case, is a <code>Zend\ServiceManager\ServiceManager</code> instance. The container also
+conforms to <code>Interop\Container\ContainerInterface</code>, allowing re-use in other
+dependency injection systems if desired. We pull a service matching the
 <code>PostRepositoryInterface</code> fully qualified class name and pass it directly to the
 controller's constructor.</p>
 <p>There's no magic happening; it's just PHP code. </p>
@@ -888,6 +888,16 @@ return [
 and then creates a factory for the <code>PostRepository</code> class by mapping it to the
 <code>InvokableFactory</code> (like we originally did for the <code>ListController</code>); we can do
 this as our <code>PostRepository</code> implementation has no dependencies of its own.</p>
+<blockquote>
+<h4 id="aliasing-services">Aliasing services</h4>
+<p>In zend-servicemanager, when you request a service by an alias you get the service
+it is mapped to. So when you request <code>Model\PostRepositoryInterface::class</code> you get
+the PostRepository class using its fully qualified class name (FQCN). We often
+alias an interface to an implementation service, as that allows the user to
+indicate they want an implementation of the interface, but do not care which
+implementation. For more information see
+<a href="https://docs.zendframework.com/zend-servicemanager/configuring-the-service-manager/#aliases">the zend-servicemanager Aliases documentation</a>.</p>
+</blockquote>
 <p>Try refreshing your browser. You should see no more error messages, but rather
 exactly the page that we have created in the previous chapter of the tutorial.</p>
 <h2 id="using-the-repository-in-our-controller">Using the repository in our controller</h2>
@@ -944,12 +954,6 @@ return ['foo' =&gt; 'bar'];</code></pre>
 
 </blockquote>
 <h2 id="accessing-view-variables">Accessing View Variables</h2>
-<p>When pushing variables to the view, they are accessible in two ways: either
-using object notation (<code>$this-&gt;posts</code>) or implicitly as script-level variables
-<code>$posts</code>). The two approaches are equivalent; however, calling <code>$posts</code> results
-in a little round-trip through the renderer's <code>__get()</code> method. We often
-recommend using <code>$this</code> notation to visually differentiate between variables
-passed to the view, and those created within the script itself.</p>
 <p>Let's modify our view to display a table of all blog posts that our repository
 returns:</p>
 <pre class="codehilite"><code class="language-php">&lt;!-- Filename: module/Blog/view/blog/list/index.phtml --&gt;
@@ -966,6 +970,16 @@ returns:</p>
 <p>In the view script, we iterate over the posts passed to the view model.  Since
 every single entry of our array is of type <code>Blog\Model\Post</code>, we can use its
 getter methods and render it.</p>
+<h4 id="instance-variables-vs-script-variables">Instance Variables Vs Script Variables</h4>
+<blockquote>
+<p>By default, all variables passed via a view model to the renderer are imported
+directly into the view script, and can therefore be referenced as either
+instance or script variables (i.e., <code>$this-&gt;posts</code> is the same as <code>$posts</code>).
+However, we recommend to reference any variables defined as part of the
+original view model using <em>instance variable</em> notation (<code>$this-&gt;posts</code>), to
+make it clear where they originate, and to only use <em>script variable</em> notation
+(<code>$posts</code>) for variables defined in the script itself.</p>
+</blockquote>
 <p>After saving this file, refresh your browser, and you should now see a list of
 blog entries!</p>
 <h2 id="summary">Summary</h2>
