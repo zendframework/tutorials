@@ -497,7 +497,7 @@ unique to your application, and descriptive of their purpose!</p>
 <p>Retrieve named adapters in your service factories just as you would another
 service:</p>
 <pre class="codehilite"><code class="language-php">function ($container) {
-    return new SomeServiceObject($container-&gt;get('Application\Db\ReadOnlyAdapter));
+    return new SomeServiceObject($container-&gt;get('Application\Db\ReadOnlyAdapter'));
 }</code></pre>
 
 <h3 id="using-the-adapterabstractservicefactory-as-a-factory">Using the AdapterAbstractServiceFactory as a factory</h3>
