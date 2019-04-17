@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend Framework Tutorials">  
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    <title>Listing tasks - tutorials</title>
+
+    <link rel="stylesheet" href="../../css/styles-18b942728f.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+</head>
+<body id="page-top">
+
+    
+    <div class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+
+            
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            <span class="navbar-brand">
+                <a class="logo-link" href="https://framework.zend.com/" data-tooltip data-placement="bottom" title="Go to the ZF homepage">
+                    <img src="../../img/zend-framework-logo.svg" height="28" alt="Zend Framework">
+                </a>
+            </span>
+        </div>
+
+        <div class="navbar-collapse collapse">
+
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="https://framework.zend.com/about">About</a>
+                </li>
+                <li>
+                    <a href="https://framework.zend.com/downloads">Install</a>
+                </li>
+                <li class="active">
+                    <a href="https://docs.zendframework.com">Documentation</a>
+                </li>
+                <li>
+                    <a href="https://www.zend.com/en/services/training">Training</a>
+                </li>
+                <li>
+                    <a href="https://framework.zend.com/blog">Blog</a>
+                </li>
+                <li>
+                    <a href="https://framework.zend.com/participate">Participate</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="nav navbar-nav navbar-collapse visible-xs-block ">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="">tutorials</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+                
+                    <li class="subnavigation__list-item ">
+                        <a href="" class="subnavigation__link">Tutorials for Zend Framework</a>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">MVC Tutorials</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Getting Started with Zend Framework</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/overview/" class="subnavigation__link">Overview</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/skeleton-application/" class="subnavigation__link">The Skeleton Application</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/modules/" class="subnavigation__link">Modules</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/routing-and-controllers/" class="subnavigation__link">Routing and Controllers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/database-and-models/" class="subnavigation__link">Database and Models</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/forms-and-actions/" class="subnavigation__link">Forms and Actions</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/conclusion/" class="subnavigation__link">Conclusion</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="unit-testing/" class="subnavigation__link">Unit Testing A zend-mvc Application</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="navigation/" class="subnavigation__link">Adding zend-navigation to the Album Module</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="pagination/" class="subnavigation__link">Adding zend-paginator to the Album Module</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">In-Depth Tutorial</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/first-module/" class="subnavigation__link">Introducing the Blog Module</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/models-and-servicemanager/" class="subnavigation__link">Models and the ServiceManager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/preparing-databases/" class="subnavigation__link">Preparing for Different Databases</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/zend-db-sql-zend-hydrator/" class="subnavigation__link">SQL Abstraction and Object Hydration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/understanding-routing/" class="subnavigation__link">Understanding the Router</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/zend-form-zend-form-fieldset/" class="subnavigation__link">Making Use of Forms and Fieldsets</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/data-binding/" class="subnavigation__link">Editing and Deleting Data</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/review/" class="subnavigation__link">Reviewing the Blog Module</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="advanced-config/" class="subnavigation__link">Advanced Configuration</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="i18n/" class="subnavigation__link">Internationalization</a>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Component Tutorials</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="db-adapter/" class="subnavigation__link">Setting Up A Database Adapter</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="event-manager/" class="subnavigation__link">Using the EventManager</a>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Migration</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">To Version 3</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/overview/" class="subnavigation__link">Overview</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/components/" class="subnavigation__link">Components</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/application/" class="subnavigation__link">Applications</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="nav navbar-nav navbar-collapse visible-xs-block">
+                <div class="component-selector">
+    <h4 class="component-selector__title">Components</h4>
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-xs-8">
+                <h1 class="header__title">
+                    Documentation
+
+                    
+                        <small class="header__subtitle">tutorials</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-xs-4 text-right">
+                
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/zendframework/tutorials/" class="header__link header__link--github" title="Go to repository of tutorials">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="laminas-announcement">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-xs-12 content" role="main">
+            <!-- content:begin -->
+                
+                    <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+    <li><a href="https://framework.zend.com/">Home</a></li>
+
+    
+        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+
+        
+            <li><a href="">tutorials</a></li>
+
+            
+
+            <li class="active">Listing tasks</li>
+        
+    
+</ol>
+
+
+    
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">In This Article</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#redirect-the-home-page" class="toc__link">Redirect the home page</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#adding-new-tasks" class="toc__link">Adding new tasks</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#editing-a-task" class="toc__link">Editing a task</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#deleting-a-task" class="toc__link">Deleting a task</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+
+    <h1 id="listing-tasks">Listing tasks</h1>
+<p>In order to list the tasks, we need to retrieve them from the model layer and
+pass them to the view. To do this, we fill in <code>indexAction()</code> within
+<code>TaskController</code>. Update the <code>indexAction()</code> like this:</p>
+<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
+
+public function indexAction()
+{
+    $mapper = $this-&gt;getTaskMapper();
+    return new ViewModel(['tasks' =&gt; $mapper-&gt;fetchAll()]);
+}</code></pre>
+
+<p>You'll also need to add <code>use Zend\View\Model\ViewModel;</code> to the list of <code>use</code>
+statements at the top of the file.</p>
+<p>To provide variables to the view layer, we return a <code>ViewModel</code> instance where
+the first parameter of the constructor is an array from the action containing
+data we need. These are then automatically passed to the view script. The
+<code>ViewModel</code> object also allows us to change the view script that is used, but
+the default is to use <code>{controller name}/{action name}</code>. You can also return an
+array from a controller as Zend Framework will construct a <code>ViewModel</code> behind
+the scenes for you.</p>
+<p>We can now fill in the <code>task/index.phtml</code> view script. Replace the contents with
+this new code:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+// In module/Checklist/view/checklist/task/index.phtml:
+
+$title = 'My task list';
+$this-&gt;headTitle($title);
+?&gt;
+&lt;h1&gt;&lt;?p= $this-&gt;escapeHtml($title) ?&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;&lt;?= $this-&gt;url('task', ['action' =&gt; 'add']) ?&gt;&quot;&gt;Add new item&lt;/a&gt;&lt;/p&gt;
+
+&lt;table class=&quot;table&quot;&gt;
+&lt;tr&gt;
+    &lt;th&gt;Task&lt;/th&gt;
+    &lt;th&gt;Created&lt;/th&gt;
+    &lt;th&gt;Completed?&lt;/th&gt;
+    &lt;th&gt;&amp;nbsp;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;?php foreach ($tasks as $task): ?&gt;
+&lt;tr&gt;
+    &lt;td&gt;
+        &lt;a href=&quot;&lt;?= $this-&gt;url('task', ['action' =&gt; 'edit', 'id' =&gt; $task-&gt;getId()]) ?&gt;&quot;&gt;
+            &lt;?= $this-&gt;escapeHtml($task-&gt;getTitle()) ?&gt;&lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td&gt;&lt;?= $this-&gt;escapeHtml($task-&gt;getCreated()) ?&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;?= $task-&gt;getCompleted() ? 'Yes' : 'No' ?&gt;&lt;/td&gt;
+    &lt;td&gt;
+        &lt;a href=&quot;&lt;?= $this-&gt;url('task', ['action' =&gt; 'delete', 'id' =&gt; $task-&gt;getId()]) ?&gt;&quot;&gt;Delete&lt;/a&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/table&gt;</code></pre>
+
+<p>The first thing we do is to set the title for the page (used in the layout) and
+also set the title for the <code>&lt;head&gt;</code> section using the <code>headTitle()</code> view helper
+which will display in the browser's title bar. We then create a link to add a
+new item using the <code>url()</code> view helper.</p>
+<p>The <code>url()</code> view helper is provided by Zend Framework and is used to create the
+links we need. The first parameter to <code>url()</code> is the route name that we wish to
+use for construction of the URL and then the second parameter is an array of all
+the variables to fit into the place-holders to use. In this case we use our task
+route which is set up to accept two place-holder variables: <code>action</code> and <code>id</code>.</p>
+<p>We iterate over the <code>$tasks</code> that we assigned from the controller action within
+an HTML table. The Zend Framework view system automatically ensures that these
+variables are extracted into the scope of the view script. Alternatively, you
+can also prefix with <code>$this-&gt;</code> if you would like.</p>
+<p>For each row, we display each task's title, creation date, completion date and
+provide links to allow for editing and deleting the record. A standard
+<code>foreach:</code> loop is used to iterate over the list of tasks, and we use the
+alternate form using a colon and <code>endforeach;</code> as it is easier to scan than to
+try and match up braces. Again, the <code>url()</code> view helper is used to create the
+edit and delete links.</p>
+<p>Note that we always use the <code>escapeHtml()</code> view helper to help protect ourselves
+from <a href="http://en.wikipedia.org/wiki/Cross-site_scripting">XSS vulnerabilities</a>.</p>
+<p>If you now run the application from within Zend Studio and navigate to
+<code>http://localhost:10088/MyTaskList/public/task</code> you should see this:</p>
+<p><img alt="image" src="../../images/getting-started-with-zend-studio.studio9.png" class="img-responsive"/></p>
+<h2 id="redirect-the-home-page">Redirect the home page</h2>
+<p>When you first pressed the Run button, you saw the application's home page which
+is the skeleton's welcome page. It would be helpful if we could redirect
+immediately to <code>/tasks</code> to save us having to edit the URL each time.</p>
+<p>To do this, go to "Navigate" -&gt; "Open Type..." in Zend Studio and type
+<code>IndexController</code> in the search box of the "Open PHP Type" dialog and press
+return.  This will open
+<code>module/Application/src/Application/Controller/IndexController.php</code> for you.
+Change the <code>indexAction()</code> method so that it reads:</p>
+<pre class="codehilite"><code class="language-php">public function indexAction()
+{
+    return $this-&gt;redirect()-&gt;toRoute('task');
+}</code></pre>
+
+<p>We use the <code>redirect</code> controller plugin to redirect the request for the home
+page to the URL defined by the route name task which we set up earlier. Now,
+when you press the green "Run" button, you will be taken directly to the list of
+tasks.</p>
+<h2 id="adding-new-tasks">Adding new tasks</h2>
+<p>We can now write the functionality to add new tasks. There are two things we
+need to do:</p>
+<ul>
+<li>Display a form for user to provide the task information</li>
+<li>Process the form submission and store to database</li>
+</ul>
+<p>We use zend-form to do this. The zend-form component manages the form and works
+in tandem with the <code>Zend\InputFilter</code> component which will provide validation.</p>
+<p>Create a new folder in <code>module/Checklist/src/Checklist</code> called <code>Form</code> and then
+within the <code>Form</code> folder, create a new PHP file called <code>TaskForm.php</code> with these
+contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+// In module/Checklist/src/Checklist/Form/TaskForm.php:
+namespace Checklist\Form;
+
+use Zend\Form\Form;
+use Zend\Stdlib\Hydrator\ClassMethods;
+
+class TaskForm extends Form
+{
+    public function __construct($name = null, $options = [])
+    {
+        parent::__construct('task');
+
+        $this-&gt;setAttribute('method', 'post');
+        $this-&gt;setInputFilter(new TaskFilter());
+        $this-&gt;setHydrator(new ClassMethods());
+
+        $this-&gt;add([
+            'name' =&gt; 'id',
+            'type' =&gt; 'hidden',
+        ]);
+
+        $this-&gt;add([
+            'name' =&gt; 'title',
+            'type' =&gt; 'text',
+            'options' =&gt; [
+                'label' =&gt; 'Title',
+            ],
+            'attributes' =&gt; [
+                'id' =&gt; 'title',
+                'maxlength' =&gt; 100,
+            ],
+        ));
+
+        $this-&gt;add([
+            'name' =&gt; 'completed',
+            'type' =&gt; 'checkbox',
+            'options' =&gt; [
+                'label' =&gt; 'Completed?',
+                'label_attributes' =&gt; ['class' =&gt; 'checkbox'],
+            ],
+        ]);
+
+        $this-&gt;add([
+            'name' =&gt; 'submit',
+            'attributes' =&gt; [
+                'type'  =&gt; 'submit',
+                'value' =&gt; 'Go',
+                'class' =&gt; 'btn btn-primary',
+            ],
+        ]);
+    }
+}</code></pre>
+
+<p>Within the constructor of <code>TaskForm</code>, we set the name when we call the parent's
+constructor and then set the method and the input filter that we want to use. We
+also set the form's hydrator to be <code>ClassMethods</code>, as a form object uses
+hydration to transfer data to and from an entity object in exactly the same way
+as the zend-db components do. Finally, we create the form elements for the id,
+title, whether the task is complete and the submit button. For each item we set
+various attributes and options, including the label to be displayed.</p>
+<p>We also need to set up validation for this form. In Zend Framework this is done
+using an input filter which can either be standalone or within any class that
+implements <code>InputFilterAwareInterface</code>, such as a model entity. For this
+application we are going to create a separate class for our input filter.</p>
+<p>Create a new PHP file called <code>TaskFilter.php</code> in the
+<code>module/Checklist/src/Checklist/Form</code> folder with these contents:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+namespace Checklist\Form;
+
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Filter\ToInt;
+use Zend\InputFilter\InputFilter;
+use Zend\Validator\StringLength;
+
+class TaskFilter extends InputFilter
+{
+    public function __construct()
+    {
+        $this-&gt;add([
+            'name' =&gt; 'id',
+            'required' =&gt; true,
+            'filters' =&gt; [
+                ['name' =&gt; ToInt::class],
+            ],
+        ]);
+
+        $this-&gt;add([
+            'name' =&gt; 'title',
+            'required' =&gt; true,
+            'filters' =&gt; [
+                ['name' =&gt; StripTags::class],
+                ['name' =&gt; StringTrim::class],
+            ],
+            'validators' =&gt; [
+                [
+                    'name' =&gt; StringLength::class,
+                    'options' =&gt; [
+                        'encoding' =&gt; 'UTF-8',
+                        'max' =&gt; 100,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this-&gt;add([
+            'name' =&gt; 'completed',
+            'required' =&gt; false,
+        ]);
+    }
+}</code></pre>
+
+<p>In the constructor for the <code>TaskFilter</code>, we create inputs for each property that
+we want to filter. Each input can have a name, a required property a list of
+filters and a list of validators. All are optional other than the name property.
+The difference between filters and validators is that a filter changes the data
+passed through it and a validator tests if the data matches some specific
+criteria. For the title, we filter the string with <code>StripTags</code> and <code>StringTrim</code>
+and finally ensure that the string is no longer than 100 characters with the
+<code>StringLength</code> validator. For the <em>completed</em> element, we simply set <code>required</code>
+to false.</p>
+<p>We now need to display the form and process it on submission. This is done
+within the <code>TaskController</code>'s <code>addAction()</code>. Open <code>TaskController.php</code>
+("Navigate" -&gt; "Open Resource..." is a convenient way to do this) and add a
+new method called <code>addAction()</code> to the class that looks like this:</p>
+<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
+
+public function addAction()
+{
+    $form = new TaskForm();
+    $task = new TaskEntity();
+    $form-&gt;bind($task);
+
+    $request = $this-&gt;getRequest();
+    if (! $request-&gt;isPost()) {
+        return ['form' =&gt; $form];
+    }
+
+    $form-&gt;setData($request-&gt;getPost());
+    if (! $form-&gt;isValid()) {
+        return ['form' =&gt; $form];
+    }
+
+    $this-&gt;getTaskMapper()-&gt;saveTask($task);
+
+    // Redirect to list of tasks
+    return $this-&gt;redirect()-&gt;toRoute('task');
+}</code></pre>
+
+<p>Add <code>use Checklist\Model\TaskEntity;</code> and <code>use Checklist\Form\TaskForm;</code> to the
+list of use statements at the top of the file.</p>
+<p>Let's look at what the <code>addAction()</code> does in detail.</p>
+<pre class="codehilite"><code class="language-php">$form = new TaskForm();
+$task = new TaskEntity();
+$form-&gt;bind($task);</code></pre>
+
+<p>We instantiate a new <code>TaskForm</code> object and an empty <code>TaskEntity</code> which we bind
+to the form for use by the form later. The form's <code>bind()</code> method attaches the
+model to the form. This is used in two ways:</p>
+<ol>
+<li>When displaying the form, the initial values for each element are extracted
+   from the model.</li>
+<li>After successful validation in <code>isValid()</code>, the data from the form is put
+   back into the model.</li>
+</ol>
+<p>When adding a new task, we only need to worry about point 2, however for editing an item, we need data transfer in both directions.</p>
+<pre class="codehilite"><code class="language-php">$request = $this-&gt;getRequest();
+if (! $request-&gt;isPost()) {
+    return ['form' =&gt; $form];
+}</code></pre>
+
+<p>If we do not have a form submission, we display the form.</p>
+<pre class="codehilite"><code class="language-php">$form-&gt;setData($request-&gt;getPost());
+if (! $form-&gt;isValid()) {
+    return ['form' =&gt; $form];
+}</code></pre>
+
+<p>For a submitted form, we set the posted data to the form and check to see if it
+is valid using the <code>isValid()</code> member function of the form. If it's not valid,
+zend-form will populate the various elements with validation failure messages,
+and we can re-display the form to the user with useful information for
+correcting their submission.</p>
+<pre class="codehilite"><code class="language-php">$this-&gt;getTaskMapper()-&gt;saveTask($task);</code></pre>
+
+<p>The <code>isValid()</code> method uses the form's input filter to test for validity and if
+it returns true, it will then transfer the filtered data values to the entity
+object that is bound to the form using the registered hydrator. This means that
+after <code>isValid()</code> is called, <code>$task</code> now contains the submitted form data.</p>
+<p>As the form is valid, we can save <code>$task</code> to the database using the mapper's
+<code>saveTask()</code> method.</p>
+<pre class="codehilite"><code class="language-php">// Redirect to list of tasks
+return $this-&gt;redirect()-&gt;toRoute('task');</code></pre>
+
+<p>After we have saved the new task, we redirect back to the list of tasks using
+the <code>Redirect</code> controller plugin.</p>
+<p>We also need to add the <code>saveTask()</code> method to the <code>TaskMapper</code> class. Open
+<code>module/Checklist/src/Checklist/Model/TaskMapper.php</code> and add this method to the
+end of the class:</p>
+<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Model/TaskMapper.php:
+
+public function saveTask(TaskEntity $task)
+{
+    $hydrator = new ClassMethods();
+    $data = $hydrator-&gt;extract($task);
+
+    $action = $task-&gt;getId()
+        ? $this-&gt;createUpdateAction($data, $task)
+        : $this-&gt;createInsertAction($data);
+
+    $statement = $this-&gt;sql-&gt;prepareStatementForSqlObject($action);
+    $result = $statement-&gt;execute();
+
+    if (! $task-&gt;getId()) {
+        $task-&gt;setId($result-&gt;getGeneratedValue());
+    }
+
+    return $result;
+}
+
+private function createUpdateAction(array $data, TaskEntity $task)
+{
+    $action = $this-&gt;sql-&gt;update();
+    $action-&gt;set($data);
+    $action-&gt;where(['id' =&gt; $task-&gt;getId()]);
+    return $task;
+}
+
+private function createInsertAction(array $data)
+{
+    $action = $this-&gt;sql-&gt;insert();
+    unset($data['id']);
+    $action-&gt;values($data);
+    return $action;
+}</code></pre>
+
+<p>The <code>saveTask()</code> method handles both inserting a new record if <code>$task</code> doesn't
+have an <code>id</code> or updating it if it does. In either case, we need the data from
+the entity as an array, so we can use the hydrator to do this. If we are
+updating, then we use the <code>Sql</code> object's <code>update()</code> method to create an <code>Update</code>
+object where we can set the data and a where clause. For inserting, we need an
+<code>Insert</code> object to which we set the values. Obviously, when inserting, the
+database will auto-increment the <code>id</code>, so we do not need the <code>id</code> property in
+the values list. In either case, we create a statement object and then execute
+it. Finally, if we are inserting, we populate the task entity's <code>id</code> with the
+value of the auto-generated id.</p>
+<p>We now need to render the form in the <code>add.phtml</code> view script. Create a new PHP
+file called <code>add.phtml</code> in the <code>module/Checklist/view/checklist/task</code> folder and
+add this code:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+// In module/Checklist/view/checklist/task/add.phtml:
+$title = 'Add new task';
+$this-&gt;headTitle($title);
+?&gt;
+&lt;h1&gt;&lt;?= $this-&gt;escapeHtml($title) ?&gt;&lt;/h1&gt;
+
+&lt;?php
+$form = $this-&gt;form;
+$form-&gt;setAttribute('action', $this-&gt;url('task', ['action' =&gt; 'add']));
+$form-&gt;get('submit')-&gt;setAttribute('value', 'Add');
+$form-&gt;prepare();
+
+echo $this-&gt;form()-&gt;openTag($form);
+echo $this-&gt;formHidden($form-&gt;get('id'));
+echo $this-&gt;formRow($form-&gt;get('title'));
+?&gt;
+&lt;div&gt;
+    &lt;?= $this-&gt;formInput($form-&gt;get('submit')) ?&gt;
+&lt;/div&gt;
+&lt;?= $this-&gt;form()-&gt;closeTag($form) ?&gt;</code></pre>
+
+<p>Again, we display a title as before and then we render the form. Zend Framework
+provides some view helpers to make this a little easier. The <code>form()</code> view
+helper has an <code>openTag()</code> and <code>closeTag()</code> method which we use to open and close
+the form. Then for the title element, which has a label, we can use the <code>formRow()</code>
+view helper which will render the HTML for the label, the element, and any
+validator messages that may exist. For the id and submit elements, we use
+<code>formHidden()</code> and <code>formInput()</code> respectively, as we only need to render the
+element itself. We also want the submit button on its own line, so we put it
+within a div. Note that the <code>formRow</code> view helper is just a convenience; we
+could have used <code>formInput()</code>, <code>formLabel()</code> and <code>formElementErrors()</code>
+separately had we wanted to.</p>
+<p>If you now run the application from within Zend Studio and click the "Add new
+item" link from the task list page, you should see:</p>
+<p><img alt="image" src="../../images/getting-started-with-zend-studio.studio11.png" class="img-responsive"/></p>
+<p>You can now add a new task item and see it in the list of tasks.</p>
+<h2 id="editing-a-task">Editing a task</h2>
+<p>Editing a task is almost identical to adding one, so the code is very similar.
+This time we use <code>editAction()</code> in the <code>TaskController</code>. Open
+<code>TaskController.php</code> and add this method to it:</p>
+<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
+
+public function editAction()
+{
+    $id = (int) $this-&gt;params('id');
+
+    if (! $id) {
+        return $this-&gt;redirect()-&gt;toRoute('task', ['action' =&gt; 'add']);
+    }
+
+    $task = $this-&gt;getTaskMapper()-&gt;getTask($id);
+    $form = new TaskForm();
+    $form-&gt;bind($task);
+    $viewData = [
+        'id' =&gt; $id,
+        'form' =&gt; $form,
+    ];
+
+    $request = $this-&gt;getRequest();
+    if (! $request-&gt;isPost()) {
+        return $viewData;
+    }
+
+    $form-&gt;setData($request-&gt;getPost());
+    if (! $form-&gt;isValid()) {
+        return $viewData;
+    }
+
+    $this-&gt;getTaskMapper()-&gt;saveTask($task);
+    return $this-&gt;redirect()-&gt;toRoute('task');
+}</code></pre>
+
+<p>This code should look familiar. Let's look at the only difference from adding a
+task: We look for the id that is in the matched route and use it to load the
+task to be edited:</p>
+<pre class="codehilite"><code class="language-php">$id = (int) $this-&gt;params('id');
+
+if (! $id) {
+    return $this-&gt;redirect()-&gt;toRoute('task', ['action' =&gt; 'add']);
+}
+
+$task = $this-&gt;getTaskMapper()-&gt;getTask($id);</code></pre>
+
+<p>The <code>params()</code> method is a controller plugin that provides a convenient way to
+retrieve parameters from the matched route. We use it to retrieve the id
+parameter that we defined in the task route that we created in the
+<code>module.config.php</code>. If the id is zero, then we redirect to the <code>add</code> action,
+otherwise, we continue by getting the task entity from the database.</p>
+<p>As we use the form's <code>bind()</code> method with its hydrator, we do not need to
+populate the <code>$task</code>'s data into the form manually as it will automatically be
+transferred for us.</p>
+<p>We also need to write a <code>getTask()</code> method in the TaskMapper to get a single
+record from the database, so let's do that now. Open <code>TaskMapper.php</code> and add
+this method:</p>
+<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Model/TaskMapper.php:
+
+public function getTask($id)
+{
+    $select = $this-&gt;sql-&gt;select();
+    $select-&gt;where(['id' =&gt; $id]);
+
+    $statement = $this-&gt;sql-&gt;prepareStatementForSqlObject($select);
+    $result = $statement-&gt;execute()-&gt;current();
+    if (! $result) {
+        return null;
+    }
+
+    $hydrator = new ClassMethods();
+    $task = new TaskEntity();
+    $hydrator-&gt;hydrate($result, $task);
+
+    return $task;
+}</code></pre>
+
+<p>This method simply sets a where clause on the <code>Sql</code>'s <code>Select</code> object and then
+executes it. Calling <code>current()</code> on the result from <code>execute()</code> will return
+either the array of data for the row or <code>false</code>. If we retrieved data, then we
+use the hydrator to populate a new <code>TaskEntity</code> (<code>$task</code>) with <code>$data</code>.</p>
+<p>In the same way as with the action methods, the view template, <code>edit.phtml</code>,
+looks very similar to the one for adding an task. Create a new PHP file called
+<code>edit.phtml</code> in in the <code>module/Checklist/view/checklist/task</code> folder and add
+this code:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+// In module/Checklist/view/checklist/task/edit.phtml:
+$title = 'Edit task';
+$this-&gt;headTitle($title);
+?&gt;
+&lt;h1&gt;&lt;?= $this-&gt;escapeHtml($title) ?&gt;&lt;/h1&gt;
+
+&lt;?php
+$form = $this-&gt;form;
+$url = $this-&gt;url('task', ['action' =&gt; 'edit', 'id' =&gt; $id]);
+$form-&gt;setAttribute('action', $url);
+$form-&gt;get('submit')-&gt;setAttribute('value', 'Edit');
+$form-&gt;prepare();
+
+echo $this-&gt;form()-&gt;openTag($form);
+echo $this-&gt;formHidden($form-&gt;get('id'));
+echo $this-&gt;formRow($form-&gt;get('title'));
+echo $this-&gt;formRow($form-&gt;get('completed'));
+?&gt;
+&lt;div&gt;
+    &lt;?= $this-&gt;formInput($form-&gt;get('submit')) ?&gt;
+&lt;/div&gt;
+&lt;?= $this-&gt;form()-&gt;closeTag($form) ?&gt;</code></pre>
+
+<p>Compared to the add view script, we set the title to ‚'Edit Task', and update
+the action URL to the edit action with the correct id. We also change the label
+of the button to <code>edit</code> and render the completed form element.</p>
+<p>You should now be able to edit tasks.</p>
+<h2 id="deleting-a-task">Deleting a task</h2>
+<p>To round out the core functionality of our application, we need to be able to
+delete a task. We have a <code>Delete</code> link next to each task on our list page and
+the naïve approach would be to run the delete action when it's clicked. This
+would be wrong. Remembering the HTTP specification, we recall that you shouldn't
+do an irreversible action using GET and should use POST instead.</p>
+<p>We shall therefore show a confirmation form when the user clicks delete and if
+they then click "Yes", we will do the deletion. As the form is trivial, we'll
+code it directly into our view (zend-form is, after all, optional!).</p>
+<p>Let's start by adding the <code>deleteAction()</code> method to the <code>TaskController</code>. Open
+<code>TaskController.php</code> and add this method to it:</p>
+<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
+public function deleteAction()
+{
+    $id = $this-&gt;params('id');
+    $task = $this-&gt;getTaskMapper()-&gt;getTask($id);
+
+    if (! $task) {
+        return $this-&gt;redirect()-&gt;toRoute('task');
+    }
+
+    $request = $this-&gt;getRequest();
+    if (! $request-&gt;isPost()) {
+        return [
+            'id' =&gt; $id,
+            'task' =&gt; $task,
+        ];
+    }
+
+    if ($request-&gt;getPost()-&gt;get('del') == 'Yes') {
+        $this-&gt;getTaskMapper()-&gt;deleteTask($id);
+    }
+
+    return $this-&gt;redirect()-&gt;toRoute('task');
+}</code></pre>
+
+<p>As before, we get the id from the matched route and retrieve the task object. We
+then check the <code>Request</code> object's <code>isPost()</code> to determine whether to show the
+confirmation page or to delete the task. We use the <code>TaskMapper</code>'s
+<code>deleteTask()</code> method to delete the row and then redirect back to the list of
+tasks. If the request is not a POST, then we assign the task to the view, along
+with the id.</p>
+<p>We also need to write <code>deleteTask()</code>, so open <code>TaskMapper.php</code> and add this
+method:</p>
+<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Model/TaskMapper.php:
+
+public function deleteTask($id)
+{
+    $delete = $this-&gt;sql-&gt;delete();
+    $delete-&gt;where(['id' =&gt; $id]);
+
+    $statement = $this-&gt;sql-&gt;prepareStatementForSqlObject($delete);
+    return $statement-&gt;execute();
+}</code></pre>
+
+<p>This code should look fairly familiar as we again use a <code>Delete</code> object from
+<code>Zend\Db\Sql</code> and execute the statement from it. As we are using a <code>Delete</code>
+object, we set the where clause to avoid deleting every row in the table.</p>
+<p>The view script is a simple HTML form. Create a new PHP file, <code>delete.phtml</code> in
+the <code>module/Checklist/view/checklist/task</code> folder with this content:</p>
+<pre class="codehilite"><code class="language-php">&lt;?php
+// In module/Checklist/view/checklist/task/delete.phtml:
+$title = 'Delete task';
+$this-&gt;headTitle($title);
+?&gt;
+&lt;h1&gt;&lt;?= $this-&gt;escapeHtml($title) ?&gt;&lt;/h1&gt;
+
+&lt;p&gt;
+  Are you sure that you want to delete the
+  '&lt;?= $this-&gt;escapeHtml($task-&gt;getTitle()) ?&gt;' task?
+&lt;/p&gt;
+&lt;?php
+$url = $this-&gt;url('task', ['action' =&gt; 'delete', 'id' =&gt; $id]) ?&gt;
+&lt;form action=&quot;&lt;?= $url ?&gt;&quot; method=&quot;post&quot;&gt;
+&lt;div&gt;
+  &lt;input type=&quot;submit&quot; name=&quot;del&quot; value=&quot;Yes&quot; /&gt;
+  &lt;input type=&quot;submit&quot; name=&quot;del&quot; value=&quot;No&quot; /&gt;
+&lt;/div&gt;
+&lt;/form&gt;</code></pre>
+
+<p>In this view script, we display a confirmation message and then a form with just
+Yes and No buttons. In the action, we checked specifically for the "Yes" value
+when doing the deletion.</p>
+<p><em>That's it</em>; you now have a fully working application!</p>
+
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/getting-started-with-zend-studio/tasks.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            <!-- content:end -->
+            </div>
+            <div class="col-md-3 col-xs-12 sidebar">
+                
+                    <div class="component-selector">
+    <h4 class="component-selector__title">Components</h4>
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="">tutorials</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+                
+                    <li class="subnavigation__list-item ">
+                        <a href="" class="subnavigation__link">Tutorials for Zend Framework</a>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">MVC Tutorials</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Getting Started with Zend Framework</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/overview/" class="subnavigation__link">Overview</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/skeleton-application/" class="subnavigation__link">The Skeleton Application</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/modules/" class="subnavigation__link">Modules</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/routing-and-controllers/" class="subnavigation__link">Routing and Controllers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/database-and-models/" class="subnavigation__link">Database and Models</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/forms-and-actions/" class="subnavigation__link">Forms and Actions</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/conclusion/" class="subnavigation__link">Conclusion</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="unit-testing/" class="subnavigation__link">Unit Testing A zend-mvc Application</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="navigation/" class="subnavigation__link">Adding zend-navigation to the Album Module</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="pagination/" class="subnavigation__link">Adding zend-paginator to the Album Module</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">In-Depth Tutorial</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/first-module/" class="subnavigation__link">Introducing the Blog Module</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/models-and-servicemanager/" class="subnavigation__link">Models and the ServiceManager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/preparing-databases/" class="subnavigation__link">Preparing for Different Databases</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/zend-db-sql-zend-hydrator/" class="subnavigation__link">SQL Abstraction and Object Hydration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/understanding-routing/" class="subnavigation__link">Understanding the Router</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/zend-form-zend-form-fieldset/" class="subnavigation__link">Making Use of Forms and Fieldsets</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/data-binding/" class="subnavigation__link">Editing and Deleting Data</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/review/" class="subnavigation__link">Reviewing the Blog Module</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="advanced-config/" class="subnavigation__link">Advanced Configuration</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="i18n/" class="subnavigation__link">Internationalization</a>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Component Tutorials</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="db-adapter/" class="subnavigation__link">Setting Up A Database Adapter</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="event-manager/" class="subnavigation__link">Using the EventManager</a>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Migration</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">To Version 3</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/overview/" class="subnavigation__link">Overview</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/components/" class="subnavigation__link">Components</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/application/" class="subnavigation__link">Applications</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h5>Zend Framework</h5>
+                <ul>
+                    <li><a href="https://framework.zend.com/">framework.zend.com</a></li>
+                    <li><a href="https://docs.zendframework.com">docs.zendframework.com</a></li>
+                    <li><a href="https://packages.zendframework.com">packages.zendframework.com</a></li>
+                    <li><a href="https://apigility.org">apigility.org</a></li>
+                    <li><a href="https://getexpressive.org/">getexpressive.org</a></li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-9">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>&copy; 2006-2018 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        var base_url = '../..',
+            siteName = 'tutorials';
+    </script>
+    <script src="../../js/scripts-edc4cfa790.js"></script>
+        <script src="../../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+// Anchors
+anchors.options.placement = 'left';
+anchors.add(
+    '.content h1:not(.content__title), .content h2, .content > h3, .content h4, .content h5'
+);
+</script>
+
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend Framework Tutorials">  
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    <title>A quick tour of the skeleton application - tutorials</title>
+
+    <link rel="stylesheet" href="../../css/styles-18b942728f.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+</head>
+<body id="page-top">
+
+    
+    <div class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+
+            
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            <span class="navbar-brand">
+                <a class="logo-link" href="https://framework.zend.com/" data-tooltip data-placement="bottom" title="Go to the ZF homepage">
+                    <img src="../../img/zend-framework-logo.svg" height="28" alt="Zend Framework">
+                </a>
+            </span>
+        </div>
+
+        <div class="navbar-collapse collapse">
+
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="https://framework.zend.com/about">About</a>
+                </li>
+                <li>
+                    <a href="https://framework.zend.com/downloads">Install</a>
+                </li>
+                <li class="active">
+                    <a href="https://docs.zendframework.com">Documentation</a>
+                </li>
+                <li>
+                    <a href="https://www.zend.com/en/services/training">Training</a>
+                </li>
+                <li>
+                    <a href="https://framework.zend.com/blog">Blog</a>
+                </li>
+                <li>
+                    <a href="https://framework.zend.com/participate">Participate</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="nav navbar-nav navbar-collapse visible-xs-block ">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="">tutorials</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+                
+                    <li class="subnavigation__list-item ">
+                        <a href="" class="subnavigation__link">Tutorials for Zend Framework</a>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">MVC Tutorials</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Getting Started with Zend Framework</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/overview/" class="subnavigation__link">Overview</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/skeleton-application/" class="subnavigation__link">The Skeleton Application</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/modules/" class="subnavigation__link">Modules</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/routing-and-controllers/" class="subnavigation__link">Routing and Controllers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/database-and-models/" class="subnavigation__link">Database and Models</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/forms-and-actions/" class="subnavigation__link">Forms and Actions</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/conclusion/" class="subnavigation__link">Conclusion</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="unit-testing/" class="subnavigation__link">Unit Testing A zend-mvc Application</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="navigation/" class="subnavigation__link">Adding zend-navigation to the Album Module</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="pagination/" class="subnavigation__link">Adding zend-paginator to the Album Module</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">In-Depth Tutorial</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/first-module/" class="subnavigation__link">Introducing the Blog Module</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/models-and-servicemanager/" class="subnavigation__link">Models and the ServiceManager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/preparing-databases/" class="subnavigation__link">Preparing for Different Databases</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/zend-db-sql-zend-hydrator/" class="subnavigation__link">SQL Abstraction and Object Hydration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/understanding-routing/" class="subnavigation__link">Understanding the Router</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/zend-form-zend-form-fieldset/" class="subnavigation__link">Making Use of Forms and Fieldsets</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/data-binding/" class="subnavigation__link">Editing and Deleting Data</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/review/" class="subnavigation__link">Reviewing the Blog Module</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="advanced-config/" class="subnavigation__link">Advanced Configuration</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="i18n/" class="subnavigation__link">Internationalization</a>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Component Tutorials</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="db-adapter/" class="subnavigation__link">Setting Up A Database Adapter</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="event-manager/" class="subnavigation__link">Using the EventManager</a>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Migration</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">To Version 3</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/overview/" class="subnavigation__link">Overview</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/components/" class="subnavigation__link">Components</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/application/" class="subnavigation__link">Applications</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="nav navbar-nav navbar-collapse visible-xs-block">
+                <div class="component-selector">
+    <h4 class="component-selector__title">Components</h4>
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-xs-8">
+                <h1 class="header__title">
+                    Documentation
+
+                    
+                        <small class="header__subtitle">tutorials</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-xs-4 text-right">
+                
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/zendframework/tutorials/" class="header__link header__link--github" title="Go to repository of tutorials">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="laminas-announcement">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-xs-12 content" role="main">
+            <!-- content:begin -->
+                
+                    <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+    <li><a href="https://framework.zend.com/">Home</a></li>
+
+    
+        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+
+        
+            <li><a href="">tutorials</a></li>
+
+            
+
+            <li class="active">A quick tour of the skeleton application</li>
+        
+    
+</ol>
+
+
+    
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">In This Article</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#the-dispatch-cycle" class="toc__link">The dispatch cycle</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+
+    <h1 id="a-quick-tour-of-the-skeleton-application">A quick tour of the skeleton application</h1>
+<p>========================================</p>
+<p>The skeleton application provides a lot of files, so it's worth having a quick
+high-level look at what has been generated for us. There are a number of high
+level directories created for us (along with <a href="http://getcomposer.org">Composer</a>
+and other support files):</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Information stored</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>config</code></td>
+<td>Application-level configuration files.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Data files generated by the application, such as caches.</td>
+</tr>
+<tr>
+<td><code>module</code></td>
+<td>The source files that make up this application are stored within separate modules within this folder.</td>
+</tr>
+<tr>
+<td><code>public</code></td>
+<td>The web server's document root. All files served directly by the web server are in here.</td>
+</tr>
+<tr>
+<td><code>vendor</code></td>
+<td>Third party libraries.</td>
+</tr>
+</tbody>
+</table></div>
+<p>One of the key features of Zend Framework is its module system. This provides
+organisation within your application; all application code lives within a
+module. The skeleton provides the <code>Application</code> module for bootstrapping, error
+and routing configuration. It also provides the application-level controllers
+for the home page and error display. The <code>Application</code> module contains these key
+folders:</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Information stored</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>config</code></td>
+<td>Module-specific configuration files.</td>
+</tr>
+<tr>
+<td><code>src/Application</code></td>
+<td>PHP files for this module, including controller and model files. The controller for the home page, <code>IndexController.php</code>, is provided.</td>
+</tr>
+<tr>
+<td><code>view/application</code></td>
+<td>View scripts for each controller action.</td>
+</tr>
+<tr>
+<td><code>view/error</code></td>
+<td>Error view scripts for 404 and generic errors.</td>
+</tr>
+<tr>
+<td><code>view/layout</code></td>
+<td>Layout view scripts. These contain the common HTML shared by a number of pages within the website. An initial default file, <code>layout.phtml</code>, is provided.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Modules are simply namespaces containing a top level <code>Module</code> class. They are
+intended to be reusable and no additional constraints are placed on how they are
+organised. An application consists of multiple modules, both third party and
+application specific, with the list of modules to load stored in
+<code>config/application.config.php</code>.</p>
+<h2 id="the-dispatch-cycle">The dispatch cycle</h2>
+<p>Zend Framework applications use the <a href="http://www.martinfowler.com/eaaCatalog/frontController.html">Front Controller</a>
+design pattern. This means that all requests are directed to a single entry
+point, the <code>public/index.php</code> file. This is done using a <code>.htaccess</code> file
+containing rewrite rules that serves all static files (such as CSS &amp;
+JavaScript) and directs all other requests to the <code>index.php</code>. The <code>index.php</code> file
+initialises the autoloader and then bootstraps <code>Zend\Mvc\Application</code> before
+finally running the application. The process looks like this:</p>
+<p><img alt="image" src="../../images/getting-started-with-zend-studio.process.png" class="img-responsive"/></p>
+<h3 id="starting-up">Starting up</h3>
+<p>To set up the application for running, a number of things happen. Firstly an
+instance of <code>Zend\ServiceManager\ServiceManager</code> is created as the master
+locator for all class instances used by the application. The Module Manager is
+then used to load all the application's modules. It does this by reading its
+configuration file, <code>application.config.php</code>, which is solely for use by the
+Module Manager and does not contain the configuration used by the application
+itself.</p>
+<p>The modules are loaded in the order listed in the configuration file and for
+each module a number of steps takes place:</p>
+<ul>
+<li>Configuration of autoloading.</li>
+<li>Loading of module configuration.</li>
+<li>Registration of event listeners.</li>
+<li>Configuration of the Service Manager.</li>
+</ul>
+<p>The configuration information from all modules is merged together into one
+configuration array. This means that configuration information in subsequent
+modules can override information already set. Finally, the global configuration
+files stored in the <code>config/autoload</code> directory are merged (the <code>*.global.php</code>
+and then the <code>*.local.php</code> files). This means that any module's configuration
+can be overridden at the application level and is a key feature that helps to
+ensure that the code within a third-party module does not need to be changed.</p>
+<p>The Service Manager and Event Manager are two other key features of a Zend
+Framework 2 application.  <a href="https://zendframework.github.io/zend-servicemanager/">zend-servicemanager</a>
+allows for decoupling the instantiation and configuration of a class and its
+dependencies from where that class is used. This is known as Dependency
+Injection and is used extensively in Zend Framework.
+<a href="https://zendframework.github.io/zend-eventmanager/">zend-eventmanager</a>
+is an implementation of the Observer design pattern which allows decoupling of
+code. In Zend Framework, every key process in the dispatch cycle is
+implemented as an event. This means that you can write listeners for these
+events which can then change the flow of operation or perform additional
+processes when something else has happened.</p>
+<h3 id="dispatching">Dispatching</h3>
+<p>Once all modules have been loaded, the application is run. This is done as a
+series of events, with the first event, <code>route</code>, used to determine the
+controller action that should be run based on the URL requested. Once this is
+determined, the <code>dispatch</code> event is triggered which causes the action method
+within the controller class to be executed. The view rendering event, <code>render</code>,
+is then triggered if an HTML view is required. Finally the <code>finish</code> event is
+triggered which sends the response back to the user's web browser.</p>
+<p>While this is a typical dispatch cycle, Zend Framework's dispatch system is
+very flexible and can be configured in a variety of ways depending on the
+specific application. Now that we've looked at how Zend Framework works, let's
+move on and write the <em>MyTaskList</em> application.</p>
+
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/getting-started-with-zend-studio/skeleton-application.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            <!-- content:end -->
+            </div>
+            <div class="col-md-3 col-xs-12 sidebar">
+                
+                    <div class="component-selector">
+    <h4 class="component-selector__title">Components</h4>
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="">tutorials</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+                
+                    <li class="subnavigation__list-item ">
+                        <a href="" class="subnavigation__link">Tutorials for Zend Framework</a>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">MVC Tutorials</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Getting Started with Zend Framework</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/overview/" class="subnavigation__link">Overview</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/skeleton-application/" class="subnavigation__link">The Skeleton Application</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/modules/" class="subnavigation__link">Modules</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/routing-and-controllers/" class="subnavigation__link">Routing and Controllers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/database-and-models/" class="subnavigation__link">Database and Models</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/forms-and-actions/" class="subnavigation__link">Forms and Actions</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="getting-started/conclusion/" class="subnavigation__link">Conclusion</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="unit-testing/" class="subnavigation__link">Unit Testing A zend-mvc Application</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="navigation/" class="subnavigation__link">Adding zend-navigation to the Album Module</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="pagination/" class="subnavigation__link">Adding zend-paginator to the Album Module</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">In-Depth Tutorial</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/first-module/" class="subnavigation__link">Introducing the Blog Module</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/models-and-servicemanager/" class="subnavigation__link">Models and the ServiceManager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/preparing-databases/" class="subnavigation__link">Preparing for Different Databases</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/zend-db-sql-zend-hydrator/" class="subnavigation__link">SQL Abstraction and Object Hydration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/understanding-routing/" class="subnavigation__link">Understanding the Router</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/zend-form-zend-form-fieldset/" class="subnavigation__link">Making Use of Forms and Fieldsets</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/data-binding/" class="subnavigation__link">Editing and Deleting Data</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="in-depth-guide/review/" class="subnavigation__link">Reviewing the Blog Module</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="advanced-config/" class="subnavigation__link">Advanced Configuration</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="i18n/" class="subnavigation__link">Internationalization</a>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Component Tutorials</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="db-adapter/" class="subnavigation__link">Setting Up A Database Adapter</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="event-manager/" class="subnavigation__link">Using the EventManager</a>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Migration</span>
+                        <ul class="subnavigation__list">
+                            
+                                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">To Version 3</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/overview/" class="subnavigation__link">Overview</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/components/" class="subnavigation__link">Components</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="migration/to-v3/application/" class="subnavigation__link">Applications</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                            
+                        </ul>
+                    </li>
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h5>Zend Framework</h5>
+                <ul>
+                    <li><a href="https://framework.zend.com/">framework.zend.com</a></li>
+                    <li><a href="https://docs.zendframework.com">docs.zendframework.com</a></li>
+                    <li><a href="https://packages.zendframework.com">packages.zendframework.com</a></li>
+                    <li><a href="https://apigility.org">apigility.org</a></li>
+                    <li><a href="https://getexpressive.org/">getexpressive.org</a></li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-9">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>&copy; 2006-2018 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        var base_url = '../..',
+            siteName = 'tutorials';
+    </script>
+    <script src="../../js/scripts-edc4cfa790.js"></script>
+        <script src="../../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+// Anchors
+anchors.options.placement = 'left';
+anchors.add(
+    '.content h1:not(.content__title), .content h2, .content > h3, .content h4, .content h5'
+);
+</script>
+
+
+
+</body>
+
+
+</html>
