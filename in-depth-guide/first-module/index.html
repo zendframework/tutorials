@@ -693,7 +693,7 @@ which is to be expected as we've not created it yet. The application is
 expecting it to be at <code>module/Blog/view/blog/list/index.phtml</code>. Create this
 file and add some dummy content to it:</p>
 <pre class="codehilite"><code class="language-html">&lt;!-- Filename: module/Blog/view/blog/list/index.phtml --&gt;
-&lt;h1&gt;Blog\ListController::indexAction()&lt;/h1&gt;</code></pre>
+&lt;h1&gt;Blog\Controller\ListController::indexAction()&lt;/h1&gt;</code></pre>
 
 <p>Before we continue let us quickly take a look at where we placed this file. Note
 that view files are found within the <code>/view</code> subdirectory, not <code>/src</code> as they
@@ -727,7 +727,7 @@ return [
 module, but also to overwrite view files from other modules.</p>
 <p>Reload your site now. Finally we are at a point where we see something different
 than an error being displayed! You should see the standard ZF Skeleton
-Application template page with <strong>Blog\ListController::indexAction()</strong> as the
+Application template page with <strong>Blog\Controller\ListController::indexAction()</strong> as the
 header.</p>
 <p>Congratulations, not only have you created a simple "Hello World" style module,
 you also learned about many error messages and their causes. If we didn't
