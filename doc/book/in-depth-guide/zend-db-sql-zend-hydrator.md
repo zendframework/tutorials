@@ -398,7 +398,7 @@ use Zend\Db\ResultSet\ResultSet;
 Next, we'll add the following import statements to our class file:
 
 ```php
-use Zend\Hydrator\Reflection as ReflectionHydrator;
+use Zend\Hydrator\ReflectionHydrator;
 use Zend\Db\ResultSet\HydratingResultSet;
 ```
 
