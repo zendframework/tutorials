@@ -842,7 +842,7 @@ case we get something else returned that is not an instance of a
 <p>Refreshing the page you will now see all your blog posts listed on the page. Great!</p>
 <h2 id="refactoring-hidden-dependencies">Refactoring hidden dependencies</h2>
 <p>There's one little thing that we have done that's not a best-practice. We use
-both a hydrator and an <code>Post</code> prototype inside our <code>ZendDbSqlRepository</code>. Let's
+both a hydrator and a <code>Post</code> prototype inside our <code>ZendDbSqlRepository</code>. Let's
 inject those instead, so that we can reuse them between our repository and
 command implementations, or vary them based on environment. Update your
 <code>ZendDbSqlRepository</code> as follows:</p>
