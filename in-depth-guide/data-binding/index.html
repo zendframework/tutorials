@@ -759,9 +759,10 @@ we pass the original <code>Post</code> instance or the identifier we pull from i
 view, however. zend-router allows another option, however: you can tell it to
 re-use currently matched parameters.  This is done by setting the last parameter
 of the view-helper to <code>true</code>: <code>$this-&gt;url('blog/edit', [], true)</code>.</p>
-<p>If you try and update the post, it'll be successful, but you'll notice that no
-edits were saved! Why? Because we have not yet implemented the functionality in
-our command class. Let's do that now.</p>
+<p>If you try and update the post, you will receive the following error: <br />
+<pre class="codehilite"><code>Call to member function getId() on null</code></pre>
+That is because we have not yet implemented the update functionality in
+our command class which will return a Post object on success. Let's do that now.</p>
 <p>Edit the file <code>module/Blog/src/Model/ZendDbSqlCommand.php</code>, and update the
 <code>updatePost()</code> method to read as follows:</p>
 <pre class="codehilite"><code class="language-php">public function updatePost(Post $post)
@@ -1046,7 +1047,7 @@ controller.</p>
 duplication in our views and re-use them. In particular, we did this with our
 form, to prevent needlessly duplicating the form markup.</p>
 <p>Finally, we looked at two more aspects of the <code>Zend\Db\Sql</code> subcomponent, and
-learned how to <code>Update</code> and <code>Delete</code> operations.</p>
+learned how to perform <code>Update</code> and <code>Delete</code> operations.</p>
 <p>In the next chapter we'll summarize everything we've done. We'll talk about the
 design patterns we've used, and we'll cover several questions that likely arose
 during the course of this tutorial.</p>

@@ -1048,7 +1048,7 @@ class ZendDbSqlCommand implements PostCommandInterface
         return new Post(
             $post-&gt;getTitle(),
             $post-&gt;getText(),
-            $result-&gt;getGeneratedValue()
+            $id
         );
     }
 
@@ -1114,7 +1114,7 @@ section of <code>module/Blog/config/module.config.php</code> to read as follows:
 
 <p>Submitting your form again, it should process the form and redirect you to the
 detail page for the new entry!</p>
-<p>Let's see if we an improve this a bit.</p>
+<p>Let's see if we can improve this a bit.</p>
 <h2 id="using-zend-hydrator-with-zend-form">Using zend-hydrator with zend-form</h2>
 <p>In our controller currently, we have the following:</p>
 <pre class="codehilite"><code class="language-php">$data = $this-&gt;form-&gt;getData()['post'];
