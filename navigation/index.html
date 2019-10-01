@@ -470,7 +470,7 @@ In order to make this change, we need to undo some work we did earlier.
 Currently, navigating to the root of your app (<code>/</code>) routes you to the
 <code>AlbumController</code>'s default action. Let's undo this route change so we have two
 discrete entry points to the app, a home page, and an albums area.</p>
-<pre class="codehilite"><code class="language-php">// In module/Application/config/module.config.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Application/config/module.config.php:
 'home' =&gt; [
    'type' =&gt; Literal::class,
     'options' =&gt; [
@@ -480,8 +480,7 @@ discrete entry points to the app, a home page, and an albums area.</p>
             'action'     =&gt; 'index',
         ],
     ],
-],</code></pre>
-
+],</code></pre></p>
 <p>(You can also now remove the import for the <code>Album\Controller\AlbumController</code>
 class.)</p>
 <p>This change means that if you go to the home page of your application
@@ -491,8 +490,7 @@ available at the <code>/album</code> route.</p>
 <h2 id="setting-up-zend-navigation">Setting Up zend-navigation</h2>
 <p>First, we need to install zend-navigation. From your root directory, execute the
 following:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-navigation</code></pre>
-
+<p> <pre class=codehilite><code class=language-bash>$ composer require zendframework/zend-navigation</code></pre></p>
 <p>Assuming you followed the <a href="../getting-started/overview/">Getting Started tutorial</a>,
 you will be prompted by the <a href="https://zendframework.github.io/zend-component-installer">zend-component-installer</a>
 plugin to inject <code>Zend\Navigation</code>; be sure to select the option for either
@@ -500,7 +498,7 @@ plugin to inject <code>Zend\Navigation</code>; be sure to select the option for 
 only package you are installing, you can answer either "y" or "n" to the "Remember this
 option for other packages of the same type" prompt.</p>
 <blockquote>
-<h3 id="manual-configuration">Manual configuration</h3>
+<h3>Manual configuration</h3>
 <p>If you are not using zend-component-installer, you will need to setup
 configuration manually. You can do this in one of two ways:</p>
 <ul>
@@ -511,13 +509,13 @@ configuration manually. You can do this in one of two ways:</p>
 <li>Alternately, add a new file, <code>config/autoload/navigation.global.php</code>, with
   the following contents:</li>
 </ul>
-<pre class="codehilite"><code class="language-php">&lt;?php
-use Zend\Navigation\ConfigProvider;
-
-return [
-    'service_manager' =&gt; (new ConfigProvider())-&gt;getDependencyConfig(),
-];</code></pre>
-
+<p>```php
+  &lt;?php
+  use Zend\Navigation\ConfigProvider;</p>
+<p>return [
+      'service_manager' =&gt; (new ConfigProvider())-&gt;getDependencyConfig(),
+  ];
+  ```</p>
 </blockquote>
 <p>Once installed, our application is now aware of zend-navigation, and even has
 some default factories in place, which we will now make use of.</p>
@@ -525,7 +523,7 @@ some default factories in place, which we will now make use of.</p>
 <p>Next up, we need zend-navigation to understand the hierarchy of our site.
 To do this, we can add a <code>navigation</code> key to our configuration, with the site
 structure details. We'll do that in the <code>Application</code> module configuration:</p>
-<pre class="codehilite"><code class="language-php">// in module/Application/config/module.config.php:
+<p> <pre class=codehilite><code class=language-php>// in module/Application/config/module.config.php:
 return [
     /* ... */
 
@@ -560,8 +558,7 @@ return [
     ],
 
     /* ... */
-];</code></pre>
-
+];</code></pre></p>
 <p>This configuration maps out the pages we've defined in our Album module, with
 labels linking to the given route names and actions. You can define highly complex
 hierarchical sites here with pages and sub-pages linking to route names,
@@ -571,26 +568,24 @@ controller/action pairs, or external uris. For more information, see the
 <p>Now that we have the navigation helper configured by our service manager and
 merged config, we can add the menu to the title bar to our layout by
 using the <a href="https://zendframework.github.io/zend-navigation/helpers/menu/">menu view helper</a>:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
-&lt;div class="collapse navbar-collapse"&gt;
+<p> <pre class=codehilite><code class=language-php>&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+&lt;div class=&quot;collapse navbar-collapse&quot;&gt;
     &lt;?php // add this: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')-&gt;menu() ?&gt;
-&lt;/div&gt;</code></pre>
-
+&lt;/div&gt;</code></pre></p>
 <p>The navigation helper is provided by default with zend-view, and uses the service
 manager configuration we've already defined to configure itself automatically.
 Refreshing your application, you will see a working menu; with just a few tweaks
 however, we can make it look even better:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
-&lt;div class="collapse navbar-collapse"&gt;
+<p> <pre class=codehilite><code class=language-php>&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+&lt;div class=&quot;collapse navbar-collapse&quot;&gt;
     &lt;?php // update to: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')
         -&gt;menu()
         -&gt;setMinDepth(0)
         -&gt;setMaxDepth(0)
         -&gt;setUlClass('nav navbar-nav') ?&gt;
-&lt;/div&gt;</code></pre>
-
+&lt;/div&gt;</code></pre></p>
 <p>Here we tell the renderer to give the root <code>&lt;ul&gt;</code> the class of <code>nav</code> (so that
 Bootstrap styles the menu correctly), and only render the first level of any
 given page. If you view your application in your browser, you will now see a
@@ -605,21 +600,20 @@ add breadcrumbs above the main content pane, so our users know exactly
 where they are in our website. Inside the container <code>&lt;div&gt;</code>, before we
 output the content from the view, let's add a breadcrumb by using the
 <a href="https://zendframework.github.io/zend-navigation/helpers/breadcrumbs/">breadcrumbs view helper</a>.</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // module/Application/view/layout/layout.phtml: ?&gt;
-&lt;div class="container"&gt;
+<p> <pre class=codehilite><code class=language-php>&lt;?php // module/Application/view/layout/layout.phtml: ?&gt;
+&lt;div class=&quot;container&quot;&gt;
     &lt;?php // add the following line: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')-&gt;breadcrumbs()-&gt;setMinDepth(0) ?&gt;
     &lt;?= $this-&gt;content ?&gt;
-&lt;/div&gt;</code></pre>
-
+&lt;/div&gt;</code></pre></p>
 <p>This adds a simple but functional breadcrumb to every page (we tell it to render
 from a depth of 0 so we see all page levels), but we can do better than that!
 Because Bootstrap has a styled breadcrumb as part of its base CSS, let's add
 a partial that outputs the <code>&lt;ul&gt;</code> using Bootstrap styles. We'll create it in the
 <code>view</code> directory of the <code>Application</code> module (this partial is application wide,
 rather than album specific):</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/partial/breadcrumb.phtml: ?&gt;
-&lt;ul class="breadcrumb"&gt;
+<p> <pre class=codehilite><code class=language-php>&lt;?php // in module/Application/view/partial/breadcrumb.phtml: ?&gt;
+&lt;ul class=&quot;breadcrumb&quot;&gt;
     &lt;?php
     // iterate through the pages
     foreach ($this-&gt;pages as $key =&gt; $page):
@@ -629,7 +623,7 @@ rather than album specific):</p>
             // if this isn't the last page, add a link and the separator:
             if ($key &lt; count($this-&gt;pages) - 1):
             ?&gt;
-                &lt;a href="&lt;?= $page-&gt;getHref() ?&gt;"&gt;&lt;?= $page-&gt;getLabel() ?&gt;&lt;/a&gt;
+                &lt;a href=&quot;&lt;?= $page-&gt;getHref() ?&gt;&quot;&gt;&lt;?= $page-&gt;getLabel() ?&gt;&lt;/a&gt;
             &lt;?php
             // otherwise, output the name only:
             else:
@@ -638,22 +632,20 @@ rather than album specific):</p>
             &lt;?php endif; ?&gt;
         &lt;/li&gt;
     &lt;?php endforeach; ?&gt;
-&lt;/ul&gt;</code></pre>
-
+&lt;/ul&gt;</code></pre></p>
 <p>Notice how the partial is passed a <code>Zend\View\Model\ViewModel</code> instance with the
 <code>pages</code> property set to an array of pages to render.</p>
 <p>Now we need to tell the breadcrumb helper to use the partial we have just
 written:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
-&lt;div class="container"&gt;
+<p> <pre class=codehilite><code class=language-php>&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+&lt;div class=&quot;container&quot;&gt;
     &lt;?php // Update to: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')
             -&gt;breadcrumbs()
             -&gt;setMinDepth(0)
             -&gt;setPartial('partial/breadcrumb') ?&gt;
     &lt;?= $this-&gt;content ?&gt;
-&lt;/div&gt;</code></pre>
-
+&lt;/div&gt;</code></pre></p>
 <p>Refreshing the page now gives us a styled set of breadcrumbs on each page.</p>
 
 
@@ -688,7 +680,7 @@ written:</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/navigation.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/navigation.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

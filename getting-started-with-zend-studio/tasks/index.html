@@ -447,14 +447,13 @@
 <p>In order to list the tasks, we need to retrieve them from the model layer and
 pass them to the view. To do this, we fill in <code>indexAction()</code> within
 <code>TaskController</code>. Update the <code>indexAction()</code> like this:</p>
-<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Controller/TaskController.php:
 
 public function indexAction()
 {
     $mapper = $this-&gt;getTaskMapper();
     return new ViewModel(['tasks' =&gt; $mapper-&gt;fetchAll()]);
-}</code></pre>
-
+}</code></pre></p>
 <p>You'll also need to add <code>use Zend\View\Model\ViewModel;</code> to the list of <code>use</code>
 statements at the top of the file.</p>
 <p>To provide variables to the view layer, we return a <code>ViewModel</code> instance where
@@ -466,16 +465,16 @@ array from a controller as Zend Framework will construct a <code>ViewModel</code
 the scenes for you.</p>
 <p>We can now fill in the <code>task/index.phtml</code> view script. Replace the contents with
 this new code:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 // In module/Checklist/view/checklist/task/index.phtml:
 
 $title = 'My task list';
 $this-&gt;headTitle($title);
 ?&gt;
 &lt;h1&gt;&lt;?p= $this-&gt;escapeHtml($title) ?&gt;&lt;/h1&gt;
-&lt;p&gt;&lt;a href="&lt;?= $this-&gt;url('task', ['action' =&gt; 'add']) ?&gt;"&gt;Add new item&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;&lt;?= $this-&gt;url('task', ['action' =&gt; 'add']) ?&gt;&quot;&gt;Add new item&lt;/a&gt;&lt;/p&gt;
 
-&lt;table class="table"&gt;
+&lt;table class=&quot;table&quot;&gt;
 &lt;tr&gt;
     &lt;th&gt;Task&lt;/th&gt;
     &lt;th&gt;Created&lt;/th&gt;
@@ -485,18 +484,17 @@ $this-&gt;headTitle($title);
 &lt;?php foreach ($tasks as $task): ?&gt;
 &lt;tr&gt;
     &lt;td&gt;
-        &lt;a href="&lt;?= $this-&gt;url('task', ['action' =&gt; 'edit', 'id' =&gt; $task-&gt;getId()]) ?&gt;"&gt;
+        &lt;a href=&quot;&lt;?= $this-&gt;url('task', ['action' =&gt; 'edit', 'id' =&gt; $task-&gt;getId()]) ?&gt;&quot;&gt;
             &lt;?= $this-&gt;escapeHtml($task-&gt;getTitle()) ?&gt;&lt;/a&gt;
     &lt;/td&gt;
     &lt;td&gt;&lt;?= $this-&gt;escapeHtml($task-&gt;getCreated()) ?&gt;&lt;/td&gt;
     &lt;td&gt;&lt;?= $task-&gt;getCompleted() ? 'Yes' : 'No' ?&gt;&lt;/td&gt;
     &lt;td&gt;
-        &lt;a href="&lt;?= $this-&gt;url('task', ['action' =&gt; 'delete', 'id' =&gt; $task-&gt;getId()]) ?&gt;"&gt;Delete&lt;/a&gt;
+        &lt;a href=&quot;&lt;?= $this-&gt;url('task', ['action' =&gt; 'delete', 'id' =&gt; $task-&gt;getId()]) ?&gt;&quot;&gt;Delete&lt;/a&gt;
     &lt;/td&gt;
 &lt;/tr&gt;
 &lt;?php endforeach; ?&gt;
-&lt;/table&gt;</code></pre>
-
+&lt;/table&gt;</code></pre></p>
 <p>The first thing we do is to set the title for the page (used in the layout) and
 also set the title for the <code>&lt;head&gt;</code> section using the <code>headTitle()</code> view helper
 which will display in the browser's title bar. We then create a link to add a
@@ -530,11 +528,10 @@ immediately to <code>/tasks</code> to save us having to edit the URL each time.<
 return.  This will open
 <code>module/Application/src/Application/Controller/IndexController.php</code> for you.
 Change the <code>indexAction()</code> method so that it reads:</p>
-<pre class="codehilite"><code class="language-php">public function indexAction()
+<p> <pre class=codehilite><code class=language-php>public function indexAction()
 {
     return $this-&gt;redirect()-&gt;toRoute('task');
-}</code></pre>
-
+}</code></pre></p>
 <p>We use the <code>redirect</code> controller plugin to redirect the request for the home
 page to the URL defined by the route name task which we set up earlier. Now,
 when you press the green "Run" button, you will be taken directly to the list of
@@ -551,7 +548,7 @@ in tandem with the <code>Zend\InputFilter</code> component which will provide va
 <p>Create a new folder in <code>module/Checklist/src/Checklist</code> called <code>Form</code> and then
 within the <code>Form</code> folder, create a new PHP file called <code>TaskForm.php</code> with these
 contents:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 // In module/Checklist/src/Checklist/Form/TaskForm.php:
 namespace Checklist\Form;
 
@@ -603,8 +600,7 @@ class TaskForm extends Form
             ],
         ]);
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>Within the constructor of <code>TaskForm</code>, we set the name when we call the parent's
 constructor and then set the method and the input filter that we want to use. We
 also set the form's hydrator to be <code>ClassMethods</code>, as a form object uses
@@ -618,7 +614,7 @@ implements <code>InputFilterAwareInterface</code>, such as a model entity. For t
 application we are going to create a separate class for our input filter.</p>
 <p>Create a new PHP file called <code>TaskFilter.php</code> in the
 <code>module/Checklist/src/Checklist/Form</code> folder with these contents:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 namespace Checklist\Form;
 
 use Zend\Filter\StringTrim;
@@ -662,8 +658,7 @@ class TaskFilter extends InputFilter
             'required' =&gt; false,
         ]);
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>In the constructor for the <code>TaskFilter</code>, we create inputs for each property that
 we want to filter. Each input can have a name, a required property a list of
 filters and a list of validators. All are optional other than the name property.
@@ -677,7 +672,7 @@ to false.</p>
 within the <code>TaskController</code>'s <code>addAction()</code>. Open <code>TaskController.php</code>
 ("Navigate" -&gt; "Open Resource..." is a convenient way to do this) and add a
 new method called <code>addAction()</code> to the class that looks like this:</p>
-<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Controller/TaskController.php:
 
 public function addAction()
 {
@@ -699,15 +694,13 @@ public function addAction()
 
     // Redirect to list of tasks
     return $this-&gt;redirect()-&gt;toRoute('task');
-}</code></pre>
-
+}</code></pre></p>
 <p>Add <code>use Checklist\Model\TaskEntity;</code> and <code>use Checklist\Form\TaskForm;</code> to the
 list of use statements at the top of the file.</p>
 <p>Let's look at what the <code>addAction()</code> does in detail.</p>
-<pre class="codehilite"><code class="language-php">$form = new TaskForm();
+<p> <pre class=codehilite><code class=language-php>$form = new TaskForm();
 $task = new TaskEntity();
-$form-&gt;bind($task);</code></pre>
-
+$form-&gt;bind($task);</code></pre></p>
 <p>We instantiate a new <code>TaskForm</code> object and an empty <code>TaskEntity</code> which we bind
 to the form for use by the form later. The form's <code>bind()</code> method attaches the
 model to the form. This is used in two ways:</p>
@@ -718,39 +711,35 @@ model to the form. This is used in two ways:</p>
    back into the model.</li>
 </ol>
 <p>When adding a new task, we only need to worry about point 2, however for editing an item, we need data transfer in both directions.</p>
-<pre class="codehilite"><code class="language-php">$request = $this-&gt;getRequest();
+<p> <pre class=codehilite><code class=language-php>$request = $this-&gt;getRequest();
 if (! $request-&gt;isPost()) {
     return ['form' =&gt; $form];
-}</code></pre>
-
+}</code></pre></p>
 <p>If we do not have a form submission, we display the form.</p>
-<pre class="codehilite"><code class="language-php">$form-&gt;setData($request-&gt;getPost());
+<p> <pre class=codehilite><code class=language-php>$form-&gt;setData($request-&gt;getPost());
 if (! $form-&gt;isValid()) {
     return ['form' =&gt; $form];
-}</code></pre>
-
+}</code></pre></p>
 <p>For a submitted form, we set the posted data to the form and check to see if it
 is valid using the <code>isValid()</code> member function of the form. If it's not valid,
 zend-form will populate the various elements with validation failure messages,
 and we can re-display the form to the user with useful information for
 correcting their submission.</p>
-<pre class="codehilite"><code class="language-php">$this-&gt;getTaskMapper()-&gt;saveTask($task);</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$this-&gt;getTaskMapper()-&gt;saveTask($task);</code></pre></p>
 <p>The <code>isValid()</code> method uses the form's input filter to test for validity and if
 it returns true, it will then transfer the filtered data values to the entity
 object that is bound to the form using the registered hydrator. This means that
 after <code>isValid()</code> is called, <code>$task</code> now contains the submitted form data.</p>
 <p>As the form is valid, we can save <code>$task</code> to the database using the mapper's
 <code>saveTask()</code> method.</p>
-<pre class="codehilite"><code class="language-php">// Redirect to list of tasks
-return $this-&gt;redirect()-&gt;toRoute('task');</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>// Redirect to list of tasks
+return $this-&gt;redirect()-&gt;toRoute('task');</code></pre></p>
 <p>After we have saved the new task, we redirect back to the list of tasks using
 the <code>Redirect</code> controller plugin.</p>
 <p>We also need to add the <code>saveTask()</code> method to the <code>TaskMapper</code> class. Open
 <code>module/Checklist/src/Checklist/Model/TaskMapper.php</code> and add this method to the
 end of the class:</p>
-<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Model/TaskMapper.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Model/TaskMapper.php:
 
 public function saveTask(TaskEntity $task)
 {
@@ -785,8 +774,7 @@ private function createInsertAction(array $data)
     unset($data['id']);
     $action-&gt;values($data);
     return $action;
-}</code></pre>
-
+}</code></pre></p>
 <p>The <code>saveTask()</code> method handles both inserting a new record if <code>$task</code> doesn't
 have an <code>id</code> or updating it if it does. In either case, we need the data from
 the entity as an array, so we can use the hydrator to do this. If we are
@@ -800,7 +788,7 @@ value of the auto-generated id.</p>
 <p>We now need to render the form in the <code>add.phtml</code> view script. Create a new PHP
 file called <code>add.phtml</code> in the <code>module/Checklist/view/checklist/task</code> folder and
 add this code:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 // In module/Checklist/view/checklist/task/add.phtml:
 $title = 'Add new task';
 $this-&gt;headTitle($title);
@@ -820,8 +808,7 @@ echo $this-&gt;formRow($form-&gt;get('title'));
 &lt;div&gt;
     &lt;?= $this-&gt;formInput($form-&gt;get('submit')) ?&gt;
 &lt;/div&gt;
-&lt;?= $this-&gt;form()-&gt;closeTag($form) ?&gt;</code></pre>
-
+&lt;?= $this-&gt;form()-&gt;closeTag($form) ?&gt;</code></pre></p>
 <p>Again, we display a title as before and then we render the form. Zend Framework
 provides some view helpers to make this a little easier. The <code>form()</code> view
 helper has an <code>openTag()</code> and <code>closeTag()</code> method which we use to open and close
@@ -841,7 +828,7 @@ item" link from the task list page, you should see:</p>
 <p>Editing a task is almost identical to adding one, so the code is very similar.
 This time we use <code>editAction()</code> in the <code>TaskController</code>. Open
 <code>TaskController.php</code> and add this method to it:</p>
-<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Controller/TaskController.php:
 
 public function editAction()
 {
@@ -871,19 +858,17 @@ public function editAction()
 
     $this-&gt;getTaskMapper()-&gt;saveTask($task);
     return $this-&gt;redirect()-&gt;toRoute('task');
-}</code></pre>
-
+}</code></pre></p>
 <p>This code should look familiar. Let's look at the only difference from adding a
 task: We look for the id that is in the matched route and use it to load the
 task to be edited:</p>
-<pre class="codehilite"><code class="language-php">$id = (int) $this-&gt;params('id');
+<p> <pre class=codehilite><code class=language-php>$id = (int) $this-&gt;params('id');
 
 if (! $id) {
     return $this-&gt;redirect()-&gt;toRoute('task', ['action' =&gt; 'add']);
 }
 
-$task = $this-&gt;getTaskMapper()-&gt;getTask($id);</code></pre>
-
+$task = $this-&gt;getTaskMapper()-&gt;getTask($id);</code></pre></p>
 <p>The <code>params()</code> method is a controller plugin that provides a convenient way to
 retrieve parameters from the matched route. We use it to retrieve the id
 parameter that we defined in the task route that we created in the
@@ -895,7 +880,7 @@ transferred for us.</p>
 <p>We also need to write a <code>getTask()</code> method in the TaskMapper to get a single
 record from the database, so let's do that now. Open <code>TaskMapper.php</code> and add
 this method:</p>
-<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Model/TaskMapper.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Model/TaskMapper.php:
 
 public function getTask($id)
 {
@@ -913,8 +898,7 @@ public function getTask($id)
     $hydrator-&gt;hydrate($result, $task);
 
     return $task;
-}</code></pre>
-
+}</code></pre></p>
 <p>This method simply sets a where clause on the <code>Sql</code>'s <code>Select</code> object and then
 executes it. Calling <code>current()</code> on the result from <code>execute()</code> will return
 either the array of data for the row or <code>false</code>. If we retrieved data, then we
@@ -923,7 +907,7 @@ use the hydrator to populate a new <code>TaskEntity</code> (<code>$task</code>) 
 looks very similar to the one for adding an task. Create a new PHP file called
 <code>edit.phtml</code> in in the <code>module/Checklist/view/checklist/task</code> folder and add
 this code:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 // In module/Checklist/view/checklist/task/edit.phtml:
 $title = 'Edit task';
 $this-&gt;headTitle($title);
@@ -945,8 +929,7 @@ echo $this-&gt;formRow($form-&gt;get('completed'));
 &lt;div&gt;
     &lt;?= $this-&gt;formInput($form-&gt;get('submit')) ?&gt;
 &lt;/div&gt;
-&lt;?= $this-&gt;form()-&gt;closeTag($form) ?&gt;</code></pre>
-
+&lt;?= $this-&gt;form()-&gt;closeTag($form) ?&gt;</code></pre></p>
 <p>Compared to the add view script, we set the title to ‚'Edit Task', and update
 the action URL to the edit action with the correct id. We also change the label
 of the button to <code>edit</code> and render the completed form element.</p>
@@ -962,7 +945,7 @@ they then click "Yes", we will do the deletion. As the form is trivial, we'll
 code it directly into our view (zend-form is, after all, optional!).</p>
 <p>Let's start by adding the <code>deleteAction()</code> method to the <code>TaskController</code>. Open
 <code>TaskController.php</code> and add this method to it:</p>
-<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Controller/TaskController.php:
 public function deleteAction()
 {
     $id = $this-&gt;params('id');
@@ -985,8 +968,7 @@ public function deleteAction()
     }
 
     return $this-&gt;redirect()-&gt;toRoute('task');
-}</code></pre>
-
+}</code></pre></p>
 <p>As before, we get the id from the matched route and retrieve the task object. We
 then check the <code>Request</code> object's <code>isPost()</code> to determine whether to show the
 confirmation page or to delete the task. We use the <code>TaskMapper</code>'s
@@ -995,7 +977,7 @@ tasks. If the request is not a POST, then we assign the task to the view, along
 with the id.</p>
 <p>We also need to write <code>deleteTask()</code>, so open <code>TaskMapper.php</code> and add this
 method:</p>
-<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Model/TaskMapper.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Model/TaskMapper.php:
 
 public function deleteTask($id)
 {
@@ -1004,14 +986,13 @@ public function deleteTask($id)
 
     $statement = $this-&gt;sql-&gt;prepareStatementForSqlObject($delete);
     return $statement-&gt;execute();
-}</code></pre>
-
+}</code></pre></p>
 <p>This code should look fairly familiar as we again use a <code>Delete</code> object from
 <code>Zend\Db\Sql</code> and execute the statement from it. As we are using a <code>Delete</code>
 object, we set the where clause to avoid deleting every row in the table.</p>
 <p>The view script is a simple HTML form. Create a new PHP file, <code>delete.phtml</code> in
 the <code>module/Checklist/view/checklist/task</code> folder with this content:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 // In module/Checklist/view/checklist/task/delete.phtml:
 $title = 'Delete task';
 $this-&gt;headTitle($title);
@@ -1024,13 +1005,12 @@ $this-&gt;headTitle($title);
 &lt;/p&gt;
 &lt;?php
 $url = $this-&gt;url('task', ['action' =&gt; 'delete', 'id' =&gt; $id]) ?&gt;
-&lt;form action="&lt;?= $url ?&gt;" method="post"&gt;
+&lt;form action=&quot;&lt;?= $url ?&gt;&quot; method=&quot;post&quot;&gt;
 &lt;div&gt;
-  &lt;input type="submit" name="del" value="Yes" /&gt;
-  &lt;input type="submit" name="del" value="No" /&gt;
+  &lt;input type=&quot;submit&quot; name=&quot;del&quot; value=&quot;Yes&quot; /&gt;
+  &lt;input type=&quot;submit&quot; name=&quot;del&quot; value=&quot;No&quot; /&gt;
 &lt;/div&gt;
-&lt;/form&gt;</code></pre>
-
+&lt;/form&gt;</code></pre></p>
 <p>In this view script, we display a confirmation message and then a form with just
 Yes and No buttons. In the action, we checked specifically for the "Yes" value
 when doing the deletion.</p>
@@ -1045,7 +1025,7 @@ when doing the deletion.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/getting-started-with-zend-studio/tasks.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/getting-started-with-zend-studio/tasks.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

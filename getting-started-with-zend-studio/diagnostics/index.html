@@ -443,7 +443,7 @@ data. We have a very simple database table with just 5 rows, so we can simulate
 this by adding a <code>sleep()</code> call to our <code>TaskMapper</code>'s <code>fetchAll()</code> method.</p>
 <p>Open <code>Checklist/src/Checklist/Model/TaskMapper.php</code> and add <code>sleep(5);</code> just
 before the end of the <code>fetchAll()</code> method:</p>
-<pre class="codehilite"><code class="language-php">public function fetchAll()
+<p> <pre class=codehilite><code class=language-php>public function fetchAll()
 {
     $select = $this-&gt;sql-&gt;select();
     $select-&gt;order(['completed ASC', 'created ASC']);
@@ -458,8 +458,7 @@ before the end of the <code>fetchAll()</code> method:</p>
 
     sleep(5);
     return $resultset;
-}</code></pre>
-
+}</code></pre></p>
 <p>It will now take 5 seconds (and a little bit) to display the list of tasks.</p>
 <p>If you now look at the home page of Zend Server's console, you'll see a "Slow
 Request Execution" critical event listed. Click on the "show" link in the "Code
@@ -518,7 +517,7 @@ Zend Studio takes you back to the code editing view.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/getting-started-with-zend-studio/diagnostics.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/getting-started-with-zend-studio/diagnostics.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

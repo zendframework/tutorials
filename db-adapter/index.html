@@ -457,8 +457,7 @@ as well as multiple adapters (which may be useful in architectures that have a
 cluster of read-only replicated servers and a single writable server of record).</p>
 <h2 id="installing-zend-db">Installing zend-db</h2>
 <p>First, install zend-db using Composer:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-db</code></pre>
-
+<p> <pre class=codehilite><code class=language-bash>$ composer require zendframework/zend-db</code></pre></p>
 <p>If you are using <a href="https://zendframework.github.io/zend-component-installer/">zend-component-installer</a>
 (installed by default with the skeleton application, and optionally for
 Expressive applications), you will be prompted to install the package
@@ -475,56 +474,55 @@ component to your application.</p>
 <p>For zend-mvc applications, update your list of modules in either
   <code>config/application.config.php</code> or <code>config/modules.config.php</code> to add an
   entry for <code>'Zend\Db'</code> at the top of the list:
-  <pre class="codehilite"><code class="language-php">&lt;?php
-  // In config/modules.config.php
-  return [
-    'Zend\Db', // &lt;-- This line
-    'Zend\Form', 
-    /* ... */
-  ];
-
-  // OR in config/application.config.php
-  return [
-  /* ... */
-  // Retrieve list of modules used in this application.
-  'modules' =&gt; [
-    'Zend\Db', // &lt;-- This line
-    'Zend\Form', 
-    /* ... */
-  ],
-  /* ... */</code></pre></p>
+  ```php
+  &lt;?php
+    // In config/modules.config.php
+    return [
+      'Zend\Db', // &lt;-- This line
+      'Zend\Form', 
+      /<em> ... </em>/
+    ];</p>
+<p>// OR in config/application.config.php
+return [
+/<em> ... </em>/
+// Retrieve list of modules used in this application.
+'modules' =&gt; [
+  'Zend\Db', // &lt;-- This line
+  'Zend\Form', 
+  /<em> ... </em>/
+],
+/<em> ... </em>/
+  ```</p>
 </li>
 <li>
 <p>For Expressive applications, create a new file,
   <code>config/autoload/zend-db.global.php</code>, with the following contents:</p>
 </li>
 </ul>
-<pre class="codehilite"><code class="language-php">&lt;?php
-use Zend\Db\ConfigProvider;
-
-return (new ConfigProvider())();</code></pre>
-
+<p>```php
+  &lt;?php
+  use Zend\Db\ConfigProvider;</p>
+<p>return (new ConfigProvider())();
+  ```</p>
 <h2 id="configuring-the-default-adapter">Configuring the default adapter</h2>
 <p>Within your service factories, you may retrieve the default adapter from your application container using the
 class name <code>Zend\Db\Adapter\AdapterInterface</code>:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Db\Adapter\AdapterInterface;
+<p> <pre class=codehilite><code class=language-php>use Zend\Db\Adapter\AdapterInterface;
 
 function ($container) {
     return new SomeServiceObject($container-&gt;get(AdapterInterface::class));
-}</code></pre>
-
+}</code></pre></p>
 <p>When installed and configured, the factory associated with <code>AdapterInterface</code>
 will look for a top-level <code>db</code> key in the configuration, and use it to create an
 adapter. As an example, the following would connect to a MySQL database using
 PDO, and the supplied PDO DSN:</p>
-<pre class="codehilite"><code class="language-php">// In config/autoload/global.php
+<p> <pre class=codehilite><code class=language-php>// In config/autoload/global.php
 return [
     'db' =&gt; [
         'driver' =&gt; 'Pdo',
         'dsn'    =&gt; 'mysql:dbname=zftutorial;host=localhost;charset=utf8',
     ],
-];</code></pre>
-
+];</code></pre></p>
 <p>More information on adapter configuration can be found in the docs for
 <a href="http://zendframework.github.io/zend-db/adapter/#creating-an-adapter-using-dependency-injection">Zend\Db\Adapter</a>.</p>
 <h2 id="configuring-named-adapters">Configuring named adapters</h2>
@@ -535,7 +533,7 @@ read-only.</p>
 <code>Zend\Db\Adapter\AdapterAbstractServiceFactory</code>, for this purpose. To use it,
 you will need to create named configuration keys under <code>db.adapters</code>, each with
 configuration for an adapter:</p>
-<pre class="codehilite"><code class="language-php">// In config/autoload/global.php
+<p> <pre class=codehilite><code class=language-php>// In config/autoload/global.php
 return [
     'db' =&gt; [
         'adapters' =&gt; [
@@ -549,18 +547,16 @@ return [
             ],
         ],
     ],
-];</code></pre>
-
+];</code></pre></p>
 <p>You retrieve the database adapters using the keys you define, so ensure they are
 unique to your application, and descriptive of their purpose!</p>
-<h3 id="retrieving-named-adapters">Retrieving named adapters</h3>
+<h3>Retrieving named adapters</h3>
 <p>Retrieve named adapters in your service factories just as you would another
 service:</p>
-<pre class="codehilite"><code class="language-php">function ($container) {
+<p> <pre class=codehilite><code class=language-php>function ($container) {
     return new SomeServiceObject($container-&gt;get('Application\Db\ReadOnlyAdapter'));
-}</code></pre>
-
-<h3 id="using-the-adapterabstractservicefactory-as-a-factory">Using the AdapterAbstractServiceFactory as a factory</h3>
+}</code></pre></p>
+<h3>Using the AdapterAbstractServiceFactory as a factory</h3>
 <p>Depending on what application container you use, abstract factories may not be
 available. Alternately, you may want to reduce lookup time when retrieving an
 adapter from the container (abstract factories are consulted last!).
@@ -568,7 +564,7 @@ zend-servicemanager abstract factories work as factories in their own right, and
 are passed the service name as an argument, allowing them to vary their return
 value based on requested service name. As such, you can add the following
 service configuration as well:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Db\Adapter\AdapterAbstractServiceFactory;
+<p> <pre class=codehilite><code class=language-php>use Zend\Db\Adapter\AdapterAbstractServiceFactory;
 
 // If using zend-mvc:
 // In module/YourModule/config/module.config.php
@@ -583,7 +579,7 @@ service configuration as well:</p>
     'factories' =&gt; [
         'Application\Db\WriteAdapter' =&gt; AdapterAbstractServiceFactory::class,
     ],
-],</code></pre>
+],</code></pre></p>
 
 
 
@@ -617,7 +613,7 @@ service configuration as well:</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/db-adapter.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/db-adapter.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

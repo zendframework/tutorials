@@ -463,8 +463,7 @@ integration with zend-mvc via the <a href="https://zendframework.github.io/zend-
 component.</p>
 <h2 id="installation">Installation</h2>
 <p>Install zend-mvc-i18n via Composer:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-mvc-i18n</code></pre>
-
+<p> <pre class=codehilite><code class=language-bash>$ composer require zendframework/zend-mvc-i18n</code></pre></p>
 <p>Assuming you are using <a href="https://zendframework.github.io/zend-component-installer">zend-component-installer</a>
 (which is installed by default with the skeleton application), this will prompt
 you to install the component as a module in your application; make sure you
@@ -506,7 +505,7 @@ that provides:</p>
 <li>a file pattern for identifying the files to use</li>
 </ul>
 <p>As examples:</p>
-<pre class="codehilite"><code class="language-php">// in a module's module.config.php:
+<p> <pre class=codehilite><code class=language-php>// in a module's module.config.php:
 'translator' =&gt; [
     'locale' =&gt; 'en_US',
     'translation_file_patterns' =&gt; [
@@ -528,8 +527,7 @@ that provides:</p>
             'pattern'  =&gt; '%s.mo',
         ],
     ],
-],</code></pre>
-
+],</code></pre></p>
 <p>Once the above configuration is in place, the translator will be active in your
 application, allowing you to use it.</p>
 <h2 id="translating-strings-in-templates">Translating strings in templates</h2>
@@ -539,8 +537,7 @@ and <a href="https://zendframework.github.io/zend-i18n/view-helpers/#translatepl
 view helpers allow you to provide translations within your view scripts.</p>
 <p>As an example, you might want to translate the string "All rights reserved" in
 your footer. You could do the following in your layout script:</p>
-<pre class="codehilite"><code class="language-php">&lt;p&gt;&amp;copy; 2016 by Examples Ltd. &lt;?= $this-&gt;translate('All rights reserved') ?&gt;&lt;/p&gt;</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>&lt;p&gt;&amp;copy; 2016 by Examples Ltd. &lt;?= $this-&gt;translate('All rights reserved') ?&gt;&lt;/p&gt;</code></pre></p>
 <h2 id="translating-route-segments">Translating route segments</h2>
 <p>In order to enable route translation, you need to do two things:</p>
 <ul>
@@ -550,30 +547,27 @@ your footer. You could do the following in your layout script:</p>
 <p>To tell the application to use the translation-aware route class, we can update
 our routing configuration. Underneath the top-level <code>router</code> key, we'll add the
 <code>router_class</code> key:</p>
-<pre class="codehilite"><code class="language-php">// In a module.config.php file, or config/autoload/global.php:
+<p> <pre class=codehilite><code class=language-php>// In a module.config.php file, or config/autoload/global.php:
 'router' =&gt; [
     'router_class' =&gt; Zend\Mvc\I18n\Router\TranslatorAwareTreeRouteStack::class,
     'routes' =&gt; [
         /* ... */
     ],
-],</code></pre>
-
+],</code></pre></p>
 <p>If you want to use an alternate text domain, you can do so via the
 <code>translator_text_domain</code> key, also directly below the <code>router</code> key:</p>
-<pre class="codehilite"><code class="language-php">// In a module.config.php file, or config/autoload/global.php:
+<p> <pre class=codehilite><code class=language-php>// In a module.config.php file, or config/autoload/global.php:
 'router' =&gt; [
     'router_class' =&gt; Zend\Mvc\I18n\Router\TranslatorAwareTreeRouteStack::class,
     'translator_text_domain' =&gt; 'router',
     'routes' =&gt; [
         /* ... */
     ],
-],</code></pre>
-
+],</code></pre></p>
 <p>Now that the router is aware of translations, we can use translatable strings in
 our routes. To do so, surround the string capable of translation with braces
 (<code>{}</code>). As an example:</p>
-<pre class="codehilite"><code class="language-php">'route' =&gt; '/{login}',</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>'route' =&gt; '/{login}',</code></pre></p>
 <p>specifies the word "login" as translatable.</p>
 
 
@@ -608,7 +602,7 @@ our routes. To do so, surround the string capable of translation with braces
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/i18n.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/i18n.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

@@ -438,10 +438,6 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#create-the-controller" class="toc__link">Create the controller</a>
-                    </li>
-                
-                    <li class="toc__entry">
                         <a href="#initialise-the-view-scripts" class="toc__link">Initialise the view scripts</a>
                     </li>
                 
@@ -524,7 +520,7 @@ actions will be:</p>
 defined in the module’s <code>module.config.php</code> file. We will add a route for our
 album actions. This is the updated module config file with the new code
 highlighted using comments.</p>
-<pre class="codehilite"><code class="language-php">namespace Album;
+<p> <pre class=codehilite><code class=language-php>namespace Album;
 
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -561,8 +557,7 @@ return [
             'album' =&gt; __DIR__ . '/../view',
         ],
     ],
-];</code></pre>
-
+];</code></pre></p>
 <p>The name of the route is ‘album’ and has a type of ‘segment’. The segment route
 allows us to specify placeholders in the URL pattern (route) that will be mapped
 to named parameters in the matched route. In this case, the route is
@@ -605,7 +600,7 @@ underscore, or hyphen. We also limit the id to digits.</p>
 </tr>
 </tbody>
 </table></div>
-<h3 id="create-the-controller">Create the controller</h3>
+<h3>Create the controller</h3>
 <p>We are now ready to set up our controller. For zend-mvc, the controller
 is a class that is generally called <code>{Controller name}Controller</code>; note that
 <code>{Controller name}</code> must start with a capital letter. This class lives in a file
@@ -615,7 +610,7 @@ is a public method within the controller class that is named <code>{action
 name}Action</code>, where <code>{action name}</code> should start with a lower case
 letter.</p>
 <blockquote>
-<h4 id="conventions-not-strictly-enforced">Conventions not strictly enforced</h4>
+<h4>Conventions not strictly enforced</h4>
 <p>This is by convention. zend-mvc doesn't provide many restrictions on
 controllers other than that they must implement the <code>Zend\Stdlib\Dispatchable</code>
 interface. The framework provides two abstract classes that do this for us:
@@ -626,7 +621,7 @@ service, <code>AbstractRestfulController</code> may be useful.</p>
 </blockquote>
 <p>Let’s go ahead and create our controller class in the file
 <code>zf-tutorials/module/Album/src/Controller/AlbumController.php</code>:</p>
-<pre class="codehilite"><code class="language-php">namespace Album\Controller;
+<p> <pre class=codehilite><code class=language-php>namespace Album\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -648,8 +643,7 @@ class AlbumController extends AbstractActionController
     public function deleteAction()
     {
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>We have now set up the four actions that we want to use. They won't work yet
 until we set up the views. The URLs for each action are:</p>
 <div class="table-responsive"><table>
@@ -727,7 +721,7 @@ directory named after the controller. Create these four empty files now:</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/getting-started/routing-and-controllers.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/getting-started/routing-and-controllers.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

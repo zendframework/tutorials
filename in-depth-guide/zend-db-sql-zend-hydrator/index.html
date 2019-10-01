@@ -478,32 +478,28 @@ classes.</p>
 tutorial, and that you've already populated the <code>data/zftutorial.db</code> SQLite
 database. We will be re-using it, and adding another table to it.</p>
 <p>Create the file <code>data/posts.schema.sql</code> with the following contents:</p>
-<pre class="codehilite"><code class="language-sql">CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100) NOT NULL, text TEXT NOT NULL);
+<p> <pre class=codehilite><code class=language-sql>CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100) NOT NULL, text TEXT NOT NULL);
 
 INSERT INTO posts (title, text) VALUES ('Blog #1', 'Welcome to my first blog post');
 INSERT INTO posts (title, text) VALUES ('Blog #2', 'Welcome to my second blog post');
 INSERT INTO posts (title, text) VALUES ('Blog #3', 'Welcome to my third blog post');
 INSERT INTO posts (title, text) VALUES ('Blog #4', 'Welcome to my fourth blog post');
-INSERT INTO posts (title, text) VALUES ('Blog #5', 'Welcome to my fifth blog post');</code></pre>
-
+INSERT INTO posts (title, text) VALUES ('Blog #5', 'Welcome to my fifth blog post');</code></pre></p>
 <p>Now we will execute this against the existing <code>data/zftutorial.db</code> SQLite
 database using the <code>sqlite</code> command (or <code>sqlite3</code>; check your operating system):</p>
-<pre class="codehilite"><code class="language-bash">$ sqlite data/zftutorial.db &lt; data/posts.schema.sql</code></pre>
-
+<p> <pre class=codehilite><code class=language-bash>$ sqlite data/zftutorial.db &lt; data/posts.schema.sql</code></pre></p>
 <p>If you don't have a <code>sqlite</code> command, you can populate it using PHP. Create the
 following script in <code>data/load_posts.php</code>:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 $db = new PDO('sqlite:' . __DIR__ . '/zftutorial.db');
 $fh = fopen(__DIR__ . '/posts.schema.sql', 'r');
 while ($line = fread($fh, 4096)) {
     $line = trim($line);
     $db-&gt;exec($line);
 }
-fclose($fh);</code></pre>
-
+fclose($fh);</code></pre></p>
 <p>and execute it using:</p>
-<pre class="codehilite"><code class="language-bash">$ php data/load_posts.php</code></pre>
-
+<p> <pre class=codehilite><code class=language-bash>$ php data/load_posts.php</code></pre></p>
 <h2 id="quick-facts-zend92db92sql">Quick Facts Zend\Db\Sql</h2>
 <p>To create queries against a database using <code>Zend\Db\Sql</code>, you need to have a
 database adapter available. The "Getting Started" tutorial
@@ -526,7 +522,7 @@ of these components is:</p>
 <h2 id="writing-the-repository-implementation">Writing the repository implementation</h2>
 <p>Create a class named <code>ZendDbSqlRepository</code> in the <code>Blog\Model</code> namespace that
 implements <code>PostRepositoryInterface</code>; leave the methods empty for now:</p>
-<pre class="codehilite"><code class="language-php">// In module/Blog/src/Model/ZendDbSqlRepository.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Blog/src/Model/ZendDbSqlRepository.php:
 namespace Blog\Model;
 
 use InvalidArgumentException;
@@ -549,14 +545,13 @@ class ZendDbSqlRepository implements PostRepositoryInterface
     public function findPost($id)
     {
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>Now recall what we have learned earlier: for <code>Zend\Db\Sql</code> to function, we will
 need a working implementation of the <code>AdapterInterface</code>. This is a
 <em>requirement</em>, and therefore will be injected using <em>constructor injection</em>.
 Create a <code>__construct()</code> method that accepts an <code>AdapterInterface</code> as its sole
 parameter, and stores it as an instance property:</p>
-<pre class="codehilite"><code class="language-php">// In module/Blog/src/Model/ZendDbSqlRepository.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Blog/src/Model/ZendDbSqlRepository.php:
 namespace Blog\Model;
 
 use InvalidArgumentException;
@@ -593,11 +588,10 @@ class ZendDbSqlRepository implements PostRepositoryInterface
     public function findPost($id)
     {
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>Whenever we have a required parameter, we need to write a factory for the class.
 Go ahead and create a factory for our new repository implementation:</p>
-<pre class="codehilite"><code class="language-php">// In module/Blog/src/Factory/ZendDbSqlRepositoryFactory.php
+<p> <pre class=codehilite><code class=language-php>// In module/Blog/src/Factory/ZendDbSqlRepositoryFactory.php
 namespace Blog\Factory;
 
 use Interop\Container\ContainerInterface;
@@ -617,8 +611,7 @@ class ZendDbSqlRepositoryFactory implements FactoryInterface
     {
         return new ZendDbSqlRepository($container-&gt;get(AdapterInterface::class));
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>We're now able to register our repository implementation as a service. To do so,
 we'll make two changes:</p>
 <ul>
@@ -627,7 +620,7 @@ we'll make two changes:</p>
   repository.</li>
 </ul>
 <p>Update <code>module/Blog/config/module.config.php</code> as follows:</p>
-<pre class="codehilite"><code class="language-php">return [
+<p> <pre class=codehilite><code class=language-php>return [
     'service_manager' =&gt; [
         'aliases' =&gt; [
             // Update this line:
@@ -642,17 +635,15 @@ we'll make two changes:</p>
     'controllers'  =&gt; [ /* ... */ ],
     'router'       =&gt; [ /* ... */ ],
     'view_manager' =&gt; [ /* ... */ ],
-];</code></pre>
-
+];</code></pre></p>
 <p>With the adapter in place you're now able to refresh the blog index at
 <code>localhost:8080/blog</code> and you'll notice that the <code>ServiceNotFoundException</code> is
 gone and we get the following PHP Warning:</p>
-<pre class="codehilite"><code class="language-text">Warning: Invalid argument supplied for foreach() in {projectPath}/module/Blog/view/blog/list/index.phtml on line {lineNumber}</code></pre>
-
+<p> <pre class=codehilite><code class=language-text>Warning: Invalid argument supplied for foreach() in {projectPath}/module/Blog/view/blog/list/index.phtml on line {lineNumber}</code></pre></p>
 <p>This is due to the fact that our mapper doesn't return anything yet. Let's
 modify the <code>findAllPosts()</code> function to return all blog posts from the database
 table:</p>
-<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Model/ZendDbSqlRepository.php:
+<p> <pre class=codehilite><code class=language-php>// In /module/Blog/src/Model/ZendDbSqlRepository.php:
 namespace Blog\Model;
 
 use InvalidArgumentException;
@@ -695,14 +686,12 @@ class ZendDbSqlRepository implements PostRepositoryInterface
     public function findPost($id)
     {
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>Sadly, though, a refresh of the application reveals another error message:</p>
-<pre class="codehilite"><code class="language-text">PHP Fatal error:  Call to a member function getId() on array in {projectPath}/module/Blog/view/blog/list/index.phtml on line {lineNumber}</code></pre>
-
+<p> <pre class=codehilite><code class=language-text>PHP Fatal error:  Call to a member function getId() on array in {projectPath}/module/Blog/view/blog/list/index.phtml on line {lineNumber}</code></pre></p>
 <p>Let's not return the <code>$result</code> variable for now and do a dump of it to see what
 we get here. Change the <code>findAllPosts()</code> method and dump the result:</p>
-<pre class="codehilite"><code class="language-php">public function findAllPosts()
+<p> <pre class=codehilite><code class=language-php>public function findAllPosts()
 {
     $sql    = new Sql($this-&gt;db);
     $select = $sql-&gt;select('posts');
@@ -713,14 +702,13 @@ we get here. Change the <code>findAllPosts()</code> method and dump the result:<
     die();
 
     return $result;
-}</code></pre>
-
+}</code></pre></p>
 <p>Refreshing the application you should now see output similar to the following:</p>
-<pre class="codehilite"><code class="language-text">Zend\Db\Adapter\Driver\Pdo\Result::__set_state(array(
+<p> <pre class=codehilite><code class=language-text>Zend\Db\Adapter\Driver\Pdo\Result::__set_state(array(
     'statementMode'   =&gt; 'forward',
     'fetchMode'       =&gt; 2,
     'resource'        =&gt; PDOStatement::__set_state(array(
-        'queryString' =&gt; 'SELECT "posts".* FROM "posts"',
+        'queryString' =&gt; 'SELECT &quot;posts&quot;.* FROM &quot;posts&quot;',
     )),
     'options'         =&gt; null,
     'currentComplete' =&gt; false,
@@ -728,8 +716,7 @@ we get here. Change the <code>findAllPosts()</code> method and dump the result:<
     'position'        =&gt; -1,
     'generatedValue'  =&gt; '0',
     'rowCount'        =&gt; Closure::__set_state(array()),
-))</code></pre>
-
+))</code></pre></p>
 <p>As you can see, we do not get any data returned. Instead we are presented with a
 dump of some <code>Result</code> object that appears to have no data in it whatsoever. But
 this is a faulty assumption. This <code>Result</code> object only has information available
@@ -737,11 +724,10 @@ for you when you actually try to access it. If you can determine that the query
 was successful, the best way to make use of the data within the <code>Result</code> object
 is to pass it to a <code>ResultSet</code> object.</p>
 <p>First, add two more import statements to the class file:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Db\Adapter\Driver\ResultInterface;
-use Zend\Db\ResultSet\ResultSet;</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\ResultSet\ResultSet;</code></pre></p>
 <p>Now update the <code>findAllPosts()</code> method as follows:</p>
-<pre class="codehilite"><code class="language-php">public function findAllPosts()
+<p> <pre class=codehilite><code class=language-php>public function findAllPosts()
 {
     $sql    = new Sql($this-&gt;db);
     $select = $sql-&gt;select('posts');
@@ -756,10 +742,9 @@ use Zend\Db\ResultSet\ResultSet;</code></pre>
     }
 
     die('no data');
-}</code></pre>
-
+}</code></pre></p>
 <p>Refreshing the page, you should now see the dump of a <code>ResultSet</code> instance:</p>
-<pre class="codehilite"><code class="language-text">Zend\Db\ResultSet\ResultSet::__set_state(array(
+<p> <pre class=codehilite><code class=language-text>Zend\Db\ResultSet\ResultSet::__set_state(array(
     'allowedReturnTypes'   =&gt;
         array(
             0 =&gt; 'arrayobject',
@@ -777,7 +762,7 @@ use Zend\Db\ResultSet\ResultSet;</code></pre>
             'fetchMode'       =&gt; 2,
             'resource'        =&gt;
                 PDOStatement::__set_state(array(
-                    'queryString' =&gt; 'SELECT "album".* FROM "album"',
+                    'queryString' =&gt; 'SELECT &quot;album&quot;.* FROM &quot;album&quot;',
                 )),
             'options'         =&gt; null,
             'currentComplete' =&gt; false,
@@ -790,8 +775,7 @@ use Zend\Db\ResultSet\ResultSet;</code></pre>
         )),
     'fieldCount'           =&gt; 3,
     'position'             =&gt; 0,
-))</code></pre>
-
+))</code></pre></p>
 <p>Of particular interest is the <code>returnType</code> property, which has a value of
 <code>arrayobject</code>.  This tells us that all database entries will be returned as an
 <code>ArrayObject</code> instances. And this is a little problem for us, as the
@@ -801,14 +785,12 @@ Luckily the <code>Zend\Db\ResultSet</code> subcomponent offers a solution for us
 specify with the data returned.</p>
 <p>Let's modify our code. First, remove the following import statement from the
 class file:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Db\ResultSet\ResultSet;</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>use Zend\Db\ResultSet\ResultSet;</code></pre></p>
 <p>Next, we'll add the following import statements to our class file:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Hydrator\Reflection as ReflectionHydrator;
-use Zend\Db\ResultSet\HydratingResultSet;</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>use Zend\Hydrator\Reflection as ReflectionHydrator;
+use Zend\Db\ResultSet\HydratingResultSet;</code></pre></p>
 <p>Now, update the <code>findAllPosts()</code> method to read as follows:</p>
-<pre class="codehilite"><code class="language-php">public function findAllPosts()
+<p> <pre class=codehilite><code class=language-php>public function findAllPosts()
 {
     $sql       = new Sql($this-&gt;db);
     $select    = $sql-&gt;select('posts');
@@ -825,8 +807,7 @@ use Zend\Db\ResultSet\HydratingResultSet;</code></pre>
     );
     $resultSet-&gt;initialize($result);
     return $resultSet;
-}</code></pre>
-
+}</code></pre></p>
 <p>We have changed a couple of things here. First, instead of a normal <code>ResultSet</code>,
 we are now using the <code>HydratingResultSet</code>. This specialized result set requires two parameters, the
 second one being an object to hydrate with data, and the first one being the
@@ -846,7 +827,7 @@ both a hydrator and a <code>Post</code> prototype inside our <code>ZendDbSqlRepo
 inject those instead, so that we can reuse them between our repository and
 command implementations, or vary them based on environment. Update your
 <code>ZendDbSqlRepository</code> as follows:</p>
-<pre class="codehilite"><code class="language-php">// In module/Blog/src/Model/ZendDbSqlRepository.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Blog/src/Model/ZendDbSqlRepository.php:
 namespace Blog\Model;
 
 use InvalidArgumentException;
@@ -917,11 +898,10 @@ class ZendDbSqlRepository implements PostRepositoryInterface
     public function findPost($id)
     {
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>Now that our repository requires more parameters, we need to update the
 <code>ZendDbSqlRepositoryFactory</code> and inject those parameters:</p>
-<pre class="codehilite"><code class="language-php">// In /module/Blog/src/Factory/ZendDbSqlRepositoryFactory.php
+<p> <pre class=codehilite><code class=language-php>// In /module/Blog/src/Factory/ZendDbSqlRepositoryFactory.php
 namespace Blog\Factory;
 
 use Interop\Container\ContainerInterface;
@@ -941,15 +921,14 @@ class ZendDbSqlRepositoryFactory implements FactoryInterface
             new Post('', '')
         );
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>With this in place you can refresh the application again and you'll see your
 blog posts listed once again. Our repository no longer has hidden dependencies,
 and works with a database!</p>
 <h2 id="finishing-the-repository">Finishing the repository</h2>
 <p>Before we jump into the next chapter, let's quickly finish the repository
 implementation by completing the <code>findPost()</code> method:</p>
-<pre class="codehilite"><code class="language-php">public function findPost($id)
+<p> <pre class=codehilite><code class=language-php>public function findPost($id)
 {
     $sql       = new Sql($this-&gt;db);
     $select    = $sql-&gt;select('posts');
@@ -960,7 +939,7 @@ implementation by completing the <code>findPost()</code> method:</p>
 
     if (! $result instanceof ResultInterface || ! $result-&gt;isQueryResult()) {
         throw new RuntimeException(sprintf(
-            'Failed retrieving blog post with identifier "%s"; unknown database error.',
+            'Failed retrieving blog post with identifier &quot;%s&quot;; unknown database error.',
             $id
         ));
     }
@@ -971,14 +950,13 @@ implementation by completing the <code>findPost()</code> method:</p>
 
     if (! $post) {
         throw new InvalidArgumentException(sprintf(
-            'Blog post with identifier "%s" not found.',
+            'Blog post with identifier &quot;%s&quot; not found.',
             $id
         ));
     }
 
     return $post;
-}</code></pre>
-
+}</code></pre></p>
 <p>The <code>findPost()</code> function looks similar to the <code>findAllPosts()</code> method, with
 several differences.</p>
 <ul>
@@ -1031,7 +1009,7 @@ start displaying individual blog posts.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/in-depth-guide/zend-db-sql-zend-hydrator.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/in-depth-guide/zend-db-sql-zend-hydrator.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

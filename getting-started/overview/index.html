@@ -459,17 +459,15 @@ web server and MySQL, accessible via the PDO extension. Your Apache installation
 must have the <code>mod_rewrite</code> extension installed and configured.</p>
 <p>You must also ensure that Apache is configured to support <code>.htaccess</code> files.
 This is usually done by changing the setting:</p>
-<pre class="codehilite"><code class="language-apache">AllowOverride None</code></pre>
-
+<p> <pre class=codehilite><code class=language-apache>AllowOverride None</code></pre></p>
 <p>to</p>
-<pre class="codehilite"><code class="language-apache">AllowOverride FileInfo</code></pre>
-
+<p> <pre class=codehilite><code class=language-apache>AllowOverride FileInfo</code></pre></p>
 <p>in your <code>httpd.conf</code> file. Check with your distribution’s documentation for
 exact details. You will not be able to navigate to any page other than the home
 page in this tutorial if you have not configured <code>mod_rewrite</code> and <code>.htaccess</code>
 usage correctly.</p>
 <blockquote>
-<h3 id="getting-started-faster">Getting started faster</h3>
+<h3>Getting started faster</h3>
 <p>Alternatively, you can use any of the following as well:</p>
 <ul>
 <li>The built-in web server in PHP. Run <code>php -S 0.0.0.0:8080 -t public
@@ -579,7 +577,7 @@ with these fields in it:</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/getting-started/overview.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/getting-started/overview.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

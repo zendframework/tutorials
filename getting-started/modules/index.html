@@ -470,7 +470,7 @@ the <code>Application</code> module as required.</p>
 <h2 id="setting-up-the-album-module">Setting up the Album module</h2>
 <p>Start by creating a directory called <code>Album</code> under <code>module</code> with the following
 subdirectories to hold the module’s files:</p>
-<pre class="codehilite"><code class="language-text">zf-tutorial/
+<p> <pre class=codehilite><code class=language-text>zf-tutorial/
     /module
         /Album
             /config
@@ -480,8 +480,7 @@ subdirectories to hold the module’s files:</p>
                 /Model
             /view
                 /album
-                    /album</code></pre>
-
+                    /album</code></pre></p>
 <p>The <code>Album</code> module has separate directories for the different types of files we
 will have. The PHP files that contain classes within the <code>Album</code> namespace live
 in the <code>src/</code> directory. The view directory also has a sub-folder called <code>album</code>
@@ -491,7 +490,7 @@ for our module's view scripts.</p>
 namespace (i.e., <code>Album</code>); in the case of our new module, that means the class
 <code>Album\Module</code>, which will be found in <code>module/Album/src/Module.php</code>.</p>
 <p>Let's create that file now, with the following contents:</p>
-<pre class="codehilite"><code class="language-php">namespace Album;
+<p> <pre class=codehilite><code class=language-php>namespace Album;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
@@ -501,41 +500,37 @@ class Module implements ConfigProviderInterface
     {
         return include __DIR__ . '/../config/module.config.php';
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>The <code>ModuleManager</code> will call <code>getConfig()</code> automatically for us.</p>
-<h3 id="autoloading">Autoloading</h3>
+<h3>Autoloading</h3>
 <p>While Zend Framework provides autoloading capabilities via its
 <a href="https://zendframework.github.io/zend-loader">zend-loader</a> component, we
 recommend using Composer's autoloading capabilities. As such, we need to inform
 Composer of our new namespace, and where its files live.</p>
 <p>Open <code>composer.json</code> in your project root, and look for the <code>autoload</code> section;
 it should look like the following by default:</p>
-<pre class="codehilite"><code class="language-json">"autoload": {
-    "psr-4": {
-        "Application\\": "module/Application/src/"
+<p> <pre class=codehilite><code class=language-json>&quot;autoload&quot;: {
+    &quot;psr-4&quot;: {
+        &quot;Application\\&quot;: &quot;module/Application/src/&quot;
     }
-},</code></pre>
-
+},</code></pre></p>
 <p>We'll now add our new module to the list, so it now reads:</p>
-<pre class="codehilite"><code class="language-json">"autoload": {
-    "psr-4": {
-        "Application\\": "module/Application/src/",
-        "Album\\": "module/Album/src/"
+<p> <pre class=codehilite><code class=language-json>&quot;autoload&quot;: {
+    &quot;psr-4&quot;: {
+        &quot;Application\\&quot;: &quot;module/Application/src/&quot;,
+        &quot;Album\\&quot;: &quot;module/Album/src/&quot;
     }
-},</code></pre>
-
+},</code></pre></p>
 <p>Once you've made that change, run the following to ensure Composer updates its
 autoloading rules:</p>
-<pre class="codehilite"><code class="language-bash">$ composer dump-autoload</code></pre>
-
+<p> <pre class=codehilite><code class=language-bash>$ composer dump-autoload</code></pre></p>
 <h2 id="configuration">Configuration</h2>
 <p>Having registered the autoloader, let’s have a quick look at the <code>getConfig()</code>
 method in <code>Album\Module</code>. This method loads the <code>config/module.config.php</code> file
 under the module's root directory.</p>
 <p>Create a file called <code>module.config.php</code> under
 <code>zf-tutorial/module/Album/config/</code>:</p>
-<pre class="codehilite"><code class="language-php">namespace Album;
+<p> <pre class=codehilite><code class=language-php>namespace Album;
 
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -550,8 +545,7 @@ return [
             'album' =&gt; __DIR__ . '/../view',
         ],
     ],
-];</code></pre>
-
+];</code></pre></p>
 <p>The config information is passed to the relevant components by the
 <code>ServiceManager</code>. We need two initial sections: <code>controllers</code> and
 <code>view_manager</code>. The controllers section provides a list of all the controllers
@@ -568,15 +562,14 @@ by the skeleton application. Update this file so that the array it returns
 contains the <code>Album</code> module as well, so the file now looks like this:</p>
 <p>(Changes required are highlighted using comments; original comments from the
 file are omitted for brevity.)</p>
-<pre class="codehilite"><code class="language-php">return [
+<p> <pre class=codehilite><code class=language-php>return [
     'Zend\Form',
     'Zend\Db',
     'Zend\Router',
     'Zend\Validator',
     'Application',
     'Album',          // &lt;-- Add this line
-];</code></pre>
-
+];</code></pre></p>
 <p>As you can see, we have added our <code>Album</code> module into the list of modules after
 the <code>Application</code> module.</p>
 <p>We have now set up the module ready for putting our custom code into it.</p>
@@ -613,7 +606,7 @@ the <code>Application</code> module.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/getting-started/modules.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/getting-started/modules.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

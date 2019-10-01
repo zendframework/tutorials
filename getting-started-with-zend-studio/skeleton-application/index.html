@@ -517,7 +517,7 @@ JavaScript) and directs all other requests to the <code>index.php</code>. The <c
 initialises the autoloader and then bootstraps <code>Zend\Mvc\Application</code> before
 finally running the application. The process looks like this:</p>
 <p><img alt="image" src="../../images/getting-started-with-zend-studio.process.png" class="img-responsive"/></p>
-<h3 id="starting-up">Starting up</h3>
+<h3>Starting up</h3>
 <p>To set up the application for running, a number of things happen. Firstly an
 instance of <code>Zend\ServiceManager\ServiceManager</code> is created as the master
 locator for all class instances used by the application. The Module Manager is
@@ -551,7 +551,7 @@ code. In Zend Framework, every key process in the dispatch cycle is
 implemented as an event. This means that you can write listeners for these
 events which can then change the flow of operation or perform additional
 processes when something else has happened.</p>
-<h3 id="dispatching">Dispatching</h3>
+<h3>Dispatching</h3>
 <p>Once all modules have been loaded, the application is run. This is done as a
 series of events, with the first event, <code>route</code>, used to determine the
 controller action that should be run based on the URL requested. Once this is
@@ -573,7 +573,7 @@ move on and write the <em>MyTaskList</em> application.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/getting-started-with-zend-studio/skeleton-application.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/getting-started-with-zend-studio/skeleton-application.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

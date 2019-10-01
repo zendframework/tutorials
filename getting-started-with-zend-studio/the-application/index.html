@@ -515,7 +515,7 @@ will suffice with the following fields:</p>
 <p>We are going to use MySQL, via PHP's PDO driver, so create a database called
 <code>mytasklist</code> using your preferred MySQL client, and run these SQL statements to
 create the <code>task_item</code> table and some sample data:</p>
-<pre class="codehilite"><code class="language-sql">CREATE TABLE task_item (
+<p> <pre class=codehilite><code class=language-sql>CREATE TABLE task_item (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
     completed TINYINT NOT NULL DEFAULT '0',
@@ -530,8 +530,7 @@ INSERT INTO task_item (title, completed, created)
 INSERT INTO task_item (title, completed, created)
     VALUES ('Book hotel', 0, NOW());
 INSERT INTO task_item (title, completed, created)
-    VALUES ('Enjoy conference', 0, NOW());</code></pre>
-
+    VALUES ('Enjoy conference', 0, NOW());</code></pre></p>
 <p>Note that if you have Zend Studio, you can use the built-in Database
 Connectivity features. This if found in the Database Development perspective
 (Window | Open Perspective | Other | Database Development menu item) and further
@@ -562,7 +561,7 @@ during the start-up process and is also used to register listeners that will be
 triggered during the dispatch process. The <code>Module</code> class created for us
 contains three methods: <code>getAutoloaderConfig()</code>, <code>getConfig()</code> and
 <code>onBootstrap()</code> which are called by the Module Manager during start-up.</p>
-<h3 id="autoloading-files">Autoloading files</h3>
+<h3>Autoloading files</h3>
 <p>Our <code>getAutoloaderConfig()</code> method returns an array that is compatible with
 ZF's <code>AutoloaderFactory</code>. It is configured for us with both a classmap file
 (<code>autoload_classmap.php</code>) and a standard autoloader to load any files in
@@ -575,7 +574,7 @@ load a class if its file is named correctly. This allows us to develop quickly
 by creating new classes when we need them and then gain a performance boost by
 using the classmap autoloader in production. Zend Framework provides
 <code>bin/classmap_generator.php</code> to create and update the file.</p>
-<h3 id="configuration">Configuration</h3>
+<h3>Configuration</h3>
 <p>The <code>getConfig()</code> method in <code>Checklist\Module</code> is called by the Module Manager
 to retrieve the configuration information for this module. By tradition, this
 method simply loads the <code>config/module.config.php</code> file which is an associative
@@ -601,7 +600,7 @@ folder for each controller. We have one controller, <code>TaskController</code>,
 is a single sub-folder in <code>view/checklist</code> called <code>task</code>. Within this folder,
 there are separate <code>.phtml</code> files which contain the specific HTML for each
 action of our module.</p>
-<h3 id="registering-events">Registering events</h3>
+<h3>Registering events</h3>
 <p>The <code>onBootstrap()</code> method in the <code>Module</code> class is the easiest place to
 register listeners for the MVC events that are triggered by the Event Manager.
 Note that the default method body provided by Zend Studio is not needed as the
@@ -648,10 +647,10 @@ dispatched. The four actions and URLs are:</p>
 defined in the module's <code>module.config.php</code> file. As noted earlier, the
 configuration file, <code>module.config.php</code> created by Zend Studio has a route
 called <code>checklist</code> set up for us.</p>
-<h3 id="routing">Routing</h3>
+<h3>Routing</h3>
 <p>The default route provided for us isn't quite what we need. The <code>checklist</code>
 route is defined like this:</p>
-<pre class="codehilite"><code class="language-php">// Inside module/Checklist/src/config/module.config.php:
+<p> <pre class=codehilite><code class=language-php>// Inside module/Checklist/src/config/module.config.php:
 
 'router' =&gt; [
     'routes' =&gt; [
@@ -674,8 +673,7 @@ route is defined like this:</p>
                     ],
                 ],
             ],
-        ],</code></pre>
-
+        ],</code></pre></p>
 <p>This defines a main route called <code>checklist</code>, which maps the URL <code>/task</code> to the
 index action of the Task controller and then there is a child route called
 <code>default</code> which maps <code>/task/{controller name}/{action name}</code> to the <code>{action
@@ -689,7 +687,7 @@ single <code>Segment</code> type route that can handle actions as well as just r
 index action</p>
 <p>Open <code>module/Checklist/config/module.config.php</code> in Zend Studio and change the
 entire router section of the array to be:</p>
-<pre class="codehilite"><code class="language-php">'router' =&gt; [
+<p> <pre class=codehilite><code class=language-php>'router' =&gt; [
     'routes' =&gt; [
         'task' =&gt; [
             'type'    =&gt; \Zend\Router\Http\Segment::class,
@@ -707,8 +705,7 @@ entire router section of the array to be:</p>
             ],
         ],
     ],
-],</code></pre>
-
+],</code></pre></p>
 <p>We have now renamed the route to task and have set it up as a <code>Segment</code> route
 with two optional parameters in the URL: <code>action</code> and <code>id</code>. We have set a
 default of <code>index</code> for the <code>action</code>, so that if the URL is simply <code>/task</code>, then
@@ -719,7 +716,7 @@ this route, we have specified that the <code>action</code> parameter must be eit
 edit or delete and that the <code>id</code> parameter must only contain numbers.</p>
 <p>The routing for our <code>Checklist</code> module is now set up, so we can now turn our
 attention to the controller.</p>
-<h3 id="the-taskcontroller">The TaskController</h3>
+<h3>The TaskController</h3>
 <p>In Zend Framework, the controller is a class that is generally called
 <code>{Controller name}Controller</code>. Note that <code>{Controller name}</code> starts with a
 capital letter. This class lives in a file called <code>{Controller name}Controller.php</code>
@@ -739,7 +736,7 @@ service, <code>AbstractRestfulController</code> may be useful.</p>
 with two action methods in it: <code>indexAction()</code> and <code>fooAction()</code>. Remove the
 <code>fooAction()</code> method and the default "Copyright Zend" DocBlock comment at the
 top of the file. Your controller should now look like this:</p>
-<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Controller/TaskController.php:
 
 namespace Checklist\Controller;
 
@@ -752,12 +749,11 @@ class TaskController extends AbstractActionController
         return [];
     }
 
-}</code></pre>
-
+}</code></pre></p>
 <p>This controller now contains the action for the home page which will display our
 list of to-do items. We now need to create a model-layer that can retrieve the
 tasks from the database for display.</p>
-<h3 id="the-model">The model</h3>
+<h3>The model</h3>
 <p>It is time to look at the model section of our application. Remember that the
 model is the part that deals with the application's core purpose (the so-called
 "business rules") and, in our case, deals with the database. Zend Framework does
@@ -781,7 +777,7 @@ PHP File dialog, set the File Name to <code>TaskEntity.php</code> as shown and t
 Finish.</p>
 <p><img alt="image" src="../../images/getting-started-with-zend-studio.studio8.png" class="img-responsive"/></p>
 <p>This will create a blank PHP file. Update it so that it looks like this:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 // In module/Checklist/src/Checklist/Model/TaskEntity.php:
 
 namespace Checklist\Model;
@@ -837,8 +833,7 @@ class TaskEntity
     {
       $this-&gt;created = $value;
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>The <code>Task</code> entity is a simple PHP class with four properties with getter and
 setter methods for each property. We also have a constructor to fill in the
 <code>created</code> property. If you are using Zend Studio rather than Eclipse PDT, then
@@ -848,7 +843,7 @@ choosing <a href="http://files.zend.com/help/Zend-Studio-10/zend-studio.htm#crea
 the database and populating them with new data. Again, right click on the Model
 folder and choose New -&gt; PHP File and create a PHP file called
 <code>TaskMapper.php</code>. Update it so that it looks like this:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 // In module/Checklist/src/Checklist/Model/TaskMapper.php:
 
 namespace Checklist\Model;
@@ -887,8 +882,7 @@ class TaskMapper
         $resultset-&gt;initialize($results);
         return $resultset;
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>Within this mapper class we have implemented the <code>fetchAll()</code> method and a
 constructor. There's quite a lot going on here as we're dealing with the
 <code>Zend\Db</code> component, so let's break it down. Firstly we have the constructor
@@ -919,7 +913,7 @@ the provided instantiated object. See the article
 <a href="http://ralphschindler.com/2012/03/09/php-constructor-best-practices-and-the-prototype-pattern">"PHP Constructor Best Practices and the Prototype Pattern"</a>
 for more details.</p>
 <p>Finally, <code>fetchAll()</code> returns the result set object with the correct data in it.</p>
-<h3 id="using-service-manager-to-configure-the-database-credentials-and-inject-into-the-controller">Using Service Manager to configure the database credentials and inject into the controller</h3>
+<h3>Using Service Manager to configure the database credentials and inject into the controller</h3>
 <p>In order to always use the same instance of our <code>TaskMapper</code>, we will use the
 Service Manager to define how to create the mapper and also to retrieve it when
 we need it. This is most easily done in the <code>Module</code> class where we create a
@@ -931,7 +925,7 @@ be instantiated or create a factory (closure or callback) method that
 instantiates the object when the Service Manager needs it. We start by
 implementing getServiceConfig() and write a closure that creates a <code>TaskMapper</code>
 instance. Add this method to the <code>Module</code> class:</p>
-<pre class="codehilite"><code class="language-php">// In module/Checklist/Module.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Checklist/Module.php:
 
 use Checklist\Model\TaskMapper;
 use Zend\Db\Adapter\Adapter;
@@ -950,8 +944,7 @@ class Module
             ],
         ];
     }
-// ...</code></pre>
-
+// ...</code></pre></p>
 <p>Don't forget to add the additional import statements at the top of the file.</p>
 <p>The <code>getServiceConfig()</code> method returns an array of class creation definitions
 that are all merged together by the Module Manager before passing to the Service
@@ -979,13 +972,12 @@ configuration information to <code>global.php</code> which you should commit to 
 version control system.You can then use <code>local.php</code> (outside of the VCS) to
 store the credentials for your database.</p>
 <p>Open <code>config/autoload/global.php</code> and replace the empty array with:</p>
-<pre class="codehilite"><code class="language-php">return [
+<p> <pre class=codehilite><code class=language-php>return [
     'db' =&gt; [
         'driver' =&gt; 'Pdo',
         'dsn'    =&gt; 'mysql:dbname=mytasklist;hostname=localhost;charset=utf8',
     ],
-];</code></pre>
-
+];</code></pre></p>
 <p>The <code>Zend\Db\Adapter\AdapterServiceFactory</code> registered by zend-db for creating a
 <code>Zend\Db\Adapter\Adapter</code> instance looks for a key called <code>db</code> in the
 configuration array and uses this to configure the database adapter. Therefore,
@@ -995,26 +987,24 @@ connect to the database. We do not want to store this in the version control
 system, so we store this in the <code>local.php</code> configuration file, which, by
 default, is ignored by git.</p>
 <p>Open <code>config/autoload/local.php</code> and replace the empty array with:</p>
-<pre class="codehilite"><code class="language-php">return [
+<p> <pre class=codehilite><code class=language-php>return [
     'db' =&gt; [
         'username' =&gt; 'YOUR_USERNAME',
         'password' =&gt; 'YOUR_PASSWORD',
     ],
-];</code></pre>
-
+];</code></pre></p>
 <p>Obviously you should replace <code>YOUR_USERNAME</code> and <code>YOUR_PASSWORD</code> with the
 correct credentials.</p>
 <p>Now that the Service Manager can create a <code>TaskMapper</code> instance for us, we can
 add a method to the controller to retrieve it. Add <code>getTaskMapper()</code> to the
 <code>TaskController</code> class:</p>
-<pre class="codehilite"><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
+<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Controller/TaskController.php:
 
 public function getTaskMapper()
 {
     $sm = $this-&gt;getServiceLocator();
     return $sm-&gt;get('TaskMapper');
-}</code></pre>
-
+}</code></pre></p>
 <p>We can now call <code>getTaskMapper()</code> from within our controller whenever we need to
 interact with our model layer. Let's start with a list of tasks when the index
 action is called.</p>
@@ -1028,7 +1018,7 @@ action is called.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/getting-started-with-zend-studio/the-application.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/getting-started-with-zend-studio/the-application.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

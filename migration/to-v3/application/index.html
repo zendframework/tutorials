@@ -483,11 +483,10 @@ get the full set of components, at the latest 2.* versions.</p>
 <li>Installing each ZF component package you actually use in your application.</li>
 </ul>
 <p>The process would look like this:</p>
-<pre class="codehilite"><code class="language-bash">$ composer remove zendframework/zendframework
+<p> <pre class=codehilite><code class=language-bash>$ composer remove zendframework/zendframework
 $ composer require zendframework/zend-component-installer
 $ composer require zendframework/zend-mvc
-# Repeat as necessary for components you use if not already installed</code></pre>
-
+# Repeat as necessary for components you use if not already installed</code></pre></p>
 <p>When you install zend-mvc, it will prompt you to add configuration for
 components; choose either <code>application.config.php</code> or <code>modules.config.php</code>, and
 re-use your selection for all other packages. This step ensures that the various
@@ -497,13 +496,13 @@ application correctly.</p>
 example, if you are not using zend-barcode, or zend-permissions-acl, or
 zend-mail, there's no reason to install them.</p>
 <blockquote>
-<h3 id="keeping-the-zendframework-package">Keeping the zendframework package</h3>
+<h3>Keeping the zendframework package</h3>
 <p>If you want to upgrade quickly, and cannot easily determine which components you
 use in your application, you can upgrade your zendframework requirement. When
 you do, you should also install the zend-component-installer, to ensure that
 component configuration is properly injected in your application.</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-component-installer "zendframework/zendframework:^3.0"</code></pre>
-
+<p><code>bash
+$ composer require zendframework/zend-component-installer "zendframework/zendframework:^3.0"</code></p>
 <p>During installation, it will prompt you to add configuration for
 components; choose either <code>application.config.php</code> or <code>modules.config.php</code>, and
 re-use your selection for all other packages. This step ensures that the various
@@ -519,24 +518,24 @@ initiative.</p>
 dependencies for each package. This affected the MVC in particular, as a number
 of features were optional or presented deep integrations between the MVC and
 other components. These include the following:</p>
-<h3 id="console-tooling">Console tooling</h3>
+<h3>Console tooling</h3>
 <p>If you were using the MVC console tooling, and are doing a partial update per
 the recommendations, you will need to install
 <a href="https://zendframework.github.io/zend-mvc-console/">zend-mvc-console</a>.</p>
-<h3 id="forms-integration">Forms integration</h3>
+<h3>Forms integration</h3>
 <p>If you were using the forms in your MVC application, and are doing a partial
 update per the recommendations, you will need to install
 <a href="https://zendframework.github.io/zend-mvc-form/">zend-mvc-form</a>.</p>
-<h3 id="i18n-integration">i18n integration</h3>
+<h3>i18n integration</h3>
 <p>If you were using i18n features in your MVC application, and are doing a partial
 update per the recommendations, you will need to install
 <a href="https://zendframework.github.io/zend-mvc-i18n/">zend-mvc-i18n</a>.</p>
-<h3 id="plugins">Plugins</h3>
+<h3>Plugins</h3>
 <p>If you were using any of the <code>prg()</code>, <code>fileprg()</code>, <code>identity()</code>, or
 <code>flashMessenger()</code> MVC controller plugins, and are doing a partial update per
 the recommendations, you will need to install
 <a href="https://zendframework.github.io/zend-mvc-plugins/">zend-mvc-plugins</a>.</p>
-<h3 id="zend-di-integration">zend-di integration</h3>
+<h3>zend-di integration</h3>
 <p>If you were using the zend-servicemanager &lt;-&gt; zend-di integration within
 your application, you will need to install
 <a href="https://zendframework.github.io/zend-servicemanager-di/">zend-servicemanager-di</a>.</p>
@@ -549,15 +548,14 @@ installed by default, nor recommended. Instead, we recommend using
 your application.</p>
 <p>As an example, if you are still defining the default <code>Application</code> module, you
 can add autoloading for it as follows in your project's <code>composer.json</code>:</p>
-<pre class="codehilite"><code class="language-json">"autoload": {
-    "psr-4": {
-        "Application\\": "module/Application/src/Application/"
+<p> <pre class=codehilite><code class=language-json>&quot;autoload&quot;: {
+    &quot;psr-4&quot;: {
+        &quot;Application\\&quot;: &quot;module/Application/src/Application/&quot;
     },
-    "files":  [
-        "module/Application/Module.php"
+    &quot;files&quot;:  [
+        &quot;module/Application/Module.php&quot;
     ]
-}</code></pre>
-
+}</code></pre></p>
 <p>The above creates a <a href="http://www.php-fig.org/psr/psr-4/">PSR-4</a> autoloading rule
 for the <code>Application</code> module, telling it to look in the
 <code>module/Application/src/Application/</code> directory. Since the <code>Application\Module</code>
@@ -565,12 +563,11 @@ class is defined at the module root, we specify it in the <code>files</code> con
 <p>To improve on this, and simplify autoloading, we recommend adopting a complete
 PSR-4 directory structure for your module class files. As an example, to change
 the existing <code>Application</code> module to PSR-4, you can do the following:</p>
-<pre class="codehilite"><code class="language-bash">$ cd module/Application
+<p> <pre class=codehilite><code class=language-bash>$ cd module/Application
 $ mv src temp
 $ mv temp/Application src
 $ rm -Rf ./temp
-$ mv Module.php src/</code></pre>
-
+$ mv Module.php src/</code></pre></p>
 <p>Update your <code>Module.php</code> file to do the following:</p>
 <ul>
 <li>Remove the <code>getAutoloaderConfig()</code> method entirely, if defined.</li>
@@ -579,22 +576,20 @@ $ mv Module.php src/</code></pre>
   '/../config/module.config.php</code>.</li>
 </ul>
 <p>You can then update the <code>autoload</code> configuration to:</p>
-<pre class="codehilite"><code class="language-json">"autoload": {
-    "psr-4": {
-        "Application\\": "module/Application/src/"
+<p> <pre class=codehilite><code class=language-json>&quot;autoload&quot;: {
+    &quot;psr-4&quot;: {
+        &quot;Application\\&quot;: &quot;module/Application/src/&quot;
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>Afterwards, run the following to update the generated autoloader:</p>
-<pre class="codehilite"><code class="language-bash">$ composer dump-autoload</code></pre>
-
+<p> <pre class=codehilite><code class=language-bash>$ composer dump-autoload</code></pre></p>
 <p>The updated application skeleton already takes this approach.</p>
 <h2 id="bootstrap">Bootstrap</h2>
 <p>Because version 3 requires usage of Composer for autoloading, you can simplify
 your application bootstrap.</p>
 <p>First, if you were using an <code>init_autoloader.php</code> file, you can now remove it.</p>
 <p>Second, update your <code>public/index.php</code> to read as follows:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 
 use Zend\Mvc\Application;
 
@@ -618,14 +613,13 @@ include __DIR__ . '/../vendor/autoload.php';
 
 if (! class_exists(Application::class)) {
     throw new RuntimeException(
-        "Unable to load application.\n"
-        . "- Type `composer install` if you are developing locally.\n"
+        &quot;Unable to load application.\n&quot;
+        . &quot;- Type `composer install` if you are developing locally.\n&quot;
     );
 }
 
 // Run the application!
-Application::init(require __DIR__ . '/../config/application.config.php')-&gt;run();</code></pre>
-
+Application::init(require __DIR__ . '/../config/application.config.php')-&gt;run();</code></pre></p>
 <h2 id="scripts">Scripts</h2>
 <p>The skeleton application for version 2 shipped three scripts with it:</p>
 <ul>
@@ -655,8 +649,7 @@ are no longer present.</p>
 which provides a way to store common development-specific settings in your
 repository and then selectively enable/disable them during development.</p>
 <p>If you are upgrading from an existing application, you can install this feature:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zfcampus/zf-development-mode</code></pre>
-
+<p> <pre class=codehilite><code class=language-bash>$ composer require zfcampus/zf-development-mode</code></pre></p>
 <p>Please refer to the <a href="https://github.com/zfcampus/zf-development-mode">package documentation</a>
 for details on how to setup your application configuration to make use of this
 feature.</p>
@@ -689,7 +682,7 @@ feature.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/tutorials/edit/master/doc/migration/to-v3/application.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/tutorials/edit/master/doc/book/migration/to-v3/application.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
