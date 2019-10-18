@@ -435,11 +435,11 @@
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#configuring-the-default-adapter" class="toc__link">Configuring the default adapter</a>
+                        <a href="#configuring-the-default-adapter" class="toc__link">Configuring the default Adapter</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#configuring-named-adapters" class="toc__link">Configuring named adapters</a>
+                        <a href="#configuring-named-adapters" class="toc__link">Configuring named Adapters</a>
                     </li>
                 
             </ul>
@@ -448,7 +448,7 @@
 
     </div>
 
-    <h1 id="setting-up-a-database-adapter">Setting up a database adapter</h1>
+    <h1 id="setting-up-a-database-adapter">Setting up a Database Adapter</h1>
 <p>zend-db provides a general purpose database abstraction layer. At its heart is
 the <code>Adapter</code>, which abstracts common database operations across the variety of
 drivers we support.</p>
@@ -458,6 +458,7 @@ cluster of read-only replicated servers and a single writable server of record).
 <h2 id="installing-zend-db">Installing zend-db</h2>
 <p>First, install zend-db using Composer:</p>
 <p> <pre class=codehilite><code class=language-bash>$ composer require zendframework/zend-db</code></pre></p>
+<h3>Installation and automated Configuration</h3>
 <p>If you are using <a href="https://zendframework.github.io/zend-component-installer/">zend-component-installer</a>
 (installed by default with the skeleton application, and optionally for
 Expressive applications), you will be prompted to install the package
@@ -467,44 +468,38 @@ configuration.</p>
   <code>modules.config.php</code>.</li>
 <li>For Expressive applications, choose <code>config/config.php</code>.</li>
 </ul>
+<h3>Installation and manual Configuration</h3>
 <p>If you are not using the installer, you will need to manually configure add the
 component to your application.</p>
-<ul>
-<li>
+<h4>Configuration for a zend-mvc-based Application</h4>
 <p>For zend-mvc applications, update your list of modules in either
-  <code>config/application.config.php</code> or <code>config/modules.config.php</code> to add an
-  entry for <code>'Zend\Db'</code> at the top of the list:
-  ```php
-  &lt;?php
-    // In config/modules.config.php
-    return [
-      'Zend\Db', // &lt;-- This line
-      'Zend\Form', 
-      /<em> ... </em>/
-    ];</p>
-<p>// OR in config/application.config.php
+<code>config/application.config.php</code> or <code>config/modules.config.php</code> to add an
+entry for <code>'Zend\Db'</code> at the top of the list:</p>
+<p> <pre class=codehilite><code class=language-php>// In config/modules.config.php
 return [
-/<em> ... </em>/
-// Retrieve list of modules used in this application.
-'modules' =&gt; [
-  'Zend\Db', // &lt;-- This line
-  'Zend\Form', 
-  /<em> ... </em>/
-],
-/<em> ... </em>/
-  ```</p>
-</li>
-<li>
+    'Zend\Db', // &lt;-- This line
+    'Zend\Form', 
+    /* ... */
+];
+
+// OR in config/application.config.php
+return [
+    /* ... */
+    // Retrieve list of modules used in this application.
+    'modules' =&gt; [
+        'Zend\Db', // &lt;-- This line
+        'Zend\Form', 
+        /* ... */
+    ],
+    /* ... */
+];</code></pre></p>
+<h4>Configuration for a zend-expressive-based Application</h4>
 <p>For Expressive applications, create a new file,
-  <code>config/autoload/zend-db.global.php</code>, with the following contents:</p>
-</li>
-</ul>
-<p>```php
-  &lt;?php
-  use Zend\Db\ConfigProvider;</p>
-<p>return (new ConfigProvider())();
-  ```</p>
-<h2 id="configuring-the-default-adapter">Configuring the default adapter</h2>
+<code>config/autoload/zend-db.global.php</code>, with the following contents:</p>
+<p> <pre class=codehilite><code class=language-php>use Zend\Db\ConfigProvider;
+
+return (new ConfigProvider())();</code></pre></p>
+<h2 id="configuring-the-default-adapter">Configuring the default Adapter</h2>
 <p>Within your service factories, you may retrieve the default adapter from your application container using the
 class name <code>Zend\Db\Adapter\AdapterInterface</code>:</p>
 <p> <pre class=codehilite><code class=language-php>use Zend\Db\Adapter\AdapterInterface;
@@ -525,7 +520,7 @@ return [
 ];</code></pre></p>
 <p>More information on adapter configuration can be found in the docs for
 <a href="http://zendframework.github.io/zend-db/adapter/#creating-an-adapter-using-dependency-injection">Zend\Db\Adapter</a>.</p>
-<h2 id="configuring-named-adapters">Configuring named adapters</h2>
+<h2 id="configuring-named-adapters">Configuring named Adapters</h2>
 <p>Sometimes you may need multiple adapters. As an example, if you work with a
 cluster of databases, one may allow write operations, while another may be
 read-only.</p>
@@ -550,13 +545,13 @@ return [
 ];</code></pre></p>
 <p>You retrieve the database adapters using the keys you define, so ensure they are
 unique to your application, and descriptive of their purpose!</p>
-<h3>Retrieving named adapters</h3>
+<h3>Retrieving named Adapters</h3>
 <p>Retrieve named adapters in your service factories just as you would another
 service:</p>
 <p> <pre class=codehilite><code class=language-php>function ($container) {
     return new SomeServiceObject($container-&gt;get('Application\Db\ReadOnlyAdapter'));
 }</code></pre></p>
-<h3>Using the AdapterAbstractServiceFactory as a factory</h3>
+<h3>Using the <code>AdapterAbstractServiceFactory</code> as a Factory</h3>
 <p>Depending on what application container you use, abstract factories may not be
 available. Alternately, you may want to reduce lookup time when retrieving an
 adapter from the container (abstract factories are consulted last!).
