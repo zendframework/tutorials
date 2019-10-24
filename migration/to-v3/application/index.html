@@ -501,8 +501,9 @@ zend-mail, there's no reason to install them.</p>
 use in your application, you can upgrade your zendframework requirement. When
 you do, you should also install the zend-component-installer, to ensure that
 component configuration is properly injected in your application.</p>
-<p><code>bash
-$ composer require zendframework/zend-component-installer "zendframework/zendframework:^3.0"</code></p>
+<p><pre class=codehilite><code class=language-bash>
+$ composer require zendframework/zend-component-installer &quot;zendframework/zendframework:^3.0&quot;
+</code></pre></p>
 <p>During installation, it will prompt you to add configuration for
 components; choose either <code>application.config.php</code> or <code>modules.config.php</code>, and
 re-use your selection for all other packages. This step ensures that the various

@@ -519,8 +519,9 @@ attributes and options, including the label to be displayed.</p>
 <p>HTML forms can be sent using <code>POST</code> and <code>GET</code>. zend-form defaults to <code>POST</code>;
 therefore you don't have to be explicit in setting this option. If you want to
 change it to <code>GET</code> however, set the method attribute in the constructor:</p>
-<p><code>php
-$this-&gt;setAttribute('method', 'GET');</code></p>
+<p><pre class=codehilite><code class=language-php>
+$this-&gt;setAttribute('method', 'GET');
+</code></pre></p>
 </blockquote>
 <p>We also need to set up validation for this form.  <a href="https://zendframework.github.io/zend-inputfilter">zend-inputfilter</a>
 provides a general purpose mechanism for input validation. It also provides an

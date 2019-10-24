@@ -995,12 +995,13 @@ template to display the data.</p>
 <p>You do not actually need to return an instance of <code>ViewModel</code>; when you return
 a normal PHP array, zend-mvc internally converts it into a <code>ViewModel</code>. The
 following are equivalent:</p>
-<p>```php
+<p><pre class=codehilite><code class=language-php>
 // Explicit ViewModel:
-return new ViewModel(['foo' =&gt; 'bar']);</p>
-<p>// Implicit ViewModel:
+return new ViewModel(['foo' =&gt; 'bar']);
+
+// Implicit ViewModel:
 return ['foo' =&gt; 'bar'];
-```</p>
+</code></pre></p>
 </blockquote>
 <h2 id="accessing-view-variables">Accessing View Variables</h2>
 <p>Let's modify our view to display a table of all blog posts that our repository

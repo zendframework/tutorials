@@ -849,8 +849,9 @@ echo $this-&gt;form()-&gt;closeTag();</code></pre></p>
 <h3>Form method</h3>
 <p>HTML forms can be sent using <code>POST</code> and <code>GET</code>. zend-form defaults to <code>POST</code>.
 If you want to switch to <code>GET</code>:</p>
-<p><code>php
-$form-&gt;setAttribute('method', 'GET');</code></p>
+<p><pre class=codehilite><code class=language-php>
+$form-&gt;setAttribute('method', 'GET');
+</code></pre></p>
 </blockquote>
 <p>Refreshing the browser you will now see your form properly displayed. It's not
 pretty, though, as the default markup does not follow semantics for Bootstrap

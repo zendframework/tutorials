@@ -637,17 +637,19 @@ one to use on your system.</p>
 <p>If you do not have Sqlite installed on your system, you can use PHP to load
 the database using the same SQL schema file created earlier. Create the file
 <code>data/load_album_fixtures.php</code> with the following contents:</p>
-<p><code>php
+<p><pre class=codehilite><code class=language-php>
 &lt;?php
 $db = new PDO('sqlite:' . realpath(__DIR__) . '/zftutorial.db');
 $fh = fopen(__DIR__ . '/album-fixtures.sql', 'r');
 while ($line = fread($fh, 4096)) {
     $db-&gt;exec($line);
 }
-fclose($fh);</code></p>
+fclose($fh);
+</code></pre></p>
 <p>Once created, execute it:</p>
-<p><code>bash
-$ php data/load_album_fixtures.php</code></p>
+<p><pre class=codehilite><code class=language-bash>
+$ php data/load_album_fixtures.php
+</code></pre></p>
 </blockquote>
 <p>This gives us a handy extra 150 rows to play with. If you now visit your album
 list at <code>/album</code>, you'll see a huge long list of 150+ albums; it's ugly.</p>

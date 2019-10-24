@@ -433,16 +433,6 @@
 
     
     
-
-    
-
-    
-    
-
-    
-
-    
-    
         <div class="toc">
             <h6 class="toc__headline">In This Article</h6>
             <ul class="toc__list">
@@ -552,39 +542,45 @@ the resultant directory to <code>zf-tutorial</code>.</p>
 <p>ZendSkeletonApplication is set up to use <a href="http://getcomposer.org">Composer</a>
 to resolve its dependencies. Run the following from within your new
 zf-tutorial folder to install them:</p>
-<p><code>bash
+<p><pre class=codehilite><code class=language-bash>
 $ composer self-update
-$ composer install</code></p>
+$ composer install
+</code></pre></p>
 <p>This takes a while. You should see output like the following:</p>
-<p>```text
+<p><pre class=codehilite><code class=language-text>
 Installing dependencies from lock file
-- Installing zendframework/zend-component-installer (0.2.0)</p>
-<p>...</p>
-<p>Generating autoload files
-```</p>
+- Installing zendframework/zend-component-installer (0.2.0)
+  
+...
+
+Generating autoload files
+</code></pre></p>
 <p>At this point, you will be prompted to answer questions as noted above.</p>
 <p>Alternately, if you do not have Composer installed, but <em>do</em> have either
 Vagrant or docker-compose available, you can run Composer via those:</p>
-<p>```bash</p>
-<h1 id="for-vagrant">For Vagrant:</h1>
-<p>$ vagrant up
-$ vagrant ssh -c 'composer install'</p>
-<h1 id="for-docker-compose">For docker-compose:</h1>
-<p>$ docker-compose build
+<p><pre class=codehilite><code class=language-bash>
+# For Vagrant:
+$ vagrant up
+$ vagrant ssh -c 'composer install'
+# For docker-compose:
+$ docker-compose build
 $ docker-compose run zf composer install
-```</p>
+</code></pre></p>
 <h3>Timeouts</h3>
 <p>If you see this message:</p>
-<p><code>text
+<p><pre class=codehilite><code class=language-text>
 [RuntimeException]      
-  The process timed out.</code></p>
+  The process timed out.
+</code></pre></p>
 <p>then your connection was too slow to download the entire package in time, and
 composer timed out. To avoid this, instead of running:</p>
-<p><code>bash
-$ composer install</code></p>
+<p><pre class=codehilite><code class=language-bash>
+$ composer install
+</code></pre></p>
 <p>run instead:</p>
-<p><code>bash
-$ COMPOSER_PROCESS_TIMEOUT=5000 composer install</code></p>
+<p><pre class=codehilite><code class=language-bash>
+$ COMPOSER_PROCESS_TIMEOUT=5000 composer install
+</code></pre></p>
 <h3>Windows users using WAMP</h3>
 <p>For windows users with wamp:</p>
 <ol>
@@ -789,11 +785,13 @@ reason to enable it is to enable debugging! As noted, the artifacts generated
 by enabling development mode cannot be committed to your repository, so
 assuming you don't run the command in production, you should be safe.</p>
 <p>You can test the status of development mode using:</p>
-<p><code>bash
-$ composer development-status</code></p>
+<p><pre class=codehilite><code class=language-bash>
+$ composer development-status
+</code></pre></p>
 <p>And you can disable it using:</p>
-<p><code>bash
-$ composer development-disable</code></p>
+<p><pre class=codehilite><code class=language-bash>
+$ composer development-disable
+</code></pre></p>
 </blockquote>
 
 
