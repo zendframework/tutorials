@@ -583,23 +583,22 @@ $ COMPOSER_PROCESS_TIMEOUT=5000 composer install
 </code></pre></p>
 <h3>Windows users using WAMP</h3>
 <p>For windows users with wamp:</p>
-<ol>
-<li>Install <a href="https://getcomposer.org/doc/00-intro.md#installation-windows">composer for windows</a>.
-   Check composer is properly installed by running:</li>
-</ol>
-<p><code>bash
-   $ composer</code></p>
-<ol>
-<li>Install <a href="https://desktop.github.com/">GitHub Desktop</a> for windows.
-     Check git is properly installed by running:</li>
-</ol>
-<p><code>bash
-   $ git</code></p>
-<ol>
-<li>Now install the skeleton using:</li>
-</ol>
-<p><code>bash
-   $ composer create-project -s dev zendframework/skeleton-application path/to/install</code></p>
+<h4>1. Install Composer for Windows</h4>
+<p>Check Composer is properly installed by running:</p>
+<p>$$$$FENCED_CODE_BLOCK_5db14c821a7a79.94591811
+Otherwise follow the
+<a href="https://getcomposer.org/doc/00-intro.md#installation-windows">installation guide for Composer</a>.</p>
+<h4>2. Install Git for Windows</h4>
+<p>Check Git is properly installed by running:</p>
+<p><pre class=codehilite><code class=language-bash>
+$ git
+</code></pre></p>
+<p>Otherwise follow the
+<a href="https://desktop.github.com/">installation guide for GitHub Desktop</a>.</p>
+<h4>3. Now install the Skeleton using</h4>
+<p><pre class=codehilite><code class=language-bash>
+$ composer create-project -s dev zendframework/skeleton-application path/to/install
+</code></pre></p>
 </blockquote>
 <p>We can now move on to the web server setup.</p>
 <h2 id="web-servers">Web Servers</h2>
@@ -624,7 +623,7 @@ via <code>http://localhost:8080</code> or <code>http://&lt;your-local-IP&gt;:808
 and you should see the following 404 page:</p>
 <p><img alt="zend-mvc 404 page" src="../../images/user-guide.skeleton-application.404.png" class="img-responsive"/></p>
 <blockquote>
-<h4>Development only</h4>
+<h3>Development only</h3>
 <p>PHP's built-in web server should be used <strong>for development only</strong>.</p>
 </blockquote>
 <h3>Using Vagrant</h3>
@@ -710,9 +709,7 @@ RewriteRule ^ index.php [NC,L]</code></pre></p>
 your <code>VirtualHost</code> to let PHP output all its errors to the browser. This can be
 useful during the development of your application.</p>
 <p>Edit <code>zf-tutorial/public/index.php</code> directory and change it to the following:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php
-
-use Zend\Mvc\Application;
+<p> <pre class=codehilite><code class=language-php>use Zend\Mvc\Application;
 use Zend\Stdlib\ArrayUtils;
 
 /**
