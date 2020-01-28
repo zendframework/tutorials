@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn how to create zend-mvc applications, get in-depth guides into components, and discover how to migrate your applications to version 3!">  
-    <link rel="canonical" href="https://docs.zendframework.com/tutorials/db-adapter/">
+    <link rel="canonical" href="https://docs.zendframework.com/db-adapter/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Setting Up A Database Adapter - Tutorials - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -360,9 +360,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/tutorials/">laminas/tutorials.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -443,7 +443,9 @@ as well as multiple adapters (which may be useful in architectures that have a
 cluster of read-only replicated servers and a single writable server of record).</p>
 <h2 id="installing-zend-db">Installing zend-db</h2>
 <p>First, install zend-db using Composer:</p>
-<p> <pre class=codehilite><code class=language-bash>$ composer require zendframework/zend-db</code></pre></p>
+<pre><code class="language-bash">$ composer require zendframework/zend-db
+</code></pre>
+
 <h3>Installation and automated Configuration</h3>
 <p>If you are using <a href="https://zendframework.github.io/zend-component-installer/">zend-component-installer</a>
 (installed by default with the skeleton application, and optionally for
@@ -461,7 +463,7 @@ component to your application.</p>
 <p>For zend-mvc applications, update your list of modules in either
 <code>config/application.config.php</code> or <code>config/modules.config.php</code> to add an
 entry for <code>'Zend\Db'</code> at the top of the list:</p>
-<p> <pre class=codehilite><code class=language-php>// In config/modules.config.php
+<pre><code class="language-php">// In config/modules.config.php
 return [
     'Zend\Db', // &lt;-- This line
     'Zend\Form', 
@@ -478,32 +480,40 @@ return [
         /* ... */
     ],
     /* ... */
-];</code></pre></p>
+];
+</code></pre>
+
 <h4>Configuration for a zend-expressive-based Application</h4>
 <p>For Expressive applications, create a new file,
 <code>config/autoload/zend-db.global.php</code>, with the following contents:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Db\ConfigProvider;
+<pre><code class="language-php">use Zend\Db\ConfigProvider;
 
-return (new ConfigProvider())();</code></pre></p>
+return (new ConfigProvider())();
+</code></pre>
+
 <h2 id="configuring-the-default-adapter">Configuring the default Adapter</h2>
 <p>Within your service factories, you may retrieve the default adapter from your application container using the
 class name <code>Zend\Db\Adapter\AdapterInterface</code>:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Db\Adapter\AdapterInterface;
+<pre><code class="language-php">use Zend\Db\Adapter\AdapterInterface;
 
 function ($container) {
     return new SomeServiceObject($container-&gt;get(AdapterInterface::class));
-}</code></pre></p>
+}
+</code></pre>
+
 <p>When installed and configured, the factory associated with <code>AdapterInterface</code>
 will look for a top-level <code>db</code> key in the configuration, and use it to create an
 adapter. As an example, the following would connect to a MySQL database using
 PDO, and the supplied PDO DSN:</p>
-<p> <pre class=codehilite><code class=language-php>// In config/autoload/global.php
+<pre><code class="language-php">// In config/autoload/global.php
 return [
     'db' =&gt; [
         'driver' =&gt; 'Pdo',
         'dsn'    =&gt; 'mysql:dbname=zftutorial;host=localhost;charset=utf8',
     ],
-];</code></pre></p>
+];
+</code></pre>
+
 <p>More information on adapter configuration can be found in the docs for
 <a href="http://zendframework.github.io/zend-db/adapter/#creating-an-adapter-using-dependency-injection">Zend\Db\Adapter</a>.</p>
 <h2 id="configuring-named-adapters">Configuring named Adapters</h2>
@@ -514,7 +524,7 @@ read-only.</p>
 <code>Zend\Db\Adapter\AdapterAbstractServiceFactory</code>, for this purpose. To use it,
 you will need to create named configuration keys under <code>db.adapters</code>, each with
 configuration for an adapter:</p>
-<p> <pre class=codehilite><code class=language-php>// In config/autoload/global.php
+<pre><code class="language-php">// In config/autoload/global.php
 return [
     'db' =&gt; [
         'adapters' =&gt; [
@@ -528,15 +538,19 @@ return [
             ],
         ],
     ],
-];</code></pre></p>
+];
+</code></pre>
+
 <p>You retrieve the database adapters using the keys you define, so ensure they are
 unique to your application, and descriptive of their purpose!</p>
 <h3>Retrieving named Adapters</h3>
 <p>Retrieve named adapters in your service factories just as you would another
 service:</p>
-<p> <pre class=codehilite><code class=language-php>function ($container) {
+<pre><code class="language-php">function ($container) {
     return new SomeServiceObject($container-&gt;get('Application\Db\ReadOnlyAdapter'));
-}</code></pre></p>
+}
+</code></pre>
+
 <h3>Using the <code>AdapterAbstractServiceFactory</code> as a Factory</h3>
 <p>Depending on what application container you use, abstract factories may not be
 available. Alternately, you may want to reduce lookup time when retrieving an
@@ -545,7 +559,7 @@ zend-servicemanager abstract factories work as factories in their own right, and
 are passed the service name as an argument, allowing them to vary their return
 value based on requested service name. As such, you can add the following
 service configuration as well:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Db\Adapter\AdapterAbstractServiceFactory;
+<pre><code class="language-php">use Zend\Db\Adapter\AdapterAbstractServiceFactory;
 
 // If using zend-mvc:
 // In module/YourModule/config/module.config.php
@@ -560,7 +574,8 @@ service configuration as well:</p>
     'factories' =&gt; [
         'Application\Db\WriteAdapter' =&gt; AdapterAbstractServiceFactory::class,
     ],
-],</code></pre></p>
+],
+</code></pre>
 
 
 
@@ -887,7 +902,7 @@ service configuration as well:</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -895,10 +910,10 @@ service configuration as well:</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -906,27 +921,28 @@ service configuration as well:</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'Tutorials';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

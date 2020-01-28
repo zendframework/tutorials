@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn how to create zend-mvc applications, get in-depth guides into components, and discover how to migrate your applications to version 3!">  
-    <link rel="canonical" href="https://docs.zendframework.com/tutorials/navigation/">
+    <link rel="canonical" href="https://docs.zendframework.com/navigation/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Adding zend-navigation to the Album Module - Tutorials - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -360,9 +360,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/tutorials/">laminas/tutorials.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -456,7 +456,7 @@ In order to make this change, we need to undo some work we did earlier.
 Currently, navigating to the root of your app (<code>/</code>) routes you to the
 <code>AlbumController</code>'s default action. Let's undo this route change so we have two
 discrete entry points to the app, a home page, and an albums area.</p>
-<p> <pre class=codehilite><code class=language-php>// In module/Application/config/module.config.php:
+<pre><code class="language-php">// In module/Application/config/module.config.php:
 'home' =&gt; [
    'type' =&gt; Literal::class,
     'options' =&gt; [
@@ -466,7 +466,9 @@ discrete entry points to the app, a home page, and an albums area.</p>
             'action'     =&gt; 'index',
         ],
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>(You can also now remove the import for the <code>Album\Controller\AlbumController</code>
 class.)</p>
 <p>This change means that if you go to the home page of your application
@@ -476,7 +478,9 @@ available at the <code>/album</code> route.</p>
 <h2 id="setting-up-zend-navigation">Setting Up zend-navigation</h2>
 <p>First, we need to install zend-navigation. From your root directory, execute the
 following:</p>
-<p> <pre class=codehilite><code class=language-bash>$ composer require zendframework/zend-navigation</code></pre></p>
+<pre><code class="language-bash">$ composer require zendframework/zend-navigation
+</code></pre>
+
 <p>Assuming you followed the <a href="../getting-started/overview/">Getting Started tutorial</a>,
 you will be prompted by the <a href="https://zendframework.github.io/zend-component-installer">zend-component-installer</a>
 plugin to inject <code>Zend\Navigation</code>; be sure to select the option for either
@@ -495,13 +499,14 @@ configuration manually. You can do this in one of two ways:</p>
 <li>Alternately, add a new file, <code>config/autoload/navigation.global.php</code>, with
   the following contents:</li>
 </ul>
-<p>```php
-  &lt;?php
-  use Zend\Navigation\ConfigProvider;</p>
-<p>return [
-      'service_manager' =&gt; (new ConfigProvider())-&gt;getDependencyConfig(),
-  ];
-  ```</p>
+<pre class=codehilite><code class=language-php>
+&lt;?php
+use Zend\Navigation\ConfigProvider;
+
+return [
+    'service_manager' =&gt; (new ConfigProvider())-&gt;getDependencyConfig(),
+];
+</code></pre>
 </blockquote>
 <p>Once installed, our application is now aware of zend-navigation, and even has
 some default factories in place, which we will now make use of.</p>
@@ -509,7 +514,7 @@ some default factories in place, which we will now make use of.</p>
 <p>Next up, we need zend-navigation to understand the hierarchy of our site.
 To do this, we can add a <code>navigation</code> key to our configuration, with the site
 structure details. We'll do that in the <code>Application</code> module configuration:</p>
-<p> <pre class=codehilite><code class=language-php>// in module/Application/config/module.config.php:
+<pre><code class="language-php">// in module/Application/config/module.config.php:
 return [
     /* ... */
 
@@ -544,7 +549,9 @@ return [
     ],
 
     /* ... */
-];</code></pre></p>
+];
+</code></pre>
+
 <p>This configuration maps out the pages we've defined in our Album module, with
 labels linking to the given route names and actions. You can define highly complex
 hierarchical sites here with pages and sub-pages linking to route names,
@@ -554,16 +561,18 @@ controller/action pairs, or external uris. For more information, see the
 <p>Now that we have the navigation helper configured by our service manager and
 merged config, we can add the menu to the title bar to our layout by
 using the <a href="https://zendframework.github.io/zend-navigation/helpers/menu/">menu view helper</a>:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+<pre><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
 &lt;div class=&quot;collapse navbar-collapse&quot;&gt;
     &lt;?php // add this: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')-&gt;menu() ?&gt;
-&lt;/div&gt;</code></pre></p>
+&lt;/div&gt;
+</code></pre>
+
 <p>The navigation helper is provided by default with zend-view, and uses the service
 manager configuration we've already defined to configure itself automatically.
 Refreshing your application, you will see a working menu; with just a few tweaks
 however, we can make it look even better:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+<pre><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
 &lt;div class=&quot;collapse navbar-collapse&quot;&gt;
     &lt;?php // update to: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')
@@ -571,7 +580,9 @@ however, we can make it look even better:</p>
         -&gt;setMinDepth(0)
         -&gt;setMaxDepth(0)
         -&gt;setUlClass('nav navbar-nav') ?&gt;
-&lt;/div&gt;</code></pre></p>
+&lt;/div&gt;
+</code></pre>
+
 <p>Here we tell the renderer to give the root <code>&lt;ul&gt;</code> the class of <code>nav</code> (so that
 Bootstrap styles the menu correctly), and only render the first level of any
 given page. If you view your application in your browser, you will now see a
@@ -586,19 +597,21 @@ add breadcrumbs above the main content pane, so our users know exactly
 where they are in our website. Inside the container <code>&lt;div&gt;</code>, before we
 output the content from the view, let's add a breadcrumb by using the
 <a href="https://zendframework.github.io/zend-navigation/helpers/breadcrumbs/">breadcrumbs view helper</a>.</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php // module/Application/view/layout/layout.phtml: ?&gt;
+<pre><code class="language-php">&lt;?php // module/Application/view/layout/layout.phtml: ?&gt;
 &lt;div class=&quot;container&quot;&gt;
     &lt;?php // add the following line: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')-&gt;breadcrumbs()-&gt;setMinDepth(0) ?&gt;
     &lt;?= $this-&gt;content ?&gt;
-&lt;/div&gt;</code></pre></p>
+&lt;/div&gt;
+</code></pre>
+
 <p>This adds a simple but functional breadcrumb to every page (we tell it to render
 from a depth of 0 so we see all page levels), but we can do better than that!
 Because Bootstrap has a styled breadcrumb as part of its base CSS, let's add
 a partial that outputs the <code>&lt;ul&gt;</code> using Bootstrap styles. We'll create it in the
 <code>view</code> directory of the <code>Application</code> module (this partial is application wide,
 rather than album specific):</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php // in module/Application/view/partial/breadcrumb.phtml: ?&gt;
+<pre><code class="language-php">&lt;?php // in module/Application/view/partial/breadcrumb.phtml: ?&gt;
 &lt;ul class=&quot;breadcrumb&quot;&gt;
     &lt;?php
     // iterate through the pages
@@ -618,12 +631,14 @@ rather than album specific):</p>
             &lt;?php endif; ?&gt;
         &lt;/li&gt;
     &lt;?php endforeach; ?&gt;
-&lt;/ul&gt;</code></pre></p>
+&lt;/ul&gt;
+</code></pre>
+
 <p>Notice how the partial is passed a <code>Zend\View\Model\ViewModel</code> instance with the
 <code>pages</code> property set to an array of pages to render.</p>
 <p>Now we need to tell the breadcrumb helper to use the partial we have just
 written:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
+<pre><code class="language-php">&lt;?php // in module/Application/view/layout/layout.phtml: ?&gt;
 &lt;div class=&quot;container&quot;&gt;
     &lt;?php // Update to: ?&gt;
     &lt;?= $this-&gt;navigation('navigation')
@@ -631,7 +646,9 @@ written:</p>
             -&gt;setMinDepth(0)
             -&gt;setPartial('partial/breadcrumb') ?&gt;
     &lt;?= $this-&gt;content ?&gt;
-&lt;/div&gt;</code></pre></p>
+&lt;/div&gt;
+</code></pre>
+
 <p>Refreshing the page now gives us a styled set of breadcrumbs on each page.</p>
 
 
@@ -959,7 +976,7 @@ written:</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -967,10 +984,10 @@ written:</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -978,27 +995,28 @@ written:</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'Tutorials';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

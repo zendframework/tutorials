@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn how to create zend-mvc applications, get in-depth guides into components, and discover how to migrate your applications to version 3!">  
-    <link rel="canonical" href="https://docs.zendframework.com/tutorials/in-depth-guide/understanding-routing/">
+    <link rel="canonical" href="https://docs.zendframework.com/in-depth-guide/understanding-routing/">
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>Understanding the Router - Tutorials - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -360,9 +360,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/tutorials/">laminas/tutorials.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -463,7 +463,7 @@ a specific string. Examples of URLs that can utilize literal routes include:</p>
 the "defaults" to return on a match. The "defaults" are then returned as route
 match parameters; one use case for these is to specify the controller to invoke
 and the action method on that controller to use. As an example:</p>
-<p> <pre class=codehilite><code class=language-php>'router' =&gt; [
+<pre><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'about' =&gt; [
             'type' =&gt; \Zend\Router\Http\Literal::class,
@@ -476,7 +476,9 @@ and the action method on that controller to use. As an example:</p>
             ],
         ],
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <h3>Segment routes</h3>
 <p>Segment routes allow you to define routes with variable parameters; a common use
 case is for specifying an identifier in the path.  Examples of URLs that might
@@ -509,7 +511,7 @@ The primary differences are:</p>
 <p>As an example, let's consider a route where we want to specify a variable "year"
 segment, and indicate that the segment must contain exactly four digits; when
 matched, we should use the <code>ArchiveController</code> and its <code>byYear</code> action:</p>
-<p> <pre class=codehilite><code class=language-php>'router' =&gt; [
+<pre><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'archives' =&gt; [
             'type' =&gt; \Zend\Router\Http\Segment::class,
@@ -526,7 +528,9 @@ matched, we should use the <code>ArchiveController</code> and its <code>byYear</
             ],
         ],
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>This configuration defines a route for a URL such as
 <code>//example.com/news/archive/2014</code>. The route contains the variable segment
 <code>:year</code>, which has a regex constraint defined as <code>\d{4}</code>, indicating it will
@@ -556,7 +560,7 @@ When writing these routes you have two options:</p>
 <h3>Generic routes</h3>
 <p>A generic route is greedy, and will match as many URLs as possible.
 A common approach is to write a route that matches the controller and action:</p>
-<p> <pre class=codehilite><code class=language-php>'router' =&gt; [
+<pre><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'default' =&gt; [
             'type' =&gt; \Zend\Router\Http\Segment::class,
@@ -573,7 +577,9 @@ A common approach is to write a route that matches the controller and action:</p
             ],
         ],
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>Let's take a closer look as to what has been defined in this configuration. The
 <code>route</code> part now contains two optional parameters, <code>controller</code> and <code>action</code>.
 The <code>action</code> parameter is optional only when the <code>controller</code> parameter is
@@ -605,7 +611,7 @@ as an attacker could use this fact to launch a Denial of Service.</p>
 <p>By now, you should be convinced that generic routes, while nice for prototyping,
 should likely be avoided. That means defining explicit routes.</p>
 <p>Your initial approach might be to create one route for every permutation:</p>
-<p> <pre class=codehilite><code class=language-php>'router' =&gt; [
+<pre><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'news' =&gt; [
             'type' =&gt; \Zend\Router\Http\Literal::class,
@@ -644,7 +650,9 @@ should likely be avoided. That means defining explicit routes.</p>
             ],
         ],
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>Routing is done as a stack, meaning last in, first out (LIFO). The trick is to
 define your most general routes first, and your most specific routes last. In
 the example above, our most general route is a literal match against the path
@@ -674,7 +682,7 @@ several optimizations:</p>
 </ul>
 <p>Let's take a look at a child routes configuration using the same example as
 above:</p>
-<p> <pre class=codehilite><code class=language-php>'router' =&gt; [
+<pre><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'news' =&gt; [
             // First we define the basic options for the parent route:
@@ -720,7 +728,9 @@ above:</p>
             ],
         ],
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>At its most basic, we define a parent route as normal, and then add an
 additional key, <code>child_routes</code>, which is normal routing configuration for
 additional routes to match if the parent route matches.</p>
@@ -760,7 +770,7 @@ only a single blog entry based on internal identifier.  Given that ID is a
 variable parameter, we need a segment route. Furthermore, we know that the route
 will also match against the same <code>/blog</code> path prefix, so we can define it as a
 child route of our existing route. Let's update our configuration:</p>
-<p> <pre class=codehilite><code class=language-php>// In module/Blog/config/module.config.php:
+<pre><code class="language-php">// In module/Blog/config/module.config.php:
 namespace Blog;
 
 use Zend\Router\Http\Literal;
@@ -800,14 +810,16 @@ return [
         ],
     ],
     'view_manager'    =&gt; [ /* ... */ ],
-];</code></pre></p>
+];
+</code></pre>
+
 <p>With this we have set up a new route that we use to display a single blog entry.
 The route defines a parameter, <code>id</code>, which needs to be a sequence of 1 or more
 positive digits, not beginning with 0.</p>
 <p>The route will call the same <code>controller</code> as the parent route, but using
 the <code>detailAction()</code> method instead. Go to your browser and request the URL
 <code>http://localhost:8080/blog/2</code>; you'll see the following error message:</p>
-<p> <pre class=codehilite><code class=language-text>A 404 error occurred
+<pre><code class="language-text">A 404 error occurred
 
 Page not found.
 
@@ -816,12 +828,14 @@ The requested controller was unable to dispatch the request.
 Controller:
 Blog\Controller\ListController
 
-No Exception available</code></pre></p>
+No Exception available
+</code></pre>
+
 <p>This is due to the fact that the controller tries to access the
 <code>detailAction()</code>, which does not yet exist. We'll create this action now; go to
 your <code>ListController</code> and add the following action, which will return an empty
 view model</p>
-<p> <pre class=codehilite><code class=language-php>// In module/Blog/src/Controller/ListController.php:
+<pre><code class="language-php">// In module/Blog/src/Controller/ListController.php:
 
 /* .. */
 
@@ -833,13 +847,15 @@ class ListController extends AbstractActionController
     {
         return new ViewModel();
     }
-}</code></pre></p>
+}
+</code></pre>
+
 <p>Refresh your browser, which should result in the familiar message that a template
 was unable to be rendered.</p>
 <p>Let's create this template now and assume that we will get a <code>Post</code> instance
 passed to the template to see the details of our blog. Create a new view file
 under <code>module/Blog/view/blog/list/detail.phtml</code>:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;h1&gt;Post Details&lt;/h1&gt;
+<pre><code class="language-php">&lt;h1&gt;Post Details&lt;/h1&gt;
 
 &lt;dl&gt;
     &lt;dt&gt;Post Title&lt;/dt&gt;
@@ -847,24 +863,28 @@ under <code>module/Blog/view/blog/list/detail.phtml</code>:</p>
 
     &lt;dt&gt;Post Text&lt;/dt&gt;
     &lt;dd&gt;&lt;?= $this-&gt;escapeHtml($this-&gt;post-&gt;getText()) ?&gt;&lt;/dd&gt;
-&lt;/dl&gt;</code></pre></p>
+&lt;/dl&gt;
+</code></pre>
+
 <p>The above template is expecting a <code>$post</code> variable referencing a <code>Post</code> instance
 in the view model. We'll now update the <code>ListController</code> to provide that:</p>
-<p> <pre class=codehilite><code class=language-php>public function detailAction()
+<pre><code class="language-php">public function detailAction()
 {
     $id = $this-&gt;params()-&gt;fromRoute('id');
 
     return new ViewModel([
         'post' =&gt; $this-&gt;postRepository-&gt;findPost($id),
     ]);
-}</code></pre></p>
+}
+</code></pre>
+
 <p>If you refresh your application now, you'll see the details for our <code>Post</code> are
 displayed. However, there is one problem with what we have done: while we
 have our repository set up to throw an <code>InvalidArgumentException</code> when no post
 is found matching a given identifier, we do not check for it in our controller.</p>
 <p>Go to your browser and open the URL <code>http://localhost:8080/blog/99</code>; you will
 see the following error message:</p>
-<p> <pre class=codehilite><code class=language-text>An error occurred
+<pre><code class="language-text">An error occurred
 
 An error occurred during execution; please try again later.
 
@@ -875,14 +895,18 @@ File:
 {projectPath}/module/Blog/src/Model/ZendDbSqlRepository.php:{lineNumber}
 
 Message:
-Blog post with identifier &quot;99&quot; not found.</code></pre></p>
+Blog post with identifier &quot;99&quot; not found.
+</code></pre>
+
 <p>This is kind of ugly, so our <code>ListController</code> should be prepared to do something
 whenever an <code>InvalidArgumentException</code> is thrown by the <code>PostService</code>. Let's
 have the controller redirect to the blog post overview.</p>
 <p>First, add a new import to the <code>ListController</code> class file:</p>
-<p> <pre class=codehilite><code class=language-php>use InvalidArgumentException;</code></pre></p>
+<pre><code class="language-php">use InvalidArgumentException;
+</code></pre>
+
 <p>Now add the following try-catch statement to the <code>detailAction()</code> method:</p>
-<p> <pre class=codehilite><code class=language-php>public function detailAction()
+<pre><code class="language-php">public function detailAction()
 {
     $id = $this-&gt;params()-&gt;fromRoute('id');
 
@@ -895,7 +919,9 @@ have the controller redirect to the blog post overview.</p>
     return new ViewModel([
         'post' =&gt; $post,
     ]);
-}</code></pre></p>
+}
+</code></pre>
+
 <p>Now whenever a user requests an invalid identifier, you'll be redirected to the
 route <code>blog</code>, which is our list of blog posts!</p>
 
@@ -1224,7 +1250,7 @@ route <code>blog</code>, which is our list of blog posts!</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -1232,10 +1258,10 @@ route <code>blog</code>, which is our list of blog posts!</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -1243,27 +1269,28 @@ route <code>blog</code>, which is our list of blog posts!</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '../..',
             siteName = 'Tutorials';
     </script>
-    <script src="../../js/scripts-8d7ae56abf.js"></script>
-        <script src="../../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

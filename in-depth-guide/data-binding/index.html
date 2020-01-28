@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn how to create zend-mvc applications, get in-depth guides into components, and discover how to migrate your applications to version 3!">  
-    <link rel="canonical" href="https://docs.zendframework.com/tutorials/in-depth-guide/data-binding/">
+    <link rel="canonical" href="https://docs.zendframework.com/in-depth-guide/data-binding/">
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>Editing and Deleting Data - Tutorials - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -360,9 +360,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/tutorials/">laminas/tutorials.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -480,7 +480,7 @@ bind it to the form. To do this, we will need to:</p>
 <li>We will add the <code>editAction()</code> implementation.</li>
 </ul>
 <p>The final result will look like the following:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php
+<pre><code class="language-php">&lt;?php
 // In module/Blog/src/Controller/WriteController.php:
 
 namespace Blog\Controller;
@@ -589,7 +589,9 @@ class WriteController extends AbstractActionController
             ['id' =&gt; $post-&gt;getId()]
         );
     }
-}</code></pre></p>
+}
+</code></pre>
+
 <p>The primary differences between <code>addAction()</code> and <code>editAction()</code> are that the
 latter needs to first fetch a <code>Post</code>, and this post is <em>bound</em> to the form. By
 binding it, we ensure that the data is populated in the form for the initial
@@ -597,10 +599,12 @@ display, and, once validated, the same instance is updated. This means that we
 can omit the call to <code>getData()</code> after validating the form.</p>
 <p>Now we need to update our <code>WriteControllerFactory</code>. First, add a new import
 statement to it:</p>
-<p> <pre class=codehilite><code class=language-php>// In module/Blog/src/Factory/WriteControllerFactory.php:
-use Blog\Model\PostRepositoryInterface;</code></pre></p>
+<pre><code class="language-php">// In module/Blog/src/Factory/WriteControllerFactory.php:
+use Blog\Model\PostRepositoryInterface;
+</code></pre>
+
 <p>Next, update the body of the factory to read as follows:</p>
-<p> <pre class=codehilite><code class=language-php>// In module/Blog/src/Factory/WriteControllerFactory.php:
+<pre><code class="language-php">// In module/Blog/src/Factory/WriteControllerFactory.php:
 public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
 {
     $formManager = $container-&gt;get('FormElementManager');
@@ -610,7 +614,9 @@ public function __invoke(ContainerInterface $container, $requestedName, array $o
         $formManager-&gt;get(PostForm::class),
         $container-&gt;get(PostRepositoryInterface::class)
     );
-}</code></pre></p>
+}
+</code></pre>
+
 <p>The controller and model are now wired together, so it's time to turn to
 routing.</p>
 <h2 id="adding-the-edit-route">Adding the edit route</h2>
@@ -621,7 +627,7 @@ with two exceptions:</p>
 <li>it will route to our <code>WriteController</code></li>
 </ul>
 <p>Update the 'blog' <code>child_routes</code> to add the new route:</p>
-<p> <pre class=codehilite><code class=language-php>// In module/Blog/config/module.config.php:
+<pre><code class="language-php">// In module/Blog/config/module.config.php:
 
 use Zend\Router\Http\Segment;
 
@@ -654,7 +660,9 @@ return [
         ],
     ],
     'view_manager'    =&gt; [ /* ... */ ],
-];</code></pre></p>
+];
+</code></pre>
+
 <h2 id="creating-the-edit-template">Creating the edit template</h2>
 <p>Rendering the form remains essentially the same between the <code>add</code> and <code>edit</code>
 templates; the only difference between them is the form action. As such, we will
@@ -662,7 +670,7 @@ create a new <em>partial</em> script for the form, update the <code>add</code> t
 and create a new <code>edit</code> template.</p>
 <p>Create a new file, <code>module/Blog/view/blog/write/form.phtml</code>, with the following
 contents:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php
+<pre><code class="language-php">&lt;?php
 $form = $this-&gt;form;
 $fieldset = $form-&gt;get('post');
 
@@ -700,10 +708,12 @@ echo $this-&gt;form()-&gt;openTag($form);
 &lt;?php
 echo $this-&gt;formSubmit($submit);
 echo $this-&gt;formHidden($fieldset-&gt;get('id'));
-echo $this-&gt;form()-&gt;closeTag();</code></pre></p>
+echo $this-&gt;form()-&gt;closeTag();
+</code></pre>
+
 <p>Now, update the <code>add</code> template, <code>module/Blog/view/write/add.phtml</code> to read as
 follows:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;h1&gt;Add a blog post&lt;/h1&gt;
+<pre><code class="language-php">&lt;h1&gt;Add a blog post&lt;/h1&gt;
 
 &lt;?php
 $form = $this-&gt;form;
@@ -711,12 +721,14 @@ $form-&gt;setAttribute('action', $this-&gt;url());
 echo $this-&gt;partial('blog/write/form', [
     'form' =&gt; $form,
     'submitLabel' =&gt; 'Insert new post',
-]);</code></pre></p>
+]);
+</code></pre>
+
 <p>The above retrieves the form, sets the form action, provides a
 context-appropriate label for the submit button, and renders it with our new
 partial view script.</p>
 <p>Next in line is the creation of the new template, <code>blog/write/edit</code>:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;h1&gt;Edit blog post&lt;/h1&gt;
+<pre><code class="language-php">&lt;h1&gt;Edit blog post&lt;/h1&gt;
 
 &lt;?php
 $form = $this-&gt;form;
@@ -724,7 +736,9 @@ $form-&gt;setAttribute('action', $this-&gt;url('blog/edit', [], true));
 echo $this-&gt;partial('blog/write/form', [
     'form' =&gt; $form,
     'submitLabel' =&gt; 'Update post',
-]);</code></pre></p>
+]);
+</code></pre>
+
 <p>The three differences between the <code>add</code> and <code>edit</code> templates are:</p>
 <ul>
 <li>The heading at the top of the page.</li>
@@ -739,12 +753,14 @@ view, however. zend-router allows another option, however: you can tell it to
 re-use currently matched parameters.  This is done by setting the last parameter
 of the view-helper to <code>true</code>: <code>$this-&gt;url('blog/edit', [], true)</code>.</p>
 <p>If you try and update the post, you will receive the following error:</p>
-<p> <pre class=codehilite><code class=language-text>Call to member function getId() on null</code></pre></p>
+<pre><code class="language-text">Call to member function getId() on null
+</code></pre>
+
 <p>That is because we have not yet implemented the update functionality in
 our command class which will return a Post object on success. Let's do that now.</p>
 <p>Edit the file <code>module/Blog/src/Model/ZendDbSqlCommand.php</code>, and update the
 <code>updatePost()</code> method to read as follows:</p>
-<p> <pre class=codehilite><code class=language-php>public function updatePost(Post $post)
+<pre><code class="language-php">public function updatePost(Post $post)
 {
     if (! $post-&gt;getId()) {
         throw new RuntimeException('Cannot update post; missing identifier');
@@ -768,7 +784,9 @@ our command class which will return a Post object on success. Let's do that now.
     }
 
     return $post;
-}</code></pre></p>
+}
+</code></pre>
+
 <p>This looks very similar to the <code>insertPost()</code> implementation we did earlier. The
 primary difference is the usage of the <code>Update</code> class; instead of calling a
 <code>values()</code> method on it, we call:</p>
@@ -784,7 +802,7 @@ success.</p>
 <h2 id="implementing-the-delete-functionality">Implementing the delete functionality</h2>
 <p>Last but not least, it's time to delete some data. We start this process by
 implementing the <code>deletePost()</code> method in our <code>ZendDbSqlCommand</code> class:</p>
-<p> <pre class=codehilite><code class=language-php>// In module/Blog/src/Model/ZendDbSqlCommand.php:
+<pre><code class="language-php">// In module/Blog/src/Model/ZendDbSqlCommand.php:
 
 public function deletePost(Post $post)
 {
@@ -804,13 +822,15 @@ public function deletePost(Post $post)
     }
 
     return true;
-}</code></pre></p>
+}
+</code></pre>
+
 <p>The above uses <code>Zend\Db\Sql\Delete</code> to create the SQL necessary to delete the
 post with the given identifier, which we then execute.</p>
 <p>Next, let's create a new controller, <code>Blog\Controller\DeleteController</code>, in a
 new file <code>module/Blog/src/Controller/DeleteController.php</code>, with the following
 contents:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php
+<pre><code class="language-php">&lt;?php
 namespace Blog\Controller;
 
 use Blog\Model\Post;
@@ -871,7 +891,9 @@ class DeleteController extends AbstractActionController
         $post = $this-&gt;command-&gt;deletePost($post);
         return $this-&gt;redirect()-&gt;toRoute('blog');
     }
-}</code></pre></p>
+}
+</code></pre>
+
 <p>Like the <code>WriteController</code>, it composes both our <code>PostRepositoryInterface</code> and
 <code>PostCommandInterface</code>. The former is used to ensure we are referencing a valid
 post instance, and the latter to perform the actual deletion.</p>
@@ -883,7 +905,7 @@ blog listing page.</p>
 <p>Like the other controllers, we now need a factory. Create the file
 <code>module/Blog/src/Factory/DeleteControllerFactory.php</code> with the following
 contents:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php
+<pre><code class="language-php">&lt;?php
 namespace Blog\Factory;
 
 use Blog\Controller\DeleteController;
@@ -907,21 +929,25 @@ class DeleteControllerFactory implements FactoryInterface
             $container-&gt;get(PostRepositoryInterface::class)
         );
     }
-}</code></pre></p>
+}
+</code></pre>
+
 <p>We'll now wire this into the application, mapping the controller to its factory,
 and providing a new route. Open the file <code>module/Blog/config/module.config.php</code>
 and make the following edits.</p>
 <p>First, map the controller to its factory:</p>
-<p> <pre class=codehilite><code class=language-php>'controllers' =&gt; [
+<pre><code class="language-php">'controllers' =&gt; [
     'factories' =&gt; [
         Controller\ListController::class =&gt; Factory\ListControllerFactory::class,
         Controller\WriteController::class =&gt; Factory\WriteControllerFactory::class,
         // Add the following line:
         Controller\DeleteController::class =&gt; Factory\DeleteControllerFactory::class,
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>Now add another child route to our "blog" route:</p>
-<p> <pre class=codehilite><code class=language-php>'router' =&gt; [
+<pre><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'blog' =&gt; [
             /* ... */
@@ -945,10 +971,12 @@ and make the following edits.</p>
             ],
         ],
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>Finally, we'll create a new view script,
 <code>module/Blog/view/blog/delete/delete.phtml</code>, with the following contents:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;h1&gt;Delete post&lt;/h1&gt;
+<pre><code class="language-php">&lt;h1&gt;Delete post&lt;/h1&gt;
 
 &lt;p&gt;Are you sure you want to delete the following post?&lt;/p&gt;
 
@@ -960,7 +988,9 @@ and make the following edits.</p>
     &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;&lt;?= $this-&gt;escapeHtmlAttr($this-&gt;post-&gt;getId()) ?&gt;&quot; /&gt;
     &lt;input class=&quot;btn btn-default&quot; type=&quot;submit&quot; name=&quot;confirm&quot; value=&quot;Cancel&quot; /&gt;
     &lt;input class=&quot;btn btn-danger&quot; type=&quot;submit&quot; name=&quot;confirm&quot; value=&quot;Delete&quot; /&gt;
-&lt;/form&gt;</code></pre></p>
+&lt;/form&gt;
+</code></pre>
+
 <p>This time around, we're not using zend-form; as it consists of just a hidden
 element and cancel/confirm buttons, there's no need to provide an OOP model for it.</p>
 <p>From here, you can now visit one of the existing blog posts, e.g.,
@@ -984,7 +1014,7 @@ determine if the edit and delete links will be displayed; we'll leave that for
 another tutorial, however.</p>
 <p>Open your <code>module/Blog/view/blog/list/index.phtml</code> file, and update it to read
 as follows:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;h1&gt;Blog Posts&lt;/h1&gt;
+<pre><code class="language-php">&lt;h1&gt;Blog Posts&lt;/h1&gt;
 
 &lt;div class=&quot;list-group&quot;&gt;
 &lt;?php foreach ($this-&gt;posts as $post): ?&gt;
@@ -1005,7 +1035,9 @@ as follows:</p>
 
 &lt;div class=&quot;btn-group&quot; role=&quot;group&quot; aria-label=&quot;Post actions&quot;&gt;
   &lt;a class=&quot;btn btn-primary&quot; href=&quot;&lt;?= $this-&gt;url('blog/add') ?&gt;&quot;&gt;Write new post&lt;/a&gt;
-&lt;/div&gt;</code></pre></p>
+&lt;/div&gt;
+</code></pre>
+
 <p>At this point, we have a far more functional blog, as we can move around between
 pages using links and buttons.</p>
 <h2 id="summary">Summary</h2>
@@ -1348,7 +1380,7 @@ during the course of this tutorial.</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -1356,10 +1388,10 @@ during the course of this tutorial.</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -1367,27 +1399,28 @@ during the course of this tutorial.</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '../..',
             siteName = 'Tutorials';
     </script>
-    <script src="../../js/scripts-8d7ae56abf.js"></script>
-        <script src="../../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

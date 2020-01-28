@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn how to create zend-mvc applications, get in-depth guides into components, and discover how to migrate your applications to version 3!">  
-    <link rel="canonical" href="https://docs.zendframework.com/tutorials/getting-started-with-zend-studio/the-application/">
+    <link rel="canonical" href="https://docs.zendframework.com/getting-started-with-zend-studio/the-application/">
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>The MyTaskList application - Tutorials - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -360,9 +360,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/tutorials/">laminas/tutorials.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -501,7 +501,7 @@ will suffice with the following fields:</p>
 <p>We are going to use MySQL, via PHP's PDO driver, so create a database called
 <code>mytasklist</code> using your preferred MySQL client, and run these SQL statements to
 create the <code>task_item</code> table and some sample data:</p>
-<p> <pre class=codehilite><code class=language-sql>CREATE TABLE task_item (
+<pre><code class="language-sql">CREATE TABLE task_item (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
     completed TINYINT NOT NULL DEFAULT '0',
@@ -516,7 +516,9 @@ INSERT INTO task_item (title, completed, created)
 INSERT INTO task_item (title, completed, created)
     VALUES ('Book hotel', 0, NOW());
 INSERT INTO task_item (title, completed, created)
-    VALUES ('Enjoy conference', 0, NOW());</code></pre></p>
+    VALUES ('Enjoy conference', 0, NOW());
+</code></pre>
+
 <p>Note that if you have Zend Studio, you can use the built-in Database
 Connectivity features. This if found in the Database Development perspective
 (Window | Open Perspective | Other | Database Development menu item) and further
@@ -636,7 +638,7 @@ called <code>checklist</code> set up for us.</p>
 <h3>Routing</h3>
 <p>The default route provided for us isn't quite what we need. The <code>checklist</code>
 route is defined like this:</p>
-<p> <pre class=codehilite><code class=language-php>// Inside module/Checklist/src/config/module.config.php:
+<pre><code class="language-php">// Inside module/Checklist/src/config/module.config.php:
 
 'router' =&gt; [
     'routes' =&gt; [
@@ -659,7 +661,9 @@ route is defined like this:</p>
                     ],
                 ],
             ],
-        ],</code></pre></p>
+        ],
+</code></pre>
+
 <p>This defines a main route called <code>checklist</code>, which maps the URL <code>/task</code> to the
 index action of the Task controller and then there is a child route called
 <code>default</code> which maps <code>/task/{controller name}/{action name}</code> to the <code>{action
@@ -673,7 +677,7 @@ single <code>Segment</code> type route that can handle actions as well as just r
 index action</p>
 <p>Open <code>module/Checklist/config/module.config.php</code> in Zend Studio and change the
 entire router section of the array to be:</p>
-<p> <pre class=codehilite><code class=language-php>'router' =&gt; [
+<pre><code class="language-php">'router' =&gt; [
     'routes' =&gt; [
         'task' =&gt; [
             'type'    =&gt; \Zend\Router\Http\Segment::class,
@@ -691,7 +695,9 @@ entire router section of the array to be:</p>
             ],
         ],
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>We have now renamed the route to task and have set it up as a <code>Segment</code> route
 with two optional parameters in the URL: <code>action</code> and <code>id</code>. We have set a
 default of <code>index</code> for the <code>action</code>, so that if the URL is simply <code>/task</code>, then
@@ -722,7 +728,7 @@ service, <code>AbstractRestfulController</code> may be useful.</p>
 with two action methods in it: <code>indexAction()</code> and <code>fooAction()</code>. Remove the
 <code>fooAction()</code> method and the default "Copyright Zend" DocBlock comment at the
 top of the file. Your controller should now look like this:</p>
-<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Controller/TaskController.php:
+<pre><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
 
 namespace Checklist\Controller;
 
@@ -735,7 +741,9 @@ class TaskController extends AbstractActionController
         return [];
     }
 
-}</code></pre></p>
+}
+</code></pre>
+
 <p>This controller now contains the action for the home page which will display our
 list of to-do items. We now need to create a model-layer that can retrieve the
 tasks from the database for display.</p>
@@ -763,7 +771,7 @@ PHP File dialog, set the File Name to <code>TaskEntity.php</code> as shown and t
 Finish.</p>
 <p><img alt="image" src="../../images/getting-started-with-zend-studio.studio8.png" class="img-responsive"/></p>
 <p>This will create a blank PHP file. Update it so that it looks like this:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php
+<pre><code class="language-php">&lt;?php
 // In module/Checklist/src/Checklist/Model/TaskEntity.php:
 
 namespace Checklist\Model;
@@ -819,7 +827,9 @@ class TaskEntity
     {
       $this-&gt;created = $value;
     }
-}</code></pre></p>
+}
+</code></pre>
+
 <p>The <code>Task</code> entity is a simple PHP class with four properties with getter and
 setter methods for each property. We also have a constructor to fill in the
 <code>created</code> property. If you are using Zend Studio rather than Eclipse PDT, then
@@ -829,7 +839,7 @@ choosing <a href="http://files.zend.com/help/Zend-Studio-10/zend-studio.htm#crea
 the database and populating them with new data. Again, right click on the Model
 folder and choose New -&gt; PHP File and create a PHP file called
 <code>TaskMapper.php</code>. Update it so that it looks like this:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php
+<pre><code class="language-php">&lt;?php
 // In module/Checklist/src/Checklist/Model/TaskMapper.php:
 
 namespace Checklist\Model;
@@ -868,7 +878,9 @@ class TaskMapper
         $resultset-&gt;initialize($results);
         return $resultset;
     }
-}</code></pre></p>
+}
+</code></pre>
+
 <p>Within this mapper class we have implemented the <code>fetchAll()</code> method and a
 constructor. There's quite a lot going on here as we're dealing with the
 <code>Zend\Db</code> component, so let's break it down. Firstly we have the constructor
@@ -911,7 +923,7 @@ be instantiated or create a factory (closure or callback) method that
 instantiates the object when the Service Manager needs it. We start by
 implementing getServiceConfig() and write a closure that creates a <code>TaskMapper</code>
 instance. Add this method to the <code>Module</code> class:</p>
-<p> <pre class=codehilite><code class=language-php>// In module/Checklist/Module.php:
+<pre><code class="language-php">// In module/Checklist/Module.php:
 
 use Checklist\Model\TaskMapper;
 use Zend\Db\Adapter\Adapter;
@@ -930,7 +942,9 @@ class Module
             ],
         ];
     }
-// ...</code></pre></p>
+// ...
+</code></pre>
+
 <p>Don't forget to add the additional import statements at the top of the file.</p>
 <p>The <code>getServiceConfig()</code> method returns an array of class creation definitions
 that are all merged together by the Module Manager before passing to the Service
@@ -958,12 +972,14 @@ configuration information to <code>global.php</code> which you should commit to 
 version control system.You can then use <code>local.php</code> (outside of the VCS) to
 store the credentials for your database.</p>
 <p>Open <code>config/autoload/global.php</code> and replace the empty array with:</p>
-<p> <pre class=codehilite><code class=language-php>return [
+<pre><code class="language-php">return [
     'db' =&gt; [
         'driver' =&gt; 'Pdo',
         'dsn'    =&gt; 'mysql:dbname=mytasklist;hostname=localhost;charset=utf8',
     ],
-];</code></pre></p>
+];
+</code></pre>
+
 <p>The <code>Zend\Db\Adapter\AdapterServiceFactory</code> registered by zend-db for creating a
 <code>Zend\Db\Adapter\Adapter</code> instance looks for a key called <code>db</code> in the
 configuration array and uses this to configure the database adapter. Therefore,
@@ -973,24 +989,28 @@ connect to the database. We do not want to store this in the version control
 system, so we store this in the <code>local.php</code> configuration file, which, by
 default, is ignored by git.</p>
 <p>Open <code>config/autoload/local.php</code> and replace the empty array with:</p>
-<p> <pre class=codehilite><code class=language-php>return [
+<pre><code class="language-php">return [
     'db' =&gt; [
         'username' =&gt; 'YOUR_USERNAME',
         'password' =&gt; 'YOUR_PASSWORD',
     ],
-];</code></pre></p>
+];
+</code></pre>
+
 <p>Obviously you should replace <code>YOUR_USERNAME</code> and <code>YOUR_PASSWORD</code> with the
 correct credentials.</p>
 <p>Now that the Service Manager can create a <code>TaskMapper</code> instance for us, we can
 add a method to the controller to retrieve it. Add <code>getTaskMapper()</code> to the
 <code>TaskController</code> class:</p>
-<p> <pre class=codehilite><code class=language-php>// In module/Checklist/src/Checklist/Controller/TaskController.php:
+<pre><code class="language-php">// In module/Checklist/src/Checklist/Controller/TaskController.php:
 
 public function getTaskMapper()
 {
     $sm = $this-&gt;getServiceLocator();
     return $sm-&gt;get('TaskMapper');
-}</code></pre></p>
+}
+</code></pre>
+
 <p>We can now call <code>getTaskMapper()</code> from within our controller whenever we need to
 interact with our model layer. Let's start with a list of tasks when the index
 action is called.</p>
@@ -1297,7 +1317,7 @@ action is called.</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -1305,10 +1325,10 @@ action is called.</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -1316,27 +1336,28 @@ action is called.</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '../..',
             siteName = 'Tutorials';
     </script>
-    <script src="../../js/scripts-8d7ae56abf.js"></script>
-        <script src="../../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

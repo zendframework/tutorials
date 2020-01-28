@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn how to create zend-mvc applications, get in-depth guides into components, and discover how to migrate your applications to version 3!">  
-    <link rel="canonical" href="https://docs.zendframework.com/tutorials/i18n/">
+    <link rel="canonical" href="https://docs.zendframework.com/i18n/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Internationalization - Tutorials - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -360,9 +360,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/tutorials/">laminas/tutorials.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -449,7 +449,9 @@ integration with zend-mvc via the <a href="https://zendframework.github.io/zend-
 component.</p>
 <h2 id="installation">Installation</h2>
 <p>Install zend-mvc-i18n via Composer:</p>
-<p> <pre class=codehilite><code class=language-bash>$ composer require zendframework/zend-mvc-i18n</code></pre></p>
+<pre><code class="language-bash">$ composer require zendframework/zend-mvc-i18n
+</code></pre>
+
 <p>Assuming you are using <a href="https://zendframework.github.io/zend-component-installer">zend-component-installer</a>
 (which is installed by default with the skeleton application), this will prompt
 you to install the component as a module in your application; make sure you
@@ -491,7 +493,7 @@ that provides:</p>
 <li>a file pattern for identifying the files to use</li>
 </ul>
 <p>As examples:</p>
-<p> <pre class=codehilite><code class=language-php>// in a module's module.config.php:
+<pre><code class="language-php">// in a module's module.config.php:
 'translator' =&gt; [
     'locale' =&gt; 'en_US',
     'translation_file_patterns' =&gt; [
@@ -513,7 +515,9 @@ that provides:</p>
             'pattern'  =&gt; '%s.mo',
         ],
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>Once the above configuration is in place, the translator will be active in your
 application, allowing you to use it.</p>
 <h2 id="translating-strings-in-templates">Translating strings in templates</h2>
@@ -523,7 +527,9 @@ and <a href="https://zendframework.github.io/zend-i18n/view-helpers/#translatepl
 view helpers allow you to provide translations within your view scripts.</p>
 <p>As an example, you might want to translate the string "All rights reserved" in
 your footer. You could do the following in your layout script:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;p&gt;&amp;copy; 2016 by Examples Ltd. &lt;?= $this-&gt;translate('All rights reserved') ?&gt;&lt;/p&gt;</code></pre></p>
+<pre><code class="language-php">&lt;p&gt;&amp;copy; 2016 by Examples Ltd. &lt;?= $this-&gt;translate('All rights reserved') ?&gt;&lt;/p&gt;
+</code></pre>
+
 <h2 id="translating-route-segments">Translating route segments</h2>
 <p>In order to enable route translation, you need to do two things:</p>
 <ul>
@@ -533,27 +539,33 @@ your footer. You could do the following in your layout script:</p>
 <p>To tell the application to use the translation-aware route class, we can update
 our routing configuration. Underneath the top-level <code>router</code> key, we'll add the
 <code>router_class</code> key:</p>
-<p> <pre class=codehilite><code class=language-php>// In a module.config.php file, or config/autoload/global.php:
+<pre><code class="language-php">// In a module.config.php file, or config/autoload/global.php:
 'router' =&gt; [
     'router_class' =&gt; Zend\Mvc\I18n\Router\TranslatorAwareTreeRouteStack::class,
     'routes' =&gt; [
         /* ... */
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>If you want to use an alternate text domain, you can do so via the
 <code>translator_text_domain</code> key, also directly below the <code>router</code> key:</p>
-<p> <pre class=codehilite><code class=language-php>// In a module.config.php file, or config/autoload/global.php:
+<pre><code class="language-php">// In a module.config.php file, or config/autoload/global.php:
 'router' =&gt; [
     'router_class' =&gt; Zend\Mvc\I18n\Router\TranslatorAwareTreeRouteStack::class,
     'translator_text_domain' =&gt; 'router',
     'routes' =&gt; [
         /* ... */
     ],
-],</code></pre></p>
+],
+</code></pre>
+
 <p>Now that the router is aware of translations, we can use translatable strings in
 our routes. To do so, surround the string capable of translation with braces
 (<code>{}</code>). As an example:</p>
-<p> <pre class=codehilite><code class=language-php>'route' =&gt; '/{login}',</code></pre></p>
+<pre><code class="language-php">'route' =&gt; '/{login}',
+</code></pre>
+
 <p>specifies the word "login" as translatable.</p>
 
 
@@ -881,7 +893,7 @@ our routes. To do so, surround the string capable of translation with braces
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -889,10 +901,10 @@ our routes. To do so, surround the string capable of translation with braces
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -900,27 +912,28 @@ our routes. To do so, surround the string capable of translation with braces
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'Tutorials';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

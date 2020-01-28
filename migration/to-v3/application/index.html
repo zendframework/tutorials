@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn how to create zend-mvc applications, get in-depth guides into components, and discover how to migrate your applications to version 3!">  
-    <link rel="canonical" href="https://docs.zendframework.com/tutorials/migration/to-v3/application/">
+    <link rel="canonical" href="https://docs.zendframework.com/migration/to-v3/application/">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
 
     <title>Applications - Tutorials - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../../../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -360,9 +360,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/tutorials/">laminas/tutorials.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -469,10 +469,12 @@ get the full set of components, at the latest 2.* versions.</p>
 <li>Installing each ZF component package you actually use in your application.</li>
 </ul>
 <p>The process would look like this:</p>
-<p> <pre class=codehilite><code class=language-bash>$ composer remove zendframework/zendframework
+<pre><code class="language-bash">$ composer remove zendframework/zendframework
 $ composer require zendframework/zend-component-installer
 $ composer require zendframework/zend-mvc
-# Repeat as necessary for components you use if not already installed</code></pre></p>
+# Repeat as necessary for components you use if not already installed
+</code></pre>
+
 <p>When you install zend-mvc, it will prompt you to add configuration for
 components; choose either <code>application.config.php</code> or <code>modules.config.php</code>, and
 re-use your selection for all other packages. This step ensures that the various
@@ -487,9 +489,9 @@ zend-mail, there's no reason to install them.</p>
 use in your application, you can upgrade your zendframework requirement. When
 you do, you should also install the zend-component-installer, to ensure that
 component configuration is properly injected in your application.</p>
-<p><pre class=codehilite><code class=language-bash>
+<pre class=codehilite><code class=language-bash>
 $ composer require zendframework/zend-component-installer &quot;zendframework/zendframework:^3.0&quot;
-</code></pre></p>
+</code></pre>
 <p>During installation, it will prompt you to add configuration for
 components; choose either <code>application.config.php</code> or <code>modules.config.php</code>, and
 re-use your selection for all other packages. This step ensures that the various
@@ -535,14 +537,16 @@ installed by default, nor recommended. Instead, we recommend using
 your application.</p>
 <p>As an example, if you are still defining the default <code>Application</code> module, you
 can add autoloading for it as follows in your project's <code>composer.json</code>:</p>
-<p> <pre class=codehilite><code class=language-json>&quot;autoload&quot;: {
+<pre><code class="language-json">&quot;autoload&quot;: {
     &quot;psr-4&quot;: {
         &quot;Application\\&quot;: &quot;module/Application/src/Application/&quot;
     },
     &quot;files&quot;:  [
         &quot;module/Application/Module.php&quot;
     ]
-}</code></pre></p>
+}
+</code></pre>
+
 <p>The above creates a <a href="http://www.php-fig.org/psr/psr-4/">PSR-4</a> autoloading rule
 for the <code>Application</code> module, telling it to look in the
 <code>module/Application/src/Application/</code> directory. Since the <code>Application\Module</code>
@@ -550,11 +554,13 @@ class is defined at the module root, we specify it in the <code>files</code> con
 <p>To improve on this, and simplify autoloading, we recommend adopting a complete
 PSR-4 directory structure for your module class files. As an example, to change
 the existing <code>Application</code> module to PSR-4, you can do the following:</p>
-<p> <pre class=codehilite><code class=language-bash>$ cd module/Application
+<pre><code class="language-bash">$ cd module/Application
 $ mv src temp
 $ mv temp/Application src
 $ rm -Rf ./temp
-$ mv Module.php src/</code></pre></p>
+$ mv Module.php src/
+</code></pre>
+
 <p>Update your <code>Module.php</code> file to do the following:</p>
 <ul>
 <li>Remove the <code>getAutoloaderConfig()</code> method entirely, if defined.</li>
@@ -563,20 +569,24 @@ $ mv Module.php src/</code></pre></p>
   '/../config/module.config.php</code>.</li>
 </ul>
 <p>You can then update the <code>autoload</code> configuration to:</p>
-<p> <pre class=codehilite><code class=language-json>&quot;autoload&quot;: {
+<pre><code class="language-json">&quot;autoload&quot;: {
     &quot;psr-4&quot;: {
         &quot;Application\\&quot;: &quot;module/Application/src/&quot;
     }
-}</code></pre></p>
+}
+</code></pre>
+
 <p>Afterwards, run the following to update the generated autoloader:</p>
-<p> <pre class=codehilite><code class=language-bash>$ composer dump-autoload</code></pre></p>
+<pre><code class="language-bash">$ composer dump-autoload
+</code></pre>
+
 <p>The updated application skeleton already takes this approach.</p>
 <h2 id="bootstrap">Bootstrap</h2>
 <p>Because version 3 requires usage of Composer for autoloading, you can simplify
 your application bootstrap.</p>
 <p>First, if you were using an <code>init_autoloader.php</code> file, you can now remove it.</p>
 <p>Second, update your <code>public/index.php</code> to read as follows:</p>
-<p> <pre class=codehilite><code class=language-php>&lt;?php
+<pre><code class="language-php">&lt;?php
 
 use Zend\Mvc\Application;
 
@@ -606,7 +616,9 @@ if (! class_exists(Application::class)) {
 }
 
 // Run the application!
-Application::init(require __DIR__ . '/../config/application.config.php')-&gt;run();</code></pre></p>
+Application::init(require __DIR__ . '/../config/application.config.php')-&gt;run();
+</code></pre>
+
 <h2 id="scripts">Scripts</h2>
 <p>The skeleton application for version 2 shipped three scripts with it:</p>
 <ul>
@@ -636,7 +648,9 @@ are no longer present.</p>
 which provides a way to store common development-specific settings in your
 repository and then selectively enable/disable them during development.</p>
 <p>If you are upgrading from an existing application, you can install this feature:</p>
-<p> <pre class=codehilite><code class=language-bash>$ composer require zfcampus/zf-development-mode</code></pre></p>
+<pre><code class="language-bash">$ composer require zfcampus/zf-development-mode
+</code></pre>
+
 <p>Please refer to the <a href="https://github.com/zfcampus/zf-development-mode">package documentation</a>
 for details on how to setup your application configuration to make use of this
 feature.</p>
@@ -962,7 +976,7 @@ feature.</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -970,10 +984,10 @@ feature.</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -981,27 +995,28 @@ feature.</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '../../..',
             siteName = 'Tutorials';
     </script>
-    <script src="../../../js/scripts-8d7ae56abf.js"></script>
-        <script src="../../../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../../../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
